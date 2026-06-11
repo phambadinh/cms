@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "course_free_001",
+    "code": "FREE101",
+    "name": "Giới thiệu lập trình web",
+    "description": "Khóa học miễn phí giúp bạn bắt đầu với HTML, CSS và JavaScript.",
+    "instructorId": "user_mentor",
+    "courseType": "FREE",
+    "price": 0.0,
+    "category": "Web Development",
+    "thumbnail": "https://example.com/course-free-001.png",
+    "level": "Beginner",
+    "totalLessons": 2,
+    "rating": 4.8,
+    "enrollmentCount": 120,
+    "published": true,
+    "createdAt": "2026-06-08T10:00:00Z",
+    "updatedAt": "2026-06-08T10:00:00Z"
+  },
+  {
+    "_id": "course_premium_001",
+    "code": "PRO200",
+    "name": "Lập trình Java nâng cao",
+    "description": "Khóa học trả phí cho người đã có cơ bản và muốn nâng cao kỹ năng Java.",
+    "instructorId": "user_mentor",
+    "courseType": "PREMIUM",
+    "price": 249.99,
+    "category": "Software Development",
+    "thumbnail": "https://example.com/course-premium-001.png",
+    "level": "Intermediate",
+    "totalLessons": 3,
+    "rating": 4.9,
+    "enrollmentCount": 45,
+    "published": true,
+    "createdAt": "2026-06-08T10:30:00Z",
+    "updatedAt": "2026-06-08T10:30:00Z"
+  }
+]

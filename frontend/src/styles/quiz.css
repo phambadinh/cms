@@ -1,0 +1,37 @@
+.quiz {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 12px;
+}
+
+.quiz-title {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: #0f4c81;
+}
+
+.quiz-question {
+  margin-bottom: 12px;
+}
+
+.quiz-question-text {
+  margin: 0 0 4px;
+  font-weight: 500;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.quiz-submit {
+  margin-top: 8px;
+}
+
+.quiz-result {
+  margin-top: 8px;
+  color: #16a34a;
+  font-weight: 500;
+}

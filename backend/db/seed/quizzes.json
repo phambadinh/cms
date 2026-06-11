@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "quiz_001",
+    "lessonId": "lesson_002",
+    "courseId": "course_free_001",
+    "title": "Quiz CSS cơ bản",
+    "description": "Kiểm tra kiến thức cơ bản về CSS.",
+    "passingScore": 70,
+    "questionIds": ["question_001", "question_002"],
+    "published": true,
+    "createdAt": "2026-06-09T08:00:00Z",
+    "updatedAt": "2026-06-09T08:00:00Z"
+  },
+  {
+    "_id": "quiz_002",
+    "lessonId": "lesson_003",
+    "courseId": "course_premium_001",
+    "title": "Quiz Java Generic",
+    "description": "Kiểm tra kiến thức Java Generic và Collection.",
+    "passingScore": 70,
+    "questionIds": ["question_003", "question_004"],
+    "published": true,
+    "createdAt": "2026-06-09T09:00:00Z",
+    "updatedAt": "2026-06-09T09:00:00Z"
+  }
+]

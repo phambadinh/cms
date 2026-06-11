@@ -1,0 +1,11 @@
+[
+  {
+    "_id": "grade_001",
+    "userId": "user_student",
+    "courseId": "course_free_001",
+    "score": 85.0,
+    "totalScore": 100.0,
+    "grade": "A",
+    "evaluatedAt": "2026-06-10T07:00:00Z"
+  }
+]

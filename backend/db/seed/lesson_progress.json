@@ -1,0 +1,22 @@
+[
+  {
+    "_id": "lesson_progress_001",
+    "userId": "user_student",
+    "lessonId": "lesson_001",
+    "courseId": "course_free_001",
+    "completed": true,
+    "watchedDuration": 900.0,
+    "startedAt": "2026-06-09T12:00:00Z",
+    "completedAt": "2026-06-09T12:15:00Z"
+  },
+  {
+    "_id": "lesson_progress_002",
+    "userId": "user_student",
+    "lessonId": "lesson_002",
+    "courseId": "course_free_001",
+    "completed": false,
+    "watchedDuration": 600.0,
+    "startedAt": "2026-06-09T12:20:00Z",
+    "completedAt": null
+  }
+]

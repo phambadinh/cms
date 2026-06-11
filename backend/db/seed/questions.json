@@ -1,0 +1,42 @@
+[
+  {
+    "_id": "question_001",
+    "quizId": "quiz_001",
+    "questionText": "Thuộc tính CSS nào dùng để đổi màu chữ?",
+    "options": ["font-color", "color", "text-color", "background-color"],
+    "correctAnswerIndex": 1,
+    "orderNumber": 1,
+    "explanation": "Thuộc tính `color` dùng để thay đổi màu chữ.",
+    "createdAt": "2026-06-09T08:05:00Z"
+  },
+  {
+    "_id": "question_002",
+    "quizId": "quiz_001",
+    "questionText": "Đơn vị CSS nào không phải là đơn vị chiều dài?",
+    "options": ["px", "em", "%", "href"],
+    "correctAnswerIndex": 3,
+    "orderNumber": 2,
+    "explanation": "`href` không phải là đơn vị chiều dài, mà là thuộc tính liên kết trong HTML.",
+    "createdAt": "2026-06-09T08:10:00Z"
+  },
+  {
+    "_id": "question_003",
+    "quizId": "quiz_002",
+    "questionText": "Generic trong Java giúp gì cho collection?",
+    "options": ["Tăng hiệu suất runtime", "Kiểm tra kiểu tại compile time", "Tự động giải phóng bộ nhớ", "Thay thế interface"],
+    "correctAnswerIndex": 1,
+    "orderNumber": 1,
+    "explanation": "Generic giúp kiểm tra kiểu tại thời điểm biên dịch và tránh cast không an toàn.",
+    "createdAt": "2026-06-09T09:05:00Z"
+  },
+  {
+    "_id": "question_004",
+    "quizId": "quiz_002",
+    "questionText": "Collection nào trong Java cho phép truy cập nhanh theo key?",
+    "options": ["ArrayList", "HashMap", "LinkedList", "TreeSet"],
+    "correctAnswerIndex": 1,
+    "orderNumber": 2,
+    "explanation": "HashMap lưu trữ dữ liệu theo cặp key-value và truy cập nhanh theo key.",
+    "createdAt": "2026-06-09T09:10:00Z"
+  }
+]

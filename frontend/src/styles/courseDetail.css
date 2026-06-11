@@ -1,0 +1,143 @@
+.course-detail-page {
+  padding: 24px;
+}
+
+.course-header {
+  margin-bottom: 20px;
+}
+
+.course-title {
+  margin: 0 0 4px;
+  font-size: 22px;
+  color: #0f4c81;
+}
+
+.course-meta {
+  margin: 0 0 8px;
+  color: #4b5563;
+}
+
+.course-description {
+  margin: 0 0 16px;
+  color: #4b5563;
+}
+
+.course-layout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 16px;
+}
+
+.course-sidebar {
+  background: #0f172a;
+  color: #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.course-sidebar h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+
+.lecture-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lecture-item {
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.lecture-item:hover {
+  background: rgba(37, 99, 235, 0.2);
+}
+
+.lecture-item.active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.lecture-title {
+  max-width: 180px;
+}
+
+.lecture-duration {
+  opacity: 0.8;
+}
+
+.course-content {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #dbeafe;
+  padding: 16px;
+  box-shadow: 0 10px 25px rgba(15, 76, 129, 0.1);
+}
+
+.lecture-heading {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #0f4c81;
+}
+
+.video-wrapper {
+  margin-bottom: 16px;
+}
+
+.video-wrapper video {
+  width: 100%;
+  border-radius: 12px;
+  background: #000000;
+}
+
+.course-payment-box {
+  background: #f8fafc;
+  border: 1px solid #dbeafe;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 20px;
+}
+
+.course-payment-box h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #0f4c81;
+}
+
+.course-payment-box p {
+  margin: 6px 0;
+  color: #334155;
+}
+
+.course-enrollment-info {
+  margin-top: 12px;
+  padding: 12px;
+  background: #eff6ff;
+  border-radius: 10px;
+  border: 1px solid #bfdbfe;
+}
+
+.payment-method-group {
+  margin-bottom: 14px;
+}
+
+.payment-method-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #1e293b;
+}
+
+.payment-method-group select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: white;
+}

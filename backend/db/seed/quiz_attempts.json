@@ -1,0 +1,14 @@
+[
+  {
+    "_id": "quiz_attempt_001",
+    "quizId": "quiz_001",
+    "userId": "user_student",
+    "courseId": "course_free_001",
+    "score": 80,
+    "totalQuestions": 2,
+    "selectedAnswers": [1, 2],
+    "passed": true,
+    "attemptedAt": "2026-06-10T07:30:00Z",
+    "durationSeconds": 120
+  }
+]

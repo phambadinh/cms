@@ -1,0 +1,24 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+}
+
+.layout-body {
+  display: flex;
+  flex: 1;
+}
+
+.layout-main {
+  flex: 1;
+  padding: 24px;
+}
+
+.sidebar {
+  width: 220px;
+  background: linear-gradient(180deg, #ffffff 0%, #f3f8ff 100%);
+  color: #0f172a;
+  border-right: 1px solid var(--cms-border);
+  box-shadow: 8px 0 24px rgba(15, 76, 129, 0.05);
+}

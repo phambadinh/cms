@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "lesson_001",
+    "courseId": "course_free_001",
+    "title": "HTML cơ bản",
+    "description": "Tìm hiểu cấu trúc tài liệu HTML và thẻ cơ bản.",
+    "videoUrl": "https://example.com/videos/html-intro.mp4",
+    "duration": 900,
+    "orderNumber": 1,
+    "published": true,
+    "createdAt": "2026-06-08T11:00:00Z",
+    "updatedAt": "2026-06-08T11:00:00Z"
+  },
+  {
+    "_id": "lesson_002",
+    "courseId": "course_free_001",
+    "title": "CSS cơ bản",
+    "description": "Học cách tạo style cho trang web bằng CSS.",
+    "videoUrl": "https://example.com/videos/css-intro.mp4",
+    "duration": 1100,
+    "orderNumber": 2,
+    "published": true,
+    "createdAt": "2026-06-08T11:15:00Z",
+    "updatedAt": "2026-06-08T11:15:00Z"
+  },
+  {
+    "_id": "lesson_003",
+    "courseId": "course_premium_001",
+    "title": "Java nâng cao: Generic và Collection",
+    "description": "Giải thích Generic, Collections và cách áp dụng thực tế.",
+    "videoUrl": "https://example.com/videos/java-generics.mp4",
+    "duration": 1800,
+    "orderNumber": 1,
+    "published": true,
+    "createdAt": "2026-06-08T12:00:00Z",
+    "updatedAt": "2026-06-08T12:00:00Z"
+  }
+]

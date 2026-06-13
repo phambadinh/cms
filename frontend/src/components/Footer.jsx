@@ -7,7 +7,7 @@ function Footer() {
       color: '#fff',
       marginTop: 'auto'
     }}>
-      © 2026 CMS
+      © Bản quyền thuộc CMS - 2026
     </footer>
   )
 }

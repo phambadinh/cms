@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAdminDashboard } from "../services/api";
-import AdminDashboardView from "../components/dashboard/AdminDashboardView";
+import AdminDashboardView from "../components/admin/AdminDashboardView";
 
 function AdminDashboard() {
   const [data, setData] = useState(null);

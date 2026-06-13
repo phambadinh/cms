@@ -33,7 +33,7 @@ function AdminTeachersPage() {
   return (
     <AdminCrudPage
       title="Teachers"
-      subtitle="CRUD live cho giảng viên/mentor, tách hẳn khỏi student."
+      subtitle="Chức năng."
       entityLabel="Teacher"
       fetchItems={() => getUsersByRole("MENTOR")}
       createItem={createUser}

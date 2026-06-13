@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getMentorDashboard } from "../services/api";
-import DashboardView from "../components/dashboard/DashboardView";
+import MentorDashboardView from "../components/mentor/MentorDashboardView";
 
 function MentorDashboard() {
   const [data, setData] = useState(null);
@@ -25,7 +25,7 @@ function MentorDashboard() {
   }, []);
 
   return (
-    <DashboardView
+    <MentorDashboardView
       title={data?.title || "Mentor Dashboard"}
       subtitle={data?.subtitle || "Quản lý khóa học, học viên và kết quả học tập."}
       stats={data?.stats || []}

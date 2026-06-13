@@ -1,18 +1,18 @@
 // src/routes/AppRoutes.jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navigate } from "react-router-dom";
+import Home from "../pages/Home";
+import About from "../pages/About";
+import Contact from "../pages/Contact";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Forgetpassword from "../pages/Forgetpassword";
+import Profile from "../pages/Profile";
 import AdminDashboard from "../pages/AdminDashboard";
 import MentorDashboard from "../pages/MentorDashboard";
 import StudentDashboard from "../pages/StudentDashboard";
 import Courses from "../pages/Courses";
-import Students from "../pages/Students";
-import Teachers from "../pages/Teachers";
-import Lectures from "../pages/Lectures";
 import Grades from "../pages/Grades";
-import Progress from "../pages/Progress";
 import CourseDetail from "../pages/CourseDetail";
 import AdminModulePage from "../pages/AdminModulePage";
 import AdminUsersPage from "../pages/AdminUsersPage";
@@ -23,6 +23,11 @@ import AdminLayout from "../layouts/AdminLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import RoleRoute from "./RoleRoute";
 import { getAuthUser } from "../services/api";
+import MyLearning from "../pages/MyLearning";
+import LearningCourse from "../pages/LearningCourse";
+import LearningProgress from "../pages/LearningProgress";
+import Certificates from "../pages/Certificate";
+import Wishlist from "../pages/Wishlist";
 
 function DashboardRedirect() {
   const user = getAuthUser();
@@ -46,8 +51,12 @@ function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Trang chủ công khai */}
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        
         {/* Login đứng riêng, không layout */}
-        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<Forgetpassword />} />
@@ -60,17 +69,19 @@ function AppRoutes() {
             </ProtectedRoute>
           }
         >
+          <Route path="/profile" element={<Profile />} />
           <Route path="/dashboard" element={<DashboardRedirect />} />
           <Route path="/dashboard/admin" element={<AdminDashboard />} />
           <Route path="/dashboard/mentor" element={<MentorDashboard />} />
           <Route path="/dashboard/student" element={<StudentDashboard />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:courseId" element={<CourseDetail />} />
-          <Route path="/students" element={<Students />} />
-          <Route path="/teachers" element={<Teachers />} />
-          <Route path="/lectures" element={<Lectures />} />
           <Route path="/grades" element={<Grades />} />
-          <Route path="/progress" element={<Progress />} />
+          <Route path="/learning" element={<MyLearning />} />
+          <Route path="/learning-progress" element={<LearningProgress />} />
+          <Route path="/certificates" element={<Certificates />} />
+          <Route path="/learning/:courseId" element={<LearningCourse />} />
+          <Route path="/wishlist" element={<Wishlist />} />
         </Route>
 
         <Route

@@ -268,9 +268,13 @@ public class DashboardService {
                             int enrollmentCount = mentorEnrollments.size();
                             int viewCount = mentorCourses.stream().mapToInt(course -> course.getViewCount() == null ? 0 : course.getViewCount()).sum();
                             int publishedCourseCount = (int) mentorCourses.stream().filter(Course::isPublished).count();
+                            String displayName = Objects.toString(
+                                    mentor.getFullName() != null ? mentor.getFullName() : mentor.getUsername(),
+                                    "Unknown"
+                            );
                             return new DashboardResponse.MentorItem(
                                     mentor.getId(),
-                                    mentor.getFullName() != null ? mentor.getFullName() : mentor.getUsername(),
+                                    displayName,
                                     courseCount,
                                     enrollmentCount,
                                     viewCount,
@@ -368,12 +372,12 @@ public class DashboardService {
                         return fallback;
                 }
 
-                String fullName = safeText(user.getFullName(), "");
+                String fullName = Objects.toString(user == null ? null : user.getFullName(), "");
                 if (!fullName.isBlank()) {
                         return fullName + " Dashboard";
                 }
 
-                String username = safeText(user.getUsername(), "");
+                String username = Objects.toString(user == null ? null : user.getUsername(), "");
                 if (!username.isBlank()) {
                         return username + " Dashboard";
                 }
@@ -381,7 +385,7 @@ public class DashboardService {
                 return fallback;
         }
 
-    private String safeText(String value, String fallback) {
-        return Objects.toString(value, fallback);
-    }
+        private String safeText(Object value, String fallback) {
+                return Objects.toString(value, fallback);
+        }
 }

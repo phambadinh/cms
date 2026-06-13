@@ -17,7 +17,7 @@ export default function Login() {
     setError("");
 
     if (!username || !password) {
-      setError("Vui lòng nhập đầy đủ Username và Password.");
+      setError("Vui lòng nhập đầy đủ Username hoặc email và Password.");
       return;
     }
 

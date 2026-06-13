@@ -4,7 +4,6 @@ import com.cms.dto.LessonRequest;
 import com.cms.dto.LessonResponse;
 import com.cms.model.Lesson;
 import com.cms.repository.LessonRepository;
-import com.cms.service.CourseService;
 import com.cms.service.LessonService;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
@@ -13,11 +12,9 @@ import java.util.List;
 @Service
 public class LessonServiceImpl implements LessonService {
     private final LessonRepository lessonRepository;
-    private final CourseService courseService;
 
-    public LessonServiceImpl(LessonRepository lessonRepository, CourseService courseService) {
+    public LessonServiceImpl(LessonRepository lessonRepository) {
         this.lessonRepository = lessonRepository;
-        this.courseService = courseService;
     }
 
     @Override
@@ -76,7 +73,6 @@ public class LessonServiceImpl implements LessonService {
 
     @Override
     public void deleteLesson(String lessonId) {
-        Lesson lesson = getLessonById(lessonId);
         lessonRepository.deleteById(lessonId);
     }
 

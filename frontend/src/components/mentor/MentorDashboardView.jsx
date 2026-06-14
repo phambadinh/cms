@@ -1,6 +1,5 @@
 import "../../styles/dashboard.css";
-
-function DashboardView({ title, subtitle, stats = [], courses = [], enrollments = [], loading = false, error = "" }) {
+function MentorDashboardView({ title, subtitle, stats = [], courses = [], enrollments = [], loading = false, error = "" }) {
   return (
     <div className="layout-main dashboard-shell">
       <h1 className="dash-title">{title}</h1>
@@ -24,15 +23,14 @@ function DashboardView({ title, subtitle, stats = [], courses = [], enrollments 
 
           {courses.length > 0 && (
             <section className="dash-panel">
-              <h2 className="dash-panel-title">Khóa học nổi bật</h2>
+              <h2 className="dash-panel-title">Khóa học của tôi</h2>
               <div className="dash-table-wrap">
                 <table className="dash-table">
                   <thead>
                     <tr>
                       <th>Tên khóa học</th>
                       <th>Loại</th>
-                      <th>Đăng ký</th>
-                      <th>Lượt xem</th>
+                      <th>Học viên</th>
                       <th>Trạng thái</th>
                     </tr>
                   </thead>
@@ -42,7 +40,6 @@ function DashboardView({ title, subtitle, stats = [], courses = [], enrollments 
                         <td>{course.name}</td>
                         <td>{course.courseType || "N/A"}</td>
                         <td>{course.enrollmentCount ?? 0}</td>
-                        <td>{course.viewCount ?? 0}</td>
                         <td>{course.published ? "Published" : "Draft"}</td>
                       </tr>
                     ))}
@@ -54,16 +51,15 @@ function DashboardView({ title, subtitle, stats = [], courses = [], enrollments 
 
           {enrollments.length > 0 && (
             <section className="dash-panel">
-              <h2 className="dash-panel-title">Đăng ký gần đây</h2>
+              <h2 className="dash-panel-title">Học viên của tôi</h2>
               <div className="dash-table-wrap">
                 <table className="dash-table">
                   <thead>
                     <tr>
                       <th>Học viên</th>
                       <th>Khóa học</th>
-                      <th>Trạng thái</th>
                       <th>Tiến độ</th>
-                      <th>Thanh toán</th>
+                      <th>Trạng thái</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -71,9 +67,8 @@ function DashboardView({ title, subtitle, stats = [], courses = [], enrollments 
                       <tr key={enrollment.id}>
                         <td>{enrollment.userName || enrollment.userId}</td>
                         <td>{enrollment.courseName || enrollment.courseId}</td>
-                        <td>{enrollment.status || "N/A"}</td>
                         <td>{enrollment.progressPercentage ?? 0}%</td>
-                        <td>{enrollment.paymentStatus || "N/A"}</td>
+                        <td>{enrollment.status || "N/A"}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -87,4 +82,4 @@ function DashboardView({ title, subtitle, stats = [], courses = [], enrollments 
   );
 }
 
-export default DashboardView;
+export default MentorDashboardView;

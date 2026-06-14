@@ -41,7 +41,7 @@ function AdminUsersPage() {
   return (
     <AdminCrudPage
       title="Users"
-      subtitle="Live CRUD cho toàn bộ người dùng trong hệ thống."
+      subtitle="Chức năng chỉnh sửa users."
       entityLabel="User"
       fetchItems={getAllUsers}
       createItem={createUser}

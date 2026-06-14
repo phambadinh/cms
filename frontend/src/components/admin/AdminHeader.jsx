@@ -13,11 +13,11 @@ function AdminHeader() {
   return (
     <header className="admin-header">
       <div>
-        <div className="admin-header-kicker">UTH Learning Admin</div>
-        <div className="admin-header-title">Control Center</div>
+        <div className="admin-header-kicker">CMS</div>
+        <div className="admin-header-title">Dashboard CMS</div>
       </div>
       <div className="admin-header-actions">
-        <button className="admin-header-link" onClick={() => navigate("/")}>Xem website</button>
+        <button className="admin-header-link" onClick={() => navigate("/")}>Xem website tại đây</button>
         <div className="admin-header-user">
           <div className="admin-avatar">{(user?.fullName || user?.username || "A")[0]}</div>
           <div>

@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import org.springframework.lang.NonNull;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,7 @@ public class UserServiceImpl implements UserService {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
+    @NonNull
     private String nowString() {
         return LocalDateTime.now().format(FORMATTER);
     }
@@ -168,8 +170,8 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
     @Override
-    public User saveUser(User user) {
-    return userRepository.save(user);
+    public @NonNull User saveUser(@NonNull User user) {
+        return userRepository.save(user);
     }
     @Override
     public UserResponse toResponse(User user) {

@@ -48,10 +48,85 @@ function Home() {
     <div className="home-page">
       <Header />
 
-      {/* Hero Section */}
-      <section className="hero-section">
-        {/* ... giữ nguyên hero content như bạn đã viết ... */}
-      </section>
+     <section className="hero-section">
+  <div className="hero-content">
+
+    <div className="hero-badge">
+      ⭐ NỀN TẢNG HỌC TRỰC TUYẾN HÀNG ĐẦU
+    </div>
+
+    <h1 className="hero-title">
+      Học tập không giới hạn,
+      <br />
+      phát triển tương lai của bạn
+    </h1>
+
+    <p className="hero-subtitle">
+      Khám phá hàng trăm khóa học chất lượng cao từ các giảng viên hàng đầu.
+      Học mọi lúc, mọi nơi với nền tảng E-Learning hiện đại.
+    </p>
+
+    <div className="hero-stats">
+      <div className="stat-item">
+        <span className="stat-number">100+</span>
+        <span className="stat-label">Khóa học</span>
+      </div>
+
+      <div className="stat-item">
+        <span className="stat-number">1000+</span>
+        <span className="stat-label">Học viên</span>
+      </div>
+
+      <div className="stat-item">
+        <span className="stat-number">50+</span>
+        <span className="stat-label">Giảng viên</span>
+      </div>
+    </div>
+
+    <div className="hero-buttons">
+      <button
+        className="btn btn-primary"
+        onClick={handleExplore}
+      >
+        Khám phá khóa học
+      </button>
+
+      <button
+        className="btn btn-secondary"
+        onClick={handleRegister}
+      >
+        Bắt đầu ngay
+      </button>
+    </div>
+
+    <div className="hero-features">
+      <span>✓ Học mọi lúc mọi nơi</span>
+      <span>✓ Chứng chỉ uy tín</span>
+      <span>✓ Hỗ trợ 24/7</span>
+    </div>
+
+  </div>
+
+  <div className="hero-image">
+    <div className="hero-image-placeholder">
+
+      <div className="floating-card top-card">
+        🏆 Nền tảng uy tín
+      </div>
+
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png"
+        alt="E-Learning"
+        className="hero-illustration"
+      />
+
+      <div className="floating-card bottom-card">
+        👥 Cộng đồng học tập
+      </div>
+
+    </div>
+  </div>
+</section>
 
       {/* Featured Courses Section */}
       <section className="featured-courses">

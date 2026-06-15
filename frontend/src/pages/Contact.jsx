@@ -124,7 +124,14 @@ function Contact() {
 
       <section className="contact-form-section">
         <div className="contact-container">
-          <h2>Gửi Tin Nhắn Cho Chúng Tôi</h2>
+         <h2 className="section-title">
+  Gửi Tin Nhắn Cho Chúng Tôi
+</h2>
+
+<p className="section-subtitle">
+  Có câu hỏi hoặc cần hỗ trợ? Hãy để lại thông tin,
+  đội ngũ CMS sẽ phản hồi trong thời gian sớm nhất.
+</p>
           <div className="contact-form-wrapper">
             <form onSubmit={handleSubmit} className="contact-form">
               <div className="form-row">
@@ -217,15 +224,49 @@ function Contact() {
             </form>
 
             <div className="contact-form-image">
-              <MessageCircle size={40} />
-              <p>Chúng tôi sẽ phản hồi tin nhắn của bạn trong vòng 24 giờ</p>
-            </div>
+  <div className="support-card">
+    <div className="support-icon">
+      <MessageCircle size={60} />
+    </div>
+
+    <h3>Hỗ Trợ Nhanh Chóng</h3>
+
+    <p className="support-desc">
+      Đội ngũ CMS luôn sẵn sàng hỗ trợ và giải đáp mọi thắc mắc của bạn.
+    </p>
+
+    <div className="support-features">
+      <div className="feature-item">
+        ✅ Phản hồi trong vòng 24 giờ
+      </div>
+
+      <div className="feature-item">
+  <span>🎓</span>
+  <span>Hơn 100+ khóa học chất lượng</span>
+</div>
+
+      <div className="feature-item">
+        👨‍🏫 50+ giảng viên giàu kinh nghiệm
+      </div>
+
+      <div className="feature-item">
+        🌍 Học tập mọi lúc mọi nơi
+      </div>
+    </div>
+  </div>
+</div>
           </div>
         </div>
       </section>
 
       <section className="contact-map-section">
-        <h2>Vị Trí Của Chúng Tôi</h2>
+        <h2 className="section-title">
+  Vị Trí Của Chúng Tôi
+</h2>
+
+<p className="section-subtitle">
+  Ghé thăm văn phòng CMS hoặc liên hệ với chúng tôi bất cứ lúc nào.
+</p>
         <div className="map-wrapper">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4224.596584267842!2d106.62404651092757!3d10.852087089256663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752a2723f249bd%3A0x2d3c522387507a31!2zNzAgxJAuIFTDtCBLw70sIFRydW5nIE3hu7kgVMOieSwgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e1!3m2!1svi!2s!4v1781277832436!5m2!1svi!2s"

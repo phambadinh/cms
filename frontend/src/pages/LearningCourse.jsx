@@ -6,6 +6,7 @@ import VideoPlayer from "../components/learning/VideoPlayer";
 import LessonSidebar from "../components/learning/LessonSidebar";
 import ProgressTracker from "../components/learning/ProgressTracker";
 import LessonContent from "../components/student/LessonContent";
+
 import "../styles/learningCourse.css";
 
 function LearningCourse() {
@@ -28,7 +29,6 @@ function LearningCourse() {
         if (data.length > 0) {
           setCurrentLesson(data[0]);
 
-          // Tiến độ bài đầu tiên
           setProgress(
             (1 / data.length) * 100
           );
@@ -43,7 +43,6 @@ function LearningCourse() {
     fetchLessons();
   }, [courseId]);
 
-  // ===== ĐỔI BÀI HỌC =====
   const handleLessonChange = (
     lesson,
     index
@@ -57,7 +56,19 @@ function LearningCourse() {
   };
 
   if (loading) {
-    return <p>Đang tải bài học...</p>;
+    return (
+      <div className="empty-learning-state">
+        <div className="empty-learning-icon">
+          ⏳
+        </div>
+
+        <h2>Đang tải khóa học...</h2>
+
+        <p>
+          Vui lòng chờ trong giây lát.
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -69,14 +80,53 @@ function LearningCourse() {
           current={progress}
         />
 
-        <VideoPlayer
-          lesson={currentLesson}
-        />
+        <div className="learning-header">
+          <h2>Khóa học đang học</h2>
 
-        <LessonContent
-        lesson={currentLesson}
-        />
-        
+          <span>
+            {lessons.length} bài học
+          </span>
+        </div>
+
+        {currentLesson && (
+          <div className="current-lesson-banner">
+            🎥 Đang học:
+            <strong>
+              {" "}
+              {currentLesson.title}
+            </strong>
+          </div>
+        )}
+
+        {currentLesson ? (
+          <>
+            <VideoPlayer
+              lesson={currentLesson}
+            />
+
+            <LessonContent
+              lesson={currentLesson}
+            />
+          </>
+        ) : (
+          <div className="empty-learning-state">
+
+            <div className="empty-learning-icon">
+              📚
+            </div>
+
+            <h2>
+              Chưa có bài học
+            </h2>
+
+            <p>
+              Khóa học này hiện chưa có
+              nội dung hoặc dữ liệu bài học
+              chưa được tải.
+            </p>
+
+          </div>
+        )}
 
       </div>
 

@@ -3,6 +3,7 @@ import {
   Star,
   BookOpen,
   ArrowRight,
+  Clock,
 } from "lucide-react";
 
 import htmlImg from "./html.png";
@@ -28,25 +29,35 @@ function CourseCard({
   return (
     <div className="course-card">
 
-      <img
-        src={getImage()}
-        alt={course.name}
-        className="course-image"
-      />
-
-      <div className="course-body">
+      <div className="course-image-wrapper">
+        <img
+          src={getImage()}
+          alt={course.name}
+          className="course-image"
+        />
 
         <span className="course-tag">
           {course.level || "Beginner"}
         </span>
+      </div>
 
-        <h3>{course.name}</h3>
+      <div className="course-body">
+
+        <h3 className="course-title">
+          {course.name}
+        </h3>
+
+        <p className="course-description">
+          {course.description
+            ? course.description.slice(0, 80) + "..."
+            : "Khóa học chất lượng giúp bạn nâng cao kỹ năng và phát triển nghề nghiệp."}
+        </p>
 
         <div className="course-stats">
 
           <span>
             <Users size={14} />
-            100
+            100+
           </span>
 
           <span>
@@ -57,6 +68,11 @@ function CourseCard({
           <span>
             <BookOpen size={14} />
             {course.totalLessons || 0}
+          </span>
+
+          <span>
+            <Clock size={14} />
+            12h
           </span>
 
         </div>
@@ -76,7 +92,7 @@ function CourseCard({
             }
           >
             Chi tiết
-            <ArrowRight size={14} />
+            <ArrowRight size={15} />
           </button>
 
         </div>
@@ -91,7 +107,7 @@ function CourseCard({
           >
             {loading
               ? "Đang ghi danh..."
-              : "Ghi danh"}
+              : "Ghi danh ngay"}
           </button>
         )}
 

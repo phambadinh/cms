@@ -1,6 +1,17 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuthUser, authLogout } from "../services/api";
+import {
+  Search,
+  User,
+  LogOut,
+  Settings,
+  ChevronDown,
+  LayoutDashboard,
+  BookOpen,
+  Info,
+  Phone,
+} from "lucide-react";
 import "../styles/header.css";
 
 function Header() {
@@ -8,6 +19,17 @@ function Header() {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const user = getAuthUser();
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsProfileMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -23,69 +45,41 @@ function Header() {
     window.location.reload();
   };
 
-  const handleProfileClick = () => {
-    navigate("/profile");
-    setIsProfileMenuOpen(false);
-  };
+  const handleNavClick = (path) => navigate(path);
 
-  const handleNavClick = (path) => {
-    navigate(path);
-  };
+  const navItems = [
+    { label: "Trang chủ", path: "/" },
+    { label: "Khóa học", path: "/courses" },
+    { label: "Giới thiệu", path: "/about" },
+    { label: "Liên hệ", path: "/contact" },
+  ];
 
   return (
     <header className="header">
       <div className="header-container">
+
         {/* Logo */}
-        <div className="header-logo">
-          <h1 className="logo-title">CMS</h1>
+        <div className="header-logo" onClick={() => handleNavClick("/")} style={{ cursor: "pointer" }}>
+          <span className="logo-title">CMS</span>
         </div>
 
-        {/* Navigation Menu */}
+        {/* Nav */}
         <nav className="header-nav">
-          <a 
-            href="/" 
-            className="nav-link active"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavClick("/");
-            }}
-          >
-            Trang chủ
-          </a>
-          <a 
-            href="/courses" 
-            className="nav-link"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavClick("/courses");
-            }}
-          >
-            Khóa học
-          </a>
-          <a 
-            href="/about" 
-            className="nav-link"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavClick("/about");
-            }}
-          >
-            Giới thiệu
-          </a>
-          <a 
-            href="/contact" 
-            className="nav-link"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavClick("/contact");
-            }}
-          >
-            Liên hệ
-          </a>
+          {navItems.map((item) => (
+            <a
+              key={item.path}
+              href={item.path}
+              className="nav-link"
+              onClick={(e) => { e.preventDefault(); handleNavClick(item.path); }}
+            >
+              {item.label}
+            </a>
+          ))}
         </nav>
 
-        {/* Search Bar */}
+        {/* Search */}
         <form className="header-search" onSubmit={handleSearch}>
+          <Search size={16} className="search-icon" />
           <input
             type="text"
             placeholder="Tìm kiếm khóa học..."
@@ -93,63 +87,78 @@ function Header() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <button type="submit" className="search-button">
-            🔍
-          </button>
         </form>
 
-        {/* Profile Section */}
+        {/* Profile / Auth */}
         <div className="header-profile">
           {user ? (
-            <div className="profile-menu">
+            <div className="profile-menu" ref={dropdownRef}>
               <button
                 className="profile-button"
                 onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+                aria-label="Mở menu tài khoản"
               >
                 <div className="profile-avatar">
                   {user.username?.charAt(0).toUpperCase() || "U"}
                 </div>
+                <span className="profile-username">{user.username}</span>
+                <ChevronDown
+                  size={14}
+                  className={`chevron-icon ${isProfileMenuOpen ? "chevron-open" : ""}`}
+                />
               </button>
 
               {isProfileMenuOpen && (
                 <div className="profile-dropdown">
-                  <div className="profile-dropdown-header">
-                    <p className="profile-name">{user.username}</p>
-                    <p className="profile-role">{user.role}</p>
+                  <div className="dropdown-header">
+                    <div className="dropdown-avatar">
+                      {user.username?.charAt(0).toUpperCase() || "U"}
+                    </div>
+                    <div className="dropdown-info">
+                      <p className="dropdown-name">{user.username}</p>
+                      <p className="dropdown-role">{user.role || "Student"}</p>
+                    </div>
                   </div>
-                  <hr />
+
+                  <div className="dropdown-divider" />
+
                   <button
                     className="dropdown-item"
-                    onClick={handleProfileClick}
+                    onClick={() => { navigate("/profile"); setIsProfileMenuOpen(false); }}
                   >
-                    ⚙️ Cài đặt tài khoản
+                    <User size={16} />
+                    Hồ sơ cá nhân
                   </button>
+
                   <button
-                    className="dropdown-item logout-btn"
-                    onClick={handleLogout}
+                    className="dropdown-item"
+                    onClick={() => { navigate("/settings"); setIsProfileMenuOpen(false); }}
                   >
-                    🚪 Đăng xuất
+                    <Settings size={16} />
+                    Cài đặt tài khoản
+                  </button>
+
+                  <div className="dropdown-divider" />
+
+                  <button className="dropdown-item dropdown-item--danger" onClick={handleLogout}>
+                    <LogOut size={16} />
+                    Đăng xuất
                   </button>
                 </div>
               )}
             </div>
           ) : (
             <div className="auth-buttons">
-              <button
-                className="btn-login"
-                onClick={() => navigate("/login")}
-              >
+              <button className="btn-login" onClick={() => navigate("/login")}>
                 Đăng nhập
               </button>
-              <button
-                className="btn-register"
-                onClick={() => navigate("/register")}
-              >
+              <button className="btn-register" onClick={() => navigate("/register")}>
                 Đăng ký
               </button>
             </div>
           )}
         </div>
+
       </div>
     </header>
   );

@@ -82,7 +82,7 @@
 
 .btn-primary {
   background-color: white;
-  color: #0052cc;
+  color: #1100ff;
 }
 
 .btn-primary:hover {
@@ -130,8 +130,19 @@
 }
 
 .computer-icon {
-  font-size: 120px;
-  opacity: 0.8;
+  width: 120px;
+  height: 120px;
+  opacity: 0.85;
+}
+
+.stat-item svg {
+  margin-bottom: 8px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Featured Courses Section */

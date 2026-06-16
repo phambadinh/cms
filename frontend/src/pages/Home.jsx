@@ -4,6 +4,14 @@ import { getPublicCourses, getAuthUser } from "../services/api";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CourseCard from "../components/course/CourseCard";
+import {
+  ArrowRight,
+  BookOpen,
+  GraduationCap,
+  MonitorPlay,
+  ShieldCheck,
+  Users,
+} from "lucide-react";
 import "../styles/home.css";
 
 function Home() {
@@ -48,12 +56,57 @@ function Home() {
     <div className="home-page">
       <Header />
 
-      {/* Hero Section */}
       <section className="hero-section">
-        {/* ... giữ nguyên hero content như bạn đã viết ... */}
+        <div className="hero-content">
+          <h1 className="hero-title">
+            Khám phá thế giới tri thức cùng CMS Learning
+          </h1>
+
+          <p className="hero-subtitle">
+            Mở rộng kỹ năng, chinh phục công nghệ và xây dựng tương lai nghề nghiệp
+            với các khóa học trực tuyến chất lượng, dễ học và thực tế.
+          </p>
+
+          <div className="hero-buttons">
+            <button className="btn btn-primary" onClick={handleExplore}>
+              <BookOpen size={18} strokeWidth={2} style={{ marginRight: 8 }} />
+              Khám phá khóa học
+            </button>
+
+            <button className="btn btn-secondary" onClick={handleRegister}>
+              <GraduationCap size={18} strokeWidth={2} style={{ marginRight: 8 }} />
+              {user ? "Tiếp tục học" : "Đăng ký ngay"}
+            </button>
+          </div>
+
+          <div className="hero-stats">
+            <div className="stat-item">
+              <BookOpen size={20} strokeWidth={2} />
+              <div className="stat-number">30+</div>
+              <div className="stat-label">Khóa học nổi bật</div>
+            </div>
+
+            <div className="stat-item">
+              <Users size={20} strokeWidth={2} />
+              <div className="stat-number">50K+</div>
+              <div className="stat-label">Học viên tin tưởng</div>
+            </div>
+
+            <div className="stat-item">
+              <ShieldCheck size={20} strokeWidth={2} />
+              <div className="stat-number">98%</div>
+              <div className="stat-label">Hài lòng sau khóa học</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="hero-image">
+          <div className="hero-image-placeholder">
+            <MonitorPlay className="computer-icon" strokeWidth={1.8} />
+          </div>
+        </div>
       </section>
 
-      {/* Featured Courses Section */}
       <section className="featured-courses">
         <h2 className="section-title">Danh mục phổ biến</h2>
         <p className="section-subtitle">Chọn lĩnh vực bạn muốn theo dõi</p>
@@ -67,9 +120,7 @@ function Home() {
               <CourseCard
                 key={course.id || course._id}
                 course={course}
-                onClick={() =>
-                  navigate(`/courses/${course.id || course._id}`)
-                }
+                onClick={() => navigate(`/courses/${course.id || course._id}`)}
               />
             ))}
           </div>
@@ -82,6 +133,7 @@ function Home() {
         <div className="view-all-button">
           <button className="btn btn-outline" onClick={handleExplore}>
             Xem tất cả khóa học
+            <ArrowRight size={18} strokeWidth={2} style={{ marginLeft: 8 }} />
           </button>
         </div>
       </section>

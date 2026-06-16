@@ -2,52 +2,52 @@
   padding: 24px;
 }
 
-.course-header {
+.course-detail-header {
   margin-bottom: 20px;
 }
 
-.course-title {
+.course-detail-title {
   margin: 0 0 4px;
   font-size: 22px;
   color: #0f4c81;
 }
 
-.course-meta {
+.course-detail-meta {
   margin: 0 0 8px;
   color: #4b5563;
 }
 
-.course-description {
+.course-detail-description {
   margin: 0 0 16px;
   color: #4b5563;
 }
 
-.course-layout {
+.course-detail-layout {
   display: grid;
   grid-template-columns: 280px minmax(0, 1fr);
   gap: 16px;
 }
 
-.course-sidebar {
+.course-detail-sidebar {
   background: #0f172a;
   color: #e5e7eb;
   border-radius: 12px;
   padding: 16px;
 }
 
-.course-sidebar h3 {
+.course-detail-sidebar h3 {
   margin-top: 0;
   margin-bottom: 12px;
   font-size: 15px;
 }
 
-.lecture-list {
+.course-detail-lecture-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.lecture-item {
+.course-detail-lecture-item {
   padding: 8px 10px;
   border-radius: 8px;
   cursor: pointer;
@@ -56,24 +56,24 @@
   font-size: 13px;
 }
 
-.lecture-item:hover {
+.course-detail-lecture-item:hover {
   background: rgba(37, 99, 235, 0.2);
 }
 
-.lecture-item.active {
+.course-detail-lecture-item.active {
   background: #2563eb;
   color: #ffffff;
 }
 
-.lecture-title {
+.course-detail-lecture-title {
   max-width: 180px;
 }
 
-.lecture-duration {
+.course-detail-lecture-duration {
   opacity: 0.8;
 }
 
-.course-content {
+.course-detail-content {
   background: #ffffff;
   border-radius: 12px;
   border: 1px solid #dbeafe;
@@ -81,23 +81,28 @@
   box-shadow: 0 10px 25px rgba(15, 76, 129, 0.1);
 }
 
-.lecture-heading {
+.course-detail-lecture-heading {
   margin-top: 0;
   margin-bottom: 12px;
   color: #0f4c81;
 }
 
-.video-wrapper {
+.course-detail-video-wrapper {
   margin-bottom: 16px;
 }
 
-.video-wrapper video {
+.course-detail-video-wrapper video {
   width: 100%;
   border-radius: 12px;
   background: #000000;
 }
 
-.course-payment-box {
+.course-detail-video-empty {
+  padding: 20px;
+  text-align: center;
+}
+
+.course-detail-payment-box {
   background: #f8fafc;
   border: 1px solid #dbeafe;
   border-radius: 14px;
@@ -105,18 +110,18 @@
   margin-bottom: 20px;
 }
 
-.course-payment-box h3 {
+.course-detail-payment-box h3 {
   margin-top: 0;
   margin-bottom: 12px;
   color: #0f4c81;
 }
 
-.course-payment-box p {
+.course-detail-payment-box p {
   margin: 6px 0;
   color: #334155;
 }
 
-.course-enrollment-info {
+.course-detail-enrollment-info {
   margin-top: 12px;
   padding: 12px;
   background: #eff6ff;
@@ -124,20 +129,35 @@
   border: 1px solid #bfdbfe;
 }
 
-.payment-method-group {
+.course-detail-payment-method-group {
   margin-bottom: 14px;
 }
 
-.payment-method-group label {
+.course-detail-payment-method-group label {
   display: block;
   margin-bottom: 6px;
   color: #1e293b;
 }
 
-.payment-method-group select {
+.course-detail-payment-method-group select {
   width: 100%;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #cbd5e1;
   background: white;
+}
+
+.course-detail-btn-primary {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.course-detail-btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }

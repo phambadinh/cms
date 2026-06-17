@@ -106,7 +106,6 @@ try {
 
 return ( <div className="layout"> <div className="layout-body"> <main className="layout-main">
 
-```
       <section className="courses-hero">
         <h1>Khóa Học Lập Trình</h1>
         <p>

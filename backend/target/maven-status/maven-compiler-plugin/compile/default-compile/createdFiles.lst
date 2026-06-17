@@ -34,6 +34,7 @@ com\cms\security\JwtAuthFilter.class
 com\cms\dto\QuizRequest.class
 com\cms\dto\DashboardResponse$MentorItem.class
 com\cms\dto\UserResponse.class
+com\cms\dto\ResetPasswordRequest.class
 com\cms\controller\DashboardController.class
 com\cms\repository\LessonRepository.class
 com\cms\model\Enrollment.class

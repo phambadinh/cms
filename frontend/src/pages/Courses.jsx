@@ -25,33 +25,35 @@ const navigate = useNavigate();
 const user = getAuthUser();
 
 useEffect(() => {
-const fetchCourses = async () => {
-setLoading(true);
-setError("");
+  const fetchCourses = async () => {
+    setLoading(true);
+    setError("");
 
+    try {
+      const res = await getPublicCourses();
 
-  try {
-    const res = await getPublicCourses();
+console.log("COURSES =", res.data);
+console.log("COUNT =", res.data.length);
 
-    const data = res.data || [];
+setCourses(res.data);
+setFilteredCourses(res.data);
 
-    setCourses(data);
-    setFilteredCourses(data);
-  } catch (err) {
-    console.error("Error fetching courses:", err);
-    setError(
-      "Không thể tải danh sách khóa học. Vui lòng thử lại."
-    );
-  } finally {
-    setLoading(false);
-  }
-};
+      console.log("API DATA:", res.data);
 
-fetchCourses();
+      const data = res.data || [];
 
+      setCourses(data);
+      setFilteredCourses(data);
+    } catch (err) {
+      console.error("Error fetching courses:", err);
+      setError("Không thể tải danh sách khóa học. Vui lòng thử lại.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-},
-[]),
+  fetchCourses();
+}, []);
 
 useEffect(() => {
 const filtered = courses.filter((course) =>

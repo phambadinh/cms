@@ -82,7 +82,9 @@ function CourseDetail() {
     if (course.courseType === "FREE") {
       setActionLoading(true);
       try {
-        await enrollCourse(course.id || course._id);
+       await enrollCourse(course.id || course._id);
+
+navigate(`/learning/${course.id || course._id}`);
         alert("Bạn đã ghi danh khóa học miễn phí thành công.");
         const res = await getEnrollmentByCourse(courseId);
         setEnrollmentInfo(res.data);
@@ -127,18 +129,18 @@ function CourseDetail() {
 
           {course && (
             <>
-              <header className="course-header">
-                <h1 className="course-title">{course.name}</h1>
-                <p className="course-meta">
-                  Giảng viên: {" "}
+              <header className="course-detail-header">
+                <h1 className="course-detail-title">{course.name}</h1>
+                <p className="course-detail-meta">
+                  Giảng viên:{" "}
                   <strong>{course.instructorName || "Đang cập nhật"}</strong>
                 </p>
-                <p className="course-description">
+                <p className="course-detail-description">
                   {course.description || "Mô tả khóa học CMS."}
                 </p>
               </header>
 
-              <div className="course-payment-box">
+              <div className="course-detail-payment-box">
                 <h3>Thanh toán khóa học</h3>
                 <p>
                   Loại khóa học:{" "}
@@ -148,12 +150,12 @@ function CourseDetail() {
                 </p>
                 {course.courseType === "PREMIUM" && (
                   <p>
-                    Giá: <strong>{course.price?.toLocaleString('vi-VN')} đ</strong>
+                    Giá: <strong>{course.price?.toLocaleString("vi-VN")} đ</strong>
                   </p>
                 )}
 
                 {enrollmentInfo ? (
-                  <div className="course-enrollment-info">
+                  <div className="course-detail-enrollment-info">
                     <p>
                       Trạng thái đăng ký: <strong>{enrollmentInfo.paymentStatus}</strong>
                     </p>
@@ -162,7 +164,7 @@ function CourseDetail() {
                 ) : (
                   <>
                     {course.courseType === "PREMIUM" && (
-                      <div className="payment-method-group">
+                      <div className="course-detail-payment-method-group">
                         <label htmlFor="paymentMethod">Chọn cổng thanh toán:</label>
                         <select
                           id="paymentMethod"
@@ -176,7 +178,7 @@ function CourseDetail() {
                     )}
 
                     <button
-                      className="btn-primary"
+                      className="course-detail-btn-primary"
                       onClick={handleCourseAction}
                       disabled={paymentLoading || actionLoading}
                     >
@@ -194,23 +196,23 @@ function CourseDetail() {
             </>
           )}
 
-          <div className="course-layout">
-            <aside className="course-sidebar">
+          <div className="course-detail-layout">
+            <aside className="course-detail-sidebar">
               <h3>Nội dung khóa học</h3>
-              <ul className="lecture-list">
+              <ul className="course-detail-lecture-list">
                 {lessons.map((lesson) => (
                   <li
                     key={lesson.id || lesson._id}
                     className={
                       currentLesson?.id === lesson.id ||
                       currentLesson?._id === lesson._id
-                        ? "lecture-item active"
-                        : "lecture-item"
+                        ? "course-detail-lecture-item active"
+                        : "course-detail-lecture-item"
                     }
                     onClick={() => setCurrentLesson(lesson)}
                   >
-                    <span className="lecture-title">{lesson.title}</span>
-                    <span className="lecture-duration">
+                    <span className="course-detail-lecture-title">{lesson.title}</span>
+                    <span className="course-detail-lecture-duration">
                       {lesson.duration
                         ? `${Math.floor(lesson.duration / 60)}:${String(
                             lesson.duration % 60
@@ -222,27 +224,59 @@ function CourseDetail() {
               </ul>
             </aside>
 
-            <section className="course-content">
-              {currentLesson && (
-                <>
-                  <h2 className="lecture-heading">{currentLesson.title}</h2>
-                  <div className="video-wrapper">
-                    {currentLesson.videoUrl ? (
-                      <video key={currentLesson.id} controls>
-                        <source src={currentLesson.videoUrl} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    ) : (
-                      <div style={{ padding: "20px", textAlign: "center" }}>
-                        Không có video cho bài học này
-                      </div>
-                    )}
-                  </div>
+            <section className="course-detail-content">
 
-                  <Quiz lessonId={currentLesson.id || currentLesson._id} />
-                </>
-              )}
-            </section>
+  {enrollmentInfo ? (
+
+    currentLesson && (
+      <>
+        <h2 className="course-detail-lecture-heading">
+          {currentLesson.title}
+        </h2>
+
+        <div className="course-detail-video-wrapper">
+          {currentLesson.videoUrl ? (
+            <video
+              key={currentLesson.id}
+              controls
+            >
+              <source
+                src={currentLesson.videoUrl}
+                type="video/mp4"
+              />
+            </video>
+          ) : (
+            <div className="course-detail-video-empty">
+              Không có video cho bài học này
+            </div>
+          )}
+        </div>
+
+        <Quiz
+          lessonId={
+            currentLesson.id ||
+            currentLesson._id
+          }
+        />
+      </>
+    )
+
+  ) : (
+
+    <div className="locked-content">
+      <h3>
+        🔒 Nội dung khóa học đã khóa
+      </h3>
+
+      <p>
+        Vui lòng ghi danh để xem video
+        và làm bài kiểm tra.
+      </p>
+    </div>
+
+  )}
+
+</section>
           </div>
         </main>
       </div>

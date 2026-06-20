@@ -18,7 +18,7 @@ public class Enrollment {
     private String courseId;
     private String status; // ACTIVE, COMPLETED, INACTIVE
     private Double progressPercentage;
-    private Integer lastLessonId;
+    private String lastLessonId;
     private Double paymentAmount;
     private String paymentStatus; // PENDING, COMPLETED, REFUNDED
     private LocalDateTime enrolledAt;

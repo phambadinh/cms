@@ -47,6 +47,7 @@ com\cms\dto\GradeRequest.class
 com\cms\dto\DashboardResponse$CourseItem.class
 com\cms\dto\QuizAttemptResponse.class
 com\cms\repository\QuestionRepository.class
+com\cms\config\DataInitializer.class
 com\cms\repository\QuizRepository.class
 com\cms\model\CourseView.class
 com\cms\controller\GradeController.class

@@ -31,12 +31,12 @@
 }
 
 /* Mission & Vision */
-.mission-vision {
+.about-mission-vision {
   padding: 80px 40px;
   background-color: white;
 }
 
-.mission-vision-container {
+.about-mission-vision-container {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
@@ -44,23 +44,23 @@
   gap: 60px;
 }
 
-.mission-vision-item {
+.about-mission-vision-item {
   text-align: center;
 }
 
-.mission-vision-icon {
+.about-mission-vision-icon {
   font-size: 64px;
   margin-bottom: 20px;
 }
 
-.mission-vision-item h3 {
+.about-mission-vision-item h3 {
   font-size: 24px;
   font-weight: bold;
   margin: 0 0 16px 0;
   color: #1a1a1a;
 }
 
-.mission-vision-item p {
+.about-mission-vision-item p {
   font-size: 15px;
   color: #666;
   line-height: 1.6;
@@ -73,7 +73,7 @@
   background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
 }
 
-.stats-title {
+.about-stats-title {
   text-align: center;
   font-size: 32px;
   font-weight: bold;
@@ -81,7 +81,7 @@
   color: #1a1a1a;
 }
 
-.stats-grid {
+.about-stats-grid {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
@@ -89,7 +89,7 @@
   gap: 30px;
 }
 
-.stat-card {
+.about-stat-card {
   background: white;
   border-radius: 12px;
   padding: 40px 20px;
@@ -98,36 +98,36 @@
   transition: all 0.3s ease;
 }
 
-.stat-card:hover {
+.about-stat-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 32px rgba(0, 82, 204, 0.15);
 }
 
-.stat-number {
+.about-stat-number {
   font-size: 40px;
   font-weight: bold;
   color: #0052cc;
   margin: 0 0 10px 0;
 }
 
-.stat-label {
+.about-stat-label {
   font-size: 16px;
   color: #666;
   margin: 0;
 }
 
 /* Why Choose Us */
-.why-choose-us {
+.about-why-choose-us {
   padding: 80px 40px;
   background-color: white;
 }
 
-.why-choose-us-container {
+.about-why-choose-us-container {
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.why-choose-us-container h2 {
+.about-why-choose-us-title {
   text-align: center;
   font-size: 32px;
   font-weight: bold;
@@ -135,13 +135,13 @@
   color: #1a1a1a;
 }
 
-.why-choose-us-grid {
+.about-why-choose-us-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 40px;
 }
 
-.why-item {
+.about-why-item {
   text-align: center;
   padding: 30px;
   border-radius: 12px;
@@ -149,24 +149,24 @@
   transition: all 0.3s ease;
 }
 
-.why-item:hover {
+.about-why-item:hover {
   background-color: #f0f4ff;
   transform: translateY(-4px);
 }
 
-.why-icon {
+.about-why-icon {
   font-size: 48px;
   margin-bottom: 16px;
 }
 
-.why-item h4 {
+.about-why-item h4 {
   font-size: 18px;
   font-weight: 600;
   margin: 0 0 12px 0;
   color: #1a1a1a;
 }
 
-.why-item p {
+.about-why-item p {
   font-size: 14px;
   color: #666;
   margin: 0;
@@ -180,20 +180,20 @@
   text-align: center;
 }
 
-.about-team h2 {
+.about-team-title {
   font-size: 32px;
   font-weight: bold;
   margin: 0 0 16px 0;
   color: #1a1a1a;
 }
 
-.team-subtitle {
+.about-team-subtitle {
   font-size: 16px;
   color: #666;
   margin: 0 0 60px 0;
 }
 
-.team-grid {
+.about-team-grid {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
@@ -201,7 +201,7 @@
   gap: 40px;
 }
 
-.team-member {
+.about-team-member {
   background: white;
   border-radius: 12px;
   padding: 40px 20px;
@@ -210,24 +210,24 @@
   transition: all 0.3s ease;
 }
 
-.team-member:hover {
+.about-team-member:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 32px rgba(0, 82, 204, 0.15);
 }
 
-.member-avatar {
+.about-member-avatar {
   font-size: 64px;
   margin-bottom: 16px;
 }
 
-.team-member h4 {
+.about-team-member h4 {
   font-size: 18px;
   font-weight: 600;
   margin: 0 0 8px 0;
   color: #1a1a1a;
 }
 
-.team-member p {
+.about-team-member p {
   font-size: 14px;
   color: #0052cc;
   font-weight: 500;
@@ -244,26 +244,27 @@
     font-size: 32px;
   }
 
-  .mission-vision-container {
+  .about-mission-vision-container {
     grid-template-columns: 1fr;
     gap: 40px;
   }
 
   .about-stats,
-  .why-choose-us,
-  .about-team {
+  .about-why-choose-us,
+  .about-team,
+  .about-mission-vision {
     padding: 40px 20px;
   }
 
-  .stats-title,
-  .why-choose-us-container h2,
-  .about-team h2 {
+  .about-stats-title,
+  .about-why-choose-us-title,
+  .about-team-title {
     font-size: 24px;
   }
 
-  .stats-grid,
-  .why-choose-us-grid,
-  .team-grid {
+  .about-stats-grid,
+  .about-why-choose-us-grid,
+  .about-team-grid {
     gap: 20px;
   }
 }
@@ -282,29 +283,30 @@
   }
 
   .about-stats,
-  .why-choose-us,
-  .about-team {
+  .about-why-choose-us,
+  .about-team,
+  .about-mission-vision {
     padding: 30px 16px;
   }
 
-  .stats-title,
-  .why-choose-us-container h2,
-  .about-team h2 {
+  .about-stats-title,
+  .about-why-choose-us-title,
+  .about-team-title {
     font-size: 20px;
   }
 
-  .stat-card,
-  .why-item,
-  .team-member {
+  .about-stat-card,
+  .about-why-item,
+  .about-team-member {
     padding: 20px;
   }
 
-  .stat-number {
+  .about-stat-number {
     font-size: 28px;
   }
 
-  .why-icon,
-  .member-avatar {
+  .about-why-icon,
+  .about-member-avatar {
     font-size: 40px;
   }
 }

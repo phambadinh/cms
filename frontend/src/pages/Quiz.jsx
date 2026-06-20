@@ -1,6 +1,9 @@
-
 import { useEffect, useState } from "react";
-import { getQuizByLesson, submitQuizAttempt } from "../services/api";
+import {
+  getQuizByLesson,
+  submitQuizAttempt,
+} from "../services/api";
+
 import "../styles/quiz.css";
 
 function Quiz({ lessonId }) {
@@ -20,15 +23,26 @@ function Quiz({ lessonId }) {
       setError("");
 
       try {
-        const res = await getQuizByLesson(lessonId);
+        const res = await getQuizByLesson(
+          lessonId
+        );
 
         const quizData = res.data;
 
         setQuiz(quizData);
-        setQuestions(quizData.questions || []);
+
+        setQuestions(
+          quizData.questions || []
+        );
       } catch (err) {
-        console.error("Error fetching quiz:", err);
-        setError("Không thể tải bài quiz. Vui lòng thử lại.");
+        console.error(
+          "Error fetching quiz:",
+          err
+        );
+
+        setError(
+          "Không thể tải bài quiz. Vui lòng thử lại."
+        );
       } finally {
         setLoading(false);
       }
@@ -37,7 +51,10 @@ function Quiz({ lessonId }) {
     fetchQuiz();
   }, [lessonId]);
 
-  const handleSelect = (questionId, optionIndex) => {
+  const handleSelect = (
+    questionId,
+    optionIndex
+  ) => {
     if (submitted) return;
 
     setSelected((prev) => ({
@@ -54,24 +71,41 @@ function Quiz({ lessonId }) {
 
     try {
       const attemptData = {
-        selectedAnswers: questions.map(
-          (q) => selected[q.id || q._id] ?? -1
-        ),
+        quizId:
+          quiz.id || quiz._id,
+
+        selectedAnswers:
+          questions.map(
+            (q) =>
+              selected[
+                q.id || q._id
+              ] ?? -1
+          ),
+
         durationSeconds: 0,
       };
 
-      const res = await submitQuizAttempt(
-        quiz.id || quiz._id,
-        attemptData
+      const response =
+        await submitQuizAttempt(
+          attemptData
+        );
+
+      setScore(
+        response.data
+          .scorePercentage ??
+          response.data.score
       );
 
-      setScore(res.data.score);
       setSubmitted(true);
     } catch (err) {
-      console.error("Error submitting quiz:", err);
+      console.error(
+        "Error submitting quiz:",
+        err
+      );
 
       const errorMessage =
-        err.response?.data?.message ||
+        err.response?.data
+          ?.message ||
         "Nộp bài thất bại. Vui lòng thử lại.";
 
       setError(errorMessage);
@@ -88,13 +122,19 @@ function Quiz({ lessonId }) {
     );
   }
 
-  if (!quiz || questions.length === 0) {
+  if (
+    !quiz ||
+    questions.length === 0
+  ) {
     return null;
   }
 
   const correctCount =
     score !== null
-      ? Math.round((score / 100) * questions.length)
+      ? Math.round(
+          (score / 100) *
+            questions.length
+        )
       : 0;
 
   const answeredCount =
@@ -115,7 +155,10 @@ function Quiz({ lessonId }) {
 
       {!submitted && (
         <div className="quiz-progress">
-          Đã trả lời {answeredCount}/{questions.length} câu hỏi
+          Đã trả lời{" "}
+          {answeredCount}/
+          {questions.length} câu
+          hỏi
         </div>
       )}
 
@@ -125,52 +168,76 @@ function Quiz({ lessonId }) {
         </div>
       )}
 
-      {questions.map((q, index) => (
-        <div
-          key={q.id || q._id}
-          className="quiz-question"
-        >
-          <p className="quiz-question-text">
-            {index + 1}. {q.questionText}
-          </p>
+      {questions.map(
+        (q, index) => (
+          <div
+            key={
+              q.id || q._id
+            }
+            className="quiz-question"
+          >
+            <p className="quiz-question-text">
+              {index + 1}.{" "}
+              {q.questionText}
+            </p>
 
-          {q.options?.map((opt, idx) => (
-            <label
-              key={idx}
-              className={`quiz-option ${
-                selected[q.id || q._id] === idx
-                  ? "selected"
-                  : ""
-              }`}
-            >
-              <input
-                type="radio"
-                name={`q-${q.id || q._id}`}
-                checked={
-                  selected[q.id || q._id] === idx
-                }
-                onChange={() =>
-                  handleSelect(
-                    q.id || q._id,
-                    idx
-                  )
-                }
-                disabled={submitted}
-              />
+            {q.options?.map(
+              (opt, idx) => (
+                <label
+                  key={idx}
+                  className={`quiz-option ${
+                    selected[
+                      q.id ||
+                        q._id
+                    ] === idx
+                      ? "selected"
+                      : ""
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name={`q-${
+                      q.id ||
+                      q._id
+                    }`}
+                    checked={
+                      selected[
+                        q.id ||
+                          q._id
+                      ] === idx
+                    }
+                    onChange={() =>
+                      handleSelect(
+                        q.id ||
+                          q._id,
+                        idx
+                      )
+                    }
+                    disabled={
+                      submitted
+                    }
+                  />
 
-              <span>{opt}</span>
-            </label>
-          ))}
-        </div>
-      ))}
+                  <span>
+                    {opt}
+                  </span>
+                </label>
+              )
+            )}
+          </div>
+        )
+      )}
 
       {!submitted && (
         <button
           className="quiz-submit"
-          onClick={handleSubmit}
+          onClick={
+            handleSubmit
+          }
           disabled={
             loading ||
-            answeredCount !== questions.length
+            answeredCount !==
+              questions.length
           }
         >
           {loading
@@ -179,30 +246,36 @@ function Quiz({ lessonId }) {
         </button>
       )}
 
-      {submitted && score !== null && (
-        <div
-          className={`quiz-score ${scoreClass}`}
-        >
-          <h3>{score}%</h3>
+      {submitted &&
+        score !== null && (
+          <div
+            className={`quiz-score ${scoreClass}`}
+          >
+            <h3>{score}%</h3>
 
-          <p>
-            Bạn trả lời đúng{" "}
-            <strong>
-              {correctCount}/
-              {questions.length}
-            </strong>{" "}
-            câu hỏi
-          </p>
+            <p>
+              Bạn trả lời đúng{" "}
+              <strong>
+                {
+                  correctCount
+                }
+                /
+                {
+                  questions.length
+                }
+              </strong>{" "}
+              câu hỏi
+            </p>
 
-          <p>
-            {score >= 80
-              ? "🎉 Xuất sắc!"
-              : score >= 50
-              ? "👍 Khá tốt!"
-              : "📚 Hãy ôn tập thêm nhé!"}
-          </p>
-        </div>
-      )}
+            <p>
+              {score >= 80
+                ? "🎉 Xuất sắc!"
+                : score >= 50
+                ? "👍 Khá tốt!"
+                : "📚 Hãy ôn tập thêm nhé!"}
+            </p>
+          </div>
+        )}
     </div>
   );
 }

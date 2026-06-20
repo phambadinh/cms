@@ -1,0 +1,282 @@
+.mentor-dashboard-shell {
+  display: grid;
+  gap: 20px;
+}
+
+.mentor-hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 28px 32px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #0f4c81 0%, #1d6fa8 52%, #3b82f6 100%);
+  color: #fff;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.16);
+}
+
+.mentor-eyebrow {
+  display: inline-flex;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+.mentor-title {
+  margin: 0 0 8px;
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.15;
+}
+
+.mentor-subtitle {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 600px;
+}
+
+.mentor-loading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #64748b;
+  padding: 24px 4px;
+}
+
+.mentor-spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid #dbeafe;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: mentorSpin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes mentorSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mentor-error {
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.mentor-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.mentor-stat-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 18px 20px;
+  border: 1px solid #dbeafe;
+  box-shadow: 0 8px 18px rgba(15, 76, 129, 0.07);
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.mentor-stat-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mentor-stat-icon {
+  color: #2563eb;
+}
+
+.mentor-stat-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mentor-stat-label {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.mentor-stat-value {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  color: #0f4c81;
+  line-height: 1.1;
+}
+
+.mentor-stat-note {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.mentor-panel {
+  background: #fff;
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid #dbeafe;
+  box-shadow: 0 10px 22px rgba(15, 76, 129, 0.07);
+}
+
+.mentor-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.mentor-panel-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0f4c81;
+}
+
+.mentor-panel-title {
+  margin: 0;
+  font-size: 17px;
+  color: #0f4c81;
+}
+
+.mentor-panel-count {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.mentor-table-wrap {
+  overflow-x: auto;
+}
+
+.mentor-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 580px;
+}
+
+.mentor-table th,
+.mentor-table td {
+  text-align: left;
+  padding: 11px 10px;
+  border-bottom: 1px solid #e5eef9;
+}
+
+.mentor-table th {
+  color: #475569;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+
+.mentor-table tr:last-child td {
+  border-bottom: none;
+}
+
+.mentor-course-name {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.mentor-badge {
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.badge-free {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.badge-premium {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-live {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-draft {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.mentor-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mentor-progress-bar {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+  min-width: 80px;
+}
+
+.mentor-progress-fill {
+  height: 100%;
+  background: #2563eb;
+  border-radius: inherit;
+}
+
+.mentor-progress-label {
+  font-size: 12px;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.mentor-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 48px 24px;
+  color: #94a3b8;
+  text-align: center;
+}
+
+.mentor-empty svg {
+  color: #cbd5e1;
+}
+
+@media (max-width: 768px) {
+  .mentor-hero {
+    padding: 20px;
+    flex-direction: column;
+  }
+
+  .mentor-dashboard-shell {
+    gap: 14px;
+  }
+
+  .mentor-stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+  }
+}

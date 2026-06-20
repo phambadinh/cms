@@ -1,15 +1,41 @@
 import {
   BookOpen,
   Users,
-  GraduationCap,
-  Activity,
-  PlusCircle,
-  FileText,
+  Award,
+  TrendingUp,
+  Clock,
   BarChart3,
-  UserPlus,
+  BookMarked,
 } from "lucide-react";
+import "../../styles/mentorDashboard.css";
 
-import "../../styles/dashboard.css";
+
+const ICON_MAP = {
+  BookOpen,
+  Users,
+  Award,
+  TrendingUp,
+  Clock,
+  BarChart3,
+  BookMarked,
+};
+
+function StatCard({ stat }) {
+  const Icon = ICON_MAP[stat.icon] || BarChart3;
+
+  return (
+    <div className="mentor-stat-card">
+      <div className="mentor-stat-icon-wrap">
+        <Icon size={22} strokeWidth={2} className="mentor-stat-icon" aria-hidden="true" />
+      </div>
+      <div className="mentor-stat-body">
+        <p className="mentor-stat-label">{stat.label}</p>
+        <p className="mentor-stat-value">{stat.value ?? "—"}</p>
+        {stat.note && <p className="mentor-stat-note">{stat.note}</p>}
+      </div>
+    </div>
+  );
+}
 
 function MentorDashboardView({
   title,
@@ -17,296 +43,105 @@ function MentorDashboardView({
   stats = [],
   courses = [],
   enrollments = [],
-  loading = false,
-  error = "",
+  loading,
+  error,
 }) {
-  const getStatValue = (index) =>
-    stats[index]?.value || 0;
-
   return (
-    <div className="layout-main dashboard-shell">
-
-      {/* HERO */}
-
-      <div className="dashboard-header">
-
-        <h1 className="dash-title">
-          Chào mừng trở lại 👋
-        </h1>
-
-        <p className="dash-subtitle">
-          Quản lý khóa học, học viên và theo dõi
-          hiệu suất giảng dạy của bạn.
-        </p>
-
+    <div className="mentor-dashboard-shell">
+      <div className="mentor-hero">
+        <div>
+          <span className="mentor-eyebrow">MENTOR</span>
+          <h1 className="mentor-title">{title}</h1>
+          <p className="mentor-subtitle">{subtitle}</p>
+        </div>
       </div>
 
-      {error && (
-        <p className="dash-error">
-          {error}
-        </p>
+      {loading && (
+        <div className="mentor-loading">
+          <span className="mentor-spinner" aria-label="Đang tải..." />
+          <p>Đang tải dữ liệu...</p>
+        </div>
       )}
 
-      {loading ? (
-        <div className="dashboard-loading">
-          Đang tải dữ liệu...
+      {error && !loading && (
+        <div className="mentor-error" role="alert">
+          {error}
         </div>
-      ) : (
+      )}
+
+      {!loading && !error && (
         <>
-
-          {/* STATS */}
-
-          <section className="dash-cards">
-
-            <div className="dash-card">
-
-              <div className="dash-card-icon">
-                <BookOpen size={28} />
-              </div>
-
-              <div className="dash-number">
-                {getStatValue(0)}
-              </div>
-
-              <h3>Khóa học của tôi</h3>
-
-              <p className="dash-note">
-                Tổng số khóa học đang quản lý
-              </p>
-
+          {stats.length > 0 && (
+            <div className="mentor-stats-grid">
+              {stats.map((stat, i) => (
+                <StatCard key={i} stat={stat} />
+              ))}
             </div>
+          )}
 
-            <div className="dash-card">
-
-              <div className="dash-card-icon">
-                <GraduationCap size={28} />
+          {courses.length > 0 && (
+            <section className="mentor-panel">
+              <div className="mentor-panel-header">
+                <div className="mentor-panel-title-row">
+                  <BookOpen size={18} strokeWidth={2} aria-hidden="true" />
+                  <h2 className="mentor-panel-title">Khóa học của tôi</h2>
+                </div>
+                <span className="mentor-panel-count">{courses.length} khóa</span>
               </div>
 
-              <div className="dash-number">
-                {getStatValue(1)}
-              </div>
-
-              <h3>Đã công bố</h3>
-
-              <p className="dash-note">
-                Khóa học đang mở cho học viên
-              </p>
-
-            </div>
-
-            <div className="dash-card">
-
-              <div className="dash-card-icon">
-                <Users size={28} />
-              </div>
-
-              <div className="dash-number">
-                {getStatValue(2)}
-              </div>
-
-              <h3>Học viên</h3>
-
-              <p className="dash-note">
-                Tổng học viên tham gia
-              </p>
-
-            </div>
-
-            <div className="dash-card">
-
-              <div className="dash-card-icon">
-                <Activity size={28} />
-              </div>
-
-              <div className="dash-number">
-                {getStatValue(3)}
-              </div>
-
-              <h3>Đang hoạt động</h3>
-
-              <p className="dash-note">
-                Hoạt động học tập gần đây
-              </p>
-
-            </div>
-
-          </section>
-
-         <section className="dash-panel">
-
-  <div className="panel-header">
-    <h2 className="dash-panel-title">
-      Thao tác nhanh
-    </h2>
-
-    <span className="panel-subtitle">
-      Truy cập nhanh các chức năng thường dùng
-    </span>
-  </div>
-
- <div className="quick-actions">
-
-  <button className="quick-card create">
-    <div className="quick-icon">
-      <PlusCircle size={26} />
-    </div>
-
-    <div className="quick-content">
-      <h4>Tạo khóa học</h4>
-      <p>Tạo khóa học mới cho học viên</p>
-    </div>
-
-    <span className="quick-arrow">→</span>
-  </button>
-
-  <button className="quick-card course">
-    <div className="quick-icon">
-      <BookOpen size={26} />
-    </div>
-
-    <div className="quick-content">
-      <h4>Quản lý khóa học</h4>
-      <p>Chỉnh sửa và cập nhật khóa học</p>
-    </div>
-
-    <span className="quick-arrow">→</span>
-  </button>
-
-  <button className="quick-card student">
-    <div className="quick-icon">
-      <UserPlus size={26} />
-    </div>
-
-    <div className="quick-content">
-      <h4>Học viên</h4>
-      <p>Theo dõi tiến độ học tập</p>
-    </div>
-
-    <span className="quick-arrow">→</span>
-  </button>
-
-  <button className="quick-card chart">
-    <div className="quick-icon">
-      <BarChart3 size={26} />
-    </div>
-
-    <div className="quick-content">
-      <h4>Báo cáo</h4>
-      <p>Phân tích hiệu suất khóa học</p>
-    </div>
-
-    <span className="quick-arrow">→</span>
-  </button>
-
-</div>
-
-</section>
-          {/* COURSES */}
-
-          <section className="dash-panel">
-
-            <div className="panel-header">
-
-              <h2 className="dash-panel-title">
-                Khóa học gần đây
-              </h2>
-
-              <span className="panel-count">
-                {courses.length} khóa học
-              </span>
-
-            </div>
-
-            {courses.length === 0 ? (
-              <div className="empty-state">
-                Chưa có khóa học nào
-              </div>
-            ) : (
-              <div className="dash-table-wrap">
-
-                <table className="dash-table">
-
+              <div className="mentor-table-wrap">
+                <table className="mentor-table">
                   <thead>
                     <tr>
                       <th>Tên khóa học</th>
                       <th>Loại</th>
-                      <th>Học viên</th>
                       <th>Trạng thái</th>
+                      <th>Học viên</th>
                     </tr>
                   </thead>
-
                   <tbody>
-
-                    {courses.map((course) => (
-                      <tr key={course.id}>
-
-                        <td>
-                          {course.name}
-                        </td>
-
-                        <td>
-                          <span className="course-badge">
-                            {course.courseType ||
-                              "FREE"}
-                          </span>
-                        </td>
-
-                        <td>
-                          {course.enrollmentCount ||
-                            0}
-                        </td>
-
+                    {courses.map((c) => (
+                      <tr key={c.id || c._id}>
+                        <td className="mentor-course-name">{c.name}</td>
                         <td>
                           <span
-                            className={
-                              course.published
-                                ? "status-published"
-                                : "status-draft"
-                            }
+                            className={`mentor-badge ${
+                              c.courseType === "FREE" ? "badge-free" : "badge-premium"
+                            }`}
                           >
-                            {course.published
-                              ? "Published"
-                              : "Draft"}
+                            {c.courseType === "FREE" ? "Miễn phí" : "Trả phí"}
                           </span>
                         </td>
-
+                        <td>
+                          <span
+                            className={`mentor-badge ${
+                              c.status === "PUBLISHED" ? "badge-live" : "badge-draft"
+                            }`}
+                          >
+                            {c.status === "PUBLISHED" ? "Đã đăng" : "Nháp"}
+                          </span>
+                        </td>
+                        <td>{c.enrollmentCount ?? "—"}</td>
                       </tr>
                     ))}
-
                   </tbody>
-
                 </table>
-
               </div>
-            )}
+            </section>
+          )}
 
-          </section>
-
-          {/* STUDENTS */}
-
-          <section className="dash-panel">
-
-            <div className="panel-header">
-
-              <h2 className="dash-panel-title">
-                Học viên mới
-              </h2>
-
-              <span className="panel-count">
-                {enrollments.length}
-              </span>
-
-            </div>
-
-            {enrollments.length === 0 ? (
-              <div className="empty-state">
-                Chưa có học viên nào
+          {enrollments.length > 0 && (
+            <section className="mentor-panel">
+              <div className="mentor-panel-header">
+                <div className="mentor-panel-title-row">
+                  <Users size={18} strokeWidth={2} aria-hidden="true" />
+                  <h2 className="mentor-panel-title">Học viên gần đây</h2>
+                </div>
+                <span className="mentor-panel-count">{enrollments.length} học viên</span>
               </div>
-            ) : (
-              <div className="dash-table-wrap">
 
-                <table className="dash-table">
-
+              <div className="mentor-table-wrap">
+                <table className="mentor-table">
                   <thead>
                     <tr>
                       <th>Học viên</th>
@@ -315,96 +150,47 @@ function MentorDashboardView({
                       <th>Trạng thái</th>
                     </tr>
                   </thead>
-
                   <tbody>
-
-                    {enrollments.map(
-                      (enrollment) => (
-                        <tr
-                          key={enrollment.id}
-                        >
-
-                          <td>
-                            {enrollment.userName ||
-                              enrollment.userId}
-                          </td>
-
-                          <td>
-                            {enrollment.courseName ||
-                              enrollment.courseId}
-                          </td>
-
-                          <td>
-
-                            <div className="progress-cell">
-
-                              <div className="table-progress">
-
-                                <div
-                                  className="table-progress-fill"
-                                  style={{
-                                    width: `${enrollment.progressPercentage || 0}%`,
-                                  }}
-                                />
-
-                              </div>
-
-                              <span>
-                                {enrollment.progressPercentage || 0}
-                                %
-                              </span>
-
+                    {enrollments.map((e) => (
+                      <tr key={e.id || e._id}>
+                        <td>{e.studentName || e.username || "—"}</td>
+                        <td>{e.courseName || "—"}</td>
+                        <td>
+                          <div className="mentor-progress-wrap">
+                            <div className="mentor-progress-bar">
+                              <div
+                                className="mentor-progress-fill"
+                                style={{ width: `${e.progressPercentage || 0}%` }}
+                              />
                             </div>
-
-                          </td>
-
-                          <td>
-                            {enrollment.status}
-                          </td>
-
-                        </tr>
-                      )
-                    )}
-
+                            <span className="mentor-progress-label">
+                              {e.progressPercentage || 0}%
+                            </span>
+                          </div>
+                        </td>
+                        <td>
+                          <span
+                            className={`mentor-badge ${
+                              e.status === "COMPLETED" ? "badge-live" : "badge-draft"
+                            }`}
+                          >
+                            {e.status === "COMPLETED" ? "Hoàn thành" : "Đang học"}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
-
                 </table>
-
               </div>
-            )}
+            </section>
+          )}
 
-          </section>
-
-          {/* ACTIVITY */}
-
-          <section className="dash-panel">
-
-            <div className="panel-header">
-
-              <h2 className="dash-panel-title">
-                Hoạt động gần đây
-              </h2>
-
+          {!courses.length && !enrollments.length && (
+            <div className="mentor-empty">
+              <BookMarked size={40} strokeWidth={1.5} aria-hidden="true" />
+              <p>Chưa có dữ liệu nào.</p>
             </div>
-
-            <ul className="activity-list">
-
-              <li>
-                📚 Học viên mới ghi danh khóa học
-              </li>
-
-              <li>
-                📝 Một bài quiz vừa được hoàn thành
-              </li>
-
-              <li>
-                🎓 Một học viên hoàn thành khóa học
-              </li>
-
-            </ul>
-
-          </section>
-
+          )}
         </>
       )}
     </div>

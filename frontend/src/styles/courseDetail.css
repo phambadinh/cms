@@ -2,52 +2,52 @@
   padding: 24px;
 }
 
-.course-header {
+.course-detail-header {
   margin-bottom: 20px;
 }
 
-.course-title {
+.course-detail-title {
   margin: 0 0 4px;
   font-size: 22px;
   color: #0f4c81;
 }
 
-.course-meta {
+.course-detail-meta {
   margin: 0 0 8px;
   color: #4b5563;
 }
 
-.course-description {
+.course-detail-description {
   margin: 0 0 16px;
   color: #4b5563;
 }
 
-.course-layout {
+.course-detail-layout {
   display: grid;
   grid-template-columns: 280px minmax(0, 1fr);
   gap: 16px;
 }
 
-.course-sidebar {
+.course-detail-sidebar {
   background: #0f172a;
   color: #e5e7eb;
   border-radius: 12px;
   padding: 16px;
 }
 
-.course-sidebar h3 {
+.course-detail-sidebar h3 {
   margin-top: 0;
   margin-bottom: 12px;
   font-size: 15px;
 }
 
-.lecture-list {
+.course-detail-lecture-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.lecture-item {
+.course-detail-lecture-item {
   padding: 8px 10px;
   border-radius: 8px;
   cursor: pointer;
@@ -56,24 +56,24 @@
   font-size: 13px;
 }
 
-.lecture-item:hover {
+.course-detail-lecture-item:hover {
   background: rgba(37, 99, 235, 0.2);
 }
 
-.lecture-item.active {
+.course-detail-lecture-item.active {
   background: #2563eb;
   color: #ffffff;
 }
 
-.lecture-title {
+.course-detail-lecture-title {
   max-width: 180px;
 }
 
-.lecture-duration {
+.course-detail-lecture-duration {
   opacity: 0.8;
 }
 
-.course-content {
+.course-detail-content {
   background: #ffffff;
   border-radius: 12px;
   border: 1px solid #dbeafe;
@@ -81,23 +81,28 @@
   box-shadow: 0 10px 25px rgba(15, 76, 129, 0.1);
 }
 
-.lecture-heading {
+.course-detail-lecture-heading {
   margin-top: 0;
   margin-bottom: 12px;
   color: #0f4c81;
 }
 
-.video-wrapper {
+.course-detail-video-wrapper {
   margin-bottom: 16px;
 }
 
-.video-wrapper video {
+.course-detail-video-wrapper video {
   width: 100%;
   border-radius: 12px;
   background: #000000;
 }
 
-.course-payment-box {
+.course-detail-video-empty {
+  padding: 20px;
+  text-align: center;
+}
+
+.course-detail-payment-box {
   background: #f8fafc;
   border: 1px solid #dbeafe;
   border-radius: 14px;
@@ -105,18 +110,18 @@
   margin-bottom: 20px;
 }
 
-.course-payment-box h3 {
+.course-detail-payment-box h3 {
   margin-top: 0;
   margin-bottom: 12px;
   color: #0f4c81;
 }
 
-.course-payment-box p {
+.course-detail-payment-box p {
   margin: 6px 0;
   color: #334155;
 }
 
-.course-enrollment-info {
+.course-detail-enrollment-info {
   margin-top: 12px;
   padding: 12px;
   background: #eff6ff;
@@ -124,286 +129,35 @@
   border: 1px solid #bfdbfe;
 }
 
-.payment-method-group {
+.course-detail-payment-method-group {
   margin-bottom: 14px;
 }
 
-.payment-method-group label {
+.course-detail-payment-method-group label {
   display: block;
   margin-bottom: 6px;
   color: #1e293b;
 }
 
-.payment-method-group select {
+.course-detail-payment-method-group select {
   width: 100%;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #cbd5e1;
   background: white;
-}.course-detail-page {
-padding: 32px;
-background: #f8fafc;
-min-height: 100vh;
 }
 
-/* ===== Header ===== */
-
-.course-header {
-margin-bottom: 30px;
+.course-detail-btn-primary {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 600;
 }
 
-.course-title {
-margin: 0 0 10px;
-
-font-size: 36px;
-font-weight: 800;
-
-color: #0f172a;
-}
-
-.course-meta {
-color: #64748b;
-margin-bottom: 12px;
-}
-
-.course-description {
-color: #475569;
-font-size: 16px;
-line-height: 1.7;
-max-width: 900px;
-}
-
-/* ===== Layout ===== */
-
-.course-layout {
-display: grid;
-
-grid-template-columns: 320px minmax(0, 1fr);
-
-gap: 24px;
-
-align-items: start;
-}
-
-/* ===== Sidebar ===== */
-
-.course-sidebar {
-background: #ffffff;
-
-border-radius: 20px;
-
-padding: 20px;
-
-border: 1px solid #e2e8f0;
-
-box-shadow:
-0 10px 30px rgba(15,23,42,.05);
-
-position: sticky;
-top: 20px;
-}
-
-.course-sidebar h3 {
-margin-top: 0;
-margin-bottom: 16px;
-
-color: #0f172a;
-font-size: 18px;
-}
-
-/* ===== Lecture List ===== */
-
-.lecture-list {
-list-style: none;
-padding: 0;
-margin: 0;
-}
-
-.lecture-item {
-padding: 12px 14px;
-
-border-radius: 12px;
-
-cursor: pointer;
-
-display: flex;
-justify-content: space-between;
-
-transition: .25s;
-
-margin-bottom: 8px;
-
-border: 1px solid transparent;
-}
-
-.lecture-item:hover {
-background: #eff6ff;
-border-color: #bfdbfe;
-}
-
-.lecture-item.active {
-background: #2563eb;
-color: white;
-}
-
-.lecture-title {
-max-width: 180px;
-font-weight: 500;
-}
-
-.lecture-duration {
-opacity: .8;
-}
-
-/* ===== Content ===== */
-
-.course-content {
-background: #ffffff;
-
-border-radius: 20px;
-
-padding: 24px;
-
-border: 1px solid #e2e8f0;
-
-box-shadow:
-0 15px 35px rgba(15,23,42,.06);
-}
-
-.lecture-heading {
-margin-top: 0;
-margin-bottom: 20px;
-
-color: #0f172a;
-
-font-size: 28px;
-font-weight: 700;
-}
-
-/* ===== Video ===== */
-
-.video-wrapper {
-margin-bottom: 24px;
-}
-
-.video-wrapper video {
-width: 100%;
-
-border-radius: 18px;
-
-background: black;
-
-box-shadow:
-0 15px 35px rgba(0,0,0,.15);
-}
-
-/* ===== Payment Box ===== */
-
-.course-payment-box {
-background: linear-gradient(
-135deg,
-#eff6ff,
-#ffffff
-);
-
-border: 1px solid #bfdbfe;
-
-border-radius: 20px;
-
-padding: 24px;
-
-margin-bottom: 24px;
-}
-
-.course-payment-box h3 {
-margin-top: 0;
-margin-bottom: 16px;
-
-color: #1d4ed8;
-
-font-size: 22px;
-}
-
-.course-payment-box p {
-color: #334155;
-margin: 8px 0;
-}
-
-/* ===== Enrollment ===== */
-
-.course-enrollment-info {
-margin-top: 16px;
-
-padding: 16px;
-
-background: #dbeafe;
-
-border-radius: 14px;
-
-border: 1px solid #93c5fd;
-}
-
-/* ===== Payment Method ===== */
-
-.payment-method-group {
-margin-bottom: 18px;
-}
-
-.payment-method-group label {
-display: block;
-
-margin-bottom: 8px;
-
-font-weight: 600;
-
-color: #0f172a;
-}
-
-.payment-method-group select {
-width: 100%;
-
-padding: 12px;
-
-border-radius: 12px;
-
-border: 1px solid #cbd5e1;
-
-background: white;
-
-transition: .2s;
-}
-
-.payment-method-group select:focus {
-outline: none;
-
-border-color: #2563eb;
-
-box-shadow:
-0 0 0 4px rgba(37,99,235,.12);
-}
-
-/* ===== Responsive ===== */
-
-@media (max-width: 992px) {
-.course-layout {
-grid-template-columns: 1fr;
-}
-
-.course-sidebar {
-position: static;
-}
-}
-
-@media (max-width: 768px) {
-.course-detail-page {
-padding: 20px;
-}
-
-.course-title {
-font-size: 28px;
-}
-
-.lecture-heading {
-font-size: 22px;
-}
+.course-detail-btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }

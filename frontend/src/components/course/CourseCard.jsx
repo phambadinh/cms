@@ -7,8 +7,6 @@ import {
 } from "lucide-react";
 
 import htmlImg from "./html.png";
-import cssImg from "./css.png";
-import javaImg from "./java.png";
 
 function CourseCard({
   course,
@@ -16,29 +14,24 @@ function CourseCard({
   onEnroll,
   loading,
 }) {
-  const getImage = () => {
-    const name = (course.name || "").toLowerCase();
-
-    if (name.includes("html")) return htmlImg;
-    if (name.includes("css")) return cssImg;
-    if (name.includes("java")) return javaImg;
-
-    return htmlImg;
-  };
-
   return (
     <div className="course-card">
 
       <div className="course-image-wrapper">
+
         <img
-          src={getImage()}
+          src={course.thumbnail || htmlImg}
           alt={course.name}
           className="course-image"
+          onError={(e) => {
+            e.target.src = htmlImg;
+          }}
         />
 
         <span className="course-tag">
           {course.level || "Beginner"}
         </span>
+
       </div>
 
       <div className="course-body">
@@ -57,16 +50,19 @@ function CourseCard({
 
           <span>
             <Users size={14} />
-            100+
+            {" "}
+            {course.enrollmentCount || 0}
           </span>
 
           <span>
             <Star size={14} />
-            4.8
+            {" "}
+            {course.rating || 0}
           </span>
 
           <span>
             <BookOpen size={14} />
+            {" "}
             {course.totalLessons || 0}
           </span>
 
@@ -80,9 +76,11 @@ function CourseCard({
         <div className="course-footer">
 
           <div className="course-price">
+
             {course.courseType === "FREE"
               ? "Miễn phí"
               : `${course.price?.toLocaleString("vi-VN")} đ`}
+
           </div>
 
           <button
@@ -106,8 +104,8 @@ function CourseCard({
             }
           >
             {loading
-              ? "Đang ghi danh..."
-              : "Ghi danh ngay"}
+              ? "Đang đăng ký..."
+              : "Đăng ký ngay"}
           </button>
         )}
 

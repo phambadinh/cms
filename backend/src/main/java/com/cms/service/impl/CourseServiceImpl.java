@@ -60,11 +60,22 @@ public class CourseServiceImpl implements CourseService {
         return courseRepository.findByInstructorId(instructorId);
     }
 
-    @Override
-    public List<Course> getPublishedCourses() {
-        return courseRepository.findByPublishedTrue();
+   @Override
+public List<Course> getPublishedCourses() {
+
+    List<Course> courses = courseRepository.findAll();
+
+    System.out.println("===============");
+    System.out.println("COURSES SIZE = " + courses.size());
+
+    for (Course c : courses) {
+        System.out.println(c.getId() + " - " + c.getName());
     }
 
+    System.out.println("===============");
+
+    return courses;
+}
     @Override
     public List<Course> getFreeCourses() {
         return courseRepository.findByCourseType(CourseType.FREE);

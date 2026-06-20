@@ -1,38 +1,472 @@
 [
   {
-    "_id": "lesson_001",
-    "courseId": "course_free_001",
-    "title": "HTML cơ bản",
-    "description": "Tìm hiểu cấu trúc tài liệu HTML và thẻ cơ bản.",
-    "videoUrl": "https://example.com/videos/html-intro.mp4",
-    "duration": 900,
+    "_id": "lesson_java_001",
+    "courseId": "course_java_001",
+    "title": "Giới thiệu Java",
+    "description": "Tổng quan về ngôn ngữ Java.",
+    "videoUrl": "https://www.youtube.com/watch?v=3gtOAlcovoQ",
+    "duration": 600,
     "orderNumber": 1,
-    "published": true,
-    "createdAt": "2026-06-08T11:00:00Z",
-    "updatedAt": "2026-06-08T11:00:00Z"
+    "published": true
   },
   {
-    "_id": "lesson_002",
-    "courseId": "course_free_001",
-    "title": "CSS cơ bản",
-    "description": "Học cách tạo style cho trang web bằng CSS.",
-    "videoUrl": "https://example.com/videos/css-intro.mp4",
-    "duration": 1100,
+    "_id": "lesson_java_002",
+    "courseId": "course_java_001",
+    "title": "Biến và Kiểu dữ liệu",
+    "description": "Tìm hiểu biến và kiểu dữ liệu trong Java.",
+    "videoUrl": "https://www.youtube.com/watch?v=N6CvaGT42jU&t=310s",
+    "duration": 720,
     "orderNumber": 2,
-    "published": true,
-    "createdAt": "2026-06-08T11:15:00Z",
-    "updatedAt": "2026-06-08T11:15:00Z"
+    "published": true
   },
   {
-    "_id": "lesson_003",
-    "courseId": "course_premium_001",
-    "title": "Java nâng cao: Generic và Collection",
-    "description": "Giải thích Generic, Collections và cách áp dụng thực tế.",
-    "videoUrl": "https://example.com/videos/java-generics.mp4",
-    "duration": 1800,
+    "_id": "lesson_java_003",
+    "courseId": "course_java_001",
+    "title": "Cấu trúc điều kiện",
+    "description": "Sử dụng if, else và switch.",
+    "videoUrl": "https://www.youtube.com/watch?v=ZpfT8xxXhFI",
+    "duration": 840,
+    "orderNumber": 3,
+    "published": true
+  },
+  {
+    "_id": "lesson_java_004",
+    "courseId": "course_java_001",
+    "title": "Vòng lặp và Mảng",
+    "description": "Làm việc với vòng lặp và mảng.",
+    "videoUrl": "https://www.youtube.com/watch?v=bpVDZwsi-JM",
+    "duration": 900,
+    "orderNumber": 4,
+    "published": true
+  },
+  {
+    "_id": "lesson_java_005",
+    "courseId": "course_java_001",
+    "title": "Lập trình hướng đối tượng",
+    "description": "OOP trong Java.",
+    "videoUrl": "https://www.youtube.com/watch?v=WQ9j2sPRstk",
+    "duration": 1200,
+    "orderNumber": 5,
+    "published": true
+  },
+
+  {
+    "_id": "lesson_spring_001",
+    "courseId": "course_spring_001",
+    "title": "Spring Boot Introduction",
+    "description": "Giới thiệu Spring Boot.",
+    "videoUrl": "https://www.youtube.com/watch?v=tjz5JA_Bz44",
+    "duration": 700,
     "orderNumber": 1,
-    "published": true,
-    "createdAt": "2026-06-08T12:00:00Z",
-    "updatedAt": "2026-06-08T12:00:00Z"
+    "published": true
+  },
+  {
+    "_id": "lesson_spring_002",
+    "courseId": "course_spring_001",
+    "title": "REST Controller",
+    "description": "Xây dựng REST API.",
+    "videoUrl": "https://www.youtube.com/watch?v=CiYkGSralDk&t=1s",
+    "duration": 850,
+    "orderNumber": 2,
+    "published": true
+  },
+  {
+    "_id": "lesson_spring_003",
+    "courseId": "course_spring_001",
+    "title": "Service Layer",
+    "description": "Tầng xử lý nghiệp vụ.",
+    "videoUrl": "https://www.youtube.com/watch?v=AmTHGm-R_40&t=1s",
+    "duration": 900,
+    "orderNumber": 3,
+    "published": true
+  },
+  {
+    "_id": "lesson_spring_004",
+    "courseId": "course_spring_001",
+    "title": "Repository Layer",
+    "description": "Làm việc với MongoDB.",
+    "videoUrl": "https://www.youtube.com/watch?v=HRYBYQ8vsw4",
+    "duration": 900,
+    "orderNumber": 4,
+    "published": true
+  },
+  {
+    "_id": "lesson_spring_005",
+    "courseId": "course_spring_001",
+    "title": "Spring Security",
+    "description": "Bảo mật API với JWT.",
+    "videoUrl": "https://www.youtube.com/watch?v=zbVsEOpK32s&t=2s",
+    "duration": 1200,
+    "orderNumber": 5,
+    "published": true
+  },
+
+  {
+    "_id": "lesson_js_001",
+    "courseId": "course_js_001",
+    "title": "JavaScript Basics",
+    "description": "Giới thiệu JavaScript.",
+    "videoUrl": "https://www.youtube.com/watch?v=1A7JUhcHQzI&t=1s",
+    "duration": 600,
+    "orderNumber": 1,
+    "published": true
+  },
+  {
+    "_id": "lesson_js_002",
+    "courseId": "course_js_001",
+    "title": "Functions và Scope",
+    "description": "Làm việc với hàm.",
+    "videoUrl": "https://www.youtube.com/watch?v=6uwR5yoQ1VY&t=1s",
+    "duration": 750,
+    "orderNumber": 2,
+    "published": true
+  },
+  {
+    "_id": "lesson_js_003",
+    "courseId": "course_js_001",
+    "title": "DOM Manipulation",
+    "description": "Tương tác DOM.",
+    "videoUrl": "https://www.youtube.com/watch?v=jhdV0XhUVWc&t=1s",
+    "duration": 800,
+    "orderNumber": 3,
+    "published": true
+  },
+  {
+    "_id": "lesson_js_004",
+    "courseId": "course_js_001",
+    "title": "ES6 Features",
+    "description": "Arrow function, destructuring.",
+    "videoUrl": "https://www.youtube.com/watch?v=eW6otoH290g",
+    "duration": 850,
+    "orderNumber": 4,
+    "published": true
+  },
+  {
+    "_id": "lesson_js_005",
+    "courseId": "course_js_001",
+    "title": "Async/Await",
+    "description": "Lập trình bất đồng bộ.",
+    "videoUrl": "https://www.youtube.com/watch?v=OZLCVcCB5Gg",
+    "duration": 900,
+    "orderNumber": 5,
+    "published": true
   }
+  ,
+{
+  "_id": "lesson_react_001",
+  "courseId": "course_react_001",
+  "title": "React Introduction",
+  "description": "Giới thiệu ReactJS.",
+  "videoUrl": "https://www.youtube.com/watch?v=gL5HBA_1bDQ",
+  "duration": 600,
+  "orderNumber": 1,
+  "published": true
+},
+{
+  "_id": "lesson_react_002",
+  "courseId": "course_react_001",
+  "title": "JSX và Components",
+  "description": "Tìm hiểu JSX và Components.",
+  "videoUrl": "https://www.youtube.com/watch?v=ALg9nGsIka4&t=2s",
+  "duration": 750,
+  "orderNumber": 2,
+  "published": true
+},
+{
+  "_id": "lesson_react_003",
+  "courseId": "course_react_001",
+  "title": "Props và State",
+  "description": "Quản lý dữ liệu trong React.",
+  "videoUrl": "https://www.youtube.com/watch?v=14YuKH8Ju9U&t=1s",
+  "duration": 850,
+  "orderNumber": 3,
+  "published": true
+},
+{
+  "_id": "lesson_react_004",
+  "courseId": "course_react_001",
+  "title": "React Hooks",
+  "description": "Sử dụng useState và useEffect.",
+  "videoUrl": "https://www.youtube.com/watch?v=jWPMYPjIYvI",
+  "duration": 900,
+  "orderNumber": 4,
+  "published": true
+},
+{
+  "_id": "lesson_react_005",
+  "courseId": "course_react_001",
+  "title": "React Router",
+  "description": "Điều hướng trong React.",
+  "videoUrl": "https://www.youtube.com/watch?v=YoQ4-qTclIs&t=257s",
+  "duration": 1000,
+  "orderNumber": 5,
+  "published": true
+},
+
+{
+  "_id": "lesson_python_001",
+  "courseId": "course_python_001",
+  "title": "Python Basics",
+  "description": "Giới thiệu Python.",
+  "videoUrl": "https://www.youtube.com/watch?v=Sl_2giz1AXs&t=1s",
+  "duration": 600,
+  "orderNumber": 1,
+  "published": true
+},
+{
+  "_id": "lesson_python_002",
+  "courseId": "course_python_001",
+  "title": "Variables và Data Types",
+  "description": "Biến và kiểu dữ liệu.",
+  "videoUrl": "https://www.youtube.com/watch?v=wdYbnCBM7Fo",
+  "duration": 700,
+  "orderNumber": 2,
+  "published": true
+},
+{
+  "_id": "lesson_python_003",
+  "courseId": "course_python_001",
+  "title": "Functions",
+  "description": "Làm việc với hàm trong Python.",
+  "videoUrl": "https://www.youtube.com/watch?v=SxHbHDY7wLY",
+  "duration": 800,
+  "orderNumber": 3,
+  "published": true
+},
+{
+  "_id": "lesson_python_004",
+  "courseId": "course_python_001",
+  "title": "Lists và Dictionaries",
+  "description": "Cấu trúc dữ liệu cơ bản.",
+  "videoUrl": "https://www.youtube.com/watch?v=zhc7RWG-hGk",
+  "duration": 850,
+  "orderNumber": 4,
+  "published": true
+},
+{
+  "_id": "lesson_python_005",
+  "courseId": "course_python_001",
+  "title": "OOP trong Python",
+  "description": "Lập trình hướng đối tượng.",
+  "videoUrl": "https://www.youtube.com/watch?v=IecqLLxUeg0",
+  "duration": 1000,
+  "orderNumber": 5,
+  "published": true
+},
+
+{
+  "_id": "lesson_go_001",
+  "courseId": "course_go_001",
+  "title": "Go Introduction",
+  "description": "Giới thiệu Golang.",
+  "videoUrl": "https://www.youtube.com/watch?v=75lJDVT1h0s&t=1s",
+  "duration": 600,
+  "orderNumber": 1,
+  "published": true
+},
+{
+  "_id": "lesson_go_002",
+  "courseId": "course_go_001",
+  "title": "Variables và Constants",
+  "description": "Biến và hằng số trong Go.",
+  "videoUrl": "https://www.youtube.com/watch?v=v0Dwl3Y4vow&t=1s",
+  "duration": 700,
+  "orderNumber": 2,
+  "published": true
+},
+{
+  "_id": "lesson_go_003",
+  "courseId": "course_go_001",
+  "title": "Struct và Interface",
+  "description": "Làm việc với Struct và Interface.",
+  "videoUrl": "https://www.youtube.com/watch?v=XbwHgnjEcHk",
+  "duration": 850,
+  "orderNumber": 3,
+  "published": true
+},
+{
+  "_id": "lesson_go_004",
+  "courseId": "course_go_001",
+  "title": "Concurrency với Goroutines",
+  "description": "Lập trình đồng thời trong Go.",
+  "videoUrl": "https://www.youtube.com/watch?v=Rb46A9vME6M",
+  "duration": 950,
+  "orderNumber": 4,
+  "published": true
+},
+{
+  "_id": "lesson_go_005",
+  "courseId": "course_go_001",
+  "title": "REST API bằng Go",
+  "description": "Xây dựng REST API với Golang.",
+  "videoUrl": "https://www.youtube.com/watch?v=7VLmLOiQ3ck",
+  "duration": 1100,
+  "orderNumber": 5,
+  "published": true
+}
+,
+{
+  "_id": "lesson_php_001",
+  "courseId": "course_php_001",
+  "title": "Laravel Introduction",
+  "description": "Giới thiệu Laravel.",
+  "videoUrl": "https://www.youtube.com/watch?v=8sSHEbZ6tQE",
+  "duration": 600,
+  "orderNumber": 1,
+  "published": true
+},
+{
+  "_id": "lesson_php_002",
+  "courseId": "course_php_001",
+  "title": "Routing và Controller",
+  "description": "Điều hướng và Controller.",
+  "videoUrl": "https://www.youtube.com/watch?v=gTzYKCqGwRc",
+  "duration": 750,
+  "orderNumber": 2,
+  "published": true
+},
+{
+  "_id": "lesson_php_003",
+  "courseId": "course_php_001",
+  "title": "Eloquent ORM",
+  "description": "Làm việc với cơ sở dữ liệu.",
+  "videoUrl": "https://www.youtube.com/watch?v=uMVQcp9it-o",
+  "duration": 850,
+  "orderNumber": 3,
+  "published": true
+},
+{
+  "_id": "lesson_php_004",
+  "courseId": "course_php_001",
+  "title": "Authentication",
+  "description": "Xác thực người dùng.",
+  "videoUrl": "https://www.youtube.com/watch?v=HT_W-8oeNuk",
+  "duration": 950,
+  "orderNumber": 4,
+  "published": true
+},
+
+{
+  "_id": "lesson_mysql_001",
+  "courseId": "course_mysql_001",
+  "title": "Database Fundamentals",
+  "description": "Kiến thức cơ bản về Database.",
+  "videoUrl": "https://www.youtube.com/watch?v=o2uNZVAM-SY&t=1s",
+  "duration": 600,
+  "orderNumber": 1,
+  "published": true
+},
+{
+  "_id": "lesson_mysql_002",
+  "courseId": "course_mysql_001",
+  "title": "SQL Queries",
+  "description": "Truy vấn dữ liệu.",
+  "videoUrl": "https://www.youtube.com/watch?v=7N2-DU8Qr3U",
+  "duration": 700,
+  "orderNumber": 2,
+  "published": true
+},
+{
+  "_id": "lesson_mysql_003",
+  "courseId": "course_mysql_001",
+  "title": "Joins và Relationships",
+  "description": "Kết nối bảng dữ liệu.",
+  "videoUrl": "https://www.youtube.com/watch?v=QQavTgQ0wwk",
+  "duration": 850,
+  "orderNumber": 3,
+  "published": true
+},
+{
+  "_id": "lesson_mysql_004",
+  "courseId": "course_mysql_001",
+  "title": "Stored Procedures",
+  "description": "Procedure trong MySQL.",
+  "videoUrl": "https://www.youtube.com/watch?v=Q33E9rp5LP4",
+  "duration": 900,
+  "orderNumber": 4,
+  "published": true
+},
+
+{
+  "_id": "lesson_mongo_001",
+  "courseId": "course_mongo_001",
+  "title": "MongoDB Introduction",
+  "description": "Giới thiệu MongoDB.",
+  "videoUrl": "https://www.youtube.com/watch?v=SnqPyqRh4r4",
+  "duration": 600,
+  "orderNumber": 1,
+  "published": true
+},
+{
+  "_id": "lesson_mongo_002",
+  "courseId": "course_mongo_001",
+  "title": "CRUD Operations",
+  "description": "Create Read Update Delete.",
+  "videoUrl": "https://www.youtube.com/watch?v=Z4ubxFDu354",
+  "duration": 750,
+  "orderNumber": 2,
+  "published": true
+},
+{
+  "_id": "lesson_mongo_003",
+  "courseId": "course_mongo_001",
+  "title": "Aggregation Framework",
+  "description": "Aggregation trong MongoDB.",
+  "videoUrl": "https://www.youtube.com/watch?v=g2YnnjvzuXI",
+  "duration": 850,
+  "orderNumber": 3,
+  "published": true
+},
+{
+  "_id": "lesson_mongo_004",
+  "courseId": "course_mongo_001",
+  "title": "Indexing và Performance",
+  "description": "Tối ưu hiệu năng.",
+  "videoUrl": "https://www.youtube.com/watch?v=GYn8dwwPBvo",
+  "duration": 950,
+  "orderNumber": 4,
+  "published": true
+},
+
+{
+  "_id": "lesson_csharp_001",
+  "courseId": "course_csharp_001",
+  "title": "ASP.NET Core Introduction",
+  "description": "Giới thiệu ASP.NET Core.",
+  "videoUrl": "https://www.youtube.com/watch?v=YbRe4iIVYJk",
+  "duration": 650,
+  "orderNumber": 1,
+  "published": true
+},
+{
+  "_id": "lesson_csharp_002",
+  "courseId": "course_csharp_001",
+  "title": "MVC Architecture",
+  "description": "Mô hình MVC.",
+  "videoUrl": "https://www.youtube.com/watch?v=N8GhaR7K3tI",
+  "duration": 800,
+  "orderNumber": 2,
+  "published": true
+},
+{
+  "_id": "lesson_csharp_003",
+  "courseId": "course_csharp_001",
+  "title": "Entity Framework Core",
+  "description": "ORM cho .NET.",
+  "videoUrl": "https://www.youtube.com/watch?v=SryQxUeChMc",
+  "duration": 900,
+  "orderNumber": 3,
+  "published": true
+},
+{
+  "_id": "lesson_csharp_004",
+  "courseId": "course_csharp_001",
+  "title": "JWT Authentication",
+  "description": "Xác thực JWT.",
+  "videoUrl": "https://www.youtube.com/watch?v=0F8721N72-k",
+  "duration": 1000,
+  "orderNumber": 4,
+  "published": true
+}
+
 ]

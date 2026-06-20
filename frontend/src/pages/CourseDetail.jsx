@@ -82,7 +82,9 @@ function CourseDetail() {
     if (course.courseType === "FREE") {
       setActionLoading(true);
       try {
-        await enrollCourse(course.id || course._id);
+       await enrollCourse(course.id || course._id);
+
+navigate(`/learning/${course.id || course._id}`);
         alert("Bạn đã ghi danh khóa học miễn phí thành công.");
         const res = await getEnrollmentByCourse(courseId);
         setEnrollmentInfo(res.data);
@@ -223,26 +225,58 @@ function CourseDetail() {
             </aside>
 
             <section className="course-detail-content">
-              {currentLesson && (
-                <>
-                  <h2 className="course-detail-lecture-heading">{currentLesson.title}</h2>
-                  <div className="course-detail-video-wrapper">
-                    {currentLesson.videoUrl ? (
-                      <video key={currentLesson.id} controls>
-                        <source src={currentLesson.videoUrl} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    ) : (
-                      <div className="course-detail-video-empty">
-                        Không có video cho bài học này
-                      </div>
-                    )}
-                  </div>
 
-                  <Quiz lessonId={currentLesson.id || currentLesson._id} />
-                </>
-              )}
-            </section>
+  {enrollmentInfo ? (
+
+    currentLesson && (
+      <>
+        <h2 className="course-detail-lecture-heading">
+          {currentLesson.title}
+        </h2>
+
+        <div className="course-detail-video-wrapper">
+          {currentLesson.videoUrl ? (
+            <video
+              key={currentLesson.id}
+              controls
+            >
+              <source
+                src={currentLesson.videoUrl}
+                type="video/mp4"
+              />
+            </video>
+          ) : (
+            <div className="course-detail-video-empty">
+              Không có video cho bài học này
+            </div>
+          )}
+        </div>
+
+        <Quiz
+          lessonId={
+            currentLesson.id ||
+            currentLesson._id
+          }
+        />
+      </>
+    )
+
+  ) : (
+
+    <div className="locked-content">
+      <h3>
+        🔒 Nội dung khóa học đã khóa
+      </h3>
+
+      <p>
+        Vui lòng ghi danh để xem video
+        và làm bài kiểm tra.
+      </p>
+    </div>
+
+  )}
+
+</section>
           </div>
         </main>
       </div>

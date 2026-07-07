@@ -87,7 +87,7 @@ function Header() {
     return [
       { label: "Dashboard", path: "/dashboard/student", icon: LayoutDashboard },
       { label: "Khóa học của tôi", path: "/my-learning", icon: GraduationCap },
-      { label: "Chứng chỉ", path: "/certificates", icon: BadgeCheck, featured: true },
+      { label: "Chứng chỉ", path: "/certificates", icon: BadgeCheck },
       { label: "Cài đặt tài khoản", path: "/settings", icon: Settings },
     ];
   }, [user]);

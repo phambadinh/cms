@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { BookOpen, Clock, CheckCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { getMyEnrollments } from "../services/api";
+import "../styles/myLearning.css";
 
 function MyLearning() {
   const [enrollments, setEnrollments] = useState([]);

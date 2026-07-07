@@ -7,7 +7,7 @@ Backend: Java Spring Boot
 
 Database: MongoDB
 
-Frontend: React hoặc Vue
+Frontend: React
 
 API: RESTful API
 

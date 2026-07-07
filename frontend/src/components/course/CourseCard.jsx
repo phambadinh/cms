@@ -3,11 +3,10 @@ import {
   Star,
   BookOpen,
   ArrowRight,
+  Clock,
 } from "lucide-react";
 
 import htmlImg from "./html.png";
-import cssImg from "./css.png";
-import javaImg from "./java.png";
 
 function CourseCard({
   course,
@@ -15,48 +14,61 @@ function CourseCard({
   onEnroll,
   loading,
 }) {
-  const getImage = () => {
-    const name = (course.name || "").toLowerCase();
-
-    if (name.includes("html")) return htmlImg;
-    if (name.includes("css")) return cssImg;
-    if (name.includes("java")) return javaImg;
-
-    return htmlImg;
-  };
-
   return (
     <div className="course-card">
 
-      <img
-        src={getImage()}
-        alt={course.name}
-        className="course-image"
-      />
+      <div className="course-image-wrapper">
 
-      <div className="course-body">
+        <img
+          src={course.thumbnail || htmlImg}
+          alt={course.name}
+          className="course-image"
+          onError={(e) => {
+            e.target.src = htmlImg;
+          }}
+        />
 
         <span className="course-tag">
           {course.level || "Beginner"}
         </span>
 
-        <h3>{course.name}</h3>
+      </div>
+
+      <div className="course-body">
+
+        <h3 className="course-title">
+          {course.name}
+        </h3>
+
+        <p className="course-description">
+          {course.description
+            ? course.description.slice(0, 80) + "..."
+            : "Khóa học chất lượng giúp bạn nâng cao kỹ năng và phát triển nghề nghiệp."}
+        </p>
 
         <div className="course-stats">
 
           <span>
             <Users size={14} />
-            100
+            {" "}
+            {course.enrollmentCount || 0}
           </span>
 
           <span>
             <Star size={14} />
-            4.8
+            {" "}
+            {course.rating || 0}
           </span>
 
           <span>
             <BookOpen size={14} />
+            {" "}
             {course.totalLessons || 0}
+          </span>
+
+          <span>
+            <Clock size={14} />
+            12h
           </span>
 
         </div>
@@ -64,9 +76,11 @@ function CourseCard({
         <div className="course-footer">
 
           <div className="course-price">
+
             {course.courseType === "FREE"
               ? "Miễn phí"
               : `${course.price?.toLocaleString("vi-VN")} đ`}
+
           </div>
 
           <button
@@ -76,7 +90,7 @@ function CourseCard({
             }
           >
             Chi tiết
-            <ArrowRight size={14} />
+            <ArrowRight size={15} />
           </button>
 
         </div>
@@ -90,8 +104,8 @@ function CourseCard({
             }
           >
             {loading
-              ? "Đang ghi danh..."
-              : "Ghi danh"}
+              ? "Đang đăng ký..."
+              : "Đăng ký ngay"}
           </button>
         )}
 

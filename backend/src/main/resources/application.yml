@@ -1,14 +1,14 @@
-content = server:
+server:
   port: 8080
   servlet:
     context-path: /
-  
+
 spring:
   application:
     name: cms-api
   data:
     mongodb:
-      uri: mongodb://localhost:27017/cms_db
+      uri: ${MONGO_URI:mongodb://localhost:27017/cms_db}
       auto-index-creation: true
 
 jwt:

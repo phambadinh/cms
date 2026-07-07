@@ -1,26 +1,675 @@
 [
   {
-    "_id": "quiz_001",
-    "lessonId": "lesson_002",
-    "courseId": "course_free_001",
-    "title": "Quiz CSS cơ bản",
-    "description": "Kiểm tra kiến thức cơ bản về CSS.",
+    "_id": "quiz_java_001",
+    "lessonId": "lesson_java_001",
+    "courseId": "course_java_001",
+    "title": "Quiz - Giới thiệu Java",
+    "description": "Kiểm tra kiến thức bài Giới thiệu Java",
     "passingScore": 70,
-    "questionIds": ["question_001", "question_002"],
-    "published": true,
-    "createdAt": "2026-06-09T08:00:00Z",
-    "updatedAt": "2026-06-09T08:00:00Z"
+    "questionIds": [
+      "question_java_001_001",
+      "question_java_001_002",
+      "question_java_001_003",
+      "question_java_001_004",
+      "question_java_001_005"
+    ],
+    "published": true
   },
   {
-    "_id": "quiz_002",
-    "lessonId": "lesson_003",
-    "courseId": "course_premium_001",
-    "title": "Quiz Java Generic",
-    "description": "Kiểm tra kiến thức Java Generic và Collection.",
+    "_id": "quiz_java_002",
+    "lessonId": "lesson_java_002",
+    "courseId": "course_java_001",
+    "title": "Quiz - Biến và Kiểu dữ liệu",
+    "description": "Kiểm tra kiến thức bài Biến và Kiểu dữ liệu",
     "passingScore": 70,
-    "questionIds": ["question_003", "question_004"],
-    "published": true,
-    "createdAt": "2026-06-09T09:00:00Z",
-    "updatedAt": "2026-06-09T09:00:00Z"
-  }
+    "questionIds": [
+      "question_java_002_001",
+      "question_java_002_002",
+      "question_java_002_003",
+      "question_java_002_004",
+      "question_java_002_005"
+    ],
+    "published": true
+  },
+  {
+    "_id": "quiz_java_003",
+    "lessonId": "lesson_java_003",
+    "courseId": "course_java_001",
+    "title": "Quiz - Cấu trúc điều kiện",
+    "description": "Kiểm tra kiến thức bài Cấu trúc điều kiện",
+    "passingScore": 70,
+    "questionIds": [
+      "question_java_003_001",
+      "question_java_003_002",
+      "question_java_003_003",
+      "question_java_003_004",
+      "question_java_003_005"
+    ],
+    "published": true
+  },
+  {
+    "_id": "quiz_java_004",
+    "lessonId": "lesson_java_004",
+    "courseId": "course_java_001",
+    "title": "Quiz - Vòng lặp và Mảng",
+    "description": "Kiểm tra kiến thức bài Vòng lặp và Mảng",
+    "passingScore": 70,
+    "questionIds": [
+      "question_java_004_001",
+      "question_java_004_002",
+      "question_java_004_003",
+      "question_java_004_004",
+      "question_java_004_005"
+    ],
+    "published": true
+  },
+  {
+    "_id": "quiz_java_005",
+    "lessonId": "lesson_java_005",
+    "courseId": "course_java_001",
+    "title": "Quiz - Lập trình hướng đối tượng",
+    "description": "Kiểm tra kiến thức bài OOP trong Java",
+    "passingScore": 70,
+    "questionIds": [
+      "question_java_005_001",
+      "question_java_005_002",
+      "question_java_005_003",
+      "question_java_005_004",
+      "question_java_005_005"
+    ],
+    "published": true
+  },
+
+  {
+    "_id": "quiz_spring_001",
+    "lessonId": "lesson_spring_001",
+    "courseId": "course_spring_001",
+    "title": "Quiz - Spring Boot Introduction",
+    "description": "Kiểm tra kiến thức Spring Boot",
+    "passingScore": 70,
+    "questionIds": [
+      "question_spring_001_001",
+      "question_spring_001_002",
+      "question_spring_001_003",
+      "question_spring_001_004",
+      "question_spring_001_005"
+    ],
+    "published": true
+  },
+  {
+    "_id": "quiz_spring_002",
+    "lessonId": "lesson_spring_002",
+    "courseId": "course_spring_001",
+    "title": "Quiz - REST Controller",
+    "description": "Kiểm tra kiến thức REST API",
+    "passingScore": 70,
+    "questionIds": [
+      "question_spring_002_001",
+      "question_spring_002_002",
+      "question_spring_002_003",
+      "question_spring_002_004",
+      "question_spring_002_005"
+    ],
+    "published": true
+  },
+  {
+    "_id": "quiz_spring_003",
+    "lessonId": "lesson_spring_003",
+    "courseId": "course_spring_001",
+    "title": "Quiz - Service Layer",
+    "description": "Kiểm tra kiến thức Service Layer",
+    "passingScore": 70,
+    "questionIds": [
+      "question_spring_003_001",
+      "question_spring_003_002",
+      "question_spring_003_003",
+      "question_spring_003_004",
+      "question_spring_003_005"
+    ],
+    "published": true
+  },
+  {
+    "_id": "quiz_spring_004",
+    "lessonId": "lesson_spring_004",
+    "courseId": "course_spring_001",
+    "title": "Quiz - Repository Layer",
+    "description": "Kiểm tra kiến thức Repository",
+    "passingScore": 70,
+    "questionIds": [
+      "question_spring_004_001",
+      "question_spring_004_002",
+      "question_spring_004_003",
+      "question_spring_004_004",
+      "question_spring_004_005"
+    ],
+    "published": true
+  },
+  {
+    "_id": "quiz_spring_005",
+    "lessonId": "lesson_spring_005",
+    "courseId": "course_spring_001",
+    "title": "Quiz - Spring Security",
+    "description": "Kiểm tra kiến thức JWT Security",
+    "passingScore": 70,
+    "questionIds": [
+      "question_spring_005_001",
+      "question_spring_005_002",
+      "question_spring_005_003",
+      "question_spring_005_004",
+      "question_spring_005_005"
+    ],
+    "published": true
+  },
+
+{
+  "_id": "quiz_js_001",
+  "lessonId": "lesson_js_001",
+  "courseId": "course_js_001",
+  "title": "Quiz - JavaScript Basics",
+  "description": "Kiểm tra kiến thức JavaScript cơ bản",
+  "passingScore": 70,
+  "questionIds": [
+    "question_js_001_001",
+    "question_js_001_002",
+    "question_js_001_003",
+    "question_js_001_004",
+    "question_js_001_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_js_002",
+  "lessonId": "lesson_js_002",
+  "courseId": "course_js_001",
+  "title": "Quiz - Functions và Scope",
+  "description": "Kiểm tra hàm và phạm vi biến",
+  "passingScore": 70,
+  "questionIds": [
+    "question_js_002_001",
+    "question_js_002_002",
+    "question_js_002_003",
+    "question_js_002_004",
+    "question_js_002_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_js_003",
+  "lessonId": "lesson_js_003",
+  "courseId": "course_js_001",
+  "title": "Quiz - DOM Manipulation",
+  "description": "Kiểm tra thao tác DOM",
+  "passingScore": 70,
+  "questionIds": [
+    "question_js_003_001",
+    "question_js_003_002",
+    "question_js_003_003",
+    "question_js_003_004",
+    "question_js_003_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_js_004",
+  "lessonId": "lesson_js_004",
+  "courseId": "course_js_001",
+  "title": "Quiz - ES6 Features",
+  "description": "Kiểm tra kiến thức ES6",
+  "passingScore": 70,
+  "questionIds": [
+    "question_js_004_001",
+    "question_js_004_002",
+    "question_js_004_003",
+    "question_js_004_004",
+    "question_js_004_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_js_005",
+  "lessonId": "lesson_js_005",
+  "courseId": "course_js_001",
+  "title": "Quiz - Async Await",
+  "description": "Kiểm tra lập trình bất đồng bộ",
+  "passingScore": 70,
+  "questionIds": [
+    "question_js_005_001",
+    "question_js_005_002",
+    "question_js_005_003",
+    "question_js_005_004",
+    "question_js_005_005"
+  ],
+  "published": true
+},
+
+{
+  "_id": "quiz_react_001",
+  "lessonId": "lesson_react_001",
+  "courseId": "course_react_001",
+  "title": "Quiz - React Introduction",
+  "description": "Giới thiệu React",
+  "passingScore": 70,
+  "questionIds": [
+    "question_react_001_001",
+    "question_react_001_002",
+    "question_react_001_003",
+    "question_react_001_004",
+    "question_react_001_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_react_002",
+  "lessonId": "lesson_react_002",
+  "courseId": "course_react_001",
+  "title": "Quiz - JSX và Components",
+  "description": "Kiểm tra JSX",
+  "passingScore": 70,
+  "questionIds": [
+    "question_react_002_001",
+    "question_react_002_002",
+    "question_react_002_003",
+    "question_react_002_004",
+    "question_react_002_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_react_003",
+  "lessonId": "lesson_react_003",
+  "courseId": "course_react_001",
+  "title": "Quiz - Props và State",
+  "description": "Kiểm tra Props và State",
+  "passingScore": 70,
+  "questionIds": [
+    "question_react_003_001",
+    "question_react_003_002",
+    "question_react_003_003",
+    "question_react_003_004",
+    "question_react_003_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_react_004",
+  "lessonId": "lesson_react_004",
+  "courseId": "course_react_001",
+  "title": "Quiz - React Hooks",
+  "description": "Kiểm tra Hooks",
+  "passingScore": 70,
+  "questionIds": [
+    "question_react_004_001",
+    "question_react_004_002",
+    "question_react_004_003",
+    "question_react_004_004",
+    "question_react_004_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_react_005",
+  "lessonId": "lesson_react_005",
+  "courseId": "course_react_001",
+  "title": "Quiz - React Router",
+  "description": "Kiểm tra React Router",
+  "passingScore": 70,
+  "questionIds": [
+    "question_react_005_001",
+    "question_react_005_002",
+    "question_react_005_003",
+    "question_react_005_004",
+    "question_react_005_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_python_001",
+  "lessonId": "lesson_python_001",
+  "courseId": "course_python_001",
+  "title": "Quiz - Python Basics",
+  "passingScore": 70,
+  "questionIds": ["question_python_001_001","question_python_001_002","question_python_001_003","question_python_001_004","question_python_001_005"],
+  "published": true
+},
+{
+  "_id": "quiz_python_002",
+  "lessonId": "lesson_python_002",
+  "courseId": "course_python_001",
+  "title": "Quiz - Variables và Data Types",
+  "passingScore": 70,
+  "questionIds": ["question_python_002_001","question_python_002_002","question_python_002_003","question_python_002_004","question_python_002_005"],
+  "published": true
+},
+{
+  "_id": "quiz_python_003",
+  "lessonId": "lesson_python_003",
+  "courseId": "course_python_001",
+  "title": "Quiz - Functions",
+  "passingScore": 70,
+  "questionIds": ["question_python_003_001","question_python_003_002","question_python_003_003","question_python_003_004","question_python_003_005"],
+  "published": true
+},
+{
+  "_id": "quiz_python_004",
+  "lessonId": "lesson_python_004",
+  "courseId": "course_python_001",
+  "title": "Quiz - Lists và Dictionaries",
+  "passingScore": 70,
+  "questionIds": ["question_python_004_001","question_python_004_002","question_python_004_003","question_python_004_004","question_python_004_005"],
+  "published": true
+},
+{
+  "_id": "quiz_python_005",
+  "lessonId": "lesson_python_005",
+  "courseId": "course_python_001",
+  "title": "Quiz - OOP trong Python",
+  "passingScore": 70,
+  "questionIds": ["question_python_005_001","question_python_005_002","question_python_005_003","question_python_005_004","question_python_005_005"],
+  "published": true
+},
+
+{
+  "_id": "quiz_go_001",
+  "lessonId": "lesson_go_001",
+  "courseId": "course_go_001",
+  "title": "Quiz - Go Introduction",
+  "passingScore": 70,
+  "questionIds": ["question_go_001_001","question_go_001_002","question_go_001_003","question_go_001_004","question_go_001_005"],
+  "published": true
+},
+{
+  "_id": "quiz_go_002",
+  "lessonId": "lesson_go_002",
+  "courseId": "course_go_001",
+  "title": "Quiz - Variables và Constants",
+  "passingScore": 70,
+  "questionIds": ["question_go_002_001","question_go_002_002","question_go_002_003","question_go_002_004","question_go_002_005"],
+  "published": true
+},
+{
+  "_id": "quiz_go_003",
+  "lessonId": "lesson_go_003",
+  "courseId": "course_go_001",
+  "title": "Quiz - Struct và Interface",
+  "passingScore": 70,
+  "questionIds": ["question_go_003_001","question_go_003_002","question_go_003_003","question_go_003_004","question_go_003_005"],
+  "published": true
+},
+{
+  "_id": "quiz_go_004",
+  "lessonId": "lesson_go_004",
+  "courseId": "course_go_001",
+  "title": "Quiz - Goroutines",
+  "passingScore": 70,
+  "questionIds": ["question_go_004_001","question_go_004_002","question_go_004_003","question_go_004_004","question_go_004_005"],
+  "published": true
+},
+{
+  "_id": "quiz_go_005",
+  "lessonId": "lesson_go_005",
+  "courseId": "course_go_001",
+  "title": "Quiz - REST API bằng Go",
+  "passingScore": 70,
+  "questionIds": ["question_go_005_001","question_go_005_002","question_go_005_003","question_go_005_004","question_go_005_005"],
+  "published": true
+},
+{
+  "_id": "quiz_php_001",
+  "lessonId": "lesson_php_001",
+  "courseId": "course_php_001",
+  "title": "Quiz - Laravel Introduction",
+  "description": "Kiểm tra kiến thức Laravel cơ bản",
+  "passingScore": 70,
+  "questionIds": [
+    "question_php_001_001",
+    "question_php_001_002",
+    "question_php_001_003",
+    "question_php_001_004",
+    "question_php_001_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_php_002",
+  "lessonId": "lesson_php_002",
+  "courseId": "course_php_001",
+  "title": "Quiz - Routing và Controller",
+  "description": "Kiểm tra Routing và Controller",
+  "passingScore": 70,
+  "questionIds": [
+    "question_php_002_001",
+    "question_php_002_002",
+    "question_php_002_003",
+    "question_php_002_004",
+    "question_php_002_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_php_003",
+  "lessonId": "lesson_php_003",
+  "courseId": "course_php_001",
+  "title": "Quiz - Eloquent ORM",
+  "description": "Kiểm tra Eloquent ORM",
+  "passingScore": 70,
+  "questionIds": [
+    "question_php_003_001",
+    "question_php_003_002",
+    "question_php_003_003",
+    "question_php_003_004",
+    "question_php_003_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_php_004",
+  "lessonId": "lesson_php_004",
+  "courseId": "course_php_001",
+  "title": "Quiz - Authentication",
+  "description": "Kiểm tra xác thực người dùng",
+  "passingScore": 70,
+  "questionIds": [
+    "question_php_004_001",
+    "question_php_004_002",
+    "question_php_004_003",
+    "question_php_004_004",
+    "question_php_004_005"
+  ],
+  "published": true
+},
+
+{
+  "_id": "quiz_mysql_001",
+  "lessonId": "lesson_mysql_001",
+  "courseId": "course_mysql_001",
+  "title": "Quiz - Database Fundamentals",
+  "description": "Kiểm tra kiến thức Database",
+  "passingScore": 70,
+  "questionIds": [
+    "question_mysql_001_001",
+    "question_mysql_001_002",
+    "question_mysql_001_003",
+    "question_mysql_001_004",
+    "question_mysql_001_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_mysql_002",
+  "lessonId": "lesson_mysql_002",
+  "courseId": "course_mysql_001",
+  "title": "Quiz - SQL Queries",
+  "description": "Kiểm tra câu lệnh SQL",
+  "passingScore": 70,
+  "questionIds": [
+    "question_mysql_002_001",
+    "question_mysql_002_002",
+    "question_mysql_002_003",
+    "question_mysql_002_004",
+    "question_mysql_002_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_mysql_003",
+  "lessonId": "lesson_mysql_003",
+  "courseId": "course_mysql_001",
+  "title": "Quiz - Joins và Relationships",
+  "description": "Kiểm tra Join",
+  "passingScore": 70,
+  "questionIds": [
+    "question_mysql_003_001",
+    "question_mysql_003_002",
+    "question_mysql_003_003",
+    "question_mysql_003_004",
+    "question_mysql_003_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_mysql_004",
+  "lessonId": "lesson_mysql_004",
+  "courseId": "course_mysql_001",
+  "title": "Quiz - Stored Procedures",
+  "description": "Kiểm tra Procedure",
+  "passingScore": 70,
+  "questionIds": [
+    "question_mysql_004_001",
+    "question_mysql_004_002",
+    "question_mysql_004_003",
+    "question_mysql_004_004",
+    "question_mysql_004_005"
+  ],
+  "published": true
+},
+
+{
+  "_id": "quiz_mongo_001",
+  "lessonId": "lesson_mongo_001",
+  "courseId": "course_mongo_001",
+  "title": "Quiz - MongoDB Introduction",
+  "description": "Kiểm tra MongoDB cơ bản",
+  "passingScore": 70,
+  "questionIds": [
+    "question_mongo_001_001",
+    "question_mongo_001_002",
+    "question_mongo_001_003",
+    "question_mongo_001_004",
+    "question_mongo_001_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_mongo_002",
+  "lessonId": "lesson_mongo_002",
+  "courseId": "course_mongo_001",
+  "title": "Quiz - CRUD Operations",
+  "description": "Kiểm tra CRUD",
+  "passingScore": 70,
+  "questionIds": [
+    "question_mongo_002_001",
+    "question_mongo_002_002",
+    "question_mongo_002_003",
+    "question_mongo_002_004",
+    "question_mongo_002_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_mongo_003",
+  "lessonId": "lesson_mongo_003",
+  "courseId": "course_mongo_001",
+  "title": "Quiz - Aggregation Framework",
+  "description": "Kiểm tra Aggregation",
+  "passingScore": 70,
+  "questionIds": [
+    "question_mongo_003_001",
+    "question_mongo_003_002",
+    "question_mongo_003_003",
+    "question_mongo_003_004",
+    "question_mongo_003_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_mongo_004",
+  "lessonId": "lesson_mongo_004",
+  "courseId": "course_mongo_001",
+  "title": "Quiz - Indexing và Performance",
+  "description": "Kiểm tra Index",
+  "passingScore": 70,
+  "questionIds": [
+    "question_mongo_004_001",
+    "question_mongo_004_002",
+    "question_mongo_004_003",
+    "question_mongo_004_004",
+    "question_mongo_004_005"
+  ],
+  "published": true
+},
+
+{
+  "_id": "quiz_csharp_001",
+  "lessonId": "lesson_csharp_001",
+  "courseId": "course_csharp_001",
+  "title": "Quiz - ASP.NET Core Introduction",
+  "description": "Kiểm tra ASP.NET Core",
+  "passingScore": 70,
+  "questionIds": [
+    "question_csharp_001_001",
+    "question_csharp_001_002",
+    "question_csharp_001_003",
+    "question_csharp_001_004",
+    "question_csharp_001_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_csharp_002",
+  "lessonId": "lesson_csharp_002",
+  "courseId": "course_csharp_001",
+  "title": "Quiz - MVC Architecture",
+  "description": "Kiểm tra MVC",
+  "passingScore": 70,
+  "questionIds": [
+    "question_csharp_002_001",
+    "question_csharp_002_002",
+    "question_csharp_002_003",
+    "question_csharp_002_004",
+    "question_csharp_002_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_csharp_003",
+  "lessonId": "lesson_csharp_003",
+  "courseId": "course_csharp_001",
+  "title": "Quiz - Entity Framework Core",
+  "description": "Kiểm tra EF Core",
+  "passingScore": 70,
+  "questionIds": [
+    "question_csharp_003_001",
+    "question_csharp_003_002",
+    "question_csharp_003_003",
+    "question_csharp_003_004",
+    "question_csharp_003_005"
+  ],
+  "published": true
+},
+{
+  "_id": "quiz_csharp_004",
+  "lessonId": "lesson_csharp_004",
+  "courseId": "course_csharp_001",
+  "title": "Quiz - JWT Authentication",
+  "description": "Kiểm tra JWT",
+  "passingScore": 70,
+  "questionIds": [
+    "question_csharp_004_001",
+    "question_csharp_004_002",
+    "question_csharp_004_003",
+    "question_csharp_004_004",
+    "question_csharp_004_005"
+  ],
+  "published": true
+}
 ]

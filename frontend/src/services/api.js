@@ -407,8 +407,11 @@ export const deleteQuiz = (quizId) => {
 /**
  * Nộp bài kiểm tra (STUDENT)
  */
-export const submitQuizAttempt = (quizId, attemptData) => {
-  return apiClient.post(`/quiz-attempts/${quizId}`, attemptData);
+export const submitQuizAttempt = (attemptData) => {
+  return apiClient.post(
+    "/quiz-attempts/submit",
+    attemptData
+  );
 };
 
 /**
@@ -433,13 +436,6 @@ export const getQuizAttemptsByQuiz = (quizId) => {
 };
 
 // ============ LESSON PROGRESS SERVICES ============
-
-/**
- * Cập nhật tiến độ bài học (STUDENT)
- */
-export const updateLessonProgress = (lessonId, progressData) => {
-  return apiClient.put(`/lesson-progress/${lessonId}`, progressData);
-};
 
 /**
  * Lấy tiến độ bài học
@@ -506,4 +502,27 @@ export const getMyGrades = () => {
   return apiClient.get('/grades/my-grades');
 };
 
+export const startLesson = (
+  lessonId,
+  courseId
+) => {
+  return apiClient.post(
+    `/lesson-progress/${lessonId}/start?courseId=${courseId}`
+  );
+};
+
+export const updateLessonProgress =
+  (lessonId, watchedDuration) => {
+    return apiClient.put(
+      `/lesson-progress/${lessonId}/update?watchedDuration=${watchedDuration}`
+    );
+  };
+
+export const completeLesson =
+  (lessonId) => {
+    return apiClient.post(
+      `/lesson-progress/${lessonId}/complete`
+    );
+  };
+  
 export default apiClient;

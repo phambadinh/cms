@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
-
+    @SuppressWarnings("null")
     @NonNull
     private String nowString() {
         return LocalDateTime.now().format(FORMATTER);
@@ -33,6 +33,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerUser(UserRequest request) {
+        return createUser(request, false);
+    }
+
+    @Override
+    public User createUserByAdmin(UserRequest request) {
+        return createUser(request, request.getActive() == null || request.getActive());
+    }
+
+    private User createUser(UserRequest request, boolean active) {
         if (userRepository.findByUsername(request.getUsername()).isPresent()) {
             throw new RuntimeException("Tên đăng nhập đã tồn tại");
         }
@@ -40,6 +49,10 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Email đã được sử dụng");
         }
     
+
+        if (request.getPassword() == null || request.getPassword().length() < 8) {
+            throw new RuntimeException("Mật khẩu phải có ít nhất 8 ký tự");
+        }
 
         User user = new User();
         user.setUsername(request.getUsername());
@@ -49,7 +62,7 @@ public class UserServiceImpl implements UserService {
         user.setRole(request.getRole() != null ? request.getRole() : UserRole.STUDENT);
         user.setProfileImage(request.getProfileImage());
         user.setBio(request.getBio());
-        user.setActive(request.getActive() == null || request.getActive());
+        user.setActive(active);
         user.setCreatedAt(nowString()); 
         user.setUpdatedAt(nowString()); 
 
@@ -60,7 +73,7 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
-
+    @SuppressWarnings("null")
     @Override
     public User getUserById(String userId) {
         return userRepository.findById(userId)
@@ -80,11 +93,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getUsersByRole(UserRole role) {
         return userRepository.findByRole(role);
-    }
-
-    @Override
-    public User createUserByAdmin(UserRequest request) {
-        return registerUser(request);
     }
 
     @Override
@@ -113,13 +121,16 @@ public class UserServiceImpl implements UserService {
             user.setActive(request.getActive());
         }
         if (request.getPassword() != null && !request.getPassword().isBlank()) {
+            if (request.getPassword().length() < 8) {
+                throw new RuntimeException("Mật khẩu phải có ít nhất 8 ký tự");
+            }
             user.setPassword(passwordEncoder.encode(request.getPassword()));
         }
 
         user.setUpdatedAt(nowString());
         return userRepository.save(user);
     }
-
+    @SuppressWarnings("null")
     @Override
     public void deleteUser(String userId) {
         userRepository.deleteById(userId);
@@ -169,6 +180,7 @@ public class UserServiceImpl implements UserService {
         user.setUpdatedAt(nowString());
         userRepository.save(user);
     }
+    @SuppressWarnings("null")
     @Override
     public @NonNull User saveUser(@NonNull User user) {
         return userRepository.save(user);

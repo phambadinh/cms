@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
+@SuppressWarnings("null")
 @Service
 public class DashboardService {
     private final UserRepository userRepository;
@@ -311,7 +311,14 @@ public class DashboardService {
     }
 
     private int countEnrollmentsByStatus(List<Enrollment> enrollments, String status) {
-        return (int) enrollments.stream().filter(enrollment -> status.equalsIgnoreCase(enrollment.getStatus())).count();
+        if (status == null) {
+            return 0;
+        }
+        return (int) enrollments.stream()
+                .map(Enrollment::getStatus)
+                .filter(Objects::nonNull)
+                .filter(enrollmentStatus -> status.equalsIgnoreCase(enrollmentStatus.name()))
+                .count();
     }
 
     private int totalCourseViews(List<Course> courses) {

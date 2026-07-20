@@ -42,7 +42,7 @@ public class GradeServiceImpl implements GradeService {
     public List<Grade> getGradesByCourse(String courseId) {
         return gradeRepository.findByCourseId(courseId);
     }
-
+    @SuppressWarnings("null")
     @Override
     public Grade updateGrade(String gradeId, Double score) {
         Grade grade = gradeRepository.findById(gradeId)

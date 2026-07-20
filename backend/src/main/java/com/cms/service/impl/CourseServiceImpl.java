@@ -43,7 +43,7 @@ public class CourseServiceImpl implements CourseService {
         course.setUpdatedAt(LocalDateTime.now());
         return courseRepository.save(course);
     }
-
+    @SuppressWarnings("null")
     @Override
     public Course getCourseById(String courseId) {
         return courseRepository.findById(courseId)
@@ -118,7 +118,7 @@ public List<Course> getPublishedCourses() {
         course.setPublished(false);
         courseRepository.save(course);
     }
-
+    @SuppressWarnings("null")
     @Override
     public void deleteCourse(String courseId) {
         courseRepository.deleteById(courseId);

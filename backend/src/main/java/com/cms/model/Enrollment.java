@@ -16,11 +16,15 @@ public class Enrollment {
     private String id;
     private String userId;
     private String courseId;
-    private String status; // ACTIVE, COMPLETED, INACTIVE
+    private EnrollmentStatus status;
     private Double progressPercentage;
     private String lastLessonId;
     private Double paymentAmount;
-    private String paymentStatus; // PENDING, COMPLETED, REFUNDED
+    private PaymentStatus paymentStatus;
     private LocalDateTime enrolledAt;
     private LocalDateTime completedAt;
+    private LocalDateTime paymentCompletedAt;
+    private String paymentMethod;
+    private String transactionId;
+    private String sessionId;
 }

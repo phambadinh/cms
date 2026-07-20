@@ -1,0 +1,39 @@
+/* Payment page additional styles */
+.payment-instructions {
+  padding: 16px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fff, #fbfdff);
+  border: 1px solid #e6f0ff;
+  margin-bottom: 12px;
+}
+
+.payment-instructions h3 {
+  margin-top: 0;
+  color: #0f172a;
+}
+
+.payment-qr img {
+  display: block;
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-top: 8px;
+  box-shadow: 0 8px 20px rgba(2,6,23,0.06);
+}
+
+.payment-instructions .small {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.payment-instructions input[type="text"] {
+  border-radius: 10px;
+  border: 1px solid #e6eefc;
+}
+
+@media (min-width: 900px) {
+  .auth-card {
+    max-width: 560px;
+  }
+}

@@ -5,6 +5,8 @@ import com.cms.dto.EnrollmentResponse;
 import com.cms.model.Course;
 import com.cms.model.CourseType;
 import com.cms.model.Enrollment;
+import com.cms.model.EnrollmentStatus;
+import com.cms.model.PaymentStatus;
 import com.cms.repository.EnrollmentRepository;
 import com.cms.service.CourseService;
 import com.cms.service.EnrollmentService;
@@ -41,9 +43,9 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         Enrollment enrollment = new Enrollment();
         enrollment.setUserId(userId);
         enrollment.setCourseId(request.getCourseId());
-        enrollment.setStatus("ACTIVE");
+        enrollment.setStatus(EnrollmentStatus.ACTIVE);
         enrollment.setProgressPercentage(0.0);
-        enrollment.setPaymentStatus(course.getCourseType() == CourseType.FREE ? "COMPLETED" : "PENDING");
+        enrollment.setPaymentStatus(course.getCourseType() == CourseType.FREE ? PaymentStatus.COMPLETED : PaymentStatus.PENDING);
         enrollment.setEnrolledAt(LocalDateTime.now());
 
         Enrollment saved = enrollmentRepository.save(enrollment);
@@ -68,7 +70,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     public Optional<Enrollment> getUserCourseEnrollment(String userId, String courseId) {
         return enrollmentRepository.findByUserIdAndCourseId(userId, courseId);
     }
-
+    @SuppressWarnings("null")
     @Override
     public Enrollment updateEnrollmentProgress(String enrollmentId, Double progressPercentage) {
         Enrollment enrollment = enrollmentRepository.findById(enrollmentId)
@@ -78,30 +80,30 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         
         // Mark as completed if progress is 100%
         if (progressPercentage >= 100.0) {
-            enrollment.setStatus("COMPLETED");
+            enrollment.setStatus(EnrollmentStatus.COMPLETED);
             enrollment.setCompletedAt(LocalDateTime.now());
         }
         
         return enrollmentRepository.save(enrollment);
     }
-
+    @SuppressWarnings("null")
     @Override
     public void completeEnrollment(String enrollmentId) {
         Enrollment enrollment = enrollmentRepository.findById(enrollmentId)
             .orElseThrow(() -> new RuntimeException("Không tìm thấy đăng ký"));
         
-        enrollment.setStatus("COMPLETED");
+        enrollment.setStatus(EnrollmentStatus.COMPLETED);
         enrollment.setCompletedAt(LocalDateTime.now());
         enrollment.setProgressPercentage(100.0);
         enrollmentRepository.save(enrollment);
     }
-
+    @SuppressWarnings("null")
     @Override
     public void unenrollFromCourse(String enrollmentId) {
         Enrollment enrollment = enrollmentRepository.findById(enrollmentId)
             .orElseThrow(() -> new RuntimeException("Không tìm thấy đăng ký"));
         
-        enrollment.setStatus("INACTIVE");
+        enrollment.setStatus(EnrollmentStatus.INACTIVE);
         enrollmentRepository.save(enrollment);
     }
 
@@ -111,9 +113,9 @@ public class EnrollmentServiceImpl implements EnrollmentService {
             enrollment.getId(),
             enrollment.getUserId(),
             enrollment.getCourseId(),
-            enrollment.getStatus(),
+            enrollment.getStatus() != null ? enrollment.getStatus().name() : null,
             enrollment.getProgressPercentage(),
-            enrollment.getPaymentStatus(),
+            enrollment.getPaymentStatus() != null ? enrollment.getPaymentStatus().name() : null,
             enrollment.getEnrolledAt(),
             enrollment.getCompletedAt()
         );

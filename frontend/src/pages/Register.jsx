@@ -27,17 +27,15 @@ function Register() {
     setSubmitting(true);
 
     try {
-      await authRegister({ username, email, fullName, password, role });
-      setSuccess("Đăng ký thành công. Vui lòng đăng nhập.");
+      const response = await authRegister({ username, email, fullName, password, role });
+      setSuccess(response.data?.message || "Đăng ký thành công. Vui lòng kiểm tra email để xác minh tài khoản.");
       setTimeout(() => {
         navigate("/login");
       }, 1200);
     } catch (err) {
-      setError(
-        err.response?.data?.message ||
-          err.message ||
-          "Đăng ký thất bại. Vui lòng thử lại."
-      );
+      const responseData = err.response?.data;
+      const msg = typeof responseData === "string" ? responseData : responseData?.message || err.message;
+      setError(msg || "Đăng ký thất bại. Vui lòng thử lại.");
     } finally {
       setSubmitting(false);
     }
@@ -49,7 +47,7 @@ function Register() {
         <h1 className="auth-logo">CMS</h1>
         <h2 className="auth-title">Đăng ký tài khoản</h2>
         <p className="auth-subtitle">
-          Tạo tài khoản mới để truy cập hệ thống.
+          Tạo tài khoản mới và xác minh email để kích hoạt truy cập hệ thống.
         </p>
 
         <form className="auth-form" onSubmit={handleSubmit}>

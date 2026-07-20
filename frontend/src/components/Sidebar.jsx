@@ -44,7 +44,7 @@ function Sidebar() {
           { to: "/learning-progress", label: "Tiến độ học tập", icon: TrendingUp },
           { to: "/certificates", label: "Chứng chỉ", icon: Award },
           { to: "/grades", label: "Kết quả Quiz", icon: ClipboardList },
-          { to: "/profile", label: "Hồ sơ cá nhân", icon: User },
+          { to: "/wishlist", label: "Danh sách yêu thích", icon: User },
         ];
 
   return (

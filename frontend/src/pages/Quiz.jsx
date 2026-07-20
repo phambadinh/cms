@@ -3,6 +3,12 @@ import {
   getQuizByLesson,
   submitQuizAttempt,
 } from "../services/api";
+import {
+  Award,
+  BookOpen,
+  Send,
+  ThumbsUp,
+} from "lucide-react";
 
 import "../styles/quiz.css";
 
@@ -242,7 +248,12 @@ function Quiz({ lessonId }) {
         >
           {loading
             ? "Đang nộp bài..."
-            : "🚀 Nộp bài"}
+            : (
+              <>
+                <Send size={18} />
+                Nộp bài
+              </>
+            )}
         </button>
       )}
 
@@ -256,24 +267,27 @@ function Quiz({ lessonId }) {
             <p>
               Bạn trả lời đúng{" "}
               <strong>
-                {
-                  correctCount
-                }
-                /
-                {
-                  questions.length
-                }
+                {correctCount}/{questions.length}
               </strong>{" "}
               câu hỏi
             </p>
 
-            <p>
-              {score >= 80
-                ? "🎉 Xuất sắc!"
-                : score >= 50
-                ? "👍 Khá tốt!"
-                : "📚 Hãy ôn tập thêm nhé!"}
-            </p>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+              {score >= 80 ? (
+                <Award size={18} />
+              ) : score >= 50 ? (
+                <ThumbsUp size={18} />
+              ) : (
+                <BookOpen size={18} />
+              )}
+              <span>
+                {score >= 80
+                  ? "Xuất sắc!"
+                  : score >= 50
+                  ? "Khá tốt!"
+                  : "Hãy ôn tập thêm nhé!"}
+              </span>
+            </div>
           </div>
         )}
     </div>

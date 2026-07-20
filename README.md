@@ -13,8 +13,6 @@ API: RESTful API
 
 Xác thực: Spring Security, JWT
 
-Containerization: Docker, Docker Compose
-
 Cloud: AWS
 
 Kiến trúc

@@ -4,4 +4,5 @@ import com.cms.model.PaymentMethod;
 
 public interface PaymentService {
     String initiatePayment(String userId, String courseId, PaymentMethod paymentMethod);
+    void completePayment(String userId, String courseId);
 }

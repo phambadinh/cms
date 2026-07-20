@@ -3,12 +3,17 @@ import axios from 'axios';
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
 
 // Tạo axios instance
-const apiClient = axios.create({
+export const apiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+// Quick mock mode: if URL contains ?mock=true, frontend will use simulated
+// payment responses to facilitate local testing without backend.
+const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
+export const USE_MOCK_PAYMENTS = urlParams?.get('mock') === 'true';
 
 // Interceptor để thêm JWT token vào mỗi request
 apiClient.interceptors.request.use((config) => {
@@ -327,7 +332,37 @@ export const getEnrollmentByCourse = (courseId) => {
  * Khởi tạo thanh toán cho khóa học premium (STUDENT)
  */
 export const initiateCoursePayment = ({ courseId, paymentMethod }) => {
+  if (USE_MOCK_PAYMENTS) {
+    // Simulate a backend response with no external paymentUrl and a session id
+    return Promise.resolve({ data: { paymentUrl: null, amount: 499000, sessionId: `mock_session_${courseId}` } });
+  }
   return apiClient.post('/payments/initiate', { courseId, paymentMethod });
+};
+
+/**
+ * Xác nhận thanh toán cho khóa học premium (STUDENT)
+ */
+/**
+ * Xác nhận thanh toán cho khóa học premium (STUDENT)
+ * Nếu có transactionId hoặc sessionId, sẽ gửi kèm để backend verify.
+ */
+export const completeCoursePayment = (courseId, { transactionId, sessionId, paymentMethod } = {}) => {
+  const payload = { courseId };
+  if (transactionId) payload.transactionId = transactionId;
+  if (sessionId) payload.sessionId = sessionId;
+  if (paymentMethod) payload.paymentMethod = paymentMethod;
+
+  if (USE_MOCK_PAYMENTS) {
+    // Simulate verification: treat any non-empty transactionId or sessionId as verified
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const verified = !!(transactionId || sessionId);
+        resolve({ data: { verified, message: verified ? 'Verified (mock)' : 'Pending (mock)' } });
+      }, 700);
+    });
+  }
+
+  return apiClient.post('/payments/complete', payload);
 };
 
 /**
@@ -484,15 +519,40 @@ export const getGradesByCourse = (courseId) => {
 /**
  * Tạo điểm (MENTOR/ADMIN)
  */
-export const createGrade = (gradeData) => {
-  return apiClient.post('/grades', gradeData);
+export const createGrade = (
+    userId,
+    courseId,
+    score
+) => {
+    return apiClient.post(
+        "/grades",
+        null,
+        {
+            params: {
+                userId,
+                courseId,
+                score,
+            },
+        }
+    );
 };
 
 /**
  * Cập nhật điểm (MENTOR/ADMIN)
  */
-export const updateGrade = (gradeId, gradeData) => {
-  return apiClient.put(`/grades/${gradeId}`, gradeData);
+export const updateGrade = (
+    gradeId,
+    score
+) => {
+    return apiClient.put(
+        `/grades/${gradeId}`,
+        null,
+        {
+            params: {
+                score,
+            },
+        }
+    );
 };
 
 /**
@@ -524,5 +584,54 @@ export const completeLesson =
       `/lesson-progress/${lessonId}/complete`
     );
   };
-  
+// ================= CERTIFICATE =================
+
+// Cấp chứng chỉ khi hoàn thành khóa học
+export const issueCertificate = (courseId) => {
+  return apiClient.post("/certificates/issue", null, {
+    params: { courseId },
+  });
+};
+
+export const getMyCertificates = () => {
+  return apiClient.get("/certificates/my-certificates");
+};
+
+export const getCertificateById = (certificateId) => {
+  return apiClient.get(`/certificates/${certificateId}`);
+};
+
+export const verifyCertificate = (certificateId) => {
+  return apiClient.get(`/certificates/${certificateId}/verify`);
+};
+
+export const getCertificateByUserAndCourse = (userId, courseId) => {
+  return apiClient.get(
+    `/certificates/user/${userId}/course/${courseId}`
+  );
+};
+
+export const getCertificatesByCourse = (courseId) => {
+  return apiClient.get(`/certificates/course/${courseId}`);
+};
+
+export const revokeCertificate = (certificateId) => {
+  return apiClient.post(`/certificates/${certificateId}/revoke`);
+};
+
+export const getCertificateVerificationStatus = (certificateId) => {
+  return apiClient.get(
+    `/certificates/${certificateId}/verification-status`
+  );
+};
+
+export const getCertificateVerificationHistory = (certificateId) => {
+  return apiClient.get(
+    `/certificates/${certificateId}/verification-history`
+  );
+};
+
+export const getViewableCertificate = (certificateId) => {
+  return apiClient.get(`/certificates/${certificateId}/viewable`);
+};
 export default apiClient;

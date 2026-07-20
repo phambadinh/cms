@@ -10,6 +10,7 @@ import {
   initiateCoursePayment,
 } from "../services/api";
 import Quiz from "../pages/Quiz";
+import { Lock } from "lucide-react";
 import "../styles/courseDetail.css";
 
 function CourseDetail() {
@@ -79,18 +80,22 @@ function CourseDetail() {
       return;
     }
 
+    const courseIdentifier = course.id || course._id;
+
     if (course.courseType === "FREE") {
       setActionLoading(true);
       try {
-       await enrollCourse(course.id || course._id);
-
-navigate(`/learning/${course.id || course._id}`);
-        alert("Bạn đã ghi danh khóa học miễn phí thành công.");
+        await enrollCourse(courseIdentifier);
+        navigate(`/learning/${courseIdentifier}`);
         const res = await getEnrollmentByCourse(courseId);
         setEnrollmentInfo(res.data);
       } catch (err) {
         const errorMessage =
           err.response?.data?.message || "Ghi danh thất bại. Vui lòng thử lại.";
+        if (errorMessage.includes("đăng ký") || errorMessage.includes("already")) {
+          navigate(`/learning/${courseIdentifier}`);
+          return;
+        }
         alert(errorMessage);
       } finally {
         setActionLoading(false);
@@ -101,24 +106,42 @@ navigate(`/learning/${course.id || course._id}`);
     setPaymentLoading(true);
     try {
       const res = await initiateCoursePayment({
-        courseId: course.id || course._id,
+        courseId: courseIdentifier,
         paymentMethod,
       });
+
       const paymentUrl = res.data?.paymentUrl;
+      const amount = res.data?.amount || course.price;
+
+      // If backend returns an external payment gateway URL, redirect the browser there.
       if (paymentUrl) {
         window.location.href = paymentUrl;
-      } else {
-        alert("Không thể khởi tạo thanh toán. Vui lòng thử lại sau.");
+        return;
       }
+
+      // Otherwise fall back to internal payment confirmation page with useful params.
+      const sessionId = res.data?.sessionId;
+      const params = new URLSearchParams();
+      params.set("courseId", courseIdentifier);
+      if (paymentMethod) params.set("paymentMethod", paymentMethod);
+      if (amount) params.set("amount", String(amount));
+      if (sessionId) params.set("sessionId", sessionId);
+
+      navigate(`/payment?${params.toString()}`);
     } catch (err) {
       console.error(err);
-      const message =
-        err.response?.data?.message || "Lỗi khi khởi tạo thanh toán. Vui lòng thử lại.";
+      const message = err.response?.data?.message || "Lỗi khi khởi tạo thanh toán. Vui lòng thử lại.";
       alert(message);
     } finally {
       setPaymentLoading(false);
     }
   };
+
+  const hasAccess = course
+    ? course.courseType === "FREE"
+      ? !!enrollmentInfo
+      : enrollmentInfo?.paymentStatus === "COMPLETED"
+    : false;
 
   return (
     <div className="layout">
@@ -226,8 +249,7 @@ navigate(`/learning/${course.id || course._id}`);
 
             <section className="course-detail-content">
 
-  {enrollmentInfo ? (
-
+  {hasAccess ? (
     currentLesson && (
       <>
         <h2 className="course-detail-lecture-heading">
@@ -260,20 +282,42 @@ navigate(`/learning/${course.id || course._id}`);
         />
       </>
     )
-
   ) : (
-
     <div className="locked-content">
       <h3>
-        🔒 Nội dung khóa học đã khóa
+        <Lock size={18} /> Nội dung khóa học đã khóa
       </h3>
 
-      <p>
-        Vui lòng ghi danh để xem video
-        và làm bài kiểm tra.
-      </p>
+      {enrollmentInfo ? (
+        <>
+          <p>Trạng thái đăng ký: <strong>{enrollmentInfo.paymentStatus}</strong></p>
+          <p>Thanh toán chưa hoàn tất. Vui lòng hoàn thành thanh toán để truy cập nội dung.</p>
+          <button
+            className="course-detail-btn-primary"
+            onClick={() => {
+              const params = new URLSearchParams();
+              params.set("courseId", (course?.id || course?._id || courseId));
+              params.set("paymentMethod", enrollmentInfo?.paymentMethod || "MOMO");
+              if (course?.price) params.set("amount", String(course.price));
+              navigate(`/payment?${params.toString()}`);
+            }}
+          >
+            Hoàn tất thanh toán
+          </button>
+        </>
+      ) : (
+        <>
+          <p>Vui lòng ghi danh để xem video và làm bài kiểm tra.</p>
+          <button
+            className="course-detail-btn-primary"
+            onClick={handleCourseAction}
+            disabled={actionLoading}
+          >
+            { (course?.courseType === "FREE") ? (actionLoading ? "Đang ghi danh..." : "Ghi danh") : (actionLoading ? "Đang xử lý..." : "Thanh toán và ghi danh") }
+          </button>
+        </>
+      )}
     </div>
-
   )}
 
 </section>

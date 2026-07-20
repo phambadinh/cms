@@ -33,7 +33,7 @@ public class LessonServiceImpl implements LessonService {
         Lesson saved = lessonRepository.save(lesson);
         return saved;
     }
-
+    @SuppressWarnings("null")
     @Override
     public Lesson getLessonById(String lessonId) {
         return lessonRepository.findById(lessonId)
@@ -70,7 +70,7 @@ public class LessonServiceImpl implements LessonService {
         lesson.setPublished(false);
         lessonRepository.save(lesson);
     }
-
+    @SuppressWarnings("null")
     @Override
     public void deleteLesson(String lessonId) {
         lessonRepository.deleteById(lessonId);

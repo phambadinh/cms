@@ -1,7 +1,7 @@
 // src/pages/Login.jsx
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { authLogin, saveAuthData } from "../services/api";
+import { authLogin, authLoginEmail, saveAuthData } from "../services/api";
 import "../styles/auth.css";
 
 export default function Login() {
@@ -25,7 +25,9 @@ export default function Login() {
 
     try {
       // Gọi API login từ backend
-      const response = await authLogin(username, password);
+      const response = username.includes("@")
+        ? await authLoginEmail(username, password)
+        : await authLogin(username, password);
       const data = response.data;
 
       // Lưu token và user info
@@ -53,13 +55,8 @@ export default function Login() {
     } catch (err) {
       console.error("Login error:", err);
       const responseData = err.response?.data;
-      const errorMessage =
-        typeof responseData === "string"
-          ? responseData
-          : responseData?.message ||
-            err.message ||
-            "Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.";
-      setError(errorMessage);
+        const errorMessage = typeof responseData === "string" ? responseData : responseData?.message || err.message || "Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.";
+        setError(errorMessage);
     } finally {
       setSubmitting(false);
     }

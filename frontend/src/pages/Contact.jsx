@@ -9,6 +9,10 @@ import {
   Clock3,
   Send,
   MessageCircle,
+  CheckCircle2,
+  BookOpen,
+  Users,
+  Laptop,
 } from "lucide-react";
 
 function Contact() {
@@ -60,16 +64,21 @@ function Contact() {
 
       <section className="contact-hero">
         <div className="contact-hero-content">
+          <span className="contact-hero-badge">CMS Support Center</span>
           <h1 className="contact-hero-title">Liên Hệ Với Chúng Tôi</h1>
           <p className="contact-hero-subtitle">
-            Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn 24/7
+            Gửi câu hỏi, góp ý hoặc yêu cầu hỗ trợ. Đội ngũ CMS phản hồi nhanh,
+            rõ ràng và đồng hành cùng bạn trong suốt hành trình học tập.
           </p>
         </div>
       </section>
 
       <section className="contact-info-section">
         <div className="contact-container">
-          <h2>Thông Tin Liên Hệ</h2>
+          <h2 className="section-title">Thông Tin Liên Hệ</h2>
+          <p className="section-subtitle">
+            Chọn kênh liên lạc phù hợp để nhận được hỗ trợ nhanh nhất từ CMS.
+          </p>
           <div className="contact-info-grid">
             <div className="contact-info-item">
               <div className="contact-info-icon">
@@ -124,14 +133,11 @@ function Contact() {
 
       <section className="contact-form-section">
         <div className="contact-container">
-         <h2 className="section-title">
-  Gửi Tin Nhắn Cho Chúng Tôi
-</h2>
-
-<p className="section-subtitle">
-  Có câu hỏi hoặc cần hỗ trợ? Hãy để lại thông tin,
-  đội ngũ CMS sẽ phản hồi trong thời gian sớm nhất.
-</p>
+          <h2 className="section-title">Gửi Tin Nhắn Cho Chúng Tôi</h2>
+          <p className="section-subtitle">
+            Có câu hỏi hoặc cần hỗ trợ? Hãy để lại thông tin, đội ngũ CMS sẽ
+            phản hồi trong thời gian sớm nhất.
+          </p>
           <div className="contact-form-wrapper">
             <form onSubmit={handleSubmit} className="contact-form">
               <div className="form-row">
@@ -208,13 +214,19 @@ function Contact() {
               </div>
 
               {message && (
-                <div className={`form-message ${message.includes("thành công") ? "success" : "error"}`}>
+                <div
+                  className={`form-message ${
+                    message.includes("thành công") ? "success" : "error"
+                  }`}
+                >
                   {message}
                 </div>
               )}
 
               <button type="submit" className="submit-button" disabled={sending}>
-                {sending ? "Đang gửi..." : (
+                {sending ? (
+                  "Đang gửi..."
+                ) : (
                   <>
                     <Send size={18} />
                     Gửi Tin Nhắn
@@ -224,49 +236,51 @@ function Contact() {
             </form>
 
             <div className="contact-form-image">
-  <div className="support-card">
-    <div className="support-icon">
-      <MessageCircle size={60} />
-    </div>
+              <div className="support-card">
+                <div className="support-icon">
+                  <MessageCircle size={38} />
+                </div>
 
-    <h3>Hỗ Trợ Nhanh Chóng</h3>
+                <h3>Hỗ Trợ Nhanh Chóng</h3>
 
-    <p className="support-desc">
-      Đội ngũ CMS luôn sẵn sàng hỗ trợ và giải đáp mọi thắc mắc của bạn.
-    </p>
+                <p className="support-desc">
+                  Đội ngũ CMS luôn sẵn sàng hỗ trợ và giải đáp mọi thắc mắc của
+                  bạn.
+                </p>
 
-    <div className="support-features">
-      <div className="feature-item">
-        ✅ Phản hồi trong vòng 24 giờ
-      </div>
+                <div className="support-features">
+                  <div className="feature-item">
+                    <CheckCircle2 size={18} />
+                    <span>Phản hồi trong vòng 24 giờ</span>
+                  </div>
 
-      <div className="feature-item">
-  <span>🎓</span>
-  <span>Hơn 100+ khóa học chất lượng</span>
-</div>
+                  <div className="feature-item">
+                    <BookOpen size={18} />
+                    <span>Hơn 100+ khóa học chất lượng</span>
+                  </div>
 
-      <div className="feature-item">
-        👨‍🏫 50+ giảng viên giàu kinh nghiệm
-      </div>
+                  <div className="feature-item">
+                    <Users size={18} />
+                    <span>50+ giảng viên giàu kinh nghiệm</span>
+                  </div>
 
-      <div className="feature-item">
-        🌍 Học tập mọi lúc mọi nơi
-      </div>
-    </div>
-  </div>
-</div>
+                  <div className="feature-item">
+                    <Laptop size={18} />
+                    <span>Học tập mọi lúc mọi nơi</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="contact-map-section">
-        <h2 className="section-title">
-  Vị Trí Của Chúng Tôi
-</h2>
+        <h2 className="section-title">Vị Trí Của Chúng Tôi</h2>
 
-<p className="section-subtitle">
-  Ghé thăm văn phòng CMS hoặc liên hệ với chúng tôi bất cứ lúc nào.
-</p>
+        <p className="section-subtitle">
+          Ghé thăm văn phòng CMS hoặc liên hệ với chúng tôi bất cứ lúc nào.
+        </p>
         <div className="map-wrapper">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4224.596584267842!2d106.62404651092757!3d10.852087089256663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752a2723f249bd%3A0x2d3c522387507a31!2zNzAgxJAuIFTDtCBLw70sIFRydW5nIE3hu7kgVMOieSwgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e1!3m2!1svi!2s!4v1781277832436!5m2!1svi!2s"

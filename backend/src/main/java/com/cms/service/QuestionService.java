@@ -33,7 +33,7 @@ public class QuestionService {
             .sorted((q1, q2) -> Integer.compare(q1.getOrderNumber(), q2.getOrderNumber()))
             .collect(Collectors.toList());
     }
-
+    @SuppressWarnings("null")
     public Question updateQuestion(String questionId, QuestionRequest request) {
         Question question = questionRepository.findById(questionId)
             .orElseThrow(() -> new RuntimeException("Câu hỏi không tìm thấy"));
@@ -44,7 +44,7 @@ public class QuestionService {
         question.setExplanation(request.getExplanation());
         return questionRepository.save(question);
     }
-
+    @SuppressWarnings("null")
     public void deleteQuestion(String questionId) {
         questionRepository.deleteById(questionId);
     }

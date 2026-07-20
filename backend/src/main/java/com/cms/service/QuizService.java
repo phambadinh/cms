@@ -33,7 +33,7 @@ public class QuizService {
         quiz.setUpdatedAt(LocalDateTime.now());
         return quizRepository.save(quiz);
     }
-
+    @SuppressWarnings("null")
     public Quiz getQuizById(String quizId) {
         return quizRepository.findById(quizId)
             .orElseThrow(() -> new RuntimeException("Quiz không tìm thấy"));
@@ -68,7 +68,7 @@ public class QuizService {
         quiz.setPublished(false);
         quizRepository.save(quiz);
     }
-
+    @SuppressWarnings("null")
     public void deleteQuiz(String quizId) {
         // Delete all questions first
         List<Question> questions = questionRepository.findByQuizId(quizId);

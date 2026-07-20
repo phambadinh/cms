@@ -7,6 +7,8 @@ import Contact from "../pages/Contact";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Forgetpassword from "../pages/Forgetpassword";
+import ResetPassword from "../pages/ResetPassword";
+import VerifyEmail from "../pages/VerifyEmail";
 import Profile from "../pages/Profile";
 import AdminDashboard from "../pages/AdminDashboard";
 import MentorDashboard from "../pages/MentorDashboard";
@@ -28,6 +30,7 @@ import LearningCourse from "../pages/LearningCourse";
 import LearningProgress from "../pages/LearningProgress";
 import Certificates from "../pages/Certificate";
 import Wishlist from "../pages/Wishlist";
+import PaymentPage from "../pages/PaymentPage";
 
 function DashboardRedirect() {
   const user = getAuthUser();
@@ -59,7 +62,10 @@ function AppRoutes() {
         {/* Login đứng riêng, không layout */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/forgot-password" element={<Forgetpassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/payment" element={<PaymentPage />} />
 
         {/* Các route còn lại dùng chung AppLayout và có protection */}
         <Route

@@ -77,7 +77,7 @@ Hệ thống quản lý khóa học trực tuyến hỗ trợ:
 
 ### 5.4. API endpoint
 - Dùng dạng rõ nghĩa, lowercase
-- Ví dụ: `/api/courses`, `/api/students`, `/api/auth/login`
+- Endpoint của bạn nằm ngay trong đoạn code controller: base path là `@RequestMapping("/api/auth")`, rồi ghép thêm từng `@PostMapping` hoặc `@GetMapping` bên dưới để ra URL đầy đủ. Vì vậy backend của bạn không phải mở ở domain gốc, mà phải mở các đường dẫn như `/api/auth/login`, `/api/auth/register`...
 
 ### 5.5. Thư mục
 ```

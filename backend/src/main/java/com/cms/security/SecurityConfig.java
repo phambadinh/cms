@@ -40,7 +40,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOrigins(Arrays.asList(
-                "http://localhost:5173",
+                "https://cmsai.id.vn",
                 "http://localhost:5174",
                 "http://localhost:3000"
         ));

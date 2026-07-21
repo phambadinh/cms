@@ -28,10 +28,10 @@ spring:
           writetimeout: 5000
 
 frontend:
-  url: ${FRONTEND_URL:http://localhost:5173}
+  url: ${FRONTEND_URL:https://cmsai.id.vn}
 
 payment:
-  return-url: ${PAYMENT_RETURN_URL:http://localhost:5173}
+  return-url: ${PAYMENT_RETURN_URL:https://cmsai.id.vn}
 
 jwt:
   secret: ${JWT_SECRET}

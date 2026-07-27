@@ -19,7 +19,7 @@
   height: auto;
   border-radius: 12px;
   margin-top: 8px;
-  box-shadow: 0 8px 20px rgba(2,6,23,0.06);
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.06);
 }
 
 .payment-instructions .small {
@@ -30,6 +30,37 @@
 .payment-instructions input[type="text"] {
   border-radius: 10px;
   border: 1px solid #e6eefc;
+}
+
+/* NEW: thay cho inline style trước đây trong PaymentPage.jsx
+   (marginTop:12, display:block, width:100%, padding:8px) */
+.payment-refid-group {
+  margin-top: 12px;
+}
+
+.payment-refid-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.payment-refid-group input {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--cms-border, #e2e8f0);
+  background: #ffffff;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.payment-refid-group input:focus {
+  outline: none;
+  border-color: var(--cms-blue-500, #60a5fa);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
 }
 
 @media (min-width: 900px) {

@@ -9,7 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"https://cmsai.id.vn", "http://localhost:5173", "http://localhost:5174", "http://localhost:3000"})
 @RestController
 @RequestMapping("/api/users")
 public class UserController {

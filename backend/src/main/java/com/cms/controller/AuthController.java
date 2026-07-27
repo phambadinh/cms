@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.cms.service.impl.PasswordResetService;
 import com.cms.dto.ForgotPasswordRequest;
 import com.cms.dto.ResetPasswordRequest;
-
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"https://cmsai.id.vn", "http://localhost:5173", "http://localhost:5174", "http://localhost:3000"})
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

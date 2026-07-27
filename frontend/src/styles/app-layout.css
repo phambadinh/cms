@@ -1,0 +1,14 @@
+/* Thay thế inline style trước đây trong AppLayout.jsx
+   -> đồng bộ với biến màu/spacing chung trong global.css */
+
+.app-layout-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+}
+
+.app-layout-main {
+  flex: 1;
+  width: 100%;
+}

@@ -23,7 +23,7 @@ public class PasswordResetService {
     private final PasswordEncoder passwordEncoder;
     private final AuthEmailTemplateService authEmailTemplateService;
 
-    @Value("${frontend.url:https://cmsai.id.vn}")
+    @Value("${frontend.url:http://localhost:5173}")
     private String frontendUrl;
 
     @Value("${spring.mail.username:}")

@@ -38,7 +38,11 @@ function PaymentPage() {
     try {
       const tx = transactionId || refId || null;
 
-      const res = await completeCoursePayment(courseId, { transactionId: tx, sessionId: searchParams.get('sessionId'), paymentMethod });
+      const res = await completeCoursePayment(courseId, {
+        transactionId: tx,
+        sessionId: searchParams.get("sessionId"),
+        paymentMethod,
+      });
 
       if (res.data?.verified) {
         setStatus("success");
@@ -89,7 +93,6 @@ function PaymentPage() {
               </p>
             </div>
 
-            {/* Nếu là Momo hoặc VNPAY hiển thị thông tin chuyển khoản / QR */}
             {(paymentMethod === "MOMO" || paymentMethod === "VNPAY") && (
               <div className="payment-instructions">
                 <h3>Hướng dẫn chuyển khoản {paymentMethod}</h3>
@@ -115,22 +118,24 @@ function PaymentPage() {
                     )}`}
                   />
                 </div>
+
                 <p className="small">
                   Sau khi chuyển khoản, vui lòng nhập mã giao dịch/ghi chú vào ô bên dưới
-                  (hoặc nếu cổng thanh toán trả về `transactionId` tự động thì bỏ qua).
+                  (hoặc nếu cổng thanh toán trả về <code>transactionId</code> tự động thì bỏ qua).
                 </p>
 
-                <div style={{ marginTop: 12 }}>
-                  <label>
-                    Mã giao dịch / Tham chiếu:
-                    <input
-                      type="text"
-                      value={refId}
-                      onChange={(e) => setRefId(e.target.value)}
-                      placeholder="Nhập mã giao dịch (vd: MOMO12345)"
-                      style={{ display: 'block', width: '100%', padding: 8, marginTop: 6 }}
-                    />
-                  </label>
+                {/* FIX: trước đây dùng style inline (marginTop, display:block, width:100%...)
+                    -> chuyển sang class .payment-refid-group trong payment.css để đồng bộ
+                    với các form khác trong hệ thống (auth.css, contact.css) */}
+                <div className="payment-refid-group">
+                  <label htmlFor="refId">Mã giao dịch / Tham chiếu:</label>
+                  <input
+                    id="refId"
+                    type="text"
+                    value={refId}
+                    onChange={(e) => setRefId(e.target.value)}
+                    placeholder="Nhập mã giao dịch (vd: MOMO12345)"
+                  />
                 </div>
               </div>
             )}

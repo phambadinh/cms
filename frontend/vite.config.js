@@ -3,5 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  server: { port: 5173 }
+  define: {
+    global: 'window', // FIX: sockjs-client cần biến `global` của Node, map nó sang `window`
+  },
 })

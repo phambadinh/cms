@@ -1,41 +1,104 @@
-Course Management System (CMS)
-Mô tả
-Hệ thống quản lý khóa học trực tuyến hỗ trợ quản lý sinh viên, giảng viên, bài giảng, chấm điểm và theo dõi tiến độ học tập.
+# Course Management System (CMS)
 
-Công nghệ
-Backend: Java Spring Boot
+## Mô tả
+CMS là hệ thống quản lý khóa học trực tuyến hỗ trợ quản lý khóa học, bài giảng, đăng ký học, làm quiz, chấm điểm và theo dõi tiến độ học tập. Hệ thống có các vai trò chính: quản trị viên, giảng viên/mentor và sinh viên.
 
-Database: MongoDB
+## Công nghệ
+- Backend: Java 21, Spring Boot 3
+- Database: MongoDB
+- Frontend: React
+- API: RESTful API
+- Xác thực và phân quyền: Spring Security, JWT
+- Cloud: AWS
 
-Frontend: React
+## Chức năng chính
 
-API: RESTful API
+### 1. Xác thực và tài khoản
+- Đăng ký tài khoản
+- Đăng nhập bằng username hoặc email
+- Quên mật khẩu, đặt lại mật khẩu, xác minh email
+- Lưu token JWT và tự động đăng xuất khi token không hợp lệ
+- Cập nhật hồ sơ cá nhân
 
-Xác thực: Spring Security, JWT
+### 2. Quản lý người dùng
+- Quản trị viên xem, tạo, cập nhật, xóa người dùng
+- Phân quyền người dùng theo role
+- Kích hoạt hoặc vô hiệu hóa tài khoản
+- Lọc người dùng theo vai trò
 
-Cloud: AWS
+### 3. Quản lý khóa học
+- Xem danh sách khóa học công khai
+- Lọc khóa học miễn phí, trả phí, theo danh mục
+- Xem chi tiết khóa học
+- Tạo, cập nhật, công bố, hủy công bố và xóa khóa học
+- Theo dõi số lượng đăng ký, đánh giá và bài học
 
-Kiến trúc
-Hệ thống được xây dựng theo mô hình backend tách lớp:
+### 4. Quản lý bài giảng
+- Xem danh sách bài giảng theo khóa học
+- Xem chi tiết bài giảng
+- Tạo, cập nhật, công bố, hủy công bố và xóa bài giảng
+- Sắp xếp bài giảng theo thứ tự trong khóa học
 
-controller
+### 5. Đăng ký học và thanh toán
+- Sinh viên đăng ký khóa học
+- Theo dõi các khóa học đã đăng ký
+- Hỗ trợ khóa học FREE và PREMIUM
+- Khởi tạo và hoàn tất thanh toán cho khóa học trả phí
+- Cập nhật trạng thái đăng ký và tiến độ học
 
-service
+### 6. Quiz và bài kiểm tra
+- Tạo quiz cho từng bài học
+- Thêm câu hỏi trắc nghiệm, đáp án và giải thích
+- Sinh viên làm quiz và nộp bài
+- Tính điểm tự động, xác định đạt hoặc không đạt
+- Xem lịch sử và chi tiết các lần làm bài
 
-repository
+### 7. Theo dõi tiến độ học tập
+- Ghi nhận bắt đầu xem bài học
+- Cập nhật thời lượng đã xem
+- Đánh dấu hoàn thành bài học
+- Xem tiến độ theo bài học, khóa học và người dùng hiện tại
 
-model
+### 8. Quản lý điểm và báo cáo
+- Chấm điểm theo khóa học
+- Xem điểm của sinh viên theo khóa học
+- Dashboard riêng cho admin, mentor và student
 
-dto
+### 9. Chat real-time
+- Chat hỗ trợ trực tuyến giữa người dùng và admin
+- Chat theo ngữ cảnh khóa học hoặc hỗ trợ chung
+- Gửi tin nhắn real-time bằng WebSocket/STOMP qua SockJS
+- Có REST fallback khi WebSocket chưa sẵn sàng
+- Hiển thị hộp chat nổi trên giao diện cho người dùng đã đăng nhập
 
-config
+### 10. Chức năng học tập trên frontend
+- Trang chủ, giới thiệu, liên hệ
+- Trang đăng nhập, đăng ký, hồ sơ
+- Trang khóa học, chi tiết khóa học, học bài
+- Trang tiến độ học, chứng chỉ, wishlist, điểm số
+- Khu vực quản trị cho admin
 
-exception
+## Vai trò sử dụng
+- ADMIN: quản lý toàn bộ hệ thống, người dùng, khóa học, báo cáo
+- MENTOR: tạo và quản lý khóa học, bài giảng, quiz, theo dõi học viên
+- STUDENT: xem khóa học, đăng ký, học bài, làm quiz, theo dõi tiến độ
+- PUBLIC: xem các khóa học công khai trước khi đăng nhập
+- Tất cả người dùng đã đăng nhập có thể dùng chat hỗ trợ real-time
 
-security
+## Kiến trúc
+Hệ thống backend được tổ chức theo mô hình tách lớp:
 
-Cấu trúc thư mục
-text
+- controller
+- service
+- repository
+- model
+- dto
+- config
+- exception
+- security
+
+## Cấu trúc thư mục
+```text
 backend/
   src/main/java/com/cms/
     config/
@@ -52,31 +115,47 @@ backend/
     requirements.md
     erd.md
   pom.xml
-Cách chạy backend
-Cài MongoDB và chạy service.
 
-Mở file src/main/resources/application.yml.
+frontend/
+  src/
+    components/
+    layouts/
+    pages/
+    routes/
+    services/
+    styles/
+```
 
-Kiểm tra URI MongoDB.
+## Cách chạy backend
+1. Cài đặt và khởi động MongoDB.
+2. Mở file `backend/src/main/resources/application.yml`.
+3. Kiểm tra cấu hình URI MongoDB.
+4. Chạy các lệnh sau:
 
-Chạy:
-
-bash
+```bash
 mvn clean install
 mvn spring-boot:run
-Backend chạy tại http://localhost:8080
+```
 
-Quy ước đặt tên
-Entity: PascalCase
+Backend chạy tại: http://localhost:8080
 
-Method/variable: camelCase
+## Cách chạy frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-Collection/field: rõ nghĩa, thường dùng chữ thường hoặc camelCase theo MongoDB convention của project
+Frontend chạy tại: http://localhost:5173
 
-API endpoint: lowercase, rõ nghĩa
+## Quy ước đặt tên
+- Entity: PascalCase
+- Method/variable: camelCase
+- Collection/field: rõ nghĩa, thường dùng chữ thường hoặc camelCase theo convention của project
+- API endpoint: lowercase, rõ nghĩa
 
-Tài liệu
-docs/requirements.md
-
-docs/erd.md
+## Tài liệu
+- docs/requirements.md
+- docs/erd.md
+- backend/API_DOCUMENTATION.md
 

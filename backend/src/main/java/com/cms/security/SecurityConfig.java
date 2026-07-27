@@ -39,8 +39,9 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(Arrays.asList(
+        configuration.setAllowedOriginPatterns(Arrays.asList(
                 "https://cmsai.id.vn",
+                "http://localhost:5173",
                 "http://localhost:5174",
                 "http://localhost:3000"
         ));
@@ -86,6 +87,10 @@ public class SecurityConfig {
                                 "/swagger-resources/**",
                                 "/webjars/**"
                         ).permitAll()
+
+                        // NEW: endpoint WebSocket/SockJS chat - xác thực riêng bằng
+                        // JwtHandshakeInterceptor (token qua query param), không qua JwtAuthFilter
+                        .requestMatchers("/ws/**").permitAll()
 
                         .requestMatchers(
                                 HttpMethod.POST,

@@ -18,7 +18,9 @@ function AdminSidebar() {
   return (
     <aside className="admin-sidebar">
       <div className="admin-sidebar-brand">
-        <div className="admin-sidebar-logo">UTH</div>
+        {/* FIX: logo cũ hiển thị "UTH" (sai thương hiệu) -> đổi thành "CMS"
+            để đồng bộ với app-brand-mark ở Header.jsx (chuẩn Coursera-style) */}
+        <div className="admin-sidebar-logo">CMS</div>
         <div>
           <div className="admin-sidebar-title">Learning Admin</div>
           <div className="admin-sidebar-subtitle">{user?.fullName || user?.username || "Admin"}</div>
@@ -27,7 +29,12 @@ function AdminSidebar() {
 
       <nav className="admin-sidebar-nav">
         {adminItems.map((item) => (
-          <NavLink key={item.to} to={item.to} className={({ isActive }) => isActive ? "admin-sidebar-link active" : "admin-sidebar-link"} end={item.to === "/admin/dashboard"}>
+          <NavLink
+            key={item.to}
+            to={item.to}
+            className={({ isActive }) => (isActive ? "admin-sidebar-link active" : "admin-sidebar-link")}
+            end={item.to === "/admin/dashboard"}
+          >
             {item.label}
           </NavLink>
         ))}

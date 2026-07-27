@@ -21,7 +21,7 @@ public class EmailVerificationService {
     private final JavaMailSender mailSender;
     private final AuthEmailTemplateService authEmailTemplateService;
 
-    @Value("${frontend.url:http://localhost:5173}")
+    @Value("${frontend.url:https://cmsai.id.vn}")
     private String frontendUrl;
 
     @Value("${spring.mail.username:}")

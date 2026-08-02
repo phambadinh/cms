@@ -1,3 +1,5 @@
+// src/components/learning/LessonSidebar.jsx
+
 import {
   PlayCircle,
   CheckCircle2,
@@ -5,44 +7,47 @@ import {
 } from "lucide-react";
 
 function LessonSidebar({
-  lessons,
+  lessons = [],
   currentLesson,
   onSelectLesson,
 }) {
   return (
     <aside className="lesson-sidebar">
 
-      <div className="sidebar-header">
+      <div className="lesson-sidebar-header">
+
         <h3>Nội dung khóa học</h3>
 
         <span>
           {lessons.length} bài học
         </span>
+
       </div>
 
-      {lessons.length === 0 ? (
-        <div className="empty-lessons">
-          <div>📚</div>
-          <p>Chưa có bài học</p>
-        </div>
-      ) : (
-        <ul>
-          {lessons.map(
-            (lesson, index) => (
-              <li
-                key={
-                  lesson.id ||
-                  lesson._id ||
-                  index
-                }
-                className={
-                  currentLesson?.id ===
-                    lesson.id ||
-                  currentLesson?._id ===
-                    lesson._id
-                    ? "active"
-                    : ""
-                }
+      <div className="lesson-sidebar-body">
+
+        {lessons.length === 0 ? (
+          <div className="lesson-empty">
+            Chưa có bài học.
+          </div>
+        ) : (
+          lessons.map((lesson, index) => {
+            const lessonId =
+              lesson.id || lesson._id;
+
+            const currentId =
+              currentLesson?.id ||
+              currentLesson?._id;
+
+            const active =
+              lessonId === currentId;
+
+            return (
+              <div
+                key={lessonId}
+                className={`lesson-item ${
+                  active ? "active" : ""
+                }`}
                 onClick={() =>
                   onSelectLesson(
                     lesson,
@@ -50,50 +55,52 @@ function LessonSidebar({
                   )
                 }
               >
+                <div className="lesson-item-icon">
 
-                <div className="lesson-number">
-                  {index + 1}
+                  {active ? (
+                    <CheckCircle2
+                      size={22}
+                    />
+                  ) : (
+                    <PlayCircle
+                      size={22}
+                    />
+                  )}
+
                 </div>
 
-                <div className="lesson-content">
+                <div className="lesson-item-content">
 
-                  <div className="lesson-title">
+                  <h4>
+
+                    {index + 1}.{" "}
                     {lesson.title}
-                  </div>
 
-                  <div className="lesson-meta">
+                  </h4>
 
-                    <span>
-                      <PlayCircle
-                        size={13}
-                      />
-                      Video
-                    </span>
+                  <div className="lesson-item-meta">
 
                     <span>
+
                       <Clock3
-                        size={13}
+                        size={14}
                       />
-                      10 phút
+
+                      {lesson.duration ||
+                        "--"} phút
+
                     </span>
 
                   </div>
 
                 </div>
 
-                {currentLesson?.id ===
-                  lesson.id && (
-                  <CheckCircle2
-                    size={18}
-                    className="lesson-check"
-                  />
-                )}
+              </div>
+            );
+          })
+        )}
 
-              </li>
-            )
-          )}
-        </ul>
-      )}
+      </div>
 
     </aside>
   );

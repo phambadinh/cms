@@ -23,7 +23,7 @@ public class JwtHandshakeInterceptor implements HandshakeInterceptor {
     public JwtHandshakeInterceptor(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
     }
-    @SuppressWarnings("not null")
+    @SuppressWarnings("Non-null")
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response,
                                     WebSocketHandler wsHandler, Map<String, Object> attributes) {

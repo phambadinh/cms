@@ -33,8 +33,6 @@ function Home() {
     try {
       const res = await getPublicCourses();
 
-      console.log("COURSES API:", res.data);
-
       const sortedCourses = [...(res.data || [])].sort((a, b) => {
         if (a.courseType === "FREE" && b.courseType !== "FREE") return -1;
         if (a.courseType !== "FREE" && b.courseType === "FREE") return 1;
@@ -54,9 +52,6 @@ function Home() {
     }
   };
 
-  useEffect(() => {
-    console.log("Courses State:", courses);
-  }, [courses]);
 
   const handleExplore = () => {
     navigate("/courses");

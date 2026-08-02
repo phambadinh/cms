@@ -1,25 +1,29 @@
+// src/pages/Quiz.jsx
 import { useEffect, useState } from "react";
 import {
   getQuizByLesson,
   submitQuizAttempt,
 } from "../services/api";
-import {
-  Award,
-  BookOpen,
-  Send,
-  ThumbsUp,
-} from "lucide-react";
+
+import QuizHeader from "../components/quiz/QuizHeader";
+import QuizProgress from "../components/quiz/QuizProgress";
+import QuizQuestion from "../components/quiz/QuizQuestion";
+import QuizNavigation from "../components/quiz/QuizNavigation";
+import QuizResult from "../components/quiz/QuizResult";
 
 import "../styles/quiz.css";
 
-function Quiz({ lessonId }) {
+function QuizPage({ lessonId }) {
   const [quiz, setQuiz] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [selected, setSelected] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(null);
+  const [resultStatus, setResultStatus] = useState(null); // PASS / FAIL
 
   useEffect(() => {
     const fetchQuiz = async () => {
@@ -29,26 +33,21 @@ function Quiz({ lessonId }) {
       setError("");
 
       try {
-        const res = await getQuizByLesson(
-          lessonId
-        );
-
+        const res = await getQuizByLesson(lessonId);
         const quizData = res.data;
 
-        setQuiz(quizData);
+        setQuiz(quizData || null);
+        setQuestions(quizData?.questions || []);
 
-        setQuestions(
-          quizData.questions || []
-        );
+        // reset state khi đổi lesson
+        setSelected({});
+        setSubmitted(false);
+        setScore(null);
+        setResultStatus(null);
+        setCurrentIndex(0);
       } catch (err) {
-        console.error(
-          "Error fetching quiz:",
-          err
-        );
-
-        setError(
-          "Không thể tải bài quiz. Vui lòng thử lại."
-        );
+        console.error("Error fetching quiz:", err);
+        setError("Không thể tải bài kiểm tra. Vui lòng thử lại.");
       } finally {
         setLoading(false);
       }
@@ -57,10 +56,7 @@ function Quiz({ lessonId }) {
     fetchQuiz();
   }, [lessonId]);
 
-  const handleSelect = (
-    questionId,
-    optionIndex
-  ) => {
+  const handleSelect = (questionId, optionIndex) => {
     if (submitted) return;
 
     setSelected((prev) => ({
@@ -69,103 +65,112 @@ function Quiz({ lessonId }) {
     }));
   };
 
+  const handlePrevious = () => {
+    setCurrentIndex((prev) => Math.max(prev - 1, 0));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) =>
+      Math.min(prev + 1, questions.length - 1)
+    );
+  };
+
   const handleSubmit = async () => {
-    if (!quiz) return;
+    if (!quiz || questions.length === 0) return;
+
+    const answeredCount = Object.keys(selected).length;
+    if (answeredCount !== questions.length) {
+      setError("Bạn cần trả lời hết tất cả câu hỏi trước khi nộp bài.");
+      return;
+    }
 
     setLoading(true);
     setError("");
 
     try {
       const attemptData = {
-        quizId:
-          quiz.id || quiz._id,
-
-        selectedAnswers:
-          questions.map(
-            (q) =>
-              selected[
-                q.id || q._id
-              ] ?? -1
-          ),
-
+        quizId: quiz.id || quiz._id,
+        selectedAnswers: questions.map((q) => {
+          const qId = q.id || q._id;
+          return selected[qId] ?? -1;
+        }),
         durationSeconds: 0,
       };
 
-      const response =
-        await submitQuizAttempt(
-          attemptData
-        );
+      const response = await submitQuizAttempt(attemptData);
+      const data = response.data || {};
 
-      setScore(
-        response.data
-          .scorePercentage ??
-          response.data.score
+      const scorePercentage =
+        data.scorePercentage ?? data.score ?? 0;
+
+      setScore(scorePercentage);
+
+      const passingScore =
+        quiz.passingScore ?? quiz.passingPercentage ?? 70;
+      setResultStatus(
+        scorePercentage >= passingScore ? "PASS" : "FAIL"
       );
 
       setSubmitted(true);
     } catch (err) {
-      console.error(
-        "Error submitting quiz:",
-        err
-      );
-
+      console.error("Error submitting quiz:", err);
       const errorMessage =
-        err.response?.data
-          ?.message ||
+        err.response?.data?.message ||
         "Nộp bài thất bại. Vui lòng thử lại.";
-
       setError(errorMessage);
     } finally {
       setLoading(false);
     }
   };
 
+  const handleRetake = () => {
+    setSelected({});
+    setSubmitted(false);
+    setScore(null);
+    setResultStatus(null);
+    setCurrentIndex(0);
+    setError("");
+  };
+
   if (loading && !quiz) {
     return (
       <div className="quiz-loading">
-        Đang tải bài quiz...
+        Đang tải bài kiểm tra...
       </div>
     );
   }
 
-  if (
-    !quiz ||
-    questions.length === 0
-  ) {
-    return null;
+  if (!quiz || questions.length === 0) {
+    return (
+      <div className="quiz-empty">
+        Không có bài kiểm tra cho bài học này.
+      </div>
+    );
   }
 
-  const correctCount =
-    score !== null
-      ? Math.round(
-          (score / 100) *
-            questions.length
-        )
-      : 0;
+  const answeredCount = Object.keys(selected).length;
+  const currentQuestion = questions[currentIndex];
+  const qId = currentQuestion?.id || currentQuestion?._id;
+  const selectedOptionIndex = selected[qId];
 
-  const answeredCount =
-    Object.keys(selected).length;
-
-  const scoreClass =
-    score >= 80
-      ? "excellent"
-      : score >= 50
-      ? "good"
-      : "bad";
+  const passingScore =
+    quiz.passingScore ?? quiz.passingPercentage ?? 70;
 
   return (
-    <div className="quiz">
-      <h3 className="quiz-title">
-        Quiz kiểm tra kiến thức
-      </h3>
+    <div className="quiz-page">
+      <QuizHeader
+        title={quiz.title}
+        description={quiz.description}
+        totalQuestions={questions.length}
+        passingScore={passingScore}
+      />
 
       {!submitted && (
-        <div className="quiz-progress">
-          Đã trả lời{" "}
-          {answeredCount}/
-          {questions.length} câu
-          hỏi
-        </div>
+        <QuizProgress
+          currentIndex={currentIndex}
+          totalQuestions={questions.length}
+          answeredCount={answeredCount}
+        />
       )}
 
       {error && (
@@ -174,124 +179,35 @@ function Quiz({ lessonId }) {
         </div>
       )}
 
-      {questions.map(
-        (q, index) => (
-          <div
-            key={
-              q.id || q._id
-            }
-            className="quiz-question"
-          >
-            <p className="quiz-question-text">
-              {index + 1}.{" "}
-              {q.questionText}
-            </p>
-
-            {q.options?.map(
-              (opt, idx) => (
-                <label
-                  key={idx}
-                  className={`quiz-option ${
-                    selected[
-                      q.id ||
-                        q._id
-                    ] === idx
-                      ? "selected"
-                      : ""
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name={`q-${
-                      q.id ||
-                      q._id
-                    }`}
-                    checked={
-                      selected[
-                        q.id ||
-                          q._id
-                      ] === idx
-                    }
-                    onChange={() =>
-                      handleSelect(
-                        q.id ||
-                          q._id,
-                        idx
-                      )
-                    }
-                    disabled={
-                      submitted
-                    }
-                  />
-
-                  <span>
-                    {opt}
-                  </span>
-                </label>
-              )
-            )}
-          </div>
-        )
-      )}
+      <QuizQuestion
+        index={currentIndex}
+        question={currentQuestion}
+        selectedOptionIndex={selectedOptionIndex}
+        disabled={submitted}
+        onSelect={handleSelect}
+      />
 
       {!submitted && (
-        <button
-          className="quiz-submit"
-          onClick={
-            handleSubmit
-          }
-          disabled={
-            loading ||
-            answeredCount !==
-              questions.length
-          }
-        >
-          {loading
-            ? "Đang nộp bài..."
-            : (
-              <>
-                <Send size={18} />
-                Nộp bài
-              </>
-            )}
-        </button>
+        <QuizNavigation
+          currentIndex={currentIndex}
+          totalQuestions={questions.length}
+          answeredCount={answeredCount}
+          loading={loading}
+          onPrevious={handlePrevious}
+          onNext={handleNext}
+          onSubmit={handleSubmit}
+        />
       )}
 
-      {submitted &&
-        score !== null && (
-          <div
-            className={`quiz-score ${scoreClass}`}
-          >
-            <h3>{score}%</h3>
-
-            <p>
-              Bạn trả lời đúng{" "}
-              <strong>
-                {correctCount}/{questions.length}
-              </strong>{" "}
-              câu hỏi
-            </p>
-
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
-              {score >= 80 ? (
-                <Award size={18} />
-              ) : score >= 50 ? (
-                <ThumbsUp size={18} />
-              ) : (
-                <BookOpen size={18} />
-              )}
-              <span>
-                {score >= 80
-                  ? "Xuất sắc!"
-                  : score >= 50
-                  ? "Khá tốt!"
-                  : "Hãy ôn tập thêm nhé!"}
-              </span>
-            </div>
-          </div>
-        )}
+      {submitted && (
+        <QuizResult
+          score={score}
+          resultStatus={resultStatus}
+          onRetake={handleRetake}
+        />
+      )}
     </div>
   );
 }
 
-export default Quiz;
+export default QuizPage;

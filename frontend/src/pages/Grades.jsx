@@ -54,11 +54,11 @@ function Grades() {
       {/* ================= HEADER ================= */}
 
       <div className="grades-hero">
-        <h1>My Grades</h1>
+        <h1>Điểm số của tôi</h1>
 
         <p>
-          Track your academic performance and
-          review your course results.
+          Theo dõi hiệu suất học tập của bạn và
+          xem lại kết quả khóa học.
         </p>
       </div>
 
@@ -70,7 +70,7 @@ function Grades() {
             <BookOpen size={24} />
           </div>
 
-          <h3>Total Courses</h3>
+          <h3>Tổng số khóa học</h3>
 
           <div className="value">
             {totalCourses}
@@ -82,7 +82,7 @@ function Grades() {
             <CheckCircle2 size={24} />
           </div>
 
-          <h3>Passed</h3>
+          <h3>Đã hoàn thành</h3>
 
           <div className="value">
             {passedCourses}
@@ -94,7 +94,7 @@ function Grades() {
             <Award size={24} />
           </div>
 
-          <h3>Average Grade</h3>
+          <h3>Điểm trung bình</h3>
 
           <div className="value">
             {averageGrade}
@@ -116,12 +116,12 @@ function Grades() {
           />
 
           <h3>
-            No grades available
+            Chưa có điểm số nào
           </h3>
 
           <p>
-            Your grades will appear here after
-            completing course assessments.
+            Điểm số của bạn sẽ xuất hiện ở đây sau khi
+            hoàn thành các bài đánh giá khóa học.
           </p>
         </div>
       ) : (
@@ -129,7 +129,7 @@ function Grades() {
           {/* ================= TITLE ================= */}
 
           <div className="section-title">
-            Course Results
+            Kết quả khóa học
           </div>
 
           {/* ================= GRID ================= */}
@@ -175,9 +175,8 @@ function Grades() {
                   </div>
 
                   <p>
-                    Review your course performance
-                    and continue improving your
-                    learning outcomes.
+                    Xem lại hiệu suất khóa học của bạn
+                    và tiếp tục cải thiện kết quả học tập.
                   </p>
 
                   {/* SCORE */}
@@ -185,7 +184,7 @@ function Grades() {
                   <div className="grade-progress">
                     <div className="grade-progress-label">
                       <span>
-                        Completion Score
+                        Điểm hoàn thành
                       </span>
 
                       <span>
@@ -215,7 +214,7 @@ function Grades() {
                       )
                     }
                   >
-                    View Course
+                    Xem Khóa học
 
                     <ArrowRight size={18} />
                   </button>
@@ -233,13 +232,13 @@ function Grades() {
 
             <div>
               <h3>
-                Academic Tip
+                Mẹo học tập
               </h3>
 
               <p>
-                Reviewing feedback regularly helps
-                you improve faster than focusing
-                only on final scores.
+                Xem lại phản hồi thường xuyên giúp
+                bạn cải thiện nhanh hơn so với chỉ tập trung
+                vào điểm cuối cùng.
               </p>
             </div>
           </div>

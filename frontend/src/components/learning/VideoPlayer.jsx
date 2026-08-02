@@ -1,128 +1,89 @@
-import { useRef } from "react";
-import {
-  startLesson,
-  updateLessonProgress,
-  completeLesson,
-} from "../../services/api";
+// src/components/learning/VideoPlayer.jsx
+
+import { PlayCircle } from "lucide-react";
 
 function VideoPlayer({ lesson }) {
-  const lastUpdateRef = useRef(0);
-
   if (!lesson) {
     return (
-      <div className="video-placeholder">
-        Chọn bài học
+      <div className="video-player">
+        <div className="video-placeholder">
+          <PlayCircle size={70} />
+          <p>Chưa có bài học để hiển thị.</p>
+        </div>
       </div>
     );
   }
 
-  const handlePlay = async () => {
-    try {
-      await startLesson(
-        lesson.id || lesson._id,
-        lesson.courseId
-      );
-    } catch (err) {
-      console.error(
-        "Start lesson error:",
-        err
-      );
-    }
-  };
+  const videoUrl =
+    lesson.videoUrl ||
+    lesson.video ||
+    lesson.youtubeUrl ||
+    "";
 
-  const handleTimeUpdate = async (
-    currentTime
-  ) => {
-    currentTime = Math.floor(currentTime);
+  // Chuyển link YouTube sang embed
+  const getYoutubeEmbed = (url) => {
+    if (!url) return "";
 
-    if (
-      currentTime - lastUpdateRef.current <
-      30
-    ) {
-      return;
+    if (url.includes("embed")) return url;
+
+    if (url.includes("watch?v=")) {
+      return url.replace("watch?v=", "embed/");
     }
 
-    lastUpdateRef.current =
-      currentTime;
-
-    try {
-      await updateLessonProgress(
-        lesson.id || lesson._id,
-        currentTime
-      );
-    } catch (err) {
-      console.error(
-        "Update progress error:",
-        err
+    if (url.includes("youtu.be/")) {
+      return url.replace(
+        "https://youtu.be/",
+        "https://www.youtube.com/embed/"
       );
     }
-  };
 
-  const handleEnded = async () => {
-    try {
-      await completeLesson(
-        lesson.id || lesson._id
-      );
-
-      alert(
-        "🎉 Bạn đã hoàn thành bài học!"
-      );
-    } catch (err) {
-      console.error(
-        "Complete lesson error:",
-        err
-      );
-    }
+    return url;
   };
 
   const isYoutube =
-    lesson.videoUrl?.includes(
-      "youtube.com"
-    ) ||
-    lesson.videoUrl?.includes(
-      "youtu.be"
-    );
+    videoUrl.includes("youtube.com") ||
+    videoUrl.includes("youtu.be");
 
   return (
     <div className="video-player">
-      {lesson.videoUrl ? (
+
+      {videoUrl ? (
         isYoutube ? (
           <iframe
-            width="100%"
-            height="500"
-            src={lesson.videoUrl}
+            className="learning-video"
+            src={getYoutubeEmbed(videoUrl)}
             title={lesson.title}
-            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            onLoad={handlePlay}
           />
         ) : (
           <video
+            className="learning-video"
             controls
-            width="100%"
-            onPlay={handlePlay}
-            onTimeUpdate={(e) =>
-              handleTimeUpdate(
-                e.target.currentTime
-              )
-            }
-            onEnded={handleEnded}
+            controlsList="nodownload"
           >
             <source
-              src={lesson.videoUrl}
+              src={videoUrl}
               type="video/mp4"
             />
 
-            Trình duyệt của bạn không hỗ trợ
-            video.
+            Trình duyệt của bạn không hỗ trợ video.
           </video>
         )
       ) : (
         <div className="video-placeholder">
-          Không có video
+
+          <PlayCircle size={70} />
+
+          <h2>Chưa có video</h2>
+
+          <p>
+            Mentor chưa cập nhật video cho bài học này.
+          </p>
+
         </div>
       )}
+
     </div>
   );
 }

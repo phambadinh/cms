@@ -2,5 +2,6 @@ package com.cms.model;
 
 public enum PaymentMethod {
     VNPAY,
-    MOMO
+    MOMO,
+    BANK_TRANSFER
 }

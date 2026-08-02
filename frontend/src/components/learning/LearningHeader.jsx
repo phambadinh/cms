@@ -1,27 +1,25 @@
 // src/components/learning/LearningHeader.jsx
-
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-function LearningHeader({
-  courseName,
-}) {
-  const navigate =
-    useNavigate();
+function LearningHeader({ courseName }) {
+  const navigate = useNavigate();
 
   return (
     <header className="learning-header">
-
       <button
-        onClick={() =>
-          navigate(-1)
-        }
+        type="button"
+        className="learning-back-btn"
+        onClick={() => navigate(-1)}
       >
         <ArrowLeft size={18} />
+        <span>Quay lại khóa học</span>
       </button>
 
-      <h2>{courseName}</h2>
-
+      <div className="learning-course-title">
+        <h2>{courseName}</h2>
+        <p>Chế độ học tập</p>
+      </div>
     </header>
   );
 }

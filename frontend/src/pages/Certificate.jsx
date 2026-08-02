@@ -54,12 +54,12 @@ function Certificate() {
       {/* ================= HEADER ================= */}
 
       <div className="certificate-hero">
-        <h1>My Certificates</h1>
+        <h1>Chứng chỉ của tôi</h1>
 
         <p>
-          View, manage, and download the
-          certificates you have earned from your
-          completed courses.
+          Xem, quản lý, và tải xuống các
+          chứng chỉ bạn đã đạt được từ các
+          khóa học đã hoàn thành.
         </p>
       </div>
 
@@ -117,12 +117,12 @@ function Certificate() {
           />
 
           <h3>
-            No certificates yet
+            Chưa có chứng chỉ nào
           </h3>
 
           <p>
-            Complete eligible courses to unlock
-            and download your certificates.
+            Hoàn thành các khóa học đủ điều kiện để mở khóa
+            và tải xuống chứng chỉ của bạn.
           </p>
         </div>
       ) : (
@@ -130,7 +130,7 @@ function Certificate() {
           {/* ================= TITLE ================= */}
 
           <div className="section-title">
-            Earned Certificates
+            Chứng chỉ đã đạt được
           </div>
 
           {/* ================= GRID ================= */}
@@ -178,9 +178,7 @@ function Certificate() {
                   </div>
 
                   <p>
-                    This certificate recognizes
-                    your successful completion of
-                    the course requirements.
+                    Đây là chứng chỉ xác nhận rằng bạn đã hoàn thành khóa học và đạt được các kỹ năng cần thiết. Hãy tự hào về thành tích của mình!
                   </p>
 
                   <div className="certificate-actions">
@@ -194,7 +192,7 @@ function Certificate() {
                       }
                     >
                       <Download size={18} />
-                      Download
+                      Tải xuống
                     </button>
 
                     <button
@@ -205,7 +203,7 @@ function Certificate() {
                         )
                       }
                     >
-                      View Course
+                      Xem Khóa học
                       <ArrowRight size={18} />
                     </button>
                   </div>
@@ -223,13 +221,11 @@ function Certificate() {
 
             <div>
               <h3>
-                Achievement Tip
+                Mẹo thành tựu
               </h3>
 
               <p>
-                Verified certificates are easier
-                to share on your CV, portfolio,
-                and professional profiles.
+                Hãy chia sẻ chứng chỉ của bạn trên các nền tảng mạng xã hội để khoe thành tích học tập và khích lệ bản thân tiếp tục học hỏi.
               </p>
             </div>
           </div>

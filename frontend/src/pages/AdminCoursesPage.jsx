@@ -1,10 +1,30 @@
 import AdminCrudPage from "../components/admin/AdminCrudPage";
-import { createCourse, deleteCourse, getAllCourses, publishCourse, unpublishCourse, updateCourse } from "../services/api";
+import {
+  createCourse,
+  deleteCourse,
+  getAllCourses,
+  publishCourse,
+  unpublishCourse,
+  updateCourse,
+} from "../services/api";
+import {
+  BookOpen,
+  Plus,
+  RefreshCw,
+  Eye,
+  EyeOff,
+} from "lucide-react";
+import "../styles/dashboard.css";
 
 const courseFields = [
   { name: "code", label: "Code", type: "text" },
   { name: "name", label: "Name", type: "text" },
-  { name: "description", label: "Description", type: "textarea", rows: 4 },
+  {
+    name: "description",
+    label: "Description",
+    type: "textarea",
+    rows: 4,
+  },
   {
     name: "courseType",
     label: "Type",
@@ -26,7 +46,12 @@ const columns = [
   { key: "courseType", label: "Type" },
   { key: "viewCount", label: "Views" },
   { key: "enrollmentCount", label: "Enrollments" },
-  { key: "published", label: "Status", render: (item) => (item.published ? "Published" : "Draft") },
+  {
+    key: "published",
+    label: "Status",
+    render: (item) =>
+      item.published ? "Published" : "Draft",
+  },
 ];
 
 const initialValues = {
@@ -45,6 +70,9 @@ function AdminCoursesPage() {
     <AdminCrudPage
       title="Courses"
       subtitle="Live CRUD cho khóa học, có publish/unpublish và xóa thật."
+      icon={BookOpen}
+      primaryActionIcon={Plus}
+      secondaryActionIcon={RefreshCw}
       entityLabel="Course"
       fetchItems={getAllCourses}
       createItem={createCourse}
@@ -65,7 +93,10 @@ function AdminCoursesPage() {
       })}
       normalizeSubmit={(formData) => ({
         ...formData,
-        price: formData.courseType === "FREE" ? 0 : Number(formData.price || 0),
+        price:
+          formData.courseType === "FREE"
+            ? 0
+            : Number(formData.price || 0),
       })}
       renderRowActions={(item, refresh) => (
         <button
@@ -80,7 +111,17 @@ function AdminCoursesPage() {
             refresh();
           }}
         >
-          {item.published ? "Unpublish" : "Publish"}
+          {item.published ? (
+            <>
+              <EyeOff size={14} style={{ marginRight: 4 }} />
+              Unpublish
+            </>
+          ) : (
+            <>
+              <Eye size={14} style={{ marginRight: 4 }} />
+              Publish
+            </>
+          )}
         </button>
       )}
     />

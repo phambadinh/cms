@@ -1,4 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
+import {
+  Plus,
+  RefreshCw,
+  Save,
+  RotateCcw,
+  Pencil,
+  Trash2,
+  Search,
+} from "lucide-react";
 
 function AdminCrudPage({
   title,
@@ -18,22 +27,21 @@ function AdminCrudPage({
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
   const [editingId, setEditingId] = useState(null);
   const [formData, setFormData] = useState(initialValues);
+  const [search, setSearch] = useState("");
+  const [error, setError] = useState("");
 
   const isEditing = editingId !== null;
-  const sortedItems = useMemo(() => items, [items]);
 
   const loadItems = async () => {
     try {
       setLoading(true);
       setError("");
-      const response = await fetchItems();
-      setItems(response.data || []);
-    } catch (err) {
-      console.error(`Error loading ${entityLabel}:`, err);
-      setError(`Không thể tải danh sách ${entityLabel}`);
+      const res = await fetchItems();
+      setItems(res.data || []);
+    } catch {
+      setError(`Không thể tải ${entityLabel}`);
     } finally {
       setLoading(false);
     }
@@ -42,6 +50,13 @@ function AdminCrudPage({
   useEffect(() => {
     loadItems();
   }, []);
+
+  const filteredItems = useMemo(() => {
+    if (!search) return items;
+    return items.filter((item) =>
+      JSON.stringify(item).toLowerCase().includes(search.toLowerCase())
+    );
+  }, [items, search]);
 
   const handleChange = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -52,12 +67,14 @@ function AdminCrudPage({
     setFormData(initialValues);
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+
     try {
-      setSubmitting(true);
-      setError("");
-      const payload = normalizeSubmit ? normalizeSubmit(formData, isEditing) : formData;
+      const payload = normalizeSubmit
+        ? normalizeSubmit(formData, isEditing)
+        : formData;
 
       if (isEditing) {
         await updateItem(editingId, payload);
@@ -67,168 +84,137 @@ function AdminCrudPage({
 
       await loadItems();
       resetForm();
-    } catch (err) {
-      console.error(`Error saving ${entityLabel}:`, err);
-      setError(err.response?.data?.message || `Không thể lưu ${entityLabel}`);
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const handleEdit = (item) => {
-    setEditingId(item.id);
-    setFormData(mapToForm ? mapToForm(item) : { ...item });
-  };
-
-  const handleDelete = async (item) => {
-    if (!window.confirm(`Xóa ${entityLabel} này?`)) {
-      return;
-    }
-
-    try {
-      setSubmitting(true);
-      setError("");
-      await deleteItem(item.id);
-      await loadItems();
-      if (editingId === item.id) {
-        resetForm();
-      }
-    } catch (err) {
-      console.error(`Error deleting ${entityLabel}:`, err);
-      setError(err.response?.data?.message || `Không thể xóa ${entityLabel}`);
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <div className="layout-main admin-module-page">
-      <div className="admin-module-header">
+    <div className="admin-crud-page">
+      <div className="admin-crud-header">
         <div>
-          <h1 className="admin-module-title">{title}</h1>
-          <p className="admin-module-subtitle">{subtitle}</p>
+          <h1>{title}</h1>
+          <p>{subtitle}</p>
         </div>
-        <div className="admin-module-actions">
-          <button className="admin-module-button" onClick={loadItems} type="button">
+
+        <div className="admin-crud-actions">
+          <button onClick={loadItems}>
+            <RefreshCw size={18} />
             Refresh
           </button>
-          <button className="admin-module-button primary" onClick={resetForm} type="button">
-            + New {entityLabel}
+
+          <button onClick={resetForm}>
+            <Plus size={18} />
+            New {entityLabel}
           </button>
         </div>
       </div>
 
-      {error && <p className="dash-error">{error}</p>}
+      {error && <div className="dash-error">{error}</div>}
 
       <div className="admin-crud-grid">
-        <form className="admin-module-card admin-crud-form" onSubmit={handleSubmit}>
-          <div className="admin-module-toolbar">
-            <span>{isEditing ? `Edit ${entityLabel}` : `Create ${entityLabel}`}</span>
-            <span>{isEditing ? `Updating ${editingId}` : `New ${entityLabel}`}</span>
-          </div>
+        <form className="admin-crud-form" onSubmit={handleSubmit}>
+          <h3>{isEditing ? `Edit ${entityLabel}` : `Create ${entityLabel}`}</h3>
 
-          <div className="admin-form-grid">
-            {fields.map((field) => (
-              <label className="admin-field" key={field.name}>
-                <span>{field.label}</span>
-                {field.type === "textarea" ? (
-                  <textarea
-                    value={formData[field.name] ?? ""}
-                    onChange={(event) => handleChange(field.name, event.target.value)}
-                    rows={field.rows || 4}
-                    placeholder={field.placeholder || ""}
-                  />
-                ) : field.type === "select" ? (
-                  <select
-                    value={formData[field.name] ?? ""}
-                    onChange={(event) => handleChange(field.name, event.target.value)}
-                  >
-                    <option value="">Select...</option>
-                    {field.options.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                ) : field.type === "checkbox" ? (
-                  <input
-                    type="checkbox"
-                    checked={Boolean(formData[field.name])}
-                    onChange={(event) => handleChange(field.name, event.target.checked)}
-                  />
-                ) : (
-                  <input
-                    type={field.type || "text"}
-                    value={formData[field.name] ?? ""}
-                    onChange={(event) => handleChange(field.name, event.target.value)}
-                    placeholder={field.placeholder || ""}
-                  />
-                )}
-              </label>
-            ))}
-          </div>
+          {fields.map((field) => (
+            <label key={field.name}>
+              <span>{field.label}</span>
+
+              <input
+                type={field.type || "text"}
+                value={formData[field.name] ?? ""}
+                onChange={(e) =>
+                  handleChange(field.name, e.target.value)
+                }
+              />
+            </label>
+          ))}
 
           <div className="admin-form-actions">
-            <button className="admin-module-button primary" type="submit" disabled={submitting}>
-              {submitting ? "Saving..." : isEditing ? "Update" : "Create"}
+            <button type="submit" disabled={submitting}>
+              <Save size={18} />
+              {isEditing ? "Update" : "Create"}
             </button>
-            <button className="admin-module-button" type="button" onClick={resetForm}>
+
+            <button type="button" onClick={resetForm}>
+              <RotateCcw size={18} />
               Reset
             </button>
           </div>
         </form>
 
-        <div className="admin-module-card">
-          <div className="admin-module-toolbar">
-            <span>Live {entityLabel} list</span>
-            <span>{sortedItems.length} records</span>
+        <div className="admin-crud-table">
+          <div className="table-toolbar">
+            <div className="table-search">
+              <Search size={18} />
+              <input
+                placeholder="Search..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
+
+            <span>{filteredItems.length} records</span>
           </div>
 
-          {loading ? (
-            <p>Đang tải...</p>
-          ) : (
-            <div className="admin-table-wrap">
-              <table className="admin-table">
-                <thead>
-                  <tr>
-                    {columns.map((column) => (
-                      <th key={column.key}>{column.label}</th>
+          <table>
+            <thead>
+              <tr>
+                {columns.map((c) => (
+                  <th key={c.key}>{c.label}</th>
+                ))}
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {loading ? (
+                <tr>
+                  <td colSpan={columns.length + 1}>Loading...</td>
+                </tr>
+              ) : filteredItems.length === 0 ? (
+                <tr>
+                  <td colSpan={columns.length + 1}>
+                    No records found.
+                  </td>
+                </tr>
+              ) : (
+                filteredItems.map((item) => (
+                  <tr key={item.id}>
+                    {columns.map((c) => (
+                      <td key={c.key}>
+                        {c.render ? c.render(item) : item[c.key]}
+                      </td>
                     ))}
-                    <th>Actions</th>
+
+                    <td>
+                      <button
+                        onClick={() => {
+                          setEditingId(item.id);
+                          setFormData(
+                            mapToForm ? mapToForm(item) : item
+                          );
+                        }}
+                        type="button"
+                      >
+                        <Pencil size={16} />
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => deleteItem(item.id)}
+                      >
+                        <Trash2 size={16} />
+                      </button>
+
+                      {renderRowActions &&
+                        renderRowActions(item, loadItems)}
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {sortedItems.map((item) => (
-                    <tr key={item.id}>
-                      {columns.map((column) => (
-                        <td key={column.key}>
-                          {column.render ? column.render(item) : item[column.key] ?? "-"}
-                        </td>
-                      ))}
-                      <td>
-                        <div className="admin-row-actions">
-                          <button type="button" className="admin-row-button" onClick={() => handleEdit(item)}>
-                            Edit
-                          </button>
-                          <button type="button" className="admin-row-button danger" onClick={() => handleDelete(item)}>
-                            Delete
-                          </button>
-                          {renderRowActions ? renderRowActions(item, loadItems) : null}
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                  {sortedItems.length === 0 && (
-                    <tr>
-                      <td colSpan={columns.length + 1} style={{ textAlign: "center", padding: "24px" }}>
-                        No {entityLabel.toLowerCase()} records found.
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          )}
+                ))
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

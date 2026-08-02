@@ -32,13 +32,8 @@ useEffect(() => {
     try {
       const res = await getPublicCourses();
 
-console.log("COURSES =", res.data);
-console.log("COUNT =", res.data.length);
-
 setCourses(res.data);
 setFilteredCourses(res.data);
-
-      console.log("API DATA:", res.data);
 
       const data = res.data || [];
 

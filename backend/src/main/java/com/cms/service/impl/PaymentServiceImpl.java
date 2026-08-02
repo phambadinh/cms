@@ -1,5 +1,6 @@
 package com.cms.service.impl;
 
+import com.cms.dto.PaymentCompleteRequest;
 import com.cms.model.Course;
 import com.cms.model.CourseType;
 import com.cms.model.Enrollment;
@@ -50,11 +51,19 @@ public class PaymentServiceImpl implements PaymentService {
             enrollment.setStatus(EnrollmentStatus.PENDING);
             enrollment.setProgressPercentage(0.0);
             enrollment.setPaymentStatus(PaymentStatus.PENDING);
+            enrollment.setPaymentAmount(course.getPrice());
+            enrollment.setPaymentMethod(paymentMethod.name());
             enrollment.setEnrolledAt(LocalDateTime.now());
             enrollmentRepository.save(enrollment);
             courseService.incrementEnrollmentCount(courseId);
         } else if (existingEnrollment.get().getPaymentStatus() == PaymentStatus.COMPLETED) {
             throw new RuntimeException("Bạn đã thanh toán và đăng ký khóa học này.");
+        } else {
+            Enrollment enrollment = existingEnrollment.get();
+            enrollment.setPaymentStatus(PaymentStatus.PENDING);
+            enrollment.setPaymentAmount(course.getPrice());
+            enrollment.setPaymentMethod(paymentMethod.name());
+            enrollmentRepository.save(enrollment);
         }
 
         String provider = paymentMethod.name();
@@ -72,12 +81,25 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public void completePayment(String userId, String courseId) {
-        Enrollment enrollment = enrollmentRepository.findByUserIdAndCourseId(userId, courseId)
+    public void completePayment(String userId, PaymentCompleteRequest request) {
+        if (request == null || request.getCourseId() == null || request.getCourseId().isBlank()) {
+            throw new RuntimeException("Thiếu thông tin khóa học để xác nhận thanh toán.");
+        }
+
+        Enrollment enrollment = enrollmentRepository.findByUserIdAndCourseId(userId, request.getCourseId())
                 .orElseThrow(() -> new RuntimeException("Bạn chưa đăng ký khóa học này"));
 
         enrollment.setPaymentStatus(PaymentStatus.COMPLETED);
         enrollment.setStatus(EnrollmentStatus.ACTIVE);
+        if (request.getPaymentMethod() != null && !request.getPaymentMethod().isBlank()) {
+            enrollment.setPaymentMethod(request.getPaymentMethod().toUpperCase());
+        }
+        if (request.getTransactionId() != null && !request.getTransactionId().isBlank()) {
+            enrollment.setTransactionId(request.getTransactionId().trim());
+        }
+        if (request.getSessionId() != null && !request.getSessionId().isBlank()) {
+            enrollment.setSessionId(request.getSessionId().trim());
+        }
         enrollment.setPaymentCompletedAt(LocalDateTime.now());
         enrollmentRepository.save(enrollment);
     }

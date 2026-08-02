@@ -24,7 +24,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public WebSocketConfig(JwtHandshakeInterceptor jwtHandshakeInterceptor) {
         this.jwtHandshakeInterceptor = jwtHandshakeInterceptor;
     }
-
+    @SuppressWarnings("Non-null")
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws")

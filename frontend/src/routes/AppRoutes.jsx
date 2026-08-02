@@ -24,9 +24,11 @@ import AppLayout from "../layouts/AppLayout";
 import AdminLayout from "../layouts/AdminLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import RoleRoute from "./RoleRoute";
+import EnrollmentRoute from "./EnrollmentRoute";
 import { getAuthUser } from "../services/api";
 import MyLearning from "../pages/MyLearning";
 import LearningCourse from "../pages/LearningCourse";
+import LearningQuizPage from "../pages/LearningQuizPage";
 import LearningProgress from "../pages/LearningProgress";
 import Certificates from "../pages/Certificate";
 import Wishlist from "../pages/Wishlist";
@@ -86,7 +88,22 @@ function AppRoutes() {
           <Route path="/my-learning" element={<MyLearning />} />
           <Route path="/learning-progress" element={<LearningProgress />} />
           <Route path="/certificates" element={<Certificates />} />
-          <Route path="/learning/:courseId" element={<LearningCourse />} />
+          <Route
+            path="/learning/:courseId"
+            element={
+              <EnrollmentRoute>
+                <LearningCourse />
+              </EnrollmentRoute>
+            }
+          />
+          <Route
+            path="/learning/:courseId/quiz/:lessonId"
+            element={
+              <EnrollmentRoute>
+                <LearningQuizPage />
+              </EnrollmentRoute>
+            }
+          />
           <Route path="/wishlist" element={<Wishlist />} />
         </Route>
 

@@ -1,5 +1,6 @@
 package com.cms.controller;
 
+import com.cms.dto.PaymentCompleteRequest;
 import com.cms.dto.PaymentInitiateRequest;
 import com.cms.dto.PaymentInitiateResponse;
 import com.cms.model.PaymentMethod;
@@ -35,10 +36,10 @@ public class PaymentController {
     @PostMapping("/complete")
     @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<Map<String, String>> completePayment(
-            @RequestParam String courseId,
+            @RequestBody PaymentCompleteRequest request,
             Authentication authentication) {
         String userId = authentication.getName();
-        paymentService.completePayment(userId, courseId);
+        paymentService.completePayment(userId, request);
         return ResponseEntity.ok(Map.of("message", "Thanh toán thành công"));
     }
 }

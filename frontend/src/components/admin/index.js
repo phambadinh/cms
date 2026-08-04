@@ -1,0 +1,9 @@
+export { default as AdminDashboard } from "./AdminDashboard";
+export { default as AdminModulePage } from "./AdminModulePage";
+export { default as AdminUsersPage } from "./AdminUsersPage";
+export { default as AdminTeachersPage } from "./AdminTeachersPage";
+export { default as AdminCoursesPage } from "./AdminCoursesPage";
+export { default as AdminDashboardView } from "./AdminDashboardView";
+export { default as AdminCrudPage } from "./AdminCrudPage";
+export { default as AdminSidebar } from "./AdminSidebar";
+export { default as AdminHeader } from "./AdminHeader";

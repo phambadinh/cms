@@ -1,0 +1,142 @@
+/* src/styles/mentorSidebar.css */
+:root {
+  --mentor-blue: #0056d2;
+  --mentor-blue-dark: #00348f;
+  --mentor-navy: #1f1f1f;
+  --mentor-gray: #6b7280;
+  --mentor-bg: #f7f9fc;
+  --mentor-border: #e3e8ee;
+  --mentor-green: #16a34a;
+  --mentor-amber: #d97706;
+  --mentor-red: #dc2626;
+}
+
+.mentor-shell {
+  display: flex;
+  min-height: 100vh;
+  background: var(--mentor-bg);
+}
+
+.mentor-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: #ffffff;
+  border-right: 1px solid var(--mentor-border);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.mentor-sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 8px 20px;
+  border-bottom: 1px solid var(--mentor-border);
+  margin-bottom: 16px;
+}
+
+.mentor-sidebar-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--mentor-blue);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.mentor-sidebar-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--mentor-navy);
+}
+
+.mentor-sidebar-role {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--mentor-blue);
+}
+
+.mentor-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.mentor-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: 10px;
+  color: #374151;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.mentor-sidebar-item:hover {
+  background: #eef3fc;
+  color: var(--mentor-blue-dark);
+}
+
+.mentor-sidebar-item.is-active {
+  background: var(--mentor-blue);
+  color: #ffffff;
+}
+
+.mentor-sidebar-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 8px 0;
+  border-top: 1px solid var(--mentor-border);
+  color: var(--mentor-gray);
+  font-size: 12px;
+}
+
+.mentor-content {
+  flex: 1;
+  min-width: 0;
+  padding: 28px 32px;
+}
+
+@media (max-width: 900px) {
+  .mentor-sidebar {
+    width: 76px;
+    padding: 16px 8px;
+  }
+
+  .mentor-sidebar-title,
+  .mentor-sidebar-role,
+  .mentor-sidebar-item span,
+  .mentor-sidebar-footer span {
+    display: none;
+  }
+
+  .mentor-sidebar-item {
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .mentor-sidebar-brand {
+    justify-content: center;
+  }
+
+  .mentor-content {
+    padding: 20px;
+  }
+}

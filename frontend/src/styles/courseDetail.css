@@ -1,0 +1,163 @@
+.course-detail-page {
+  padding: 24px;
+}
+
+.course-detail-header {
+  margin-bottom: 20px;
+}
+
+.course-detail-title {
+  margin: 0 0 4px;
+  font-size: 22px;
+  color: #0f4c81;
+}
+
+.course-detail-meta {
+  margin: 0 0 8px;
+  color: #4b5563;
+}
+
+.course-detail-description {
+  margin: 0 0 16px;
+  color: #4b5563;
+}
+
+.course-detail-layout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 16px;
+}
+
+.course-detail-sidebar {
+  background: #0f172a;
+  color: #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.course-detail-sidebar h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+
+.course-detail-lecture-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.course-detail-lecture-item {
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.course-detail-lecture-item:hover {
+  background: rgba(37, 99, 235, 0.2);
+}
+
+.course-detail-lecture-item.active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.course-detail-lecture-title {
+  max-width: 180px;
+}
+
+.course-detail-lecture-duration {
+  opacity: 0.8;
+}
+
+.course-detail-content {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #dbeafe;
+  padding: 16px;
+  box-shadow: 0 10px 25px rgba(15, 76, 129, 0.1);
+}
+
+.course-detail-lecture-heading {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #0f4c81;
+}
+
+.course-detail-video-wrapper {
+  margin-bottom: 16px;
+}
+
+.course-detail-video-wrapper video {
+  width: 100%;
+  border-radius: 12px;
+  background: #000000;
+}
+
+.course-detail-video-empty {
+  padding: 20px;
+  text-align: center;
+}
+
+.course-detail-payment-box {
+  background: #f8fafc;
+  border: 1px solid #dbeafe;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 20px;
+}
+
+.course-detail-payment-box h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #0f4c81;
+}
+
+.course-detail-payment-box p {
+  margin: 6px 0;
+  color: #334155;
+}
+
+.course-detail-enrollment-info {
+  margin-top: 12px;
+  padding: 12px;
+  background: #eff6ff;
+  border-radius: 10px;
+  border: 1px solid #bfdbfe;
+}
+
+.course-detail-payment-method-group {
+  margin-bottom: 14px;
+}
+
+.course-detail-payment-method-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #1e293b;
+}
+
+.course-detail-payment-method-group select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: white;
+}
+
+.course-detail-btn-primary {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.course-detail-btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}

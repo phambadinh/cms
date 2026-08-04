@@ -1,0 +1,312 @@
+/* about.css */
+
+.about-page {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hero Section */
+.about-hero {
+  background: linear-gradient(135deg, #0052cc 0%, #0040aa 100%);
+  color: white;
+  padding: 100px 40px;
+  text-align: center;
+}
+
+.about-hero-title {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 0 0 16px 0;
+}
+
+.about-hero-subtitle {
+  font-size: 18px;
+  margin: 0;
+  opacity: 0.95;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Mission & Vision */
+.about-mission-vision {
+  padding: 80px 40px;
+  background-color: white;
+}
+
+.about-mission-vision-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.about-mission-vision-item {
+  text-align: center;
+}
+
+.about-mission-vision-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.about-mission-vision-item h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 0 16px 0;
+  color: #1a1a1a;
+}
+
+.about-mission-vision-item p {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Statistics */
+.about-stats {
+  padding: 80px 40px;
+  background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
+}
+
+.about-stats-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0 0 60px 0;
+  color: #1a1a1a;
+}
+
+.about-stats-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+}
+
+.about-stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.about-stat-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0, 82, 204, 0.15);
+}
+
+.about-stat-number {
+  font-size: 40px;
+  font-weight: bold;
+  color: #0052cc;
+  margin: 0 0 10px 0;
+}
+
+.about-stat-label {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+}
+
+/* Why Choose Us */
+.about-why-choose-us {
+  padding: 80px 40px;
+  background-color: white;
+}
+
+.about-why-choose-us-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-why-choose-us-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0 0 60px 0;
+  color: #1a1a1a;
+}
+
+.about-why-choose-us-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+}
+
+.about-why-item {
+  text-align: center;
+  padding: 30px;
+  border-radius: 12px;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.about-why-item:hover {
+  background-color: #f0f4ff;
+  transform: translateY(-4px);
+}
+
+.about-why-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.about-why-item h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: #1a1a1a;
+}
+
+.about-why-item p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Team */
+.about-team {
+  padding: 80px 40px;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.about-team-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0 0 16px 0;
+  color: #1a1a1a;
+}
+
+.about-team-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin: 0 0 60px 0;
+}
+
+.about-team-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+}
+
+.about-team-member {
+  background: white;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.about-team-member:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0, 82, 204, 0.15);
+}
+
+.about-member-avatar {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.about-team-member h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #1a1a1a;
+}
+
+.about-team-member p {
+  font-size: 14px;
+  color: #0052cc;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-hero {
+    padding: 60px 20px;
+  }
+
+  .about-hero-title {
+    font-size: 32px;
+  }
+
+  .about-mission-vision-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about-stats,
+  .about-why-choose-us,
+  .about-team,
+  .about-mission-vision {
+    padding: 40px 20px;
+  }
+
+  .about-stats-title,
+  .about-why-choose-us-title,
+  .about-team-title {
+    font-size: 24px;
+  }
+
+  .about-stats-grid,
+  .about-why-choose-us-grid,
+  .about-team-grid {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero {
+    padding: 40px 16px;
+  }
+
+  .about-hero-title {
+    font-size: 24px;
+  }
+
+  .about-hero-subtitle {
+    font-size: 14px;
+  }
+
+  .about-stats,
+  .about-why-choose-us,
+  .about-team,
+  .about-mission-vision {
+    padding: 30px 16px;
+  }
+
+  .about-stats-title,
+  .about-why-choose-us-title,
+  .about-team-title {
+    font-size: 20px;
+  }
+
+  .about-stat-card,
+  .about-why-item,
+  .about-team-member {
+    padding: 20px;
+  }
+
+  .about-stat-number {
+    font-size: 28px;
+  }
+
+  .about-why-icon,
+  .about-member-avatar {
+    font-size: 40px;
+  }
+}

@@ -1,0 +1,50 @@
+server:
+  port: ${PORT:8080}
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: cms-api
+
+  data:
+    mongodb:
+      uri: ${MONGO_URI:mongodb://localhost:27017/cms_db}
+      auto-index-creation: true
+
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+
+frontend:
+  url: ${FRONTEND_URL:http://localhost:5173}
+
+payment:
+  return-url: ${PAYMENT_RETURN_URL:http://localhost:5173}
+
+jwt:
+  secret: ${JWT_SECRET:ThisIsAVeryLongSecretKeyForHS512EncryptionThatMustBeAtLeast256BitsLongForHmacSHA512AlgorithmToWorkProperlyInJWTTokenGeneration}
+  expiration: ${JWT_EXPIRATION:86400000}
+
+logging:
+  level:
+    root: INFO
+    org.springframework.security: INFO
+    org.springframework.data.mongodb: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+gemini:
+  api:
+    key: ${GEMINI_API_KEY:}
+    model: ${GEMINI_MODEL:gemini-flash-latest}

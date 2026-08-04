@@ -13,6 +13,7 @@
   border-radius: 20px;
   margin-bottom: 28px;
   box-shadow: 0 10px 30px rgba(0, 86, 210, 0.15);
+<<<<<<< HEAD
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -36,6 +37,8 @@
   color: #ffffff;
   font-size: 13px;
   font-weight: 600;
+=======
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
 }
 
 .grades-hero h1 {
@@ -201,10 +204,13 @@
   color: #0056d2;
 }
 
+<<<<<<< HEAD
 .grade-card-content p strong {
   color: #0f172a;
 }
 
+=======
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
 .grade-card-content p {
   font-size: 15px;
   color: #64748b;
@@ -306,7 +312,10 @@
 
   .grades-hero {
     padding: 24px;
+<<<<<<< HEAD
     flex-direction: column;
+=======
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
   }
 
   .grades-hero h1 {

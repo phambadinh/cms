@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* src/styles/mentorDashboard.css — Coursera-inspired visual language */
 
 .mentor-page-shell {
@@ -104,39 +105,137 @@
   top: 16px;
   right: 16px;
   color: #9aa9bb;
+=======
+.mentor-dashboard-shell {
+  display: grid;
+  gap: 20px;
+}
+
+.mentor-hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 28px 32px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #0f4c81 0%, #1d6fa8 52%, #3b82f6 100%);
+  color: #fff;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.16);
+}
+
+.mentor-eyebrow {
+  display: inline-flex;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+.mentor-title {
+  margin: 0 0 8px;
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.15;
+}
+
+.mentor-subtitle {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 600px;
+}
+
+.mentor-loading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #64748b;
+  padding: 24px 4px;
+}
+
+.mentor-spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid #dbeafe;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: mentorSpin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes mentorSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mentor-error {
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
 }
 
 .mentor-stats-grid {
   display: grid;
+<<<<<<< HEAD
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+=======
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
   gap: 14px;
 }
 
 .mentor-stat-card {
   background: #fff;
+<<<<<<< HEAD
   border-radius: 10px;
   padding: 18px 20px;
   border: 1px solid var(--mentor-border, #e3e8ee);
+=======
+  border-radius: 16px;
+  padding: 18px 20px;
+  border: 1px solid #dbeafe;
+  box-shadow: 0 8px 18px rgba(15, 76, 129, 0.07);
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
   display: flex;
   align-items: flex-start;
   gap: 14px;
 }
 
 .mentor-stat-icon-wrap {
+<<<<<<< HEAD
   width: 42px;
   height: 42px;
   border-radius: 8px;
   background: #eaf1fd;
+=======
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #eff6ff;
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+<<<<<<< HEAD
   color: #0056d2;
 }
 
 .mentor-stat-icon-wrap.tone-blue { background: #e6f0ff; color: #0056d2; }
 .mentor-stat-icon-wrap.tone-green { background: #e6f6ec; color: #16a34a; }
 .mentor-stat-icon-wrap.tone-amber { background: #fef3e2; color: #d97706; }
+=======
+}
+
+.mentor-stat-icon {
+  color: #2563eb;
+}
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
 
 .mentor-stat-body {
   display: flex;
@@ -147,20 +246,31 @@
 .mentor-stat-label {
   margin: 0;
   font-size: 13px;
+<<<<<<< HEAD
   color: #5b6b7b;
+=======
+  color: #64748b;
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
 }
 
 .mentor-stat-value {
   margin: 0;
   font-size: 26px;
+<<<<<<< HEAD
   font-weight: 700;
   color: #1f1f1f;
   line-height: 1.15;
+=======
+  font-weight: 800;
+  color: #0f4c81;
+  line-height: 1.1;
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
 }
 
 .mentor-stat-note {
   margin: 2px 0 0;
   font-size: 12px;
+<<<<<<< HEAD
   color: #8a97a5;
 }
 
@@ -175,13 +285,23 @@
   .mentor-two-col {
     grid-template-columns: 1fr;
   }
+=======
+  color: #94a3b8;
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
 }
 
 .mentor-panel {
   background: #fff;
+<<<<<<< HEAD
   border-radius: 10px;
   padding: 20px;
   border: 1px solid var(--mentor-border, #e3e8ee);
+=======
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid #dbeafe;
+  box-shadow: 0 10px 22px rgba(15, 76, 129, 0.07);
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
 }
 
 .mentor-panel-header {
@@ -196,18 +316,28 @@
   display: flex;
   align-items: center;
   gap: 8px;
+<<<<<<< HEAD
   color: #00348f;
+=======
+  color: #0f4c81;
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
 }
 
 .mentor-panel-title {
   margin: 0;
+<<<<<<< HEAD
   font-size: 16px;
   font-weight: 700;
   color: #1f1f1f;
+=======
+  font-size: 17px;
+  color: #0f4c81;
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
 }
 
 .mentor-panel-count {
   font-size: 13px;
+<<<<<<< HEAD
   color: #5b6b7b;
 }
 
@@ -220,6 +350,9 @@
 
 .mentor-panel-link:hover {
   text-decoration: underline;
+=======
+  color: #64748b;
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
 }
 
 .mentor-table-wrap {
@@ -229,12 +362,17 @@
 .mentor-table {
   width: 100%;
   border-collapse: collapse;
+<<<<<<< HEAD
   min-width: 640px;
+=======
+  min-width: 580px;
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
 }
 
 .mentor-table th,
 .mentor-table td {
   text-align: left;
+<<<<<<< HEAD
   padding: 12px 10px;
   border-bottom: 1px solid #eef2f7;
   font-size: 14px;
@@ -242,6 +380,14 @@
 
 .mentor-table th {
   color: #5b6b7b;
+=======
+  padding: 11px 10px;
+  border-bottom: 1px solid #e5eef9;
+}
+
+.mentor-table th {
+  color: #475569;
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -254,23 +400,53 @@
 
 .mentor-course-name {
   font-weight: 600;
+<<<<<<< HEAD
   color: #1f1f1f;
+=======
+  color: #0f172a;
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
 }
 
 .mentor-badge {
   display: inline-flex;
   padding: 4px 10px;
+<<<<<<< HEAD
   border-radius: 6px;
+=======
+  border-radius: 999px;
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
   font-size: 12px;
   font-weight: 700;
 }
 
+<<<<<<< HEAD
 .badge-free { background: #e6f0ff; color: #0056d2; }
 .badge-premium { background: #fef3e2; color: #92400e; }
 .badge-live { background: #e6f6ec; color: #166534; }
 .badge-draft { background: #f1f4f8; color: #5b6b7b; }
 .badge-active { background: #fef3e2; color: #92400e; }
 .badge-danger { background: #fdecec; color: #c0392b; }
+=======
+.badge-free {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.badge-premium {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-live {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-draft {
+  background: #f1f5f9;
+  color: #475569;
+}
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
 
 .mentor-progress-wrap {
   display: flex;
@@ -282,19 +458,28 @@
   flex: 1;
   height: 8px;
   border-radius: 999px;
+<<<<<<< HEAD
   background: #eef2f7;
+=======
+  background: #e5e7eb;
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
   overflow: hidden;
   min-width: 80px;
 }
 
 .mentor-progress-fill {
   height: 100%;
+<<<<<<< HEAD
   background: #0056d2;
+=======
+  background: #2563eb;
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
   border-radius: inherit;
 }
 
 .mentor-progress-label {
   font-size: 12px;
+<<<<<<< HEAD
   color: #5b6b7b;
   white-space: nowrap;
 }
@@ -421,17 +606,30 @@
   font-size: 14px;
 }
 
+=======
+  color: #64748b;
+  white-space: nowrap;
+}
+
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
 .mentor-empty {
   display: flex;
   flex-direction: column;
   align-items: center;
+<<<<<<< HEAD
   gap: 10px;
   padding: 56px 24px;
   color: #8a97a5;
+=======
+  gap: 12px;
+  padding: 48px 24px;
+  color: #94a3b8;
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
   text-align: center;
 }
 
 .mentor-empty svg {
+<<<<<<< HEAD
   color: #c7d1db;
 }
 
@@ -450,18 +648,31 @@
 
 @media (max-width: 768px) {
   .mentor-page-header {
+=======
+  color: #cbd5e1;
+}
+
+@media (max-width: 768px) {
+  .mentor-hero {
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
     padding: 20px;
     flex-direction: column;
   }
 
+<<<<<<< HEAD
   .mentor-page-shell {
     gap: 16px;
+=======
+  .mentor-dashboard-shell {
+    gap: 14px;
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
   }
 
   .mentor-stats-grid {
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 10px;
   }
+<<<<<<< HEAD
 
   .mentor-actions-grid {
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -474,4 +685,6 @@
   .mentor-page-actions .mentor-button {
     flex: 1 1 160px;
   }
+=======
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
 }

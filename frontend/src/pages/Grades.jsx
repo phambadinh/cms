@@ -1,13 +1,14 @@
 // src/pages/Grades.jsx
+<<<<<<< HEAD
 import { useEffect, useMemo, useState } from "react";
 import {
-  BookOpen,
-  Award,
-  CheckCircle2,
   ArrowRight,
+  Award,
+  BarChart3,
+  BookOpen,
+  CheckCircle2,
   ClipboardList,
   Users,
-  BarChart3,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -22,6 +23,10 @@ import "../styles/grades.css";
 function formatScore(value) {
   const score = Number(value || 0);
   return Number.isInteger(score) ? String(score) : score.toFixed(1);
+}
+
+function getScoreValue(item) {
+  return Number(item?.score ?? item?.totalScore ?? item?.finalGrade ?? 0);
 }
 
 function Grades() {
@@ -75,16 +80,14 @@ function Grades() {
   }, []);
 
   const totalCourses = grades.length;
-
-  const passedCourses = grades.filter((item) => (item.score ?? item.finalGrade ?? 0) >= 5).length;
-
+  const passedCourses = grades.filter((item) => getScoreValue(item) >= 5).length;
   const averageGrade =
     grades.length > 0
       ? (
-          grades.reduce((sum, item) => sum + Number(item.score ?? item.finalGrade ?? 0), 0) /
+          grades.reduce((sum, item) => sum + getScoreValue(item), 0) /
           grades.length
         ).toFixed(1)
-      : 0;
+      : "0.0";
 
   const uniqueStudents = useMemo(
     () => new Set(grades.map((item) => item.userId).filter(Boolean)).size,
@@ -172,7 +175,7 @@ function Grades() {
 
           <div className="grades-grid">
             {grades.map((item) => {
-              const score = Number(item.score ?? item.finalGrade ?? 0);
+              const score = getScoreValue(item);
               const passed = score >= 5;
 
               return (
@@ -249,6 +252,25 @@ function Grades() {
               <p>
                 Xem lại phản hồi thường xuyên giúp bạn cải thiện nhanh hơn so với chỉ tập trung vào
                 điểm cuối cùng.
+              </p>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+export default Grades;
+              <h3>
+                Mẹo học tập
+              </h3>
+
+              <p>
+                Xem lại phản hồi thường xuyên giúp
+                bạn cải thiện nhanh hơn so với chỉ tập trung
+                vào điểm cuối cùng.
+>>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
               </p>
             </div>
           </div>

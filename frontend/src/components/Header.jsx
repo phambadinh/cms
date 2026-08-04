@@ -16,6 +16,9 @@ import {
   GraduationCap,
   BadgeCheck,
   Sparkles,
+  Newspaper,
+  MapPin,
+  Users,
 } from "lucide-react";
 import "../styles/header.css";
 
@@ -62,6 +65,7 @@ function Header() {
     { label: "Trang chủ", path: "/", icon: House },
     { label: "Khóa học", path: "/courses", icon: BookOpen },
     { label: "Giới thiệu", path: "/about", icon: Info },
+    { label: "Blog", path: "/blog", icon: Newspaper },
     { label: "Liên hệ", path: "/contact", icon: Phone },
   ];
 
@@ -70,22 +74,24 @@ function Header() {
 
     if (user.role === "ADMIN") {
       return [
-        { label: "Dashboard", path: "/admin/dashboard", icon: LayoutDashboard },
+        { label: "Dashboard", path: "/admin/dashboard", icon: LayoutDashboard, featured: true },
         { label: "Quản lý khóa học", path: "/admin/courses", icon: GraduationCap },
+        { label: "Quản lý người dùng", path: "/admin/users", icon: Users },
         { label: "Cài đặt tài khoản", path: "/settings", icon: Settings },
       ];
     }
 
     if (user.role === "MENTOR") {
       return [
-        { label: "Dashboard", path: "/dashboard/mentor", icon: LayoutDashboard },
-        { label: "Khóa học của tôi", path: "/dashboard/mentor", icon: GraduationCap },
+        { label: "Dashboard", path: "/dashboard/mentor", icon: LayoutDashboard, featured: true },
+        { label: "Khóa học của tôi", path: "/mentor/courses", icon: GraduationCap },
+        { label: "Tiến độ", path: "/mentor/progress", icon: BadgeCheck },
         { label: "Cài đặt tài khoản", path: "/settings", icon: Settings },
       ];
     }
 
     return [
-      { label: "Dashboard", path: "/dashboard/student", icon: LayoutDashboard },
+      { label: "Dashboard", path: "/dashboard/student", icon: LayoutDashboard, featured: true },
       { label: "Khóa học của tôi", path: "/my-learning", icon: GraduationCap },
       { label: "Chứng chỉ", path: "/certificates", icon: BadgeCheck },
       { label: "Cài đặt tài khoản", path: "/settings", icon: Settings },

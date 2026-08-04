@@ -17,6 +17,7 @@ D:\CMS\backend\src\main\java\com\cms\dto\CourseResponse.java
 D:\CMS\backend\src\main\java\com\cms\model\Enrollment.java
 D:\CMS\backend\src\main\java\com\cms\service\ChatService.java
 D:\CMS\backend\src\main\java\com\cms\dto\QuizAttemptRequest.java
+D:\CMS\backend\src\main\java\com\cms\dto\PaymentCompleteRequest.java
 D:\CMS\backend\src\main\java\com\cms\Application.java
 D:\CMS\backend\src\main\java\com\cms\model\Lesson.java
 D:\CMS\backend\src\main\java\com\cms\service\impl\PaymentServiceImpl.java

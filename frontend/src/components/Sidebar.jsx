@@ -32,17 +32,10 @@ function Sidebar() {
       : role === "MENTOR"
       ? [
           { to: "/dashboard/mentor", label: "Dashboard", icon: LayoutDashboard },
-<<<<<<< HEAD
           { to: "/mentor/courses", label: "Khóa học của tôi", icon: BookOpen },
           { to: "/mentor/lectures", label: "Bài giảng", icon: Library },
           { to: "/mentor/grades", label: "Điểm số", icon: ClipboardList },
           { to: "/mentor/progress", label: "Tiến độ học viên", icon: TrendingUp },
-=======
-          { to: "/courses", label: "Khóa học của tôi", icon: BookOpen },
-          { to: "/lectures", label: "Bài giảng", icon: Library },
-          { to: "/grades", label: "Điểm số", icon: ClipboardList },
-          { to: "/progress", label: "Tiến độ học viên", icon: TrendingUp },
->>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
         ]
       : [
           { to: "/dashboard/student", label: "Dashboard", icon: LayoutDashboard },
@@ -50,17 +43,12 @@ function Sidebar() {
           { to: "/courses", label: "Khám phá khóa học", icon: BookOpen },
           { to: "/learning-progress", label: "Tiến độ học tập", icon: TrendingUp },
           { to: "/certificates", label: "Chứng chỉ", icon: Award },
-<<<<<<< HEAD
           { to: "/grades", label: "Điểm số", icon: ClipboardList },
-=======
-          { to: "/grades", label: "Kết quả Quiz", icon: ClipboardList },
->>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
           { to: "/wishlist", label: "Danh sách yêu thích", icon: User },
         ];
 
   return (
     <aside className="app-sidebar" aria-label="Sidebar điều hướng">
-<<<<<<< HEAD
       <div className="app-sidebar-brand">
         <div className="app-sidebar-logo">CMS</div>
         <div className="app-sidebar-copy">
@@ -68,9 +56,6 @@ function Sidebar() {
           <div className="app-sidebar-role">{role || "Course Student"}</div>
         </div>
       </div>
-=======
-      <div className="app-sidebar-role">{role || "CMS LMS"}</div>
->>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
 
       <ul className="app-sidebar-nav">
         {items.map((item) => {

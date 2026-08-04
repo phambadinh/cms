@@ -1,74 +1,28 @@
 // src/pages/Grades.jsx
-<<<<<<< HEAD
-import { useEffect, useMemo, useState } from "react";
+
+import { useEffect, useState } from "react";
 import {
-  ArrowRight,
-  Award,
-  BarChart3,
   BookOpen,
+  Award,
   CheckCircle2,
-  ClipboardList,
-  Users,
+  ArrowRight,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import {
-  getAuthUser,
-  getGradesByCourse,
-  getMyCreatedCourses,
-  getMyGrades,
-} from "../services/api";
+import { getMyGrades } from "../services/api";
 
 import "../styles/grades.css";
-
-function formatScore(value) {
-  const score = Number(value || 0);
-  return Number.isInteger(score) ? String(score) : score.toFixed(1);
-}
-
-function getScoreValue(item) {
-  return Number(item?.score ?? item?.totalScore ?? item?.finalGrade ?? 0);
-}
 
 function Grades() {
   const [grades, setGrades] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [scopeLabel, setScopeLabel] = useState("Học viên");
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
-        const user = getAuthUser();
-
-        if (user?.role === "MENTOR" || user?.role === "ADMIN") {
-          setScopeLabel("Mentor");
-          const coursesResponse = await getMyCreatedCourses();
-          const courses = coursesResponse.data || [];
-          const results = await Promise.all(
-            courses.map(async (course) => {
-              try {
-                const gradesResponse = await getGradesByCourse(course.id);
-                return (gradesResponse.data || []).map((grade) => ({
-                  ...grade,
-                  courseName: course.name,
-                  courseId: grade.courseId || course.id,
-                }));
-              } catch (err) {
-                console.error(`Không tải được điểm của khóa ${course.name}:`, err);
-                return [];
-              }
-            })
-          );
-
-          setGrades(results.flat());
-          return;
-        }
-
-        setScopeLabel("Học viên");
-        const response = await getMyGrades();
-        setGrades(response.data || []);
+        const res = await getMyGrades();
+        setGrades(res.data || []);
       } catch (err) {
         console.error(err);
       } finally {
@@ -80,188 +34,203 @@ function Grades() {
   }, []);
 
   const totalCourses = grades.length;
-  const passedCourses = grades.filter((item) => getScoreValue(item) >= 5).length;
+
+  const passedCourses = grades.filter(
+    (item) => (item.finalGrade || 0) >= 5
+  ).length;
+
   const averageGrade =
     grades.length > 0
       ? (
-          grades.reduce((sum, item) => sum + getScoreValue(item), 0) /
-          grades.length
+          grades.reduce(
+            (sum, item) => sum + (item.finalGrade || 0),
+            0
+          ) / grades.length
         ).toFixed(1)
-      : "0.0";
-
-  const uniqueStudents = useMemo(
-    () => new Set(grades.map((item) => item.userId).filter(Boolean)).size,
-    [grades]
-  );
+      : 0;
 
   return (
     <div className="grades-page">
+      {/* ================= HEADER ================= */}
+
       <div className="grades-hero">
-        <div>
-          <h1>{scopeLabel === "Mentor" ? "Điểm số lớp học" : "Điểm số của tôi"}</h1>
-          <p>
-            {scopeLabel === "Mentor"
-              ? "Theo dõi kết quả học viên theo từng khóa học và cập nhật điểm chấm nhanh hơn."
-              : "Theo dõi hiệu suất học tập của bạn và xem lại kết quả khóa học."}
-          </p>
-        </div>
-        <div className="grades-hero-actions">
-          <div className="grades-hero-chip">
-            <ClipboardList size={16} />
-            <span>{grades.length} bản ghi</span>
-          </div>
-          <div className="grades-hero-chip">
-            <BarChart3 size={16} />
-            <span>{scopeLabel}</span>
-          </div>
-        </div>
+        <h1>Điểm số của tôi</h1>
+
+        <p>
+          Theo dõi hiệu suất học tập của bạn và
+          xem lại kết quả khóa học.
+        </p>
       </div>
+
+      {/* ================= STATS ================= */}
 
       <div className="grades-stats">
         <div className="stat-card">
           <div className="stat-icon">
             <BookOpen size={24} />
           </div>
-          <h3>{scopeLabel === "Mentor" ? "Khóa có điểm" : "Tổng số khóa học"}</h3>
-          <div className="value">{totalCourses}</div>
+
+          <h3>Tổng số khóa học</h3>
+
+          <div className="value">
+            {totalCourses}
+          </div>
         </div>
 
         <div className="stat-card">
           <div className="stat-icon">
             <CheckCircle2 size={24} />
           </div>
-          <h3>{scopeLabel === "Mentor" ? "Học viên đạt" : "Đã hoàn thành"}</h3>
-          <div className="value">{passedCourses}</div>
+
+          <h3>Đã hoàn thành</h3>
+
+          <div className="value">
+            {passedCourses}
+          </div>
         </div>
 
         <div className="stat-card">
           <div className="stat-icon">
             <Award size={24} />
           </div>
-          <h3>Điểm trung bình</h3>
-          <div className="value">{averageGrade}</div>
-        </div>
 
-        {scopeLabel === "Mentor" && (
-          <div className="stat-card">
-            <div className="stat-icon">
-              <Users size={24} />
-            </div>
-            <h3>Học viên riêng</h3>
-            <div className="value">{uniqueStudents}</div>
+          <h3>Điểm trung bình</h3>
+
+          <div className="value">
+            {averageGrade}
           </div>
-        )}
+        </div>
       </div>
+
+      {/* ================= EMPTY ================= */}
 
       {loading ? (
         <div className="empty-grades">
-          <h3>Đang tải...</h3>
+          <h3>Loading...</h3>
         </div>
       ) : grades.length === 0 ? (
         <div className="empty-grades">
-          <BookOpen size={72} color="#0056D2" />
-          <h3>{scopeLabel === "Mentor" ? "Chưa có điểm nào" : "Chưa có điểm số nào"}</h3>
+          <BookOpen
+            size={72}
+            color="#0056D2"
+          />
+
+          <h3>
+            Chưa có điểm số nào
+          </h3>
+
           <p>
-            {scopeLabel === "Mentor"
-              ? "Điểm số của học viên sẽ xuất hiện ở đây sau khi bạn chấm hoặc cập nhật kết quả học tập."
-              : "Điểm số của bạn sẽ xuất hiện ở đây sau khi hoàn thành các bài đánh giá khóa học."}
+            Điểm số của bạn sẽ xuất hiện ở đây sau khi
+            hoàn thành các bài đánh giá khóa học.
           </p>
         </div>
       ) : (
         <>
+          {/* ================= TITLE ================= */}
+
           <div className="section-title">
-            {scopeLabel === "Mentor" ? "Bảng điểm học viên" : "Kết quả khóa học"}
+            Kết quả khóa học
           </div>
+
+          {/* ================= GRID ================= */}
 
           <div className="grades-grid">
-            {grades.map((item) => {
-              const score = getScoreValue(item);
-              const passed = score >= 5;
+            {grades.map((item) => (
+              <div
+                key={item.id}
+                className="grade-card"
+              >
+                {/* THUMBNAIL */}
 
-              return (
-                <div key={item.id} className="grade-card">
-                  <div className="grade-banner">
-                    {item.courseName?.charAt(0)?.toUpperCase() || "C"}
-                  </div>
-
-                  <div className="grade-card-content">
-                    <div className={`grade-status ${passed ? "passed" : "failed"}`}>
-                      {passed ? "Đạt" : "Chưa đạt"}
-                    </div>
-
-                    <h3>{item.courseName || "Khóa học"}</h3>
-
-                    <div className="grade-meta">
-                      Điểm: <span>{formatScore(score)}</span>
-                    </div>
-
-                    {scopeLabel === "Mentor" ? (
-                      <p>
-                        Học viên: <strong>{item.userId || "Không rõ"}</strong>
-                      </p>
-                    ) : (
-                      <p>
-                        Xem lại hiệu suất khóa học của bạn và tiếp tục cải thiện kết quả học tập.
-                      </p>
-                    )}
-
-                    <div className="grade-progress">
-                      <div className="grade-progress-label">
-                        <span>Điểm hoàn thành</span>
-                        <span>{formatScore(score)}/10</span>
-                      </div>
-
-                      <div className="progress-bar">
-                        <div
-                          className="progress-fill"
-                          style={{ width: `${Math.min((score / 10) * 100, 100)}%` }}
-                        />
-                      </div>
-                    </div>
-
-                    <button
-                      className="details-btn"
-                      onClick={() =>
-                        navigate(
-                          item.courseId
-                            ? scopeLabel === "Mentor"
-                              ? `/courses/${item.courseId}`
-                              : `/learning/${item.courseId}`
-                            : scopeLabel === "Mentor"
-                              ? "/mentor/courses"
-                              : "/courses"
-                        )
-                      }
-                    >
-                      Xem khóa học
-                      <ArrowRight size={18} />
-                    </button>
-                  </div>
+                <div className="grade-banner">
+                  {item.courseName
+                    ?.charAt(0)
+                    ?.toUpperCase() || "C"}
                 </div>
-              );
-            })}
+
+                {/* BODY */}
+
+                <div className="grade-card-content">
+                  <div
+                    className={`grade-status ${
+                      (item.finalGrade || 0) >= 5
+                        ? "passed"
+                        : "failed"
+                    }`}
+                  >
+                    {(item.finalGrade || 0) >= 5
+                      ? "Passed"
+                      : "Not Passed"}
+                  </div>
+
+                  <h3>
+                    {item.courseName || "Course"}
+                  </h3>
+
+                  <div className="grade-meta">
+                    Final Grade:{" "}
+                    <span>
+                      {item.finalGrade || 0}
+                    </span>
+                  </div>
+
+                  <p>
+                    Xem lại hiệu suất khóa học của bạn
+                    và tiếp tục cải thiện kết quả học tập.
+                  </p>
+
+                  {/* SCORE */}
+
+                  <div className="grade-progress">
+                    <div className="grade-progress-label">
+                      <span>
+                        Điểm hoàn thành
+                      </span>
+
+                      <span>
+                        {item.finalGrade || 0}/10
+                      </span>
+                    </div>
+
+                    <div className="progress-bar">
+                      <div
+                        className="progress-fill"
+                        style={{
+                          width: `${
+                            ((item.finalGrade || 0) /
+                              10) *
+                            100
+                          }%`,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    className="details-btn"
+                    onClick={() =>
+                      navigate(
+                        `/learning/${item.courseId}`
+                      )
+                    }
+                  >
+                    Xem Khóa học
+
+                    <ArrowRight size={18} />
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
+
+          {/* ================= NOTE ================= */}
 
           <div className="grades-tip">
             <div className="grades-tip-icon">
-              <BookOpen size={28} />
+                <BookOpen size={28} />
             </div>
 
             <div>
-              <h3>Mẹo học tập</h3>
-              <p>
-                Xem lại phản hồi thường xuyên giúp bạn cải thiện nhanh hơn so với chỉ tập trung vào
-                điểm cuối cùng.
-              </p>
-            </div>
-          </div>
-        </>
-      )}
-    </div>
-  );
-}
-
-export default Grades;
               <h3>
                 Mẹo học tập
               </h3>
@@ -270,7 +239,6 @@ export default Grades;
                 Xem lại phản hồi thường xuyên giúp
                 bạn cải thiện nhanh hơn so với chỉ tập trung
                 vào điểm cuối cùng.
->>>>>>> 951bef6c76ec00b1328bd7cc87e68eeb7fb23683
               </p>
             </div>
           </div>

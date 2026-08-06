@@ -9,12 +9,18 @@ import com.cms.service.AutoReplyService;
 import com.cms.service.ChatService;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Instant;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174", "https://cmsai.id.vn"})
 @RestController
 @RequestMapping("/api/chat")
 public class ChatController {
@@ -24,8 +30,8 @@ public class ChatController {
     private final AutoReplyService autoReplyService;
 
     public ChatController(ChatService chatService,
-                           SimpMessagingTemplate messagingTemplate,
-                           AutoReplyService autoReplyService) {
+                          SimpMessagingTemplate messagingTemplate,
+                          AutoReplyService autoReplyService) {
         this.chatService = chatService;
         this.messagingTemplate = messagingTemplate;
         this.autoReplyService = autoReplyService;
@@ -48,8 +54,10 @@ public class ChatController {
         return history;
     }
 
+    @SuppressWarnings("null")
     @PostMapping("/send")
-    public ChatMessageResponse sendMessage(@RequestBody ChatMessageRequest request, Authentication authentication) {
+    public ChatMessageResponse sendMessage(@RequestBody ChatMessageRequest request,
+                                            Authentication authentication) {
         ChatMessageResponse saved = chatService.sendMessage(authentication.getName(), request);
         messagingTemplate.convertAndSendToUser(saved.getReceiverId(), "/queue/messages", saved);
         messagingTemplate.convertAndSendToUser(saved.getSenderId(), "/queue/messages", saved);

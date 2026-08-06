@@ -90,7 +90,7 @@ public class CertificateServiceImpl implements CertificateService {
     public List<Certificate> getCertificatesByCourse(String courseId) {
         return certificateRepository.findByCourseId(courseId);
     }
-
+    @SuppressWarnings("null")
     @Override
     public Optional<Certificate> getCertificateById(String certificateId) {
         return certificateRepository.findById(certificateId);
@@ -100,7 +100,7 @@ public class CertificateServiceImpl implements CertificateService {
     public Optional<Certificate> getCertificateByUserAndCourse(String userId, String courseId) {
         return certificateRepository.findByUserIdAndCourseId(userId, courseId);
     }
-
+    @SuppressWarnings("null")
     @Override
     public Certificate revokeCertificate(String certificateId, String revokedByUserId, String revokeReason) {
         Certificate certificate = certificateRepository.findById(certificateId)

@@ -31,6 +31,8 @@ public class AutoReplyService {
      * Chỉ tự động trả lời cho tin nhắn kênh SUPPORT, gửi bởi người dùng thật
      * (không lặp vô hạn khi chính bot hoặc admin gửi).
      */
+    
+    @SuppressWarnings("null")
     @Async
     public void maybeAutoReply(ChatMessage userMessage) {
         if (userMessage.getType() != ChatType.SUPPORT) return;

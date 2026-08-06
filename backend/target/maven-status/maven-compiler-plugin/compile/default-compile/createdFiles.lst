@@ -24,7 +24,6 @@ com\cms\dto\DashboardResponse$MentorItem.class
 com\cms\dto\UserResponse.class
 com\cms\dto\ResetPasswordRequest.class
 com\cms\controller\DashboardController.class
-com\cms\config\WebSocketConfig$1.class
 com\cms\exception\GlobalExceptionHandler.class
 com\cms\repository\EnrollmentRepository.class
 com\cms\service\CourseService.class
@@ -72,7 +71,6 @@ com\cms\dto\CourseRequest.class
 com\cms\dto\LoginResponse.class
 com\cms\repository\CourseRepository.class
 com\cms\service\AutoReplyService.class
-com\cms\config\WebSocketConfig.class
 com\cms\service\impl\EnrollmentServiceImpl.class
 com\cms\service\EnrollmentService.class
 com\cms\security\JwtAuthFilter.class

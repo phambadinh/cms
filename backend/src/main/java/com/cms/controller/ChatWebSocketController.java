@@ -27,7 +27,7 @@ public class ChatWebSocketController {
         this.messagingTemplate = messagingTemplate;
         this.autoReplyService = autoReplyService;
     }
-
+    @SuppressWarnings("null")
     // Client gửi tới: /app/chat.send
     @MessageMapping("/chat.send")
     public void sendMessage(ChatMessageRequest request, Principal principal) {

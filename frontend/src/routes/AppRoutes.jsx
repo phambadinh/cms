@@ -72,7 +72,7 @@ function AppRoutes() {
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/forgot-password" element={<Forgetpassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/payment" element={<PaymentPage />} /> 
         <Route path="/blog" element={<Blog />} />
 
         <Route

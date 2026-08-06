@@ -1,8 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { MessageCircle, X } from "lucide-react";
 import { getAuthUser, getAuthToken } from "../../services/api";
-import { getChatConversations, getChatHistory, sendChatMessageRest } from "../../services/chatApi";
-import { connectChatSocket, sendChatSocketMessage, disconnectChatSocket } from "../../services/chatSocket";
+import {
+  getChatConversations,
+  getChatHistory,
+  sendChatMessageRest,
+} from "../../services/chatApi";
+import {
+  connectChatSocket,
+  sendChatSocketMessage,
+  disconnectChatSocket,
+} from "../../services/chatSocket";
 import ChatThread from "./ChatThread";
 import "../../styles/chat.css";
 
@@ -73,16 +81,22 @@ function ChatWidget() {
 
   const handleSend = async (content) => {
     if (partnerId) {
-      const sentViaSocket = socketReady.current && sendChatSocketMessage({
-        receiverId: partnerId,
-        courseId: null,
-        type: "SUPPORT",
-        content,
-      });
+      const sentViaSocket =
+        socketReady.current &&
+        sendChatSocketMessage({
+          receiverId: partnerId,
+          courseId: null,
+          type: "SUPPORT",
+          content,
+        });
 
       if (!sentViaSocket) {
         try {
-          const res = await sendChatMessageRest({ receiverId: partnerId, type: "SUPPORT", content });
+          const res = await sendChatMessageRest({
+            receiverId: partnerId,
+            type: "SUPPORT",
+            content,
+          });
           setMessages((prev) => [...prev, res.data]);
         } catch (e) {
           console.error("Gửi tin nhắn thất bại:", e);
@@ -111,7 +125,11 @@ function ChatWidget() {
               <div className="chat-widget-title">Hỗ trợ CMS</div>
               <div className="chat-widget-subtitle">Đội ngũ CMS phản hồi trong 24 giờ</div>
             </div>
-            <button className="chat-widget-close" onClick={handleToggle} aria-label="Đóng chat">
+            <button
+              className="chat-widget-close"
+              onClick={handleToggle}
+              aria-label="Đóng chat"
+            >
               <X size={18} />
             </button>
           </div>
@@ -126,7 +144,11 @@ function ChatWidget() {
         </div>
       )}
 
-      <button className="chat-widget-fab" onClick={handleToggle} aria-label="Mở chat hỗ trợ">
+      <button
+        className="chat-widget-fab"
+        onClick={handleToggle}
+        aria-label="Mở chat hỗ trợ"
+      >
         <MessageCircle size={24} />
         {unread > 0 && <span className="chat-widget-badge">{unread}</span>}
       </button>

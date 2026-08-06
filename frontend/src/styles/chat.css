@@ -231,3 +231,19 @@
     height: 65vh;
   }
 }
+.chat-action-button {
+  margin-top: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: none;
+  background: #2563eb;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.4);
+}
+
+.chat-action-button:hover {
+  background: #1d4ed8;
+}

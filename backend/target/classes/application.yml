@@ -46,5 +46,5 @@ logging:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
 gemini:
   api:
-    key: ${GEMINI_API_KEY:AQ.Ab8RN6JaqbTPeT4gDs2bGTHMmoOO8bQ79jJw2RZQZ1fmXoQPOQ}
+    key: ${GEMINI_API_KEY:}
     model: ${GEMINI_MODEL:gemini-flash-latest}

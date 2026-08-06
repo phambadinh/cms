@@ -26,6 +26,7 @@ D:\CMS\backend\src\main\java\com\cms\repository\QuizAttemptRepository.java
 D:\CMS\backend\src\main\java\com\cms\dto\GradeRequest.java
 D:\CMS\backend\src\main\java\com\cms\exception\GlobalExceptionHandler.java
 D:\CMS\backend\src\main\java\com\cms\repository\PasswordResetTokenRepository.java
+D:\CMS\backend\src\main\java\com\cms\service\CertificateService.java
 D:\CMS\backend\src\main\java\com\cms\dto\LessonResponse.java
 D:\CMS\backend\src\main\java\com\cms\controller\GradeController.java
 D:\CMS\backend\src\main\java\com\cms\model\User.java
@@ -38,6 +39,7 @@ D:\CMS\backend\src\main\java\com\cms\service\UserService.java
 D:\CMS\backend\src\main\java\com\cms\controller\CourseController.java
 D:\CMS\backend\src\main\java\com\cms\controller\LessonController.java
 D:\CMS\backend\src\main\java\com\cms\dto\ResetPasswordRequest.java
+D:\CMS\backend\src\main\java\com\cms\controller\CertificateController.java
 D:\CMS\backend\src\main\java\com\cms\dto\ChatMessageResponse.java
 D:\CMS\backend\src\main\java\com\cms\dto\PaymentInitiateRequest.java
 D:\CMS\backend\src\main\java\com\cms\security\JwtHandshakeInterceptor.java
@@ -52,6 +54,7 @@ D:\CMS\backend\src\main\java\com\cms\service\EnrollmentService.java
 D:\CMS\backend\src\main\java\com\cms\model\CourseView.java
 D:\CMS\backend\src\main\java\com\cms\model\ChatType.java
 D:\CMS\backend\src\main\java\com\cms\service\GradeService.java
+D:\CMS\backend\src\main\java\com\cms\model\Certificate.java
 D:\CMS\backend\src\main\java\com\cms\model\UserRole.java
 D:\CMS\backend\src\main\java\com\cms\repository\UserRepository.java
 D:\CMS\backend\src\main\java\com\cms\model\Grade.java
@@ -67,6 +70,7 @@ D:\CMS\backend\src\main\java\com\cms\repository\QuizRepository.java
 D:\CMS\backend\src\main\java\com\cms\config\CorsConfig.java
 D:\CMS\backend\src\main\java\com\cms\service\DashboardService.java
 D:\CMS\backend\src\main\java\com\cms\model\PasswordResetToken.java
+D:\CMS\backend\src\main\java\com\cms\repository\CertificateRepository.java
 D:\CMS\backend\src\main\java\com\cms\dto\DashboardResponse.java
 D:\CMS\backend\src\main\java\com\cms\dto\EnrollmentResponse.java
 D:\CMS\backend\src\main\java\com\cms\model\ChatMessage.java
@@ -92,6 +96,7 @@ D:\CMS\backend\src\main\java\com\cms\service\QuizService.java
 D:\CMS\backend\src\main\java\com\cms\dto\QuizResponse.java
 D:\CMS\backend\src\main\java\com\cms\repository\GradeRepository.java
 D:\CMS\backend\src\main\java\com\cms\config\WebSocketConfig.java
+D:\CMS\backend\src\main\java\com\cms\service\impl\CertificateServiceImpl.java
 D:\CMS\backend\src\main\java\com\cms\model\PaymentMethod.java
 D:\CMS\backend\src\main\java\com\cms\dto\ForgotPasswordRequest.java
 D:\CMS\backend\src\main\java\com\cms\dto\ChatConversationResponse.java
@@ -100,6 +105,7 @@ D:\CMS\backend\src\main\java\com\cms\service\CourseService.java
 D:\CMS\backend\src\main\java\com\cms\controller\PaymentController.java
 D:\CMS\backend\src\main\java\com\cms\service\impl\EnrollmentServiceImpl.java
 D:\CMS\backend\src\main\java\com\cms\service\impl\AuthEmailTemplateService.java
+D:\CMS\backend\src\main\java\com\cms\dto\CertificateResponse.java
 D:\CMS\backend\src\main\java\com\cms\repository\ChatMessageRepository.java
 D:\CMS\backend\src\main\java\com\cms\security\StompPrincipal.java
 D:\CMS\backend\src\main\java\com\cms\service\AiAssistantService.java

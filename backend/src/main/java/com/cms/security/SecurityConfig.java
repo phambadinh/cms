@@ -106,6 +106,14 @@ public class SecurityConfig {
                                 "/api/courses/public/**"
                         ).permitAll()
 
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/certificates/*/viewable",
+                                "/api/certificates/*/verify",
+                                "/api/certificates/*/verification-status",
+                                "/api/certificates/*/verification-history"
+                        ).permitAll()
+
                         .anyRequest().authenticated()
                 )
 

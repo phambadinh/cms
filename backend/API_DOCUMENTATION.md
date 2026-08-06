@@ -437,6 +437,43 @@ Authorization: Bearer {token}
 Response: LessonProgress
 ```
 
+### Certificate (Chứng Chỉ)
+
+#### Cấp chứng chỉ
+```
+POST /api/certificates/issue?courseId=course_id
+Authorization: Bearer {token}
+```
+- `STUDENT`: cấp cho chính mình khi đã hoàn thành khóa học
+- `MENTOR`, `ADMIN`: cấp cho student bằng cách thêm `userId`
+
+#### Chứng chỉ của tôi
+```
+GET /api/certificates/my-certificates
+Authorization: Bearer {token}
+```
+
+#### Xem chi tiết / xác minh
+```
+GET /api/certificates/{certificateId}
+GET /api/certificates/{certificateId}/verify
+GET /api/certificates/{certificateId}/verification-status
+GET /api/certificates/{certificateId}/verification-history
+GET /api/certificates/{certificateId}/viewable
+```
+
+#### Chứng chỉ theo user hoặc khóa học
+```
+GET /api/certificates/user/{userId}/course/{courseId}
+GET /api/certificates/course/{courseId}
+```
+
+#### Thu hồi chứng chỉ
+```
+POST /api/certificates/{certificateId}/revoke?reason=... 
+Authorization: Bearer {token}
+```
+
 ## Quy Trình Học Tập
 
 ### 1. Đăng Ký Tài Khoản
@@ -507,6 +544,9 @@ GET /api/enrollments/course/{courseId}
 - `POST /api/lessons/course/{courseId}`
 - `POST /api/quizzes`
 - `POST /api/quizzes/{quizId}/questions`
+- `POST /api/certificates/issue`
+- `POST /api/certificates/{certificateId}/revoke`
+- `GET /api/certificates/course/{courseId}`
 
 ## Chạy Ứng Dụng
 

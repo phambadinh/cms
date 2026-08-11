@@ -635,3 +635,19 @@ export const getViewableCertificate = (certificateId) => {
   return apiClient.get(`/certificates/${certificateId}/viewable`);
 };
 export default apiClient;
+
+// ============ WISHLIST SERVICES ============
+
+/**
+ * Lấy danh sách khóa học trong wishlist của user hiện tại (STUDENT)
+ */
+export const getMyWishlist = () => {
+  return apiClient.get("/wishlist/my");
+};
+
+/**
+ * Thêm hoặc bỏ khóa học khỏi wishlist (toggle) (STUDENT)
+ */
+export const toggleWishlist = (courseId) => {
+  return apiClient.post(`/wishlist/${courseId}/toggle`);
+};

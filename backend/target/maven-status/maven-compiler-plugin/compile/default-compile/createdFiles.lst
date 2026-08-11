@@ -1,6 +1,7 @@
 com\cms\repository\GradeRepository.class
 com\cms\model\PasswordResetToken.class
 com\cms\controller\EnrollmentController.class
+com\cms\dto\CertificateResponse.class
 com\cms\model\Course.class
 com\cms\service\PaymentService.class
 com\cms\service\impl\UserServiceImpl.class
@@ -8,6 +9,7 @@ com\cms\service\LessonProgressService.class
 com\cms\repository\CourseViewRepository.class
 com\cms\model\Grade.class
 com\cms\model\CourseType.class
+com\cms\service\CertificateService.class
 com\cms\service\GradeService.class
 com\cms\service\impl\CourseServiceImpl.class
 com\cms\dto\LoginRequest.class
@@ -24,6 +26,7 @@ com\cms\dto\DashboardResponse$MentorItem.class
 com\cms\dto\UserResponse.class
 com\cms\dto\ResetPasswordRequest.class
 com\cms\controller\DashboardController.class
+com\cms\config\WebSocketConfig$1.class
 com\cms\exception\GlobalExceptionHandler.class
 com\cms\repository\EnrollmentRepository.class
 com\cms\service\CourseService.class
@@ -33,6 +36,7 @@ com\cms\dto\GradeRequest.class
 com\cms\dto\DashboardResponse$CourseItem.class
 com\cms\repository\QuestionRepository.class
 com\cms\controller\ChatWebSocketController.class
+com\cms\dto\PaymentCompleteRequest.class
 com\cms\controller\GradeController.class
 com\cms\dto\QuestionRequest.class
 com\cms\model\LessonProgress.class
@@ -54,6 +58,7 @@ com\cms\repository\PasswordResetTokenRepository.class
 com\cms\dto\EnrollmentRequest.class
 com\cms\Application.class
 com\cms\controller\LessonController.class
+com\cms\dto\BlogPostResponse.class
 com\cms\dto\PaymentInitiateRequest.class
 com\cms\dto\GradeResponse.class
 com\cms\model\QuizAttempt.class
@@ -63,6 +68,7 @@ com\cms\model\PaymentMethod.class
 com\cms\service\DashboardService.class
 com\cms\config\CorsConfig.class
 com\cms\repository\EmailVerificationTokenRepository.class
+com\cms\service\impl\CertificateServiceImpl.class
 com\cms\controller\PaymentController.class
 com\cms\model\ChatMessage.class
 com\cms\service\impl\EmailVerificationService.class
@@ -71,6 +77,7 @@ com\cms\dto\CourseRequest.class
 com\cms\dto\LoginResponse.class
 com\cms\repository\CourseRepository.class
 com\cms\service\AutoReplyService.class
+com\cms\config\WebSocketConfig.class
 com\cms\service\impl\EnrollmentServiceImpl.class
 com\cms\service\EnrollmentService.class
 com\cms\security\JwtAuthFilter.class
@@ -94,15 +101,18 @@ com\cms\service\impl\PasswordResetService.class
 com\cms\dto\PaymentInitiateResponse.class
 com\cms\model\User.class
 com\cms\dto\LessonProgressResponse.class
+com\cms\repository\CertificateRepository.class
 com\cms\service\impl\GradeServiceImpl.class
 com\cms\model\ChatType.class
 com\cms\service\UserService.class
 com\cms\security\JwtUtil.class
+com\cms\model\Certificate.class
 com\cms\model\EmailVerificationToken.class
 com\cms\model\Question.class
 com\cms\controller\UserController.class
 com\cms\dto\DashboardResponse$InsightChart.class
 com\cms\dto\DashboardResponse$EnrollmentItem.class
+com\cms\controller\CertificateController.class
 com\cms\model\Lesson.class
 com\cms\repository\ChatMessageRepository.class
 com\cms\security\JwtHandshakeInterceptor.class

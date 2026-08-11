@@ -2,6 +2,7 @@ D:\CMS\backend\src\main\java\com\cms\model\CourseType.java
 D:\CMS\backend\src\main\java\com\cms\model\LessonProgress.java
 D:\CMS\backend\src\main\java\com\cms\repository\LessonRepository.java
 D:\CMS\backend\src\main\java\com\cms\repository\LessonProgressRepository.java
+D:\CMS\backend\src\main\java\com\cms\service\impl\BlogPostServiceImpl.java
 D:\CMS\backend\src\main\java\com\cms\model\Question.java
 D:\CMS\backend\src\main\java\com\cms\repository\EmailVerificationTokenRepository.java
 D:\CMS\backend\src\main\java\com\cms\security\JwtAuthFilter.java
@@ -33,16 +34,20 @@ D:\CMS\backend\src\main\java\com\cms\model\User.java
 D:\CMS\backend\src\main\java\com\cms\service\QuestionService.java
 D:\CMS\backend\src\main\java\com\cms\security\SecurityConfig.java
 D:\CMS\backend\src\main\java\com\cms\service\AutoReplyService.java
+D:\CMS\backend\src\main\java\com\cms\dto\BlogPostRequest.java
 D:\CMS\backend\src\main\java\com\cms\controller\QuizAttemptController.java
 D:\CMS\backend\src\main\java\com\cms\dto\QuizAttemptResponse.java
+D:\CMS\backend\src\main\java\com\cms\service\BlogPostService.java
 D:\CMS\backend\src\main\java\com\cms\service\UserService.java
 D:\CMS\backend\src\main\java\com\cms\controller\CourseController.java
 D:\CMS\backend\src\main\java\com\cms\controller\LessonController.java
 D:\CMS\backend\src\main\java\com\cms\dto\ResetPasswordRequest.java
+D:\CMS\backend\src\main\java\com\cms\repository\BlogPostRepository.java
 D:\CMS\backend\src\main\java\com\cms\controller\CertificateController.java
 D:\CMS\backend\src\main\java\com\cms\dto\ChatMessageResponse.java
 D:\CMS\backend\src\main\java\com\cms\dto\PaymentInitiateRequest.java
 D:\CMS\backend\src\main\java\com\cms\security\JwtHandshakeInterceptor.java
+D:\CMS\backend\src\main\java\com\cms\controller\BlogPostController.java
 D:\CMS\backend\src\main\java\com\cms\controller\EnrollmentController.java
 D:\CMS\backend\src\main\java\com\cms\dto\QuestionResponse.java
 D:\CMS\backend\src\main\java\com\cms\controller\ChatWebSocketController.java
@@ -65,6 +70,7 @@ D:\CMS\backend\src\main\java\com\cms\service\impl\PasswordResetService.java
 D:\CMS\backend\src\main\java\com\cms\controller\QuizController.java
 D:\CMS\backend\src\main\java\com\cms\dto\UserResponse.java
 D:\CMS\backend\src\main\java\com\cms\dto\LessonRequest.java
+D:\CMS\backend\src\main\java\com\cms\model\BlogPost.java
 D:\CMS\backend\src\main\java\com\cms\security\JwtUtil.java
 D:\CMS\backend\src\main\java\com\cms\repository\QuizRepository.java
 D:\CMS\backend\src\main\java\com\cms\config\CorsConfig.java
@@ -103,6 +109,7 @@ D:\CMS\backend\src\main\java\com\cms\dto\ChatConversationResponse.java
 D:\CMS\backend\src\main\java\com\cms\service\LessonService.java
 D:\CMS\backend\src\main\java\com\cms\service\CourseService.java
 D:\CMS\backend\src\main\java\com\cms\controller\PaymentController.java
+D:\CMS\backend\src\main\java\com\cms\dto\BlogPostResponse.java
 D:\CMS\backend\src\main\java\com\cms\service\impl\EnrollmentServiceImpl.java
 D:\CMS\backend\src\main\java\com\cms\service\impl\AuthEmailTemplateService.java
 D:\CMS\backend\src\main\java\com\cms\dto\CertificateResponse.java

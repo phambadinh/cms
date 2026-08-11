@@ -19,8 +19,8 @@
   cursor: pointer;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, var(--cms-blue-700, #2563eb), var(--cms-blue-500, #60a5fa));
-  color: #fff;
+  background: linear-gradient(135deg, var(--cms-blue-700, #0400ff), var(--cms-blue-500, #1900ff));
+  color: #f8f8f8;
   box-shadow: var(--cms-shadow-lg, 0 25px 50px rgba(15, 23, 42, 0.12));
   transition: transform 0.2s ease;
 }
@@ -63,7 +63,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 18px;
-  background: linear-gradient(135deg, var(--cms-blue-700, #2563eb), var(--cms-blue-500, #60a5fa));
+  background: linear-gradient(135deg, var(--cms-blue-700, #0051ff), var(--cms-blue-500, #9dff00));
   color: #fff;
 }
 

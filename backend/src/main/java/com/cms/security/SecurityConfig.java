@@ -103,7 +103,8 @@ public class SecurityConfig {
 
                         .requestMatchers(
                                 HttpMethod.GET,
-                                "/api/courses/public/**"
+                                "/api/courses/public/**",
+                                "/api/blog-posts/public/**"
                         ).permitAll()
 
                         .requestMatchers(

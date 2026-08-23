@@ -1,12 +1,21 @@
+/* cookies.css — aligned with admin-layout.css */
+
+.cookies-page,
+.cookies-page * {
+  box-sizing: border-box;
+}
+
 .cookies-page {
   min-height: 100vh;
-  background: #f8fafc;
+  background: var(--cds-white, #ffffff);
+  color: var(--cds-text, #0f1114);
+  font-family: "Source Sans 3", "Source Sans Pro", "Noto Sans", sans-serif;
 }
 
 .cookies-hero {
   padding: 72px 24px;
-  background: linear-gradient(90deg, #0f4c81, #2563eb);
-  color: #fff;
+  background: var(--cds-blue, #0056d2);
+  color: var(--cds-white, #ffffff);
   text-align: center;
 }
 
@@ -16,62 +25,76 @@
 }
 
 .cookies-hero-title {
-  font-size: 44px;
-  margin: 0 0 16px;
-  font-weight: 800;
+  margin: 0 0 12px;
+  font-size: clamp(36px, 5vw, 44px);
+  font-weight: 700;
+  line-height: 1.15;
 }
 
 .cookies-hero-subtitle {
-  font-size: 18px;
-  line-height: 1.7;
   max-width: 820px;
   margin: 0 auto;
-  opacity: 0.95;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 18px;
+  line-height: 1.6;
 }
 
 .cookies-section {
-  padding: 64px 24px;
+  padding: 56px 24px;
 }
 
 .cookies-container {
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
 }
 
 .cookies-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 28px;
-  box-shadow: 0 8px 24px rgba(15, 76, 129, 0.08);
+  padding: 24px;
+  background: var(--cds-white, #ffffff);
+  border: 1px solid var(--cds-border, #dae1ed);
+  border-radius: var(--cds-radius-md, 12px);
+  box-shadow: none;
+  transition: border-color 0.15s ease;
+}
+
+.cookies-card:hover {
+  border-color: var(--cds-blue, #0056d2);
 }
 
 .cookies-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  background: #eaf2ff;
-  color: #0f4c81;
   display: flex;
+  width: 48px;
+  height: 48px;
   align-items: center;
   justify-content: center;
   margin-bottom: 16px;
+  border-radius: var(--cds-radius-sm, 8px);
+  background: var(--cds-surface, #e8eef7);
+  color: var(--cds-blue, #0056d2);
 }
 
 .cookies-card h3 {
   margin: 0 0 12px;
-  color: #0f172a;
+  color: var(--cds-text, #0f1114);
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .cookies-card p {
   margin: 0;
-  color: #475569;
+  color: var(--cds-text-muted, #5b6780);
   line-height: 1.7;
 }
 
 @media (max-width: 768px) {
+  .cookies-hero,
+  .cookies-section {
+    padding: 48px 16px;
+  }
+
   .cookies-container {
     grid-template-columns: 1fr;
   }

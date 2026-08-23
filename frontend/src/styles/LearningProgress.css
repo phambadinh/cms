@@ -1,22 +1,32 @@
+/* learning-progress.css — aligned with admin-layout.css */
+
+.learning-progress-page,
+.learning-progress-page * {
+  box-sizing: border-box;
+}
+
 .learning-progress-page {
-  padding: 32px;
-  background: #f8fbff;
   min-height: 100vh;
+  padding: 24px;
+  background: var(--cds-white, #ffffff);
+  color: var(--cds-text, #0f1114);
+  font-family: "Source Sans 3", "Source Sans Pro", "Noto Sans", sans-serif;
 }
 
 .progress-hero {
-  background: linear-gradient(135deg, #0056d2, #2575fc);
-  color: #ffffff;
-  padding: 32px;
-  border-radius: 20px;
-  margin-bottom: 28px;
-  box-shadow: 0 10px 30px rgba(0, 86, 210, 0.15);
+  margin-bottom: 24px;
+  padding: 28px;
+  background: var(--cds-blue, #0056d2);
+  border: 1px solid var(--cds-blue-pressed, #0048b0);
+  border-radius: var(--cds-radius-lg, 16px);
+  color: var(--cds-white, #ffffff);
+  box-shadow: none;
 }
 
-.hero-title {
+.progress-hero .hero-title {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .progress-hero h1 {
@@ -26,214 +36,218 @@
 }
 
 .progress-hero p {
-  font-size: 16px;
-  opacity: 0.95;
   max-width: 650px;
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 16px;
   line-height: 1.6;
-  margin-top: 10px;
 }
 
-.progress-stats {
+/* Stat cards — scoped để không đè grades.css/certificate.css */
+.learning-progress-page .progress-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  margin-bottom: 32px;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
-.stat-card {
-  background: #ffffff;
-  padding: 24px;
-  border-radius: 18px;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-  border: 1px solid #eef2f7;
-  transition: all 0.25s ease;
+.learning-progress-page .stat-card {
+  padding: 20px;
+  background: var(--cds-white, #ffffff);
+  border: 1px solid var(--cds-border, #dae1ed);
+  border-radius: var(--cds-radius-md, 12px);
+  box-shadow: none;
   text-align: center;
+  transition: border-color 0.15s ease;
 }
 
-.stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.1);
+.learning-progress-page .stat-card:hover {
+  transform: none;
+  border-color: var(--cds-blue, #0056d2);
+  box-shadow: none;
 }
 
-.stat-card svg {
-  color: #0056d2;
-  margin-bottom: 14px;
+.learning-progress-page .stat-card svg {
+  margin-bottom: 12px;
+  color: var(--cds-blue, #0056d2);
 }
 
-.stat-card h3 {
+.learning-progress-page .stat-card h3 {
+  margin: 0 0 8px;
+  color: var(--cds-text-muted, #5b6780);
   font-size: 15px;
-  color: #64748b;
-  margin-bottom: 8px;
   font-weight: 600;
 }
 
-.stat-card .value {
+.learning-progress-page .stat-card .value {
+  color: var(--cds-text, #0f1114);
   font-size: 28px;
   font-weight: 700;
-  color: #0f172a;
 }
 
+/* Course progress card */
 .progress-course-card {
-  background: #ffffff;
-  border-radius: 20px;
+  margin-bottom: 16px;
   padding: 24px;
-  margin-bottom: 24px;
-  border: 1px solid #edf2f7;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
-  transition: all 0.25s ease;
+  background: var(--cds-white, #ffffff);
+  border: 1px solid var(--cds-border, #dae1ed);
+  border-radius: var(--cds-radius-lg, 16px);
+  box-shadow: none;
+  transition: border-color 0.15s ease;
 }
 
 .progress-course-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.1);
+  transform: none;
+  border-color: var(--cds-blue, #0056d2);
+  box-shadow: none;
 }
 
 .course-header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
   gap: 16px;
-  margin-bottom: 20px;
-}
-
-.section-title,
-.my-course-title,
-.hero-title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.section-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #0f172a;
-  margin: 0;
-}
-
-.my-course-title {
-  margin: 40px 0 20px;
-  font-size: 32px;
-  font-weight: 800;
-  color: #0f172a;
+  margin-bottom: 18px;
 }
 
 .course-header h2 {
   margin: 0;
-  font-size: 28px;
-  font-weight: 800;
-  color: #0f172a;
+  color: var(--cds-text, #0f1114);
+  font-size: 26px;
+  font-weight: 700;
 }
 
 .course-header span {
-  padding: 10px 20px;
+  padding: 8px 16px;
   border-radius: 999px;
-  color: #ffffff;
+  background: var(--cds-blue, #0056d2);
+  color: var(--cds-white, #ffffff);
   font-size: 14px;
   font-weight: 700;
-  background: linear-gradient(135deg, #0056d2, #4f8cff);
   white-space: nowrap;
 }
 
 .course-meta {
   display: flex;
-  gap: 20px;
   flex-wrap: wrap;
-  margin-top: 18px;
+  gap: 16px;
+  margin-top: 16px;
 }
 
 .meta-item {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #64748b;
-  font-weight: 600;
+  color: var(--cds-text-muted, #5b6780);
   font-size: 14px;
+  font-weight: 600;
 }
 
 .meta-item svg {
-  color: #0056d2;
+  color: var(--cds-blue, #0056d2);
 }
 
-.progress-bar {
-  width: 100%;
+.learning-progress-page .progress-bar {
   height: 10px;
-  background: #e2e8f0;
-  border-radius: 999px;
   overflow: hidden;
-  margin: 18px 0 16px;
+  margin: 16px 0 14px;
+  background: var(--cds-surface, #e8eef7);
+  border-radius: 999px;
 }
 
-.progress-fill {
+.learning-progress-page .progress-fill {
   height: 100%;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #0056d2, #4f8cff);
-  box-shadow: 0 0 14px rgba(37, 99, 235, 0.35);
+  border-radius: inherit;
+  background: var(--cds-blue, #0056d2);
+  box-shadow: none;
   transition: width 0.4s ease;
 }
 
 .progress-course-card p {
-  color: #64748b;
-  line-height: 1.7;
   margin: 12px 0 0;
+  color: var(--cds-text-muted, #5b6780);
   font-size: 15px;
+  line-height: 1.7;
 }
 
 .progress-course-card strong {
-  color: #0056d2;
+  color: var(--cds-blue, #0056d2);
 }
 
-.grades-tip {
-  margin-top: 32px;
-  background: #ffffff;
-  border: 1px solid #eef2f7;
-  border-radius: 20px;
-  padding: 22px 24px;
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
-}
-
-.grades-tip-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  background: #eff6ff;
-  color: #0056d2;
+/* Titles — scoped để tránh trùng .section-title của contact.css/certificate.css */
+.learning-progress-page .section-title {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.grades-tip h3 {
-  font-size: 18px;
+  gap: 10px;
+  margin: 0;
+  color: var(--cds-text, #0f1114);
+  font-size: 22px;
   font-weight: 700;
-  color: #0f172a;
-  margin-bottom: 6px;
 }
 
-.grades-tip p {
-  font-size: 15px;
-  color: #64748b;
-  line-height: 1.6;
+.learning-progress-page .my-course-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 32px 0 16px;
+  color: var(--cds-text, #0f1114);
+  font-size: 28px;
+  font-weight: 700;
 }
 
 .learning-progress-page > h2 {
-  margin: 40px 0 22px;
-  font-size: 24px;
+  margin: 32px 0 18px;
+  color: var(--cds-text, #0f1114);
+  font-size: 22px;
   font-weight: 700;
-  color: #0f172a;
 }
 
 .learning-progress-page > h2:first-child {
   text-align: center;
 }
 
+/* Tip box — scoped để tránh trùng .grades-tip của grades.css */
+.learning-progress-page .grades-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--cds-white, #ffffff);
+  border: 1px solid var(--cds-border, #dae1ed);
+  border-radius: var(--cds-radius-md, 12px);
+  box-shadow: none;
+}
+
+.learning-progress-page .grades-tip-icon {
+  display: flex;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  background: var(--cds-surface, #e8eef7);
+  border-radius: var(--cds-radius-sm, 8px);
+  color: var(--cds-blue, #0056d2);
+}
+
+.learning-progress-page .grades-tip h3 {
+  margin: 0 0 6px;
+  color: var(--cds-text, #0f1114);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.learning-progress-page .grades-tip p {
+  margin: 0;
+  color: var(--cds-text-muted, #5b6780);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
 @media (max-width: 768px) {
   .learning-progress-page {
-    padding: 20px;
+    padding: 16px;
   }
 
   .progress-hero {
@@ -253,11 +267,11 @@
     font-size: 22px;
   }
 
-  .my-course-title {
-    font-size: 28px;
+  .learning-progress-page .my-course-title {
+    font-size: 26px;
   }
 
-  .grades-tip {
+  .learning-progress-page .grades-tip {
     flex-direction: column;
   }
 }

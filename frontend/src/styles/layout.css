@@ -1,187 +1,125 @@
-/* =========================
-LAYOUT
-========================= */
+.layout,
+.layout * {
+  box-sizing: border-box;
+}
 
 .layout {
-min-height: 100vh;
-
-display: flex;
-flex-direction: column;
-
-background:
-linear-gradient(
-135deg,
-#f8fafc,
-#eff6ff
-);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--cds-white, #ffffff);
+  color: var(--cds-text, #0f1114);
+  font-family: "Source Sans 3", "Source Sans Pro", "Noto Sans", sans-serif;
 }
 
 .layout-body {
-display: flex;
-flex: 1;
+  display: flex;
+  flex: 1;
 }
 
-/* =========================
-MAIN CONTENT
-========================= */
-
+/* Main content */
 .layout-main {
-flex: 1;
-
-padding: 30px;
-
-overflow-y: auto;
+  flex: 1;
+  min-width: 0;
+  padding: 24px;
+  overflow-y: auto;
+  background: var(--cds-white, #ffffff);
 }
 
-/* =========================
-SIDEBAR
-========================= */
-
+/* Sidebar */
 .sidebar {
-width: 260px;
-
-background:
-linear-gradient(
-180deg,
-#ffffff 0%,
-#f8fbff 100%
-);
-
-color: #0f172a;
-
-border-right: 1px solid #e2e8f0;
-
-box-shadow:
-10px 0 30px rgba(15,23,42,.06);
-
-position: sticky;
-top: 0;
-
-height: 100vh;
-
-overflow-y: auto;
-
-transition: .3s;
+  position: sticky;
+  top: 0;
+  width: 260px;
+  height: 100vh;
+  flex-shrink: 0;
+  overflow-y: auto;
+  background: var(--cds-white, #ffffff);
+  color: var(--cds-text, #0f1114);
+  border-right: 1px solid var(--cds-border, #dae1ed);
+  box-shadow: none;
+  transition: width 0.15s ease;
 }
-
-/* =========================
-SIDEBAR HEADER
-========================= */
 
 .sidebar-header {
-padding: 24px;
-
-border-bottom: 1px solid #e2e8f0;
+  padding: 20px;
+  border-bottom: 1px solid var(--cds-border, #dae1ed);
 }
 
 .sidebar-logo {
-font-size: 24px;
-font-weight: 800;
-
-color: #2563eb;
+  color: var(--cds-blue, #0056d2);
+  font-size: 22px;
+  font-weight: 700;
 }
 
-/* =========================
-MENU
-========================= */
-
+/* Menu */
 .sidebar-menu {
-padding: 16px;
+  padding: 12px;
 }
 
 .sidebar-menu-item {
-display: flex;
-align-items: center;
-
-gap: 12px;
-
-padding: 14px 16px;
-
-border-radius: 14px;
-
-color: #475569;
-
-text-decoration: none;
-
-font-weight: 600;
-
-transition: .25s;
-
-margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: var(--cds-radius-sm, 8px);
+  color: var(--cds-text, #0f1114);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .sidebar-menu-item:hover {
-background: #eff6ff;
-
-color: #2563eb;
+  background: var(--cds-surface, #e8eef7);
+  color: var(--cds-blue, #0056d2);
 }
 
 .sidebar-menu-item.active {
-background:
-linear-gradient(
-135deg,
-#2563eb,
-#3b82f6
-);
-
-color: white;
-
-box-shadow:
-0 10px 20px rgba(37,99,235,.2);
+  background: var(--cds-blue, #0056d2);
+  color: var(--cds-white, #ffffff);
+  box-shadow: none;
 }
 
-/* =========================
-USER BOX
-========================= */
-
+/* User box */
 .sidebar-user {
-margin: 20px 16px;
-
-padding: 16px;
-
-border-radius: 18px;
-
-background: #eff6ff;
-
-border: 1px solid #bfdbfe;
+  margin: 16px 12px;
+  padding: 14px;
+  background: var(--cds-surface, #e8eef7);
+  border: 1px solid var(--cds-border, #dae1ed);
+  border-radius: var(--cds-radius-md, 12px);
 }
 
 .sidebar-user-name {
-font-weight: 700;
-color: #0f172a;
+  color: var(--cds-text, #0f1114);
+  font-weight: 700;
 }
 
 .sidebar-user-role {
-font-size: 13px;
-color: #64748b;
+  color: var(--cds-text-muted, #5b6780);
+  font-size: 13px;
 }
 
-/* =========================
-RESPONSIVE
-========================= */
-
+/* Responsive */
 @media (max-width: 992px) {
-.sidebar {
-width: 220px;
-}
+  .sidebar {
+    width: 220px;
+  }
 
-.layout-main {
-padding: 20px;
-}
+  .layout-main {
+    padding: 16px;
+  }
 }
 
 @media (max-width: 768px) {
-.layout-body {
-flex-direction: column;
-}
+  .layout-body {
+    flex-direction: column;
+  }
 
-.sidebar {
-width: 100%;
-height: auto;
-
-
-position: relative;
-
-
-}
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
 }

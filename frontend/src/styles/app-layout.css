@@ -1,24 +1,32 @@
+/* app-layout.css — aligned with admin-layout.css */
+
+.app-layout-shell,
+.app-layout-shell * {
+  box-sizing: border-box;
+}
+
 .app-layout-shell {
   min-height: 100vh;
   display: flex;
-  background:
-    radial-gradient(circle at top right, rgba(37, 99, 235, 0.06), transparent 25%),
-    #f6fbff;
+  background: var(--cds-white, #ffffff);
+  color: var(--cds-text, #0f1114);
+  font-family: "Source Sans 3", "Source Sans Pro", "Noto Sans", sans-serif;
 }
 
 .app-layout-body {
   flex: 1;
   min-width: 0;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 .app-layout-main {
   flex: 1;
   width: 100%;
   min-height: 0;
-  padding: 28px 32px 40px;
+  padding: 24px;
+  background: var(--cds-white, #ffffff);
 }
 
 @media (max-width: 992px) {
@@ -27,6 +35,6 @@
   }
 
   .app-layout-main {
-    padding: 20px 18px 28px;
+    padding: 16px;
   }
 }

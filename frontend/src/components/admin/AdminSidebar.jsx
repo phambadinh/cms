@@ -1,7 +1,6 @@
-// src/components/admin/AdminSidebar.jsx
+import { NavLink, useNavigate } from "react-router-dom";
+import { authLogout, getAuthUser } from "../../services/api";
 
-import { NavLink } from "react-router-dom";
-import { getAuthUser } from "../../services/api";
 import {
   LayoutDashboard,
   Users,
@@ -71,45 +70,43 @@ const adminItems = [
 ];
 
 function AdminSidebar() {
+  const navigate = useNavigate();
   const user = getAuthUser();
+
+  const displayName =
+    user?.fullName || user?.username || "Administrator";
+
+  const avatarInitial = displayName.charAt(0).toUpperCase();
+
+  const handleLogout = () => {
+    authLogout();
+    navigate("/login", { replace: true });
+  };
+
+  const handleSettings = () => {
+    navigate("/profile");
+  };
 
   return (
     <aside className="admin-sidebar">
-      {/* Logo */}
-
       <div className="admin-sidebar-brand">
-        <div className="admin-logo-circle">
-          CMS
-        </div>
+        <div className="admin-sidebar-logo">CMS</div>
 
         <div>
-          <h3>Learning Admin</h3>
-          <p>Management System</p>
+          <div className="admin-sidebar-title">
+            Dashboard Admin
+          </div>
+
+          <div className="admin-sidebar-subtitle">
+            Course Management System
+          </div>
         </div>
       </div>
 
-      {/* User */}
-
-      <div className="admin-user-card">
-        <div className="admin-avatar">
-          {(user?.fullName || user?.username || "A")
-            .charAt(0)
-            .toUpperCase()}
-        </div>
-
-        <div>
-          <h4>
-            {user?.fullName ||
-              user?.username}
-          </h4>
-
-          <span>Administrator</span>
-        </div>
-      </div>
-
-      {/* Menu */}
-
-      <nav className="admin-sidebar-nav">
+      <nav
+        className="admin-sidebar-nav"
+        aria-label="Admin navigation"
+      >
         {adminItems.map((item) => {
           const Icon = item.icon;
 
@@ -117,44 +114,40 @@ function AdminSidebar() {
             <NavLink
               key={item.to}
               to={item.to}
-              end={
-                item.to ===
-                "/admin/dashboard"
-              }
+              end={item.to === "/admin/dashboard"}
               className={({ isActive }) =>
                 isActive
                   ? "admin-sidebar-link active"
                   : "admin-sidebar-link"
               }
             >
-              <Icon size={20} />
-
+              <Icon size={18} strokeWidth={2} />
               <span>{item.label}</span>
             </NavLink>
           );
         })}
       </nav>
 
-      {/* Bottom */}
-
       <div className="admin-sidebar-footer">
-
-        <button className="admin-sidebar-action">
-
-          <Settings size={18} />
-
+        <button
+          type="button"
+          className="admin-sidebar-action"
+          onClick={handleSettings}
+          aria-label="Open settings"
+        >
+          <Settings size={18} strokeWidth={2} />
           <span>Settings</span>
-
         </button>
 
-        <button className="admin-sidebar-action logout">
-
-          <LogOut size={18} />
-
+        <button
+          type="button"
+          className="admin-sidebar-action logout"
+          onClick={handleLogout}
+          aria-label="Log out"
+        >
+          <LogOut size={18} strokeWidth={2} />
           <span>Logout</span>
-
         </button>
-
       </div>
     </aside>
   );

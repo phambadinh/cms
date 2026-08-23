@@ -7,3 +7,4 @@ export { default as AdminDashboardView } from "./AdminDashboardView";
 export { default as AdminCrudPage } from "./AdminCrudPage";
 export { default as AdminSidebar } from "./AdminSidebar";
 export { default as AdminHeader } from "./AdminHeader";
+export { default as AdminCertificatesPage } from "./AdminCertificatesPage";

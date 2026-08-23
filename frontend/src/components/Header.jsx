@@ -197,12 +197,6 @@ function Header() {
                         >
                           <Icon size={16} strokeWidth={2} />
                           <span>{item.label}</span>
-                          {item.featured && (
-                            <span className="app-account-badge">
-                              <Sparkles size={12} strokeWidth={2} />
-                              Nổi bật
-                            </span>
-                          )}
                         </button>
                       );
                     })}

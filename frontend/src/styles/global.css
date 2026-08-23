@@ -1,209 +1,173 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  }
+/* index.css / global.css — core design tokens aligned with admin-layout.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap");
 
 :root {
-/* ===== Primary ===== */
---cms-blue-900: #1e3a8a;
---cms-blue-800: #1d4ed8;
---cms-blue-700: #2563eb;
---cms-blue-600: #3b82f6;
---cms-blue-500: #60a5fa;
+  /* Coursera-inspired primary */
+  --cds-blue: #0056d2;
+  --cds-blue-pressed: #0048b0;
 
-/* ===== Background ===== */
---cms-blue-100: #dbeafe;
---cms-blue-50: #f8fbff;
+  /* Neutrals */
+  --cds-text: #0f1114;
+  --cds-text-muted: #5b6780;
+  --cds-border: #dae1ed;
+  --cds-surface: #e8eef7;
+  --cds-white: #ffffff;
 
-/* ===== Surface ===== */
---cms-surface: #ffffff;
---cms-surface-hover: #f8fafc;
+  /* Semantic states */
+  --cds-success-bg: #e3f3ea;
+  --cds-success-text: #1a6b3c;
+  --cds-warning-bg: #fdf1dc;
+  --cds-warning-text: #8a5a12;
+  --cds-danger-bg: #fbe9e9;
+  --cds-danger-text: #9c2b2b;
 
-/* ===== Text ===== */
---cms-text: #0f172a;
---cms-muted: #64748b;
+  /* Shared geometry */
+  --cds-radius-sm: 8px;
+  --cds-radius-md: 12px;
+  --cds-radius-lg: 16px;
 
-/* ===== Border ===== */
---cms-border: #e2e8f0;
+  /*
+   * Legacy aliases:
+   * Giúp các component cũ còn đang dùng --cms-* tiếp tục chạy,
+   * nhưng toàn bộ cùng lấy màu từ bộ --cds-* chuẩn mới.
+   */
+  --cms-blue-900: var(--cds-blue-pressed);
+  --cms-blue-800: var(--cds-blue-pressed);
+  --cms-blue-700: var(--cds-blue);
+  --cms-blue-600: var(--cds-blue);
+  --cms-blue-500: var(--cds-blue);
 
-/* ===== Status ===== */
---cms-success: #16a34a;
---cms-danger: #dc2626;
---cms-warning: #f59e0b;
+  --cms-blue-100: var(--cds-surface);
+  --cms-blue-50: var(--cds-surface);
 
-/* ===== Shadow ===== */
---cms-shadow-sm:
-0 4px 10px rgba(15,23,42,.05);
+  --cms-surface: var(--cds-white);
+  --cms-surface-hover: var(--cds-surface);
 
---cms-shadow:
-0 15px 35px rgba(15,23,42,.08);
+  --cms-text: var(--cds-text);
+  --cms-muted: var(--cds-text-muted);
+  --cms-border: var(--cds-border);
 
---cms-shadow-lg:
-0 25px 50px rgba(15,23,42,.12);
+  --cms-success: var(--cds-success-text);
+  --cms-danger: var(--cds-danger-text);
+  --cms-warning: var(--cds-warning-text);
 
-/* ===== Radius ===== */
---cms-radius-sm: 10px;
---cms-radius: 16px;
---cms-radius-lg: 24px;
+  --cms-shadow-sm: none;
+  --cms-shadow: none;
+  --cms-shadow-lg: none;
+
+  --cms-radius-sm: var(--cds-radius-sm);
+  --cms-radius: var(--cds-radius-md);
+  --cms-radius-lg: var(--cds-radius-lg);
 }
 
-/* =========================
-HTML/BODY
-========================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 html,
 body,
 #root {
-min-height: 100%;
+  min-height: 100%;
 }
 
 html {
-scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-font-family:
-"Inter",
-"Avenir Next",
-"Segoe UI",
-sans-serif;
-
-background:
-radial-gradient(
-circle at top left,
-rgba(37,99,235,.08),
-transparent 30%
-),
-radial-gradient(
-circle at top right,
-rgba(59,130,246,.08),
-transparent 25%
-),
-linear-gradient(
-180deg,
-#f8fbff,
-#f8fafc
-);
-
-color: var(--cms-text);
-
-line-height: 1.6;
-
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  background: var(--cds-white);
+  color: var(--cds-text);
+  font-family: "Source Sans 3", "Source Sans Pro", "Noto Sans", sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* =========================
-SCROLLBAR
-========================= */
-
-::-webkit-scrollbar {
-width: 10px;
-height: 10px;
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }
-
-::-webkit-scrollbar-track {
-background: #f1f5f9;
-}
-
-::-webkit-scrollbar-thumb {
-background: #cbd5e1;
-border-radius: 999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-background: #94a3b8;
-}
-
-/* =========================
-LINKS
-========================= */
-
-a {
-text-decoration: none;
-color: inherit;
-}
-
-/* =========================
-BUTTONS
-========================= */
 
 button {
-font-family: inherit;
+  font-family: inherit;
 }
 
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
-select:focus-visible {
-outline: none;
+select:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(0, 86, 210, 0.25);
+  outline-offset: 2px;
 }
 
-/* =========================
-INPUTS
-========================= */
-
-input,
-textarea,
-select {
-font-family: inherit;
+a {
+  color: inherit;
+  text-decoration: none;
 }
-
-/* =========================
-IMAGES
-========================= */
 
 img {
-max-width: 100%;
-display: block;
+  display: block;
+  max-width: 100%;
 }
-
-/* =========================
-SELECTION
-========================= */
 
 ::selection {
-background:
-rgba(37,99,235,.18);
-
-color: #0f172a;
+  background: rgba(0, 86, 210, 0.18);
+  color: var(--cds-text);
 }
 
-/* =========================
-COMMON UTILITIES
-========================= */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
 
+::-webkit-scrollbar-track {
+  background: var(--cds-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b9c5d6;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8e9db2;
+}
+
+/* Shared utilities */
 .container {
-width: 100%;
-max-width: 1280px;
-margin: 0 auto;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 .card {
-background: white;
-
-border-radius: var(--cms-radius);
-
-border: 1px solid var(--cms-border);
-
-box-shadow: var(--cms-shadow);
+  background: var(--cds-white);
+  border: 1px solid var(--cds-border);
+  border-radius: var(--cds-radius-md);
+  box-shadow: none;
 }
 
 .text-muted {
-color: var(--cms-muted);
+  color: var(--cds-text-muted);
 }
 
 .text-primary {
-color: var(--cms-blue-700);
+  color: var(--cds-blue);
 }
 
 .shadow-hover {
-transition: .3s;
+  transition: border-color 0.15s ease;
 }
 
 .shadow-hover:hover {
-transform: translateY(-4px);
-
-box-shadow: var(--cms-shadow-lg);
+  transform: none;
+  border-color: var(--cds-blue);
+  box-shadow: none;
 }

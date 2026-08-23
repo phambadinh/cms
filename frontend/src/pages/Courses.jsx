@@ -1,180 +1,180 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search } from "lucide-react";
-
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import {
-getPublicCourses,
-enrollCourse,
-getAuthUser,
+  getPublicCourses,
+  enrollCourse,
+  getAuthUser,
 } from "../services/api";
-
 import CourseCard from "../components/course/CourseCard";
-
-import "../styles/layout.css";
 import "../styles/courses.css";
 
 function Courses() {
-const [courses, setCourses] = useState([]);
-const [filteredCourses, setFilteredCourses] = useState([]);
-const [loading, setLoading] = useState(false);
-const [error, setError] = useState("");
-const [searchTerm, setSearchTerm] = useState("");
-const [enrolling, setEnrolling] = useState({});
+  const [courses, setCourses] = useState([]);
+  const [filteredCourses, setFilteredCourses] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [enrolling, setEnrolling] = useState({});
 
-const navigate = useNavigate();
-const user = getAuthUser();
+  const navigate = useNavigate();
 
-useEffect(() => {
-  const fetchCourses = async () => {
-    setLoading(true);
-    setError("");
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const res = await getPublicCourses();
+        const data = res.data || [];
+
+        setCourses(data);
+        setFilteredCourses(data);
+      } catch (err) {
+        console.error("Error fetching courses:", err);
+        setError("Không thể tải danh sách khóa học. Vui lòng thử lại.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+  useEffect(() => {
+    const normalizedSearch = searchTerm.trim().toLowerCase();
+
+    if (!normalizedSearch) {
+      setFilteredCourses(courses);
+      return;
+    }
+
+    setFilteredCourses(
+      courses.filter((course) =>
+        [course.name, course.code, course.category, course.level]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase()
+          .includes(normalizedSearch)
+      )
+    );
+  }, [searchTerm, courses]);
+
+  const handleViewCourse = (courseId) => {
+    navigate(`/courses/${courseId}`);
+  };
+
+  const handleEnroll = async (courseId) => {
+    const user = getAuthUser();
+
+    if (!user) {
+      navigate("/login", {
+        state: { from: `/courses/${courseId}` },
+      });
+      return;
+    }
+
+    setEnrolling((prev) => ({
+      ...prev,
+      [courseId]: true,
+    }));
 
     try {
-      const res = await getPublicCourses();
+      await enrollCourse(courseId);
 
-setCourses(res.data);
-setFilteredCourses(res.data);
-
-      const data = res.data || [];
-
-      setCourses(data);
-      setFilteredCourses(data);
+      alert("Ghi danh khóa học thành công!");
+      navigate(`/courses/${courseId}`);
     } catch (err) {
-      console.error("Error fetching courses:", err);
-      setError("Không thể tải danh sách khóa học. Vui lòng thử lại.");
+      console.error("Error enrolling course:", err);
+
+      alert(
+        err.response?.data?.message ||
+          "Ghi danh thất bại. Vui lòng thử lại."
+      );
     } finally {
-      setLoading(false);
+      setEnrolling((prev) => ({
+        ...prev,
+        [courseId]: false,
+      }));
     }
   };
 
-  fetchCourses();
-}, []);
+  return (
+    <div className="courses-page">
+      <Header />
 
-useEffect(() => {
-const filtered = courses.filter((course) =>
-(course.name || "")
-.toLowerCase()
-.includes(searchTerm.toLowerCase())
-);
+      <main>
+        <section className="courses-hero">
+          <h1>Khóa Học Lập Trình</h1>
+          <p>
+            Chọn từ các khóa học chất lượng cao để phát triển kỹ năng của bạn.
+          </p>
+        </section>
 
+        <section
+          className="courses-filter"
+          aria-label="Tìm kiếm khóa học"
+        >
+          <div className="search-box">
+            <Search size={18} aria-hidden="true" />
 
-setFilteredCourses(filtered);
-
-
-}, [searchTerm, courses]);
-
-const handleViewCourse = (courseId) => {
-navigate(`/courses/${courseId}`);
-};
-
-const handleEnroll = async (courseId) => {
-if (!user) {
-navigate("/login");
-return;
-}
-
-setEnrolling((prev) => ({
-  ...prev,
-  [courseId]: true,
-}));
-
-try {
-  await enrollCourse(courseId);
-
-  alert("Ghi danh khóa học thành công!");
-
-  navigate(`/courses/${courseId}`);
-} catch (err) {
-  console.error(err);
-
-  const errorMessage =
-    err.response?.data?.message ||
-    "Ghi danh thất bại. Vui lòng thử lại.";
-
-  alert(errorMessage);
-} finally {
-  setEnrolling((prev) => ({
-    ...prev,
-    [courseId]: false,
-  }));
-}
-
-};
-
-return ( <div className="layout"> <div className="layout-body"> <main className="layout-main">
-
-      <section className="courses-hero">
-        <h1>Khóa Học Lập Trình</h1>
-        <p>
-          Chọn từ các khóa học chất lượng cao
-        </p>
-      </section>
-
-      <section className="courses-filter">
-        <div className="search-box">
-          <Search size={18} />
-
-          <input
-            type="text"
-            placeholder="Tìm kiếm khóa học..."
-            value={searchTerm}
-            onChange={(e) =>
-              setSearchTerm(e.target.value)
-            }
-          />
-        </div>
-      </section>
-
-      {loading && (
-        <p className="loading-text">
-          Đang tải khóa học...
-        </p>
-      )}
-
-      {error && (
-        <p className="courses-error">
-          {error}
-        </p>
-      )}
-
-      {!loading && (
-        <div className="courses-grid">
-          {filteredCourses.map(
-            (course, index) => (
-              <CourseCard
-                key={
-                  course.id ||
-                  course._id ||
-                  index
-                }
-                course={course}
-                onView={handleViewCourse}
-                onEnroll={handleEnroll}
-                loading={
-                  enrolling[
-                    course.id ||
-                      course._id
-                  ]
-                }
-              />
-            )
-          )}
-        </div>
-      )}
-
-      {!loading &&
-        filteredCourses.length === 0 && (
-          <div className="empty-state">
-            Chưa có khóa học nào.
+            <input
+              type="search"
+              placeholder="Tìm kiếm khóa học..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              aria-label="Tìm kiếm khóa học"
+            />
           </div>
+        </section>
+
+        {loading && (
+          <p className="loading-text">
+            Đang tải khóa học...
+          </p>
         )}
 
-    </main>
-  </div>
-</div>
+        {error && (
+          <p className="courses-error">
+            {error}
+          </p>
+        )}
 
+        {!loading && !error && filteredCourses.length > 0 && (
+          <section
+            className="courses-grid"
+            aria-label="Danh sách khóa học"
+          >
+            {filteredCourses.map((course, index) => {
+              const courseId = course.id || course._id;
 
-);
+              return (
+                <CourseCard
+                  key={courseId || index}
+                  course={course}
+                  onView={handleViewCourse}
+                  onEnroll={handleEnroll}
+                  loading={Boolean(enrolling[courseId])}
+                />
+              );
+            })}
+          </section>
+        )}
+
+        {!loading && !error && filteredCourses.length === 0 && (
+          <div className="empty-state">
+            {searchTerm
+              ? "Không tìm thấy khóa học phù hợp."
+              : "Chưa có khóa học nào."}
+          </div>
+        )}
+      </main>
+
+      <Footer />
+    </div>
+  );
 }
 
 export default Courses;

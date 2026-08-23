@@ -28,6 +28,8 @@ function Sidebar() {
           { to: "/admin/teachers", label: "Giảng viên", icon: UserCog },
           { to: "/admin/grades", label: "Điểm số", icon: ClipboardList },
           { to: "/admin/progress", label: "Tiến độ", icon: TrendingUp },
+          { to: "/admin/feedbacks", label: "Phản hồi", icon: User },
+          { to: "/admin/certificates", label: "Chứng chỉ", icon: Award },
         ]
       : role === "MENTOR"
       ? [

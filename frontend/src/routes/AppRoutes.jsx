@@ -19,12 +19,14 @@ import ProtectedRoute from "./ProtectedRoute";
 import RoleRoute from "./RoleRoute";
 import EnrollmentRoute from "./EnrollmentRoute";
 import { getAuthUser } from "../services/api";
+
 import {
   AdminDashboard,
   AdminModulePage,
   AdminUsersPage,
   AdminTeachersPage,
   AdminCoursesPage,
+  AdminCertificatesPage,
 } from "../components/admin";
 import {
   MentorDashboard,
@@ -64,17 +66,22 @@ function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Public pages */}
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/courses" element={<Courses />} />
+        <Route path="/courses/:courseId" element={<CourseDetail />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/forgot-password" element={<Forgetpassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/payment" element={<PaymentPage />} /> 
-        <Route path="/blog" element={<Blog />} />
+        <Route path="/payment" element={<PaymentPage />} />
 
+        {/* Logged-in user pages */}
         <Route
           element={
             <ProtectedRoute>
@@ -84,19 +91,20 @@ function AppRoutes() {
         >
           <Route path="/profile" element={<Profile />} />
           <Route path="/dashboard" element={<DashboardRedirect />} />
-          <Route path="/dashboard/admin" element={<AdminDashboard />} />
           <Route path="/dashboard/mentor" element={<MentorDashboard />} />
           <Route path="/dashboard/student" element={<StudentDashboard />} />
+
           <Route path="/mentor/courses" element={<MentorCourses />} />
           <Route path="/mentor/lectures" element={<MentorLectures />} />
           <Route path="/mentor/progress" element={<MentorProgress />} />
           <Route path="/mentor/grades" element={<Grades />} />
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/courses/:courseId" element={<CourseDetail />} />
+
           <Route path="/grades" element={<Grades />} />
           <Route path="/my-learning" element={<MyLearning />} />
           <Route path="/learning-progress" element={<LearningProgress />} />
           <Route path="/certificates" element={<Certificate />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+
           <Route
             path="/learning/:courseId"
             element={
@@ -113,9 +121,9 @@ function AppRoutes() {
               </EnrollmentRoute>
             }
           />
-          <Route path="/wishlist" element={<Wishlist />} />
         </Route>
 
+        {/* Admin-only pages */}
         <Route
           element={
             <ProtectedRoute>
@@ -129,6 +137,8 @@ function AppRoutes() {
           <Route path="/admin/users" element={<AdminUsersPage />} />
           <Route path="/admin/teachers" element={<AdminTeachersPage />} />
           <Route path="/admin/courses" element={<AdminCoursesPage />} />
+          <Route path="/admin/certificates" element={<AdminCertificatesPage />} />
+
           <Route
             path="/admin/lectures"
             element={
@@ -173,7 +183,20 @@ function AppRoutes() {
               />
             }
           />
+          <Route
+            path="/admin/feedbacks"
+            element={
+              <AdminModulePage
+                title="Feedbacks"
+                subtitle="Quản lý phản hồi từ học viên."
+                entityLabel="Feedback"
+                columns={["Student", "Course", "Rating", "Comment", "Actions"]}
+              />
+            }
+          />
         </Route>
+
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );

@@ -615,8 +615,10 @@ export const getCertificatesByCourse = (courseId) => {
   return apiClient.get(`/certificates/course/${courseId}`);
 };
 
-export const revokeCertificate = (certificateId) => {
-  return apiClient.post(`/certificates/${certificateId}/revoke`);
+export const revokeCertificate = (certificateId, reason) => {
+  return apiClient.post(`/certificates/${certificateId}/revoke`, null, {
+    params: reason ? { reason } : {},
+  });
 };
 
 export const getCertificateVerificationStatus = (certificateId) => {

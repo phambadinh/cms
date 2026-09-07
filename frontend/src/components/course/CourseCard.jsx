@@ -99,13 +99,9 @@ function CourseCard({
           <button
             className="enroll-btn"
             disabled={loading}
-            onClick={() =>
-              onEnroll(course.id || course._id)
-            }
+            onClick={() => onEnroll(course.id || course._id)}
           >
-            {loading
-              ? "Đang đăng ký..."
-              : "Đăng ký ngay"}
+            {loading ? "Đang đăng ký..." : "Đăng ký ngay"}
           </button>
         )}
 

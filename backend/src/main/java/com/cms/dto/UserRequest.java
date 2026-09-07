@@ -13,6 +13,7 @@ public class UserRequest {
     private String email;
     private String password;
     private String fullName;
+    private String phone;
     private UserRole role; // Default: STUDENT
     private String profileImage;
     private String bio;

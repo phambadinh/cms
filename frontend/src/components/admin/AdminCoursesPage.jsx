@@ -17,34 +17,34 @@ import {
 import "../../styles/dashboard.css";
 
 const courseFields = [
-  { name: "code", label: "Code", type: "text" },
-  { name: "name", label: "Name", type: "text" },
-  { name: "description", label: "Description", type: "textarea", rows: 4 },
+  { name: "code", label: "Mã khóa học", type: "text" },
+  { name: "name", label: "Tên khóa học", type: "text" },
+  { name: "description", label: "Mô tả", type: "textarea", rows: 4 },
   {
     name: "courseType",
-    label: "Type",
+    label: "Loại khóa học",
     type: "select",
     options: [
       { value: "FREE", label: "FREE" },
       { value: "PREMIUM", label: "PREMIUM" },
     ],
   },
-  { name: "price", label: "Price", type: "number" },
-  { name: "category", label: "Category", type: "text" },
-  { name: "thumbnail", label: "Thumbnail", type: "text" },
-  { name: "level", label: "Level", type: "text" },
+  { name: "price", label: "Giá", type: "number" },
+  { name: "category", label: "Danh mục", type: "text" },
+  { name: "thumbnail", label: "Ảnh đại diện", type: "text" },
+  { name: "level", label: "Cấp độ", type: "text" },
 ];
 
 const columns = [
-  { key: "code", label: "Code" },
-  { key: "name", label: "Name" },
-  { key: "courseType", label: "Type" },
-  { key: "viewCount", label: "Views" },
-  { key: "enrollmentCount", label: "Enrollments" },
+  { key: "code", label: "Mã" },
+  { key: "name", label: "Tên khóa học" },
+  { key: "courseType", label: "Loại" },
+  { key: "viewCount", label: "Lượt xem" },
+  { key: "enrollmentCount", label: "Lượt đăng ký" },
   {
     key: "published",
-    label: "Status",
-    render: (item) => (item.published ? "Published" : "Draft"),
+    label: "Trạng thái",
+    render: (item) => (item.published ? "Đã xuất bản" : "Bản nháp"),
   },
 ];
 
@@ -62,12 +62,12 @@ const initialValues = {
 function AdminCoursesPage() {
   return (
     <AdminCrudPage
-      title="Courses"
-      subtitle="Live CRUD cho khóa học, có publish/unpublish và xóa thật."
+      title="Khóa học"
+      subtitle="Quản lý khóa học, xuất bản và xóa dữ liệu."
       icon={BookOpen}
       primaryActionIcon={Plus}
       secondaryActionIcon={RefreshCw}
-      entityLabel="Course"
+      entityLabel="khóa học"
       fetchItems={getAllCourses}
       createItem={createCourse}
       updateItem={updateCourse}

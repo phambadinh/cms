@@ -3,11 +3,16 @@ import Home from "../pages/Home";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Blog from "../pages/Blog";
+import BlogDetail from "../pages/BlogDetail";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Forgetpassword from "../pages/Forgetpassword";
 import ResetPassword from "../pages/ResetPassword";
 import VerifyEmail from "../pages/VerifyEmail";
+import Team from "../pages/Team";
+import Terms from "../pages/Terms";
+import Privacy from "../pages/Privacy";
+import Cookies from "../pages/Cookies";
 import Profile from "../pages/Profile";
 import Courses from "../pages/Courses";
 import Grades from "../pages/Grades";
@@ -26,6 +31,11 @@ import {
   AdminUsersPage,
   AdminTeachersPage,
   AdminCoursesPage,
+  AdminLessonsPage,
+  AdminEnrollmentsPage,
+  AdminGradesPage,
+  AdminProgressPage,
+  AdminFeedbackPage,
   AdminCertificatesPage,
 } from "../components/admin";
 import {
@@ -62,6 +72,16 @@ function DashboardRedirect() {
   return <Navigate to="/dashboard/student" replace />;
 }
 
+function ProfileRedirect() {
+  const user = getAuthUser();
+
+  if (user?.role === "ADMIN") {
+    return <Navigate to="/admin/profile" replace />;
+  }
+
+  return <Profile />;
+}
+
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -71,12 +91,17 @@ function AppRoutes() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogDetail />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/:courseId" element={<CourseDetail />} />
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/team" element={<Team />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/cookies" element={<Cookies />} />
         <Route path="/forgot-password" element={<Forgetpassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/payment" element={<PaymentPage />} />
@@ -89,7 +114,7 @@ function AppRoutes() {
             </ProtectedRoute>
           }
         >
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<ProfileRedirect />} />
           <Route path="/dashboard" element={<DashboardRedirect />} />
           <Route path="/dashboard/mentor" element={<MentorDashboard />} />
           <Route path="/dashboard/student" element={<StudentDashboard />} />
@@ -134,66 +159,17 @@ function AppRoutes() {
           }
         >
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/profile" element={<Profile />} />
           <Route path="/admin/users" element={<AdminUsersPage />} />
           <Route path="/admin/teachers" element={<AdminTeachersPage />} />
           <Route path="/admin/courses" element={<AdminCoursesPage />} />
           <Route path="/admin/certificates" element={<AdminCertificatesPage />} />
 
-          <Route
-            path="/admin/lectures"
-            element={
-              <AdminModulePage
-                title="Lectures"
-                subtitle="Quản lý bài học theo từng khóa."
-                entityLabel="Lecture"
-                columns={["Lecture", "Course", "Published", "Actions"]}
-              />
-            }
-          />
-          <Route
-            path="/admin/enrollments"
-            element={
-              <AdminModulePage
-                title="Enrollments"
-                subtitle="Theo dõi học viên đăng ký và trạng thái."
-                entityLabel="Enrollment"
-                columns={["Student", "Course", "Progress", "Status", "Actions"]}
-              />
-            }
-          />
-          <Route
-            path="/admin/grades"
-            element={
-              <AdminModulePage
-                title="Grades"
-                subtitle="Chấm điểm và theo dõi kết quả học tập."
-                entityLabel="Grade"
-                columns={["Student", "Course", "Score", "Grade", "Actions"]}
-              />
-            }
-          />
-          <Route
-            path="/admin/progress"
-            element={
-              <AdminModulePage
-                title="Progress"
-                subtitle="Theo dõi tiến độ học chi tiết."
-                entityLabel="Progress"
-                columns={["Student", "Lesson", "Progress", "Actions"]}
-              />
-            }
-          />
-          <Route
-            path="/admin/feedbacks"
-            element={
-              <AdminModulePage
-                title="Feedbacks"
-                subtitle="Quản lý phản hồi từ học viên."
-                entityLabel="Feedback"
-                columns={["Student", "Course", "Rating", "Comment", "Actions"]}
-              />
-            }
-          />
+          <Route path="/admin/lectures" element={<AdminLessonsPage />} />
+          <Route path="/admin/enrollments" element={<AdminEnrollmentsPage />} />
+          <Route path="/admin/grades" element={<AdminGradesPage />} />
+          <Route path="/admin/progress" element={<AdminProgressPage />} />
+          <Route path="/admin/feedbacks" element={<AdminFeedbackPage />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

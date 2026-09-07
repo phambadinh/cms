@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Footer() {
   const footerStyle = {
     background: 'linear-gradient(90deg, #0f4c81, #2563eb)',
@@ -44,23 +46,23 @@ function Footer() {
       <div style={containerStyle}>
         <div>
           <div style={titleStyle}>About</div>
-          <a href="/about" style={linkStyle}>Giới thiệu</a>
-          <a href="/team" style={linkStyle}>Đội ngũ</a>
-          <a href="/blog" style={linkStyle}>Tin tức</a>
+          <Link to="/about" style={linkStyle}>Giới thiệu</Link>
+          <Link to="/team" style={linkStyle}>Đội ngũ</Link>
+          <Link to="/blog" style={linkStyle}>Tin tức</Link>
         </div>
 
         <div>
           <div style={titleStyle}>Contact</div>
           <a href="mailto:support@cms.com" style={linkStyle}>support@cms.com</a>
           <a href="tel:+84876578996" style={linkStyle}>+84 876 578 996</a>
-          <a href="/contact" style={linkStyle}>Liên hệ</a>
+          <Link to="/contact" style={linkStyle}>Liên hệ</Link>
         </div>
 
         <div>
           <div style={titleStyle}>Terms</div>
-          <a href="/terms" style={linkStyle}>Điều khoản sử dụng</a>
-          <a href="/privacy" style={linkStyle}>Chính sách bảo mật</a>
-          <a href="/cookies" style={linkStyle}>Cookie Policy</a>
+          <Link to="/terms" style={linkStyle}>Điều khoản sử dụng</Link>
+          <Link to="/privacy" style={linkStyle}>Chính sách bảo mật</Link>
+          <Link to="/cookies" style={linkStyle}>Cookie Policy</Link>
         </div>
 
         <div>

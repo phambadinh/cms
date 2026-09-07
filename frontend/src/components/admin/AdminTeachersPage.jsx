@@ -2,20 +2,20 @@ import AdminCrudPage from "./AdminCrudPage";
 import { createUser, deleteUser, getUsersByRole, updateUser } from "../../services/api";
 
 const teacherFields = [
-  { name: "username", label: "Username", type: "text" },
+  { name: "username", label: "Tên đăng nhập", type: "text" },
   { name: "email", label: "Email", type: "email" },
-  { name: "password", label: "Password", type: "password", placeholder: "Leave blank to keep current" },
-  { name: "fullName", label: "Full name", type: "text" },
-  { name: "active", label: "Active", type: "checkbox" },
-  { name: "profileImage", label: "Profile image", type: "text" },
-  { name: "bio", label: "Bio", type: "textarea", rows: 3 },
+  { name: "password", label: "Mật khẩu", type: "password", placeholder: "Để trống nếu không thay đổi" },
+  { name: "fullName", label: "Họ và tên", type: "text" },
+  { name: "active", label: "Đang hoạt động", type: "checkbox" },
+  { name: "profileImage", label: "Ảnh đại diện", type: "text" },
+  { name: "bio", label: "Giới thiệu", type: "textarea", rows: 3 },
 ];
 
 const columns = [
-  { key: "username", label: "Username" },
-  { key: "fullName", label: "Full name" },
+  { key: "username", label: "Tên đăng nhập" },
+  { key: "fullName", label: "Họ và tên" },
   { key: "email", label: "Email" },
-  { key: "active", label: "Active", render: (item) => (item.active ? "Yes" : "No") },
+  { key: "active", label: "Trạng thái", render: (item) => (item.active ? "Có" : "Không") },
 ];
 
 const initialValues = {
@@ -32,9 +32,9 @@ const initialValues = {
 function AdminTeachersPage() {
   return (
     <AdminCrudPage
-      title="Teachers"
-      subtitle="Chức năng."
-      entityLabel="Teacher"
+      title="Mentor"
+      subtitle="Quản lý tài khoản mentor."
+      entityLabel="mentor"
       fetchItems={() => getUsersByRole("MENTOR")}
       createItem={createUser}
       updateItem={updateUser}

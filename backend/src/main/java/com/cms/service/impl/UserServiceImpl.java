@@ -59,6 +59,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setFullName(request.getFullName());
+        user.setPhone(request.getPhone());
         user.setRole(request.getRole() != null ? request.getRole() : UserRole.STUDENT);
         user.setProfileImage(request.getProfileImage());
         user.setBio(request.getBio());
@@ -108,6 +109,9 @@ public class UserServiceImpl implements UserService {
         if (request.getFullName() != null) {
             user.setFullName(request.getFullName());
         }
+        if (request.getPhone() != null) {
+            user.setPhone(request.getPhone());
+        }
         if (request.getProfileImage() != null) {
             user.setProfileImage(request.getProfileImage());
         }
@@ -140,6 +144,7 @@ public class UserServiceImpl implements UserService {
     public User updateUser(String userId, UserRequest request) {
         User user = getUserById(userId);
         user.setFullName(request.getFullName());
+        user.setPhone(request.getPhone());
         user.setProfileImage(request.getProfileImage());
         user.setBio(request.getBio());
         user.setUpdatedAt(nowString()); 
@@ -192,6 +197,7 @@ public class UserServiceImpl implements UserService {
             user.getUsername(),
             user.getEmail(),
             user.getFullName(),
+            user.getPhone(),
             user.getRole(),
             user.getProfileImage(),
             user.getBio(),

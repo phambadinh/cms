@@ -7,6 +7,7 @@ import {
   Pencil,
   Trash2,
   Search,
+  X,
 } from "lucide-react";
 
 function AdminCrudPage({
@@ -29,6 +30,7 @@ function AdminCrudPage({
   const [submitting, setSubmitting] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [formData, setFormData] = useState(initialValues);
+  const [showForm, setShowForm] = useState(false);
   const [search, setSearch] = useState("");
   const [error, setError] = useState("");
 
@@ -65,6 +67,7 @@ function AdminCrudPage({
   const resetForm = () => {
     setEditingId(null);
     setFormData(initialValues);
+    setShowForm(false);
   };
 
   const handleSubmit = async (e) => {
@@ -104,160 +107,193 @@ function AdminCrudPage({
             onClick={loadItems}
           >
             <RefreshCw size={18} style={{ marginRight: 6 }} />
-            Refresh
+            Làm mới
           </button>
 
           <button
             type="button"
             className="admin-module-button primary"
-            onClick={resetForm}
+            onClick={() => {
+              setEditingId(null);
+              setFormData(initialValues);
+              setShowForm(true);
+            }}
           >
             <Plus size={18} style={{ marginRight: 6 }} />
-            New {entityLabel}
+            Tạo {entityLabel}
           </button>
         </div>
       </div>
 
       {error && <div className="dash-error">{error}</div>}
 
-      <div className="admin-crud-grid">
-        <form className="admin-crud-form admin-module-card" onSubmit={handleSubmit}>
-          <h3>{isEditing ? `Edit ${entityLabel}` : `Create ${entityLabel}`}</h3>
-
-          <div className="admin-form-grid">
-            {fields.map((field) => (
-              <label key={field.name} className="admin-field">
-                <span>{field.label}</span>
-
-                {field.type === "textarea" ? (
-                  <textarea
-                    rows={field.rows || 3}
-                    value={formData[field.name] ?? ""}
-                    onChange={(e) => handleChange(field.name, e.target.value)}
-                  />
-                ) : field.type === "select" ? (
-                  <select
-                    value={formData[field.name] ?? ""}
-                    onChange={(e) => handleChange(field.name, e.target.value)}
-                  >
-                    {(field.options || []).map((opt) => (
-                      <option key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </option>
-                    ))}
-                  </select>
-                ) : field.type === "checkbox" ? (
-                  <input
-                    type="checkbox"
-                    checked={Boolean(formData[field.name])}
-                    onChange={(e) => handleChange(field.name, e.target.checked)}
-                  />
-                ) : (
-                  <input
-                    type={field.type || "text"}
-                    placeholder={field.placeholder}
-                    value={formData[field.name] ?? ""}
-                    onChange={(e) => handleChange(field.name, e.target.value)}
-                  />
-                )}
-              </label>
-            ))}
-          </div>
-
-          <div className="admin-form-actions">
-            <button
-              type="submit"
-              className="admin-module-button primary"
-              disabled={submitting}
-            >
-              <Save size={18} style={{ marginRight: 6 }} />
-              {isEditing ? "Update" : "Create"}
-            </button>
-
-            <button
-              type="button"
-              className="admin-module-button"
-              onClick={resetForm}
-            >
-              <RotateCcw size={18} style={{ marginRight: 6 }} />
-              Reset
-            </button>
-          </div>
-        </form>
-
-        <div className="admin-module-card">
-          <div className="admin-module-toolbar">
-            <div className="table-search">
-              <Search size={18} style={{ marginRight: 6 }} />
-              <input
-                placeholder="Search..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
+      {showForm || isEditing ? (
+        <div
+          className="admin-crud-modal-backdrop"
+          role="presentation"
+          onMouseDown={(e) => {
+            if (e.target === e.currentTarget) resetForm();
+          }}
+        >
+          <form
+            className="admin-crud-modal admin-module-card"
+            onSubmit={handleSubmit}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="admin-crud-modal-title"
+            onMouseDown={(e) => e.stopPropagation()}
+          >
+            <div className="admin-crud-modal-header">
+              <h3 id="admin-crud-modal-title">
+                {isEditing ? `Chỉnh sửa ${entityLabel}` : `Tạo ${entityLabel}`}
+              </h3>
+              <button
+                type="button"
+                className="admin-row-button"
+                aria-label="Đóng biểu mẫu"
+                title="Đóng"
+                onClick={resetForm}
+              >
+                <X size={18} />
+              </button>
             </div>
 
-            <span>{filteredItems.length} records</span>
-          </div>
+            <div className="admin-form-grid">
+              {fields.map((field) => (
+                <label key={field.name} className="admin-field">
+                  <span>{field.label}</span>
 
-          <div className="admin-table-wrap">
-            <table className="admin-table">
-              <thead>
-                <tr>
-                  {columns.map((c) => (
-                    <th key={c.key}>{c.label}</th>
-                  ))}
-                  <th>Actions</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {loading ? (
-                  <tr>
-                    <td colSpan={columns.length + 1}>Loading...</td>
-                  </tr>
-                ) : filteredItems.length === 0 ? (
-                  <tr>
-                    <td colSpan={columns.length + 1}>No records found.</td>
-                  </tr>
-                ) : (
-                  filteredItems.map((item) => (
-                    <tr key={item.id}>
-                      {columns.map((c) => (
-                        <td key={c.key}>
-                          {c.render ? c.render(item) : item[c.key]}
-                        </td>
+                  {field.type === "textarea" ? (
+                    <textarea
+                      rows={field.rows || 3}
+                      value={formData[field.name] ?? ""}
+                      onChange={(e) => handleChange(field.name, e.target.value)}
+                    />
+                  ) : field.type === "select" ? (
+                    <select
+                      value={formData[field.name] ?? ""}
+                      onChange={(e) => handleChange(field.name, e.target.value)}
+                    >
+                      {(field.options || []).map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </option>
                       ))}
+                    </select>
+                  ) : field.type === "checkbox" ? (
+                    <input
+                      type="checkbox"
+                      checked={Boolean(formData[field.name])}
+                      onChange={(e) => handleChange(field.name, e.target.checked)}
+                    />
+                  ) : (
+                    <input
+                      type={field.type || "text"}
+                      placeholder={field.placeholder}
+                      value={formData[field.name] ?? ""}
+                      onChange={(e) => handleChange(field.name, e.target.value)}
+                    />
+                  )}
+                </label>
+              ))}
+            </div>
 
-                      <td>
-                        <div className="admin-row-actions">
-                          <button
-                            type="button"
-                            className="admin-row-button"
-                            onClick={() => {
-                              setEditingId(item.id);
-                              setFormData(mapToForm ? mapToForm(item) : item);
-                            }}
-                          >
-                            <Pencil size={14} />
-                          </button>
+            <div className="admin-form-actions">
+              <button
+                type="submit"
+                className="admin-module-button primary"
+                disabled={submitting}
+              >
+                <Save size={18} style={{ marginRight: 6 }} />
+                {isEditing ? "Cập nhật" : "Tạo"}
+              </button>
 
-                          <button
-                            type="button"
-                            className="admin-row-button danger"
-                            onClick={() => deleteItem(item.id)}
-                          >
-                            <Trash2 size={14} />
-                          </button>
+              <button
+                type="button"
+                className="admin-module-button"
+                onClick={resetForm}
+              >
+                <RotateCcw size={18} style={{ marginRight: 6 }} />
+                Đặt lại
+              </button>
+            </div>
+          </form>
+        </div>
+      ) : null}
 
-                          {renderRowActions && renderRowActions(item, loadItems)}
-                        </div>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+      <div className="admin-module-card">
+        <div className="admin-module-toolbar">
+          <div className="table-search">
+            <Search size={18} style={{ marginRight: 6 }} />
+            <input
+              placeholder="Tìm kiếm..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </div>
+
+          <span>{filteredItems.length} bản ghi</span>
+        </div>
+
+        <div className="admin-table-wrap">
+          <table className="admin-table">
+            <thead>
+              <tr>
+                {columns.map((c) => (
+                  <th key={c.key}>{c.label}</th>
+                ))}
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {loading ? (
+                <tr>
+                  <td colSpan={columns.length + 1}>Đang tải...</td>
+                </tr>
+              ) : filteredItems.length === 0 ? (
+                <tr>
+                  <td colSpan={columns.length + 1}>Không tìm thấy bản ghi.</td>
+                </tr>
+              ) : (
+                filteredItems.map((item) => (
+                  <tr key={item.id}>
+                    {columns.map((c) => (
+                      <td key={c.key}>
+                        {c.render ? c.render(item) : item[c.key]}
+                      </td>
+                    ))}
+
+                    <td>
+                      <div className="admin-row-actions">
+                        <button
+                          type="button"
+                          className="admin-row-button"
+                          onClick={() => {
+                            setEditingId(item.id);
+                            setFormData(mapToForm ? mapToForm(item) : item);
+                            setShowForm(true);
+                          }}
+                        >
+                          <Pencil size={14} />
+                        </button>
+
+                        <button
+                          type="button"
+                          className="admin-row-button danger"
+                          onClick={() => deleteItem(item.id)}
+                        >
+                          <Trash2 size={14} />
+                        </button>
+
+                        {renderRowActions && renderRowActions(item, loadItems)}
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

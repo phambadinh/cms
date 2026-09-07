@@ -40,9 +40,9 @@ const initialValues = {
 function AdminUsersPage() {
   return (
     <AdminCrudPage
-      title="Users"
-      subtitle="Chức năng chỉnh sửa users."
-      entityLabel="User"
+      title="Người dùng"
+      subtitle="Quản lý tài khoản người dùng."
+      entityLabel="người dùng"
       fetchItems={getAllUsers}
       createItem={createUser}
       updateItem={updateUser}

@@ -4,6 +4,7 @@ import {
   completeCoursePayment,
   getAuthUser,
   getCourseById,
+  getVietQrBanks,
   initiateCoursePayment,
 } from "../services/api";
 import "../styles/payment.css";
@@ -19,6 +20,7 @@ function PaymentPage() {
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
   const [paymentMessage, setPaymentMessage] = useState("");
+  const [vietQrBank, setVietQrBank] = useState(null);
 
   const [selectedMethod, setSelectedMethod] = useState(
     searchParams.get("paymentMethod") || "BANK_TRANSFER"
@@ -73,6 +75,25 @@ function PaymentPage() {
   useEffect(() => {
     if (paymentMethodFromQuery) setSelectedMethod(paymentMethodFromQuery);
   }, [paymentMethodFromQuery]);
+
+  useEffect(() => {
+    let active = true;
+    getVietQrBanks()
+      .then((banks) => {
+        const bank = banks.find((item) =>
+          item.code === "MB" ||
+          /^(MB|MBBANK)$/i.test(String(item.shortName || "")) ||
+          /MBBANK|MB BANK/i.test(String(item.name || ""))
+        );
+        if (active) setVietQrBank(bank || null);
+      })
+      .catch(() => {
+        if (active) setVietQrBank(null);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const couponSummary = useMemo(() => {
     if (!couponCode.trim()) return "";
@@ -153,14 +174,16 @@ function PaymentPage() {
 
     setProcessing(true);
     try {
-      await completeCoursePayment(courseId, {
+      const response = await completeCoursePayment(courseId, {
         transactionId: transactionId.trim() || orderCode,
         sessionId,
         paymentMethod: selectedMethod,
       });
 
-      setPaymentMessage("Thanh toán thành công. Đang chuyển tới khóa học...");
-      setTimeout(() => navigate(`/learning/${courseId}`), 1200);
+      setPaymentMessage(
+        response.data?.message ||
+          "Đã gửi yêu cầu. Bạn chỉ được truy cập khóa học sau khi thanh toán được xác nhận."
+      );
     } catch (err) {
       setPaymentMessage(err.response?.data?.message || "Thanh toán không thành công. Vui lòng thử lại.");
     } finally {
@@ -292,10 +315,11 @@ function PaymentPage() {
   const renderTransferStep = () => {
     const bankAccountNumber = "24680006800068";
     const bankAccountName = "PHAM BA DINH";
-    const bankName = "MB Bank";
+    const bankName = vietQrBank?.shortName || "MB Bank";
+    const bankBin = vietQrBank?.bin || "970422";
     const transferContent = `GHI_DANH ${courseId || "COURSE"}`;
 
-    const qrUrl = `https://img.vietqr.io/image/mb-${bankAccountNumber}-compact2.png?amount=${
+    const qrUrl = `https://img.vietqr.io/image/${bankBin}-${bankAccountNumber}-compact2.png?amount=${
       finalAmount || amount || 0
     }&addInfo=${encodeURIComponent(transferContent)}&accountName=${encodeURIComponent(bankAccountName)}`;
 
@@ -327,7 +351,7 @@ function PaymentPage() {
 
             <div className="payment-transfer-actions">
               <button type="button" className="payment-success-button" onClick={handleConfirmPayment} disabled={processing}>
-                {processing ? "Đang xác minh..." : "Tôi đã thanh toán"}
+                {processing ? "Đang gửi yêu cầu..." : "Tôi đã chuyển khoản"}
               </button>
               <button type="button" className="payment-cancel-button" onClick={() => navigate(`/courses/${courseId}`)}>
                 Hủy
@@ -357,7 +381,7 @@ function PaymentPage() {
               <li>Mở ứng dụng Mobile Banking trên điện thoại.</li>
               <li>Chọn tính năng <strong>Quét mã QR</strong> hoặc chuyển khoản thủ công.</li>
               <li>Kiểm tra kĩ số tiền và <strong>Nội dung chuyển khoản</strong>.</li>
-              <li>Xác nhận giao dịch và nhấn nút "Tôi đã thanh toán" ở bên cạnh.</li>
+              <li>Sau khi chuyển khoản, nhấn nút "Tôi đã chuyển khoản" để gửi yêu cầu xác nhận.</li>
             </ol>
           </div>
         </div>

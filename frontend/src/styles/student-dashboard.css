@@ -6,8 +6,20 @@
 }
 
 .student-dashboard-shell {
+  min-height: 100%;
   padding: 24px;
+  background: var(--cds-white, #ffffff);
+  color: var(--cds-text, #0f1114);
   font-family: "Source Sans 3", "Source Sans Pro", "Noto Sans", sans-serif;
+}
+
+/* Header */
+.student-dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
 .student-dash-title {
@@ -15,11 +27,14 @@
   color: var(--cds-text, #0f1114);
   font-size: 22px;
   font-weight: 700;
+  line-height: 1.3;
 }
 
 .student-dash-subtitle {
-  margin-bottom: 20px;
+  margin: 0 0 20px;
   color: var(--cds-text-muted, #5b6780);
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 /* Summary cards */
@@ -48,6 +63,7 @@
   color: var(--cds-blue, #0056d2);
   font-size: 26px;
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .student-dash-note {
@@ -56,7 +72,7 @@
   font-size: 13px;
 }
 
-/* Panel / table */
+/* Generic dashboard panel */
 .student-dash-panel {
   margin-top: 24px;
   padding: 16px;
@@ -73,7 +89,9 @@
   font-weight: 700;
 }
 
+/* Tables */
 .student-dash-table-wrap {
+  width: 100%;
   overflow-x: auto;
 }
 
@@ -87,16 +105,28 @@
 .student-dash-table td {
   padding: 12px 10px;
   border-bottom: 1px solid var(--cds-border, #dae1ed);
+  color: var(--cds-text, #0f1114);
   text-align: left;
+  vertical-align: middle;
 }
 
 .student-dash-table th {
   color: var(--cds-text-muted, #5b6780);
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
+.student-dash-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.student-dash-table tbody tr:hover {
+  background: var(--cds-surface, #e8eef7);
+}
+
+/* Error message */
 .student-dash-error {
   margin: 0;
   padding: 12px 14px;
@@ -104,6 +134,7 @@
   border: 1px solid var(--cds-danger-text, #9c2b2b);
   border-radius: var(--cds-radius-sm, 8px);
   color: var(--cds-danger-text, #9c2b2b);
+  font-size: 14px;
 }
 
 /* Course section */
@@ -115,12 +146,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
   margin-bottom: 16px;
 }
 
 .student-section-header h2 {
   margin: 0;
   color: var(--cds-text, #0f1114);
+  font-size: 20px;
   font-weight: 700;
 }
 
@@ -130,8 +163,10 @@
   gap: 20px;
 }
 
-/* Enrolled course card (simple variant) */
+/* Enrolled course card — simple variant */
 .student-my-course-card {
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   background: var(--cds-white, #ffffff);
   border: 1px solid var(--cds-border, #dae1ed);
@@ -142,15 +177,16 @@
 
 .student-my-course-card:hover {
   border-color: var(--cds-blue, #0056d2);
-  transform: none;
 }
 
 .student-my-course-thumbnail {
   height: 180px;
   overflow: hidden;
+  background: var(--cds-surface, #e8eef7);
 }
 
 .student-my-course-thumbnail img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -158,22 +194,31 @@
 
 .student-my-course-placeholder {
   display: flex;
+  width: 100%;
   height: 100%;
   align-items: center;
   justify-content: center;
   background: var(--cds-surface, #e8eef7);
+  color: var(--cds-text-muted, #5b6780);
 }
 
 .student-my-course-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   padding: 16px;
 }
 
 .student-my-course-title {
-  margin-bottom: 8px;
+  margin: 0 0 8px;
   color: var(--cds-text, #0f1114);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
 }
 
 .student-my-course-level {
+  margin: 0;
   color: var(--cds-text-muted, #5b6780);
   font-size: 14px;
 }
@@ -182,7 +227,9 @@
   margin: 12px 0;
 }
 
-.student-progress-bar {
+/* Shared progress bars */
+.student-progress-bar,
+.student-progress-bar-track {
   width: 100%;
   height: 8px;
   overflow: hidden;
@@ -190,26 +237,39 @@
   border-radius: 999px;
 }
 
+.student-progress-bar-fill,
 .student-progress-fill {
   height: 100%;
+  border-radius: inherit;
   background: var(--cds-blue, #0056d2);
+  transition: width 0.25s ease-out;
 }
 
 .student-continue-btn {
   width: 100%;
+  margin-top: auto;
   padding: 10px;
   background: var(--cds-blue, #0056d2);
-  border: none;
+  border: 1px solid var(--cds-blue, #0056d2);
   border-radius: var(--cds-radius-sm, 8px);
   color: var(--cds-white, #ffffff);
   cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
-.student-continue-btn:hover {
+.student-continue-btn:hover:not(:disabled) {
   background: var(--cds-blue-pressed, #0048b0);
+  border-color: var(--cds-blue-pressed, #0048b0);
 }
 
-/* Stat cards */
+.student-continue-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Statistic cards */
 .student-stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -234,106 +294,16 @@
   margin: 12px 0 6px;
   color: var(--cds-text, #0f1114);
   font-size: 28px;
+  font-weight: 700;
 }
 
 .student-stat-card p {
-  color: var(--cds-text-muted, #5b6780);
-}
-
-/* Certificate card */
-.student-certificate-card {
-  padding: 24px;
-  background: var(--cds-warning-bg, #fdf3e0);
-  border: 1px solid var(--cds-warning-text, #92600a);
-  border-radius: var(--cds-radius-md, 12px);
-  text-align: center;
-}
-
-.student-certificate-card svg {
-  color: var(--cds-warning-text, #92600a);
-}
-
-.student-certificate-card h3 {
-  margin: 12px 0;
-  color: var(--cds-text, #0f1114);
-}
-
-.student-certificate-card button {
-  margin-top: 12px;
-  padding: 10px 18px;
-  background: var(--cds-blue, #0056d2);
-  border: none;
-  border-radius: var(--cds-radius-sm, 8px);
-  color: var(--cds-white, #ffffff);
-  cursor: pointer;
-}
-
-.student-certificate-card button:hover {
-  background: var(--cds-blue-pressed, #0048b0);
-}
-
-/* Learning progress card */
-.student-learning-progress-card {
-  padding: 16px;
-  background: var(--cds-white, #ffffff);
-  border: 1px solid var(--cds-border, #dae1ed);
-  border-radius: var(--cds-radius-md, 12px);
-}
-
-.student-progress-top {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
+  margin: 0;
   color: var(--cds-text-muted, #5b6780);
   font-size: 14px;
 }
 
-.student-learning-progress-card .student-progress-bar {
-  height: 10px;
-  overflow: hidden;
-  background: var(--cds-surface, #e8eef7);
-  border-radius: 999px;
-}
-
-.student-learning-progress-card .student-progress-fill {
-  height: 100%;
-  background: var(--cds-blue, #0056d2);
-  border-radius: inherit;
-}
-
-.student-dash-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-/* Loading */
-.student-dash-loading {
-  display: grid;
-  min-height: 240px;
-  gap: 12px;
-  place-items: center;
-  color: var(--cds-text-muted, #5b6780);
-}
-
-.student-dash-spinner {
-  width: 36px;
-  height: 36px;
-  border: 3px solid var(--cds-surface, #e8eef7);
-  border-top-color: var(--cds-blue, #0056d2);
-  border-radius: 999px;
-  animation: student-dash-spin 0.8s linear infinite;
-}
-
-@keyframes student-dash-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Stat icon variants — semantic tokens instead of raw pastel hex */
+/* Icon summary statistic */
 .student-stat-icon-wrap {
   display: inline-flex;
   width: 48px;
@@ -353,6 +323,7 @@
   color: var(--cds-text, #0f1114);
   font-size: 28px;
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .student-stat-label {
@@ -375,9 +346,104 @@
   color: var(--cds-success-text, #1a6b3c);
 }
 
+/* Purple retained as primary-blue because no purple token exists */
 .student-stat-purple .student-stat-icon-wrap {
   background: var(--cds-surface, #e8eef7);
   color: var(--cds-blue, #0056d2);
+}
+
+/* Certificate prompt */
+.student-certificate-card {
+  padding: 24px;
+  background: var(--cds-warning-bg, #fdf3e0);
+  border: 1px solid var(--cds-warning-text, #92600a);
+  border-radius: var(--cds-radius-md, 12px);
+  text-align: center;
+}
+
+.student-certificate-card svg {
+  color: var(--cds-warning-text, #92600a);
+}
+
+.student-certificate-card h3 {
+  margin: 12px 0;
+  color: var(--cds-text, #0f1114);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.student-certificate-card button {
+  margin-top: 12px;
+  padding: 10px 18px;
+  background: var(--cds-blue, #0056d2);
+  border: 1px solid var(--cds-blue, #0056d2);
+  border-radius: var(--cds-radius-sm, 8px);
+  color: var(--cds-white, #ffffff);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.student-certificate-card button:hover:not(:disabled) {
+  background: var(--cds-blue-pressed, #0048b0);
+  border-color: var(--cds-blue-pressed, #0048b0);
+}
+
+.student-certificate-card button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Learning progress card */
+.student-learning-progress-card {
+  padding: 16px;
+  background: var(--cds-white, #ffffff);
+  border: 1px solid var(--cds-border, #dae1ed);
+  border-radius: var(--cds-radius-md, 12px);
+}
+
+.student-progress-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+  color: var(--cds-text-muted, #5b6780);
+  font-size: 14px;
+}
+
+.student-learning-progress-card .student-progress-bar {
+  height: 10px;
+}
+
+.student-learning-progress-card .student-progress-fill {
+  background: var(--cds-blue, #0056d2);
+}
+
+/* Loading */
+.student-dash-loading {
+  display: grid;
+  min-height: 240px;
+  gap: 12px;
+  place-items: center;
+  color: var(--cds-text-muted, #5b6780);
+  font-size: 14px;
+}
+
+.student-dash-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--cds-surface, #e8eef7);
+  border-top-color: var(--cds-blue, #0056d2);
+  border-radius: 999px;
+  animation: student-dash-spin 0.8s linear infinite;
+}
+
+@keyframes student-dash-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Toolbar */
@@ -394,10 +460,12 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  min-height: 42px;
   padding: 10px 14px;
   background: var(--cds-white, #ffffff);
   border: 1px solid var(--cds-border, #dae1ed);
   border-radius: var(--cds-radius-sm, 8px);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .student-search-wrap {
@@ -408,12 +476,20 @@
   flex: 0 0 auto;
 }
 
+.student-search-wrap:focus-within,
+.student-filter-wrap:focus-within {
+  border-color: var(--cds-blue, #0056d2);
+  box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.15);
+}
+
 .student-search-icon {
+  flex: 0 0 auto;
   color: var(--cds-text-muted, #5b6780);
 }
 
 .student-course-search,
 .student-course-filter {
+  min-width: 0;
   background: transparent;
   border: none;
   color: var(--cds-text, #0f1114);
@@ -423,6 +499,11 @@
 
 .student-course-search {
   width: 100%;
+}
+
+.student-course-search::placeholder {
+  color: var(--cds-text-muted, #5b6780);
+  opacity: 1;
 }
 
 /* Empty state */
@@ -441,10 +522,14 @@
 .student-empty-state h3 {
   margin: 0;
   color: var(--cds-text, #0f1114);
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .student-empty-state p {
+  max-width: 520px;
   margin: 0;
+  line-height: 1.6;
 }
 
 .student-btn-explore {
@@ -454,17 +539,21 @@
   margin-top: 8px;
   padding: 10px 16px;
   background: var(--cds-blue, #0056d2);
+  border: 1px solid var(--cds-blue, #0056d2);
   border-radius: var(--cds-radius-sm, 8px);
   color: var(--cds-white, #ffffff);
+  font-size: 14px;
   font-weight: 700;
   text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .student-btn-explore:hover {
   background: var(--cds-blue-pressed, #0048b0);
+  border-color: var(--cds-blue-pressed, #0048b0);
 }
 
-/* Course card (rich variant) */
+/* Course card — detailed variant */
 .student-course-card {
   position: relative;
   display: grid;
@@ -474,9 +563,15 @@
   border: 1px solid var(--cds-border, #dae1ed);
   border-radius: var(--cds-radius-md, 12px);
   box-shadow: none;
+  transition: border-color 0.2s ease;
 }
 
-.student-course-badge {
+.student-course-card:hover {
+  border-color: var(--cds-blue, #0056d2);
+}
+
+.student-course-badge,
+.student-course-type-tag {
   display: inline-flex;
   width: fit-content;
   align-items: center;
@@ -485,9 +580,11 @@
   border-radius: 999px;
   font-size: 12px;
   font-weight: 700;
+  line-height: 1.2;
 }
 
-.student-badge-completed {
+.student-badge-completed,
+.student-tag-free {
   background: var(--cds-success-bg, #e3f3ea);
   color: var(--cds-success-text, #1a6b3c);
 }
@@ -495,6 +592,11 @@
 .student-badge-active {
   background: var(--cds-surface, #e8eef7);
   color: var(--cds-blue, #0056d2);
+}
+
+.student-tag-paid {
+  background: var(--cds-warning-bg, #fdf3e0);
+  color: var(--cds-warning-text, #92600a);
 }
 
 .student-course-card-body {
@@ -516,6 +618,7 @@
 
 .student-course-card-info {
   display: grid;
+  min-width: 0;
   gap: 6px;
 }
 
@@ -523,31 +626,14 @@
   margin: 0;
   color: var(--cds-text, #0f1114);
   font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
 }
 
 .student-course-card-code {
   margin: 0;
   color: var(--cds-text-muted, #5b6780);
   font-size: 14px;
-}
-
-.student-course-type-tag {
-  display: inline-flex;
-  width: fit-content;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.student-tag-free {
-  background: var(--cds-success-bg, #e3f3ea);
-  color: var(--cds-success-text, #1a6b3c);
-}
-
-.student-tag-paid {
-  background: var(--cds-warning-bg, #fdf3e0);
-  color: var(--cds-warning-text, #92600a);
 }
 
 .student-course-progress-section {
@@ -564,21 +650,13 @@
 }
 
 .student-progress-pct {
+  flex: 0 0 auto;
   color: var(--cds-blue, #0056d2);
   font-weight: 700;
 }
 
 .student-progress-bar-track {
-  width: 100%;
   height: 10px;
-  overflow: hidden;
-  background: var(--cds-surface, #e8eef7);
-  border-radius: 999px;
-}
-
-.student-progress-bar-fill {
-  height: 100%;
-  border-radius: inherit;
 }
 
 .student-fill-active {
@@ -604,22 +682,28 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+  min-height: 40px;
   padding: 10px 14px;
   border-radius: var(--cds-radius-sm, 8px);
   cursor: pointer;
+  font: inherit;
+  font-size: 14px;
   font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .student-btn-certificate,
 .student-btn-continue {
   background: var(--cds-blue, #0056d2);
-  border: none;
+  border: 1px solid var(--cds-blue, #0056d2);
   color: var(--cds-white, #ffffff);
 }
 
-.student-btn-certificate:hover,
-.student-btn-continue:hover {
+.student-btn-certificate:hover:not(:disabled),
+.student-btn-continue:hover:not(:disabled) {
   background: var(--cds-blue-pressed, #0048b0);
+  border-color: var(--cds-blue-pressed, #0048b0);
 }
 
 .student-btn-review,
@@ -629,13 +713,98 @@
   color: var(--cds-blue, #0056d2);
 }
 
-.student-btn-review:hover,
-.student-btn-detail:hover {
+.student-btn-review:hover:not(:disabled),
+.student-btn-detail:hover:not(:disabled) {
   background: var(--cds-surface, #e8eef7);
+  border-color: var(--cds-blue, #0056d2);
+}
+
+.student-btn-certificate:disabled,
+.student-btn-review:disabled,
+.student-btn-continue:disabled,
+.student-btn-detail:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .student-dashboard-shell {
+    padding: 20px 16px 28px;
+  }
+
+  .student-dash-header,
+  .student-section-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .student-dash-cards,
+  .student-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .student-course-toolbar {
+    gap: 12px;
+  }
+
+  .student-search-wrap,
+  .student-filter-wrap {
+    flex: 1 1 100%;
+  }
 }
 
 @media (max-width: 640px) {
+  .student-dashboard-shell {
+    padding: 16px 12px 24px;
+  }
+
+  .student-dash-title {
+    font-size: 20px;
+  }
+
+  .student-section-header h2 {
+    font-size: 18px;
+  }
+
+  .student-course-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
   .student-course-card-actions {
     grid-template-columns: 1fr;
+  }
+
+  .student-my-course-thumbnail {
+    height: 160px;
+  }
+
+  .student-dash-panel {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 440px) {
+  .student-dash-cards,
+  .student-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .student-course-card-body {
+    gap: 12px;
+  }
+
+  .student-course-card-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .student-stat-card {
+    padding: 16px;
+  }
+
+  .student-certificate-card {
+    padding: 20px 16px;
   }
 }

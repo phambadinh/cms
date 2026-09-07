@@ -61,6 +61,20 @@
   --cms-radius-lg: var(--cds-radius-lg);
 }
 
+:root[data-theme="dark"] {
+  --cds-text: #eef4ff;
+  --cds-text-muted: #aab8cf;
+  --cds-border: #34445d;
+  --cds-surface: #202d43;
+  --cds-white: #111b2c;
+  --cds-success-bg: #183b2b;
+  --cds-success-text: #8de0ad;
+  --cds-warning-bg: #493719;
+  --cds-warning-text: #f4c978;
+  --cds-danger-bg: #47232b;
+  --cds-danger-text: #ff9da7;
+}
+
 *,
 *::before,
 *::after {

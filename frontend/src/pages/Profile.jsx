@@ -68,7 +68,17 @@ function Profile() {
     setError("");
 
     try {
-      await updateUserProfile(formData);
+      const response = await updateUserProfile(formData);
+      const updatedUser = response.data;
+      const storedUser = getAuthUser();
+      if (storedUser && updatedUser) {
+        localStorage.setItem("cms_user_info", JSON.stringify({
+          ...storedUser,
+          ...updatedUser,
+          id: updatedUser.id || storedUser.id,
+          userId: updatedUser.id || storedUser.userId || storedUser.id,
+        }));
+      }
       setMessage("Cập nhật thông tin thành công!");
       setTimeout(() => setMessage(""), 3000);
     } catch (err) {

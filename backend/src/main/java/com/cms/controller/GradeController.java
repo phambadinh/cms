@@ -31,9 +31,12 @@ public class GradeController {
     // STUDENT: Get own grades
     @GetMapping("/my-grades")
     @PreAuthorize("hasRole('STUDENT')")
-    public List<GradeResponse> getMyGrades() {
-        // This would need the userId from authentication
-        return List.of();
+    public List<GradeResponse> getMyGrades(org.springframework.security.core.Authentication authentication) {
+        String userId = authentication.getName();
+        return gradeService.getGradesByUser(userId)
+            .stream()
+            .map(gradeService::toResponse)
+            .toList();
     }
 
     // MENTOR: Create grade for student

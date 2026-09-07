@@ -6,6 +6,7 @@ import com.cms.dto.PaymentInitiateResponse;
 import com.cms.model.PaymentMethod;
 import com.cms.service.PaymentService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,10 @@ public class PaymentController {
             Authentication authentication) {
         String userId = authentication.getName();
         paymentService.completePayment(userId, request);
-        return ResponseEntity.ok(Map.of("message", "Thanh toán thành công"));
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+            .body(Map.of(
+                "status", "PENDING",
+                "message", "Đã gửi yêu cầu. Thanh toán sẽ được xác nhận sau khi kiểm tra giao dịch."
+            ));
     }
 }

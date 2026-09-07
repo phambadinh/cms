@@ -17,6 +17,15 @@ public class GradeServiceImpl implements GradeService {
         this.gradeRepository = gradeRepository;
     }
 
+    private String calculateLetterGrade(Double score) {
+        if (score == null) return "F";
+        if (score >= 90) return "A";
+        if (score >= 80) return "B";
+        if (score >= 70) return "C";
+        if (score >= 60) return "D";
+        return "F";
+    }
+
     @Override
     public Grade createGrade(String userId, String courseId, Double score) {
         Grade grade = new Grade();
@@ -24,6 +33,7 @@ public class GradeServiceImpl implements GradeService {
         grade.setCourseId(courseId);
         grade.setScore(score);
         grade.setTotalScore(score);
+        grade.setGrade(calculateLetterGrade(score));
         grade.setEvaluatedAt(LocalDateTime.now());
         return gradeRepository.save(grade);
     }
@@ -49,6 +59,7 @@ public class GradeServiceImpl implements GradeService {
             .orElseThrow(() -> new RuntimeException("Điểm không tìm thấy"));
         grade.setScore(score);
         grade.setTotalScore(score);
+        grade.setGrade(calculateLetterGrade(score));
         grade.setEvaluatedAt(LocalDateTime.now());
         return gradeRepository.save(grade);
     }

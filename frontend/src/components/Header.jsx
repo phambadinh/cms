@@ -2,11 +2,11 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import { getAuthUser, authLogout } from "../services/api";
 import LoginModal from "../pages/LoginModal";
+import { useLanguage } from "../contexts/LanguageContext";
 import {
   Search,
   User,
   LogOut,
-  Settings,
   ChevronDown,
   House,
   BookOpen,
@@ -19,6 +19,9 @@ import {
   Newspaper,
   MapPin,
   Users,
+  Sun,
+  Moon,
+  Languages,
 } from "lucide-react";
 import "../styles/header.css";
 
@@ -29,6 +32,7 @@ function Header() {
   const navigate = useNavigate();
   const user = getAuthUser();
   const dropdownRef = useRef(null);
+  const { language, setLanguage, theme, setTheme, isVietnamese } = useLanguage();
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -62,11 +66,11 @@ function Header() {
   };
 
   const navItems = [
-    { label: "Trang chủ", path: "/", icon: House },
-    { label: "Khóa học", path: "/courses", icon: BookOpen },
-    { label: "Giới thiệu", path: "/about", icon: Info },
+    { label: isVietnamese ? "Trang chủ" : "Home", path: "/", icon: House },
+    { label: isVietnamese ? "Khóa học" : "Courses", path: "/courses", icon: BookOpen },
+    { label: isVietnamese ? "Giới thiệu" : "About", path: "/about", icon: Info },
     { label: "Blog", path: "/blog", icon: Newspaper },
-    { label: "Liên hệ", path: "/contact", icon: Phone },
+    { label: isVietnamese ? "Liên hệ" : "Contact", path: "/contact", icon: Phone },
   ];
 
   const quickLinks = useMemo(() => {
@@ -74,10 +78,9 @@ function Header() {
 
     if (user.role === "ADMIN") {
       return [
-        { label: "Dashboard", path: "/admin/dashboard", icon: LayoutDashboard, featured: true },
-        { label: "Quản lý khóa học", path: "/admin/courses", icon: GraduationCap },
-        { label: "Quản lý người dùng", path: "/admin/users", icon: Users },
-        { label: "Cài đặt tài khoản", path: "/settings", icon: Settings },
+        { label: isVietnamese ? "Tổng quan" : "Overview", path: "/admin/dashboard", icon: LayoutDashboard, featured: true },
+        { label: isVietnamese ? "Quản lý khóa học" : "Manage courses", path: "/admin/courses", icon: GraduationCap },
+        { label: isVietnamese ? "Quản lý người dùng" : "Manage users", path: "/admin/users", icon: Users },
       ];
     }
 
@@ -86,7 +89,6 @@ function Header() {
         { label: "Dashboard", path: "/dashboard/mentor", icon: LayoutDashboard, featured: true },
         { label: "Khóa học của tôi", path: "/mentor/courses", icon: GraduationCap },
         { label: "Tiến độ", path: "/mentor/progress", icon: BadgeCheck },
-        { label: "Cài đặt tài khoản", path: "/settings", icon: Settings },
       ];
     }
 
@@ -94,9 +96,8 @@ function Header() {
       { label: "Dashboard", path: "/dashboard/student", icon: LayoutDashboard, featured: true },
       { label: "Khóa học của tôi", path: "/my-learning", icon: GraduationCap },
       { label: "Chứng chỉ", path: "/certificates", icon: BadgeCheck },
-      { label: "Cài đặt tài khoản", path: "/settings", icon: Settings },
     ];
-  }, [user]);
+  }, [isVietnamese, user]);
 
   return (
     <>
@@ -172,6 +173,54 @@ function Header() {
                       <div className="app-account-dropdown-info">
                         <p className="app-account-dropdown-name">{user.username}</p>
                         <p className="app-account-dropdown-role">{user.role || "Student"}</p>
+                      </div>
+                    </div>
+
+                    <div className="app-account-dropdown-divider" />
+
+                    <div className="app-preference-group">
+                      <div className="app-preference-label">
+                        <Languages size={15} strokeWidth={2} />
+                        <span>{language === "vi" ? "Ngôn ngữ" : "Language"}</span>
+                      </div>
+                      <div className="app-preference-options" role="group" aria-label="Language">
+                        <button
+                          type="button"
+                          className={`app-preference-button ${language === "vi" ? "is-selected" : ""}`}
+                          onClick={() => setLanguage("vi")}
+                        >
+                          VI
+                        </button>
+                        <button
+                          type="button"
+                          className={`app-preference-button ${language === "en" ? "is-selected" : ""}`}
+                          onClick={() => setLanguage("en")}
+                        >
+                          EN
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="app-preference-group">
+                      <div className="app-preference-label">
+                        {theme === "light" ? <Sun size={15} strokeWidth={2} /> : <Moon size={15} strokeWidth={2} />}
+                        <span>{language === "vi" ? "Giao diện" : "Theme"}</span>
+                      </div>
+                      <div className="app-preference-options" role="group" aria-label="Theme">
+                        <button
+                          type="button"
+                          className={`app-preference-button ${theme === "light" ? "is-selected" : ""}`}
+                          onClick={() => setTheme("light")}
+                        >
+                          {language === "vi" ? "Sáng" : "Light"}
+                        </button>
+                        <button
+                          type="button"
+                          className={`app-preference-button ${theme === "dark" ? "is-selected" : ""}`}
+                          onClick={() => setTheme("dark")}
+                        >
+                          {language === "vi" ? "Tối" : "Dark"}
+                        </button>
                       </div>
                     </div>
 

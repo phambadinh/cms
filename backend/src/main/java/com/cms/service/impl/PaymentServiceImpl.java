@@ -89,8 +89,13 @@ public class PaymentServiceImpl implements PaymentService {
         Enrollment enrollment = enrollmentRepository.findByUserIdAndCourseId(userId, request.getCourseId())
                 .orElseThrow(() -> new RuntimeException("Bạn chưa đăng ký khóa học này"));
 
-        enrollment.setPaymentStatus(PaymentStatus.COMPLETED);
-        enrollment.setStatus(EnrollmentStatus.ACTIVE);
+        if (enrollment.getPaymentStatus() == PaymentStatus.COMPLETED) {
+            throw new RuntimeException("Thanh toán của bạn đã được xác nhận trước đó.");
+        }
+
+        // Client chỉ có thể báo đã chuyển khoản; việc hoàn tất phải do admin hoặc webhook xác nhận.
+        enrollment.setPaymentStatus(PaymentStatus.PENDING);
+        enrollment.setStatus(EnrollmentStatus.PENDING);
         if (request.getPaymentMethod() != null && !request.getPaymentMethod().isBlank()) {
             enrollment.setPaymentMethod(request.getPaymentMethod().toUpperCase());
         }
@@ -100,7 +105,7 @@ public class PaymentServiceImpl implements PaymentService {
         if (request.getSessionId() != null && !request.getSessionId().isBlank()) {
             enrollment.setSessionId(request.getSessionId().trim());
         }
-        enrollment.setPaymentCompletedAt(LocalDateTime.now());
+        enrollment.setPaymentCompletedAt(null);
         enrollmentRepository.save(enrollment);
     }
 }

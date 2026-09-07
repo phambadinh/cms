@@ -201,7 +201,7 @@ function AdminCertificatesPage() {
       <div className="admin-module-card">
         <div className="admin-module-toolbar">
           <span>Danh sách chứng chỉ theo khóa học đã chọn ở trên</span>
-          <span>{certificates.length} certificates</span>
+          <span>{certificates.length} chứng chỉ</span>
         </div>
 
         <div className="admin-table-wrap">
@@ -213,7 +213,7 @@ function AdminCertificatesPage() {
                 <th>Ngày cấp</th>
                 <th>Cấp bởi</th>
                 <th>Trạng thái</th>
-                <th>Actions</th>
+                <th>Thao tác</th>
               </tr>
             </thead>
             <tbody>
@@ -223,7 +223,7 @@ function AdminCertificatesPage() {
                 </tr>
               ) : loading ? (
                 <tr>
-                  <td colSpan={6}>Loading...</td>
+                  <td colSpan={6}>Đang tải...</td>
                 </tr>
               ) : certificates.length === 0 ? (
                 <tr>
@@ -246,7 +246,7 @@ function AdminCertificatesPage() {
                         }
                         title={cert.revoked ? cert.revokeReason || "" : ""}
                       >
-                        {cert.revoked ? "Revoked" : cert.verified ? "Verified" : "Active"}
+                        {cert.revoked ? "Đã thu hồi" : cert.verified ? "Đã xác minh" : "Đang hiệu lực"}
                       </span>
                     </td>
                     <td>

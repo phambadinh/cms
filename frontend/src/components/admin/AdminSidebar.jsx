@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { authLogout, getAuthUser } from "../../services/api";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 import {
   LayoutDashboard,
@@ -12,66 +13,26 @@ import {
   TrendingUp,
   MessageSquare,
   Award,
-  Settings,
   LogOut,
 } from "lucide-react";
 
 const adminItems = [
-  {
-    to: "/admin/dashboard",
-    label: "Dashboard",
-    icon: LayoutDashboard,
-  },
-  {
-    to: "/admin/users",
-    label: "Users",
-    icon: Users,
-  },
-  {
-    to: "/admin/teachers",
-    label: "Mentors",
-    icon: GraduationCap,
-  },
-  {
-    to: "/admin/courses",
-    label: "Courses",
-    icon: BookOpen,
-  },
-  {
-    to: "/admin/lectures",
-    label: "Lessons",
-    icon: PlayCircle,
-  },
-  {
-    to: "/admin/enrollments",
-    label: "Enrollments",
-    icon: ClipboardList,
-  },
-  {
-    to: "/admin/grades",
-    label: "Grades",
-    icon: BarChart3,
-  },
-  {
-    to: "/admin/progress",
-    label: "Progress",
-    icon: TrendingUp,
-  },
-  {
-    to: "/admin/feedbacks",
-    label: "Feedbacks",
-    icon: MessageSquare,
-  },
-  {
-    to: "/admin/certificates",
-    label: "Certificates",
-    icon: Award,
-  },
+  { to: "/admin/dashboard", vi: "Tổng quan", en: "Overview", icon: LayoutDashboard },
+  { to: "/admin/users", vi: "Người dùng", en: "Users", icon: Users },
+  { to: "/admin/teachers", vi: "Mentor", en: "Mentors", icon: GraduationCap },
+  { to: "/admin/courses", vi: "Khóa học", en: "Courses", icon: BookOpen },
+  { to: "/admin/lectures", vi: "Bài học", en: "Lessons", icon: PlayCircle },
+  { to: "/admin/enrollments", vi: "Đăng ký", en: "Enrollments", icon: ClipboardList },
+  { to: "/admin/grades", vi: "Điểm số", en: "Grades", icon: BarChart3 },
+  { to: "/admin/progress", vi: "Tiến độ", en: "Progress", icon: TrendingUp },
+  { to: "/admin/feedbacks", vi: "Phản hồi", en: "Feedback", icon: MessageSquare },
+  { to: "/admin/certificates", vi: "Chứng chỉ", en: "Certificates", icon: Award },
 ];
 
 function AdminSidebar() {
   const navigate = useNavigate();
   const user = getAuthUser();
+  const { isVietnamese } = useLanguage();
 
   const displayName =
     user?.fullName || user?.username || "Administrator";
@@ -83,10 +44,6 @@ function AdminSidebar() {
     navigate("/login", { replace: true });
   };
 
-  const handleSettings = () => {
-    navigate("/profile");
-  };
-
   return (
     <aside className="admin-sidebar">
       <div className="admin-sidebar-brand">
@@ -94,18 +51,18 @@ function AdminSidebar() {
 
         <div>
           <div className="admin-sidebar-title">
-            Dashboard Admin
+            {isVietnamese ? "Dashboard Admin" : "Admin Dashboard"}
           </div>
 
           <div className="admin-sidebar-subtitle">
-            Course Management System
+            {isVietnamese ? "Hệ thống quản lý khóa học" : "Course Management System"}
           </div>
         </div>
       </div>
 
       <nav
         className="admin-sidebar-nav"
-        aria-label="Admin navigation"
+        aria-label={isVietnamese ? "Điều hướng quản trị" : "Admin navigation"}
       >
         {adminItems.map((item) => {
           const Icon = item.icon;
@@ -122,7 +79,7 @@ function AdminSidebar() {
               }
             >
               <Icon size={18} strokeWidth={2} />
-              <span>{item.label}</span>
+              <span>{isVietnamese ? item.vi : item.en}</span>
             </NavLink>
           );
         })}
@@ -131,22 +88,12 @@ function AdminSidebar() {
       <div className="admin-sidebar-footer">
         <button
           type="button"
-          className="admin-sidebar-action"
-          onClick={handleSettings}
-          aria-label="Open settings"
-        >
-          <Settings size={18} strokeWidth={2} />
-          <span>Settings</span>
-        </button>
-
-        <button
-          type="button"
           className="admin-sidebar-action logout"
           onClick={handleLogout}
-          aria-label="Log out"
+          aria-label={isVietnamese ? "Đăng xuất" : "Log out"}
         >
           <LogOut size={18} strokeWidth={2} />
-          <span>Logout</span>
+          <span>{isVietnamese ? "Đăng xuất" : "Log out"}</span>
         </button>
       </div>
     </aside>

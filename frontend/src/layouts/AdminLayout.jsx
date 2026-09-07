@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import AdminHeader from "../components/admin/AdminHeader";
+import Header from "../components/Header";
 import AdminSidebar from "../components/admin/AdminSidebar";
 import "../styles/admin-layout.css";
 
@@ -8,7 +8,7 @@ function AdminLayout() {
     <div className="admin-layout-shell">
       <AdminSidebar />
       <div className="admin-layout-body">
-        <AdminHeader />
+        <Header />
         <main className="admin-layout-content">
           <Outlet />
         </main>

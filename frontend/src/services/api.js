@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+const VIETQR_BANKS_URL = 'https://api.vietqr.io/v2/banks';
 
 // Tạo axios instance
 export const apiClient = axios.create({
@@ -14,6 +15,16 @@ export const apiClient = axios.create({
 // payment responses to facilitate local testing without backend.
 const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
 export const USE_MOCK_PAYMENTS = urlParams?.get('mock') === 'true';
+
+let vietQrBanksPromise;
+
+/** Lấy danh sách ngân hàng VietQR để dùng BIN chuẩn khi tạo Quick Link. */
+export const getVietQrBanks = () => {
+  if (!vietQrBanksPromise) {
+    vietQrBanksPromise = axios.get(VIETQR_BANKS_URL).then((response) => response.data?.data || []);
+  }
+  return vietQrBanksPromise;
+};
 
 // Interceptor để thêm JWT token vào mỗi request
 apiClient.interceptors.request.use((config) => {
@@ -281,14 +292,28 @@ export const getLessonById = (lessonId) => {
  * Tạo bài giảng (MENTOR/ADMIN)
  */
 export const createLesson = (courseId, lessonData) => {
-  return apiClient.post(`/lessons/course/${courseId}`, lessonData);
+  const resolvedCourseId = typeof courseId === 'string' ? courseId : (courseId && courseId.courseId) ? courseId.courseId : null;
+  const payload = typeof courseId === 'string' ? lessonData : courseId;
+
+  if (!resolvedCourseId) {
+    return Promise.reject(new Error('courseId is required to create a lesson'));
+  }
+
+  return apiClient.post(`/lessons/course/${resolvedCourseId}`, payload);
 };
 
 /**
  * Cập nhật bài giảng (MENTOR/ADMIN)
  */
 export const updateLesson = (lessonId, lessonData) => {
-  return apiClient.put(`/lessons/${lessonId}`, lessonData);
+  const resolvedLessonId = typeof lessonId === 'string' ? lessonId : (lessonId && lessonId.id) ? lessonId.id : null;
+  const payload = typeof lessonId === 'string' ? lessonData : lessonId;
+
+  if (!resolvedLessonId) {
+    return Promise.reject(new Error('lessonId is required to update a lesson'));
+  }
+
+  return apiClient.put(`/lessons/${resolvedLessonId}`, payload);
 };
 
 /**
@@ -353,11 +378,10 @@ export const completeCoursePayment = (courseId, { transactionId, sessionId, paym
   if (paymentMethod) payload.paymentMethod = paymentMethod;
 
   if (USE_MOCK_PAYMENTS) {
-    // Simulate verification: treat any non-empty transactionId or sessionId as verified
+    // Mock only records a pending confirmation; it must not unlock the course.
     return new Promise((resolve) => {
       setTimeout(() => {
-        const verified = !!(transactionId || sessionId);
-        resolve({ data: { verified, message: verified ? 'Verified (mock)' : 'Pending (mock)' } });
+        resolve({ data: { status: 'PENDING', message: 'Đã gửi yêu cầu, đang chờ xác nhận.' }, status: 202 });
       }, 700);
     });
   }
@@ -377,6 +401,20 @@ export const getMyEnrollments = () => {
  */
 export const getEnrollmentById = (enrollmentId) => {
   return apiClient.get(`/enrollments/${enrollmentId}`);
+};
+
+/**
+ * Hoàn thành khóa học / enrollment (STUDENT)
+ */
+export const completeEnrollment = (enrollmentId) => {
+  return apiClient.post(`/enrollments/${enrollmentId}/complete`);
+};
+
+/**
+ * Hủy đăng ký khóa học (STUDENT)
+ */
+export const unenrollFromCourse = (enrollmentId) => {
+  return apiClient.post(`/enrollments/${enrollmentId}/unenroll`);
 };
 
 /**

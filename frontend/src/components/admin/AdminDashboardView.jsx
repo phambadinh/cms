@@ -132,7 +132,7 @@ function AdminDashboardView({
             ))}
           </section>
 
-          {/* TABLES: COURSES / ENROLLMENTS / MENTORS / CRUD SHORTCUTS */}
+          {/* TABLES: COURSES / ENROLLMENTS / MENTORS */}
           <section className="admin-content-grid">
             {/* Top courses */}
             <div className="admin-panel">
@@ -238,28 +238,6 @@ function AdminDashboardView({
               </div>
             </div>
 
-            {/* CRUD shortcuts */}
-            <div className="admin-panel">
-              <div className="admin-panel-header">
-                <h2>CRUD shortcuts</h2>
-                <span>Trỏ thẳng tới module quản trị</span>
-              </div>
-              <div className="admin-shortcuts-grid">
-                {quickActions.slice(0, 4).map((action) => {
-                  const Icon = action.icon;
-                  return (
-                    <button
-                      key={action.label}
-                      className="admin-action-card"
-                      onClick={() => navigate(action.to)}
-                    >
-                      <Icon size={18} style={{ marginRight: 8 }} />
-                      <span>{action.label}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
           </section>
         </>
       )}

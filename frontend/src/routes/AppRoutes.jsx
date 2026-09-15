@@ -42,6 +42,7 @@ import {
   MentorDashboard,
   MentorCourses,
   MentorLectures,
+  MentorGrades,
   MentorProgress,
 } from "../components/mentor";
 import {
@@ -117,12 +118,13 @@ function AppRoutes() {
           <Route path="/profile" element={<ProfileRedirect />} />
           <Route path="/dashboard" element={<DashboardRedirect />} />
           <Route path="/dashboard/mentor" element={<MentorDashboard />} />
+          <Route path="/mentor/dashboard" element={<MentorDashboard />} />
           <Route path="/dashboard/student" element={<StudentDashboard />} />
 
           <Route path="/mentor/courses" element={<MentorCourses />} />
           <Route path="/mentor/lectures" element={<MentorLectures />} />
           <Route path="/mentor/progress" element={<MentorProgress />} />
-          <Route path="/mentor/grades" element={<Grades />} />
+          <Route path="/mentor/grades" element={<MentorGrades />} />
 
           <Route path="/grades" element={<Grades />} />
           <Route path="/my-learning" element={<MyLearning />} />

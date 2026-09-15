@@ -420,6 +420,16 @@
   background: var(--cds-surface, #e8eef7);
 }
 
+.mentor-button.is-danger {
+  background: #fff5f5;
+  border-color: #f0b8b8;
+  color: #a12626;
+}
+
+.mentor-button.is-danger:hover:not(:disabled) {
+  background: #fbe9e9;
+}
+
 .mentor-table-actions {
   display: flex;
   align-items: center;
@@ -517,4 +527,92 @@
   .mentor-page-actions .mentor-button {
     flex: 1 1 160px;
   }
+}
+
+.mentor-modal-backdrop {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgb(15 17 20 / 45%);
+}
+
+.mentor-modal {
+  width: min(720px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow: auto;
+  padding: 24px;
+  background: var(--cds-white, #ffffff);
+  border: 1px solid var(--cds-border, #dae1ed);
+  border-radius: var(--cds-radius-lg, 16px);
+  box-shadow: 0 20px 60px rgb(15 17 20 / 20%);
+}
+
+.mentor-modal-header,
+.mentor-modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.mentor-modal-header {
+  margin-bottom: 20px;
+}
+
+.mentor-modal-header h2 {
+  margin: 0;
+  color: var(--cds-text, #0f1114);
+  font-size: 20px;
+}
+
+.mentor-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--cds-border, #dae1ed);
+  border-radius: var(--cds-radius-sm, 8px);
+  background: var(--cds-white, #ffffff);
+  color: var(--cds-text, #0f1114);
+  cursor: pointer;
+}
+
+.mentor-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.mentor-form-grid label {
+  display: grid;
+  gap: 6px;
+  color: var(--cds-text, #0f1114);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.mentor-form-grid input,
+.mentor-form-grid select,
+.mentor-form-grid textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--cds-border, #dae1ed);
+  border-radius: var(--cds-radius-sm, 8px);
+  background: var(--cds-white, #ffffff);
+  color: var(--cds-text, #0f1114);
+  font: inherit;
+  font-weight: 400;
+}
+
+.mentor-form-full {
+  grid-column: 1 / -1;
+}
+
+.mentor-modal-actions {
+  justify-content: flex-end;
+  margin-top: 20px;
 }

@@ -1,8 +1,15 @@
 // src/components/mentor/MentorCourses.jsx
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BookOpen, CheckCircle2, Clock3, PlusCircle, Users } from "lucide-react";
-import { getMyCreatedCourses, publishCourse, unpublishCourse } from "../../services/api";
+import { BookOpen, CheckCircle2, Clock3, Edit3, PlusCircle, Trash2, Users, X } from "lucide-react";
+import {
+  createCourse,
+  deleteCourse,
+  getMyCreatedCourses,
+  publishCourse,
+  unpublishCourse,
+  updateCourse,
+} from "../../services/api";
 import PageHeader from "./PageHeader";
 import StatCard from "./StatCard";
 import EmptyState from "./EmptyState";
@@ -16,6 +23,18 @@ function MentorCourses() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [busyCourseId, setBusyCourseId] = useState("");
+  const [showForm, setShowForm] = useState(false);
+  const [editingCourse, setEditingCourse] = useState(null);
+  const [form, setForm] = useState({
+    code: "",
+    name: "",
+    description: "",
+    courseType: "FREE",
+    price: "",
+    category: "",
+    thumbnail: "",
+    level: "BEGINNER",
+  });
   const navigate = useNavigate();
 
   const loadCourses = async () => {
@@ -60,6 +79,56 @@ function MentorCourses() {
     }
   };
 
+  const openCreateForm = () => {
+    setEditingCourse(null);
+    setForm({ code: "", name: "", description: "", courseType: "FREE", price: "", category: "", thumbnail: "", level: "BEGINNER" });
+    setShowForm(true);
+  };
+
+  const openEditForm = (course) => {
+    setEditingCourse(course);
+    setForm({
+      code: course.code || "",
+      name: course.name || "",
+      description: course.description || "",
+      courseType: course.courseType || "FREE",
+      price: course.price ?? "",
+      category: course.category || "",
+      thumbnail: course.thumbnail || "",
+      level: course.level || "BEGINNER",
+    });
+    setShowForm(true);
+  };
+
+  const handleSaveCourse = async (event) => {
+    event.preventDefault();
+    try {
+      setBusyCourseId("form");
+      const payload = { ...form, price: form.courseType === "PREMIUM" ? Number(form.price || 0) : 0 };
+      if (editingCourse) await updateCourse(editingCourse.id, payload);
+      else await createCourse(payload);
+      setShowForm(false);
+      await loadCourses();
+    } catch (err) {
+      setError(err.response?.data?.message || "Không thể lưu khóa học.");
+    } finally {
+      setBusyCourseId("");
+    }
+  };
+
+  const handleDeleteCourse = async (course) => {
+    if (!window.confirm(`Xóa khóa học ${course.name}?`)) return;
+    try {
+      setBusyCourseId(course.id);
+      await deleteCourse(course.id);
+      await loadCourses();
+    } catch (err) {
+      setError(err.response?.data?.message || "Không thể xóa khóa học.");
+    } finally {
+      setBusyCourseId("");
+    }
+  };
+
   return (
     <div className="mentor-page-shell">
       <PageHeader
@@ -69,9 +138,9 @@ function MentorCourses() {
         onReload={loadCourses}
         reloading={loading}
         actions={
-          <button className="mentor-button is-primary" type="button" onClick={() => navigate("/courses")}>
+          <button className="mentor-button is-primary" type="button" onClick={openCreateForm}>
             <PlusCircle size={16} />
-            Xem khóa học
+            Tạo khóa học
           </button>
         }
       />
@@ -129,12 +198,20 @@ function MentorCourses() {
                     </td>
                     <td>
                       <div className="mentor-table-actions">
-                        <button
+                          <button
                           type="button"
                           className="mentor-button is-ghost"
                           onClick={() => navigate(`/courses/${course.id}`)}
                         >
                           Xem
+                        </button>
+                        <button
+                          type="button"
+                          className="mentor-button is-ghost"
+                          onClick={() => openEditForm(course)}
+                        >
+                          <Edit3 size={14} />
+                          Sửa
                         </button>
                         <button
                           type="button"
@@ -144,6 +221,15 @@ function MentorCourses() {
                         >
                           {course.published ? "Hủy đăng" : "Đăng"}
                         </button>
+                        <button
+                          type="button"
+                          className="mentor-button is-danger"
+                          onClick={() => handleDeleteCourse(course)}
+                          disabled={busyCourseId === course.id}
+                        >
+                          <Trash2 size={14} />
+                          Xóa
+                        </button>
                       </div>
                     </td>
                   </tr>
@@ -152,6 +238,33 @@ function MentorCourses() {
             </table>
           </div>
         </section>
+      )}
+
+      {showForm && (
+        <div className="mentor-modal-backdrop" role="presentation">
+          <form className="mentor-modal" onSubmit={handleSaveCourse}>
+            <div className="mentor-modal-header">
+              <h2>{editingCourse ? "Sửa khóa học" : "Tạo khóa học"}</h2>
+              <button type="button" className="mentor-icon-button" onClick={() => setShowForm(false)} aria-label="Đóng">
+                <X size={18} />
+              </button>
+            </div>
+            <div className="mentor-form-grid">
+              <label>Mã khóa học<input required value={form.code} onChange={(e) => setForm({ ...form, code: e.target.value })} /></label>
+              <label>Tên khóa học<input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} /></label>
+              <label>Loại khóa học<select value={form.courseType} onChange={(e) => setForm({ ...form, courseType: e.target.value })}><option value="FREE">Miễn phí</option><option value="PREMIUM">Có phí</option></select></label>
+              <label>Giá<input type="number" min="0" disabled={form.courseType !== "PREMIUM"} value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} /></label>
+              <label>Danh mục<input value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} /></label>
+              <label>Cấp độ<input value={form.level} onChange={(e) => setForm({ ...form, level: e.target.value })} /></label>
+              <label className="mentor-form-full">Ảnh đại diện<input value={form.thumbnail} onChange={(e) => setForm({ ...form, thumbnail: e.target.value })} /></label>
+              <label className="mentor-form-full">Mô tả<textarea rows="4" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} /></label>
+            </div>
+            <div className="mentor-modal-actions">
+              <button type="button" className="mentor-button is-secondary" onClick={() => setShowForm(false)}>Hủy</button>
+              <button type="submit" className="mentor-button is-primary" disabled={busyCourseId === "form"}>{busyCourseId === "form" ? "Đang lưu..." : "Lưu khóa học"}</button>
+            </div>
+          </form>
+        </div>
       )}
     </div>
   );

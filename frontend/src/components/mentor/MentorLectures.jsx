@@ -1,7 +1,15 @@
 // src/components/mentor/MentorLectures.jsx
 import { useEffect, useMemo, useState } from "react";
-import { BookOpen, Clock3, Library } from "lucide-react";
-import { getLessonsByCourse, getMyCreatedCourses } from "../../services/api";
+import { BookOpen, Clock3, Edit3, Library, PlusCircle, Trash2, X } from "lucide-react";
+import {
+  createLesson,
+  deleteLesson,
+  getLessonsByCourse,
+  getMyCreatedCourses,
+  publishLesson,
+  unpublishLesson,
+  updateLesson,
+} from "../../services/api";
 import PageHeader from "./PageHeader";
 import StatCard from "./StatCard";
 import EmptyState from "./EmptyState";
@@ -15,6 +23,10 @@ function MentorLectures() {
   const [lessons, setLessons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [showForm, setShowForm] = useState(false);
+  const [editingLesson, setEditingLesson] = useState(null);
+  const [form, setForm] = useState({ courseId: "", title: "", description: "", videoUrl: "", duration: "", orderNumber: "1" });
+  const [busyLessonId, setBusyLessonId] = useState("");
 
   const loadData = async () => {
     try {
@@ -49,6 +61,60 @@ function MentorLectures() {
     loadData();
   }, []);
 
+  const openCreateForm = () => {
+    setEditingLesson(null);
+    setForm({ courseId: courses[0]?.id || "", title: "", description: "", videoUrl: "", duration: "", orderNumber: String(lessons.length + 1) });
+    setShowForm(true);
+  };
+
+  const openEditForm = (lesson) => {
+    setEditingLesson(lesson);
+    setForm({ courseId: lesson.courseId, title: lesson.title || "", description: lesson.description || "", videoUrl: lesson.videoUrl || "", duration: lesson.duration ?? "", orderNumber: lesson.orderNumber ?? "1" });
+    setShowForm(true);
+  };
+
+  const handleSaveLesson = async (event) => {
+    event.preventDefault();
+    try {
+      setBusyLessonId("form");
+      const payload = { ...form, duration: Number(form.duration || 0), orderNumber: Number(form.orderNumber || 1) };
+      if (editingLesson) await updateLesson(editingLesson.id, payload);
+      else await createLesson(form.courseId, payload);
+      setShowForm(false);
+      await loadData();
+    } catch (err) {
+      setError(err.response?.data?.message || "Không thể lưu bài giảng.");
+    } finally {
+      setBusyLessonId("");
+    }
+  };
+
+  const handleTogglePublish = async (lesson) => {
+    try {
+      setBusyLessonId(lesson.id);
+      if (lesson.published) await unpublishLesson(lesson.id);
+      else await publishLesson(lesson.id);
+      await loadData();
+    } catch (err) {
+      setError(err.response?.data?.message || "Không thể thay đổi trạng thái bài giảng.");
+    } finally {
+      setBusyLessonId("");
+    }
+  };
+
+  const handleDeleteLesson = async (lesson) => {
+    if (!window.confirm(`Xóa bài giảng ${lesson.title}?`)) return;
+    try {
+      setBusyLessonId(lesson.id);
+      await deleteLesson(lesson.id);
+      await loadData();
+    } catch (err) {
+      setError(err.response?.data?.message || "Không thể xóa bài giảng.");
+    } finally {
+      setBusyLessonId("");
+    }
+  };
+
   const stats = useMemo(() => {
     const published = lessons.filter((l) => l.published).length;
     const totalDuration = lessons.reduce((sum, l) => sum + (l.duration || 0), 0);
@@ -63,6 +129,7 @@ function MentorLectures() {
         subtitle="Theo dõi các bài giảng theo từng khóa học, trạng thái hiển thị và thời lượng nội dung."
         onReload={loadData}
         reloading={loading}
+        actions={<button className="mentor-button is-primary" type="button" onClick={openCreateForm} disabled={courses.length === 0}><PlusCircle size={16} />Tạo bài giảng</button>}
       />
 
       <div className="mentor-stats-grid">
@@ -97,6 +164,7 @@ function MentorLectures() {
                   <th>Thứ tự</th>
                   <th>Thời lượng</th>
                   <th>Trạng thái</th>
+                  <th>Hành động</th>
                 </tr>
               </thead>
               <tbody>
@@ -111,12 +179,39 @@ function MentorLectures() {
                         {lesson.published ? "Đã đăng" : "Nháp"}
                       </Badge>
                     </td>
+                    <td>
+                      <div className="mentor-table-actions">
+                        <button type="button" className="mentor-button is-ghost" onClick={() => openEditForm(lesson)}><Edit3 size={14} />Sửa</button>
+                        <button type="button" className="mentor-button is-secondary" onClick={() => handleTogglePublish(lesson)} disabled={busyLessonId === lesson.id}>{lesson.published ? "Hủy đăng" : "Đăng"}</button>
+                        <button type="button" className="mentor-button is-danger" onClick={() => handleDeleteLesson(lesson)} disabled={busyLessonId === lesson.id}><Trash2 size={14} />Xóa</button>
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         </section>
+      )}
+
+      {showForm && (
+        <div className="mentor-modal-backdrop" role="presentation">
+          <form className="mentor-modal" onSubmit={handleSaveLesson}>
+            <div className="mentor-modal-header">
+              <h2>{editingLesson ? "Sửa bài giảng" : "Tạo bài giảng"}</h2>
+              <button type="button" className="mentor-icon-button" onClick={() => setShowForm(false)} aria-label="Đóng"><X size={18} /></button>
+            </div>
+            <div className="mentor-form-grid">
+              <label>Khóa học<select required disabled={Boolean(editingLesson)} value={form.courseId} onChange={(e) => setForm({ ...form, courseId: e.target.value })}>{courses.map((course) => <option key={course.id} value={course.id}>{course.name}</option>)}</select></label>
+              <label>Thứ tự<input type="number" min="1" required value={form.orderNumber} onChange={(e) => setForm({ ...form, orderNumber: e.target.value })} /></label>
+              <label className="mentor-form-full">Tiêu đề<input required value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} /></label>
+              <label className="mentor-form-full">URL video<input value={form.videoUrl} onChange={(e) => setForm({ ...form, videoUrl: e.target.value })} /></label>
+              <label>Thời lượng (phút)<input type="number" min="0" value={form.duration} onChange={(e) => setForm({ ...form, duration: e.target.value })} /></label>
+              <label className="mentor-form-full">Mô tả<textarea rows="4" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} /></label>
+            </div>
+            <div className="mentor-modal-actions"><button type="button" className="mentor-button is-secondary" onClick={() => setShowForm(false)}>Hủy</button><button type="submit" className="mentor-button is-primary" disabled={busyLessonId === "form"}>{busyLessonId === "form" ? "Đang lưu..." : "Lưu bài giảng"}</button></div>
+          </form>
+        </div>
       )}
     </div>
   );

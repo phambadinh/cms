@@ -49,6 +49,37 @@ function LearningProgress() {
         <p>Theo dõi hành trình học tập, tiến độ hoàn thành và kết quả các khóa học của bạn.</p>
       </div>
 
+      <div className="progress-overview">
+        <div className="overview-main">
+          <span className="overview-badge">Tiến độ tổng thể</span>
+          <div className="overview-value-wrap">
+            <h2>{averageProgress}%</h2>
+            <div className="overview-ring">
+              <TrendingUp size={24} />
+            </div>
+          </div>
+          <p>Bạn đang duy trì nhịp học ổn định với {completedLessons} bài học đã hoàn thành.</p>
+        </div>
+
+        <div className="overview-details">
+          <div className="detail-item">
+            <BookOpen size={18} />
+            <span>Khóa đang học</span>
+            <strong>{activeCourses}</strong>
+          </div>
+          <div className="detail-item">
+            <Target size={18} />
+            <span>Hoàn thành</span>
+            <strong>{completedCourses}</strong>
+          </div>
+          <div className="detail-item">
+            <Trophy size={18} />
+            <span>Quiz đã làm</span>
+            <strong>{quizAttempts}</strong>
+          </div>
+        </div>
+      </div>
+
       <div className="progress-stats">
         <div className="stat-card">
           <BookOpen size={34} />

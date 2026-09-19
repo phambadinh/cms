@@ -4,6 +4,7 @@ import com.cms.dto.QuizRequest;
 import com.cms.dto.QuestionRequest;
 import com.cms.dto.QuestionResponse;
 import com.cms.dto.QuizResponse;
+import com.cms.dto.QuizManagementResponse;
 import com.cms.service.QuizService;
 import com.cms.service.QuestionService;
 import com.cms.model.Question;
@@ -44,6 +45,14 @@ public class QuizController {
     public QuizResponse getQuiz(@PathVariable String quizId) {
         Quiz quiz = quizService.getQuizById(quizId);
         return quizService.toResponse(quiz);
+    }
+
+    @GetMapping("/course/{courseId}")
+    @PreAuthorize("hasAnyRole('MENTOR', 'ADMIN')")
+    public List<QuizManagementResponse> getQuizzesByCourse(@PathVariable String courseId) {
+        return quizService.getQuizzesByCourseId(courseId).stream()
+            .map(quizService::toManagementResponse)
+            .toList();
     }
 
     // MENTOR/ADMIN: Cập nhật quiz

@@ -421,13 +421,13 @@
 }
 
 .mentor-button.is-danger {
-  background: #fff5f5;
-  border-color: #f0b8b8;
-  color: #a12626;
+  background: var(--cds-danger-bg, #fbe9e9);
+  border-color: var(--cds-danger-text, #9c2b2b);
+  color: var(--cds-danger-text, #9c2b2b);
 }
 
 .mentor-button.is-danger:hover:not(:disabled) {
-  background: #fbe9e9;
+  background: var(--cds-danger-bg, #fbe9e9);
 }
 
 .mentor-table-actions {

@@ -9,15 +9,6 @@ function formatTime(iso) {
     return "";
   }
 }
-
-/**
- * props:
- * - messages: [{ id, senderId, senderName, content, createdAt }]
- * - currentUserId
- * - onSend(content)
- * - loading
- * - placeholder
- */
 function ChatThread({ messages, currentUserId, onSend, loading, placeholder }) {
   const [draft, setDraft] = useState("");
   const bottomRef = useRef(null);

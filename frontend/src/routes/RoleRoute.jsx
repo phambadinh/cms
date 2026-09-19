@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { getAuthUser } from "../services/api";
 
 function RoleRoute({ allowedRoles = [], children }) {
@@ -16,7 +16,7 @@ function RoleRoute({ allowedRoles = [], children }) {
     return <Navigate to="/dashboard" replace />;
   }
 
-  return children;
+  return children || <Outlet />;
 }
 
 export default RoleRoute;

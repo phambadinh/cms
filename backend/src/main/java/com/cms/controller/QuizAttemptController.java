@@ -2,7 +2,6 @@ package com.cms.controller;
 
 import com.cms.dto.QuizAttemptRequest;
 import com.cms.dto.QuizAttemptResponse;
-import com.cms.model.Quiz;
 import com.cms.service.QuizAttemptService;
 import com.cms.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = {"https://cmsai.id.vn", "http://localhost:5173", "http://localhost:5174", "http://localhost:3000"})
 @RestController
@@ -28,11 +28,11 @@ public class QuizAttemptController {
             @RequestBody QuizAttemptRequest request,
             Authentication authentication) {
         String userId = authentication.getName();
-        
-        // Get courseId from quiz
-        Quiz quiz = quizService.getQuizById(request.getQuizId());
-        String courseId = quiz.getCourseId();
-        
+        if (request == null || request.getQuizId() == null || request.getQuizId().isBlank()) {
+            throw new IllegalArgumentException("quizId là bắt buộc");
+        }
+
+        String courseId = quizService.getQuizById(request.getQuizId()).getCourseId();
         return quizAttemptService.submitQuizAttempt(userId, courseId, request);
     }
 
@@ -41,10 +41,9 @@ public class QuizAttemptController {
     @PreAuthorize("hasRole('STUDENT')")
     public List<QuizAttemptResponse> getMyAttempts(Authentication authentication) {
         String userId = authentication.getName();
-        return quizAttemptService.getUserAttempts(userId)
-            .stream()
-            .map(quizAttemptService::toResponse)
-            .toList();
+        return quizAttemptService.getUserAttempts(userId).stream()
+                .map(quizAttemptService::toResponse)
+                .collect(Collectors.toList());
     }
 
     // MENTOR/ADMIN: Lấy các lần làm bài của học sinh cho một quiz
@@ -53,19 +52,17 @@ public class QuizAttemptController {
     public List<QuizAttemptResponse> getQuizAttempts(
             @PathVariable String quizId,
             @PathVariable String userId) {
-        return quizAttemptService.getQuizAttempts(quizId, userId)
-            .stream()
-            .map(quizAttemptService::toResponse)
-            .toList();
+        return quizAttemptService.getQuizAttempts(quizId, userId).stream()
+                .map(quizAttemptService::toResponse)
+                .collect(Collectors.toList());
     }
 
     // MENTOR/ADMIN: Lấy tất cả các lần làm bài cho một khóa học
     @GetMapping("/course/{courseId}")
     @PreAuthorize("hasAnyRole('MENTOR', 'ADMIN')")
     public List<QuizAttemptResponse> getCourseAttempts(@PathVariable String courseId) {
-        return quizAttemptService.getCourseAttempts(courseId)
-            .stream()
-            .map(quizAttemptService::toResponse)
-            .toList();
+        return quizAttemptService.getCourseAttempts(courseId).stream()
+                .map(quizAttemptService::toResponse)
+                .collect(Collectors.toList());
     }
 }

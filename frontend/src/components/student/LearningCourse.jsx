@@ -5,7 +5,6 @@ import { getCourseById, getLessonsByCourse, getEnrollmentByCourse } from "../../
 
 import VideoPlayer from "../learning/VideoPlayer";
 import LessonSidebar from "../learning/LessonSidebar";
-import ProgressTracker from "../learning/ProgressTracker";
 import LessonInfo from "../learning/LessonInfo";
 
 import "../../styles/learningCourse.css";
@@ -96,35 +95,76 @@ function LearningCourse() {
     );
   }
 
+  const completedLessons = lessons.length > 0 ? Math.round((progress / 100) * lessons.length) : 0;
+
   return (
-    <div className="learning-page">
-      <div className="learning-header">
-        <div>
-          <h1>{course?.title || "Learning"}</h1>
-          <p>Continue your learning journey</p>
-        </div>
-
-        <button
-          className="learning-quiz-btn"
-          onClick={() =>
-            currentLesson && navigate(`/learning/${courseId}/quiz/${currentLesson.id || currentLesson._id}`)
-          }
-        >
-          <ClipboardCheck size={18} />
-          Quiz
-        </button>
-      </div>
-
       <div className="learning-layout">
         <div className="learning-main">
+          <div className="learning-progress-card">
+            <div className="learning-progress-card-header">
+              <h3>Tiến độ học tập</h3>
+              <button
+                className="learning-quiz-btn"
+                onClick={() =>
+                  currentLesson && navigate(`/learning/${courseId}/quiz/${currentLesson.id || currentLesson._id}`)
+                }
+              >
+                <ClipboardCheck size={18} />
+                Quiz
+              </button>
+            </div>
+
+            <div className="learning-progress-summary">
+              <div>
+                <p>Theo dõi quá trình hoàn thành khóa học</p>
+              </div>
+              <div className="progress-percent">
+                {Math.round(progress)}%
+              </div>
+            </div>
+
+            <div className="progress-bar">
+              <div className="progress-fill" style={{ width: `${progress}%` }} />
+            </div>
+
+            <div className="progress-stats">
+              <div className="progress-card">
+                <BookOpen size={22} />
+                <div>
+                  <strong>{completedLessons}</strong>
+                  <span>Bài đã học</span>
+                </div>
+              </div>
+
+              <div className="progress-card">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" className="mini-trend-icon">
+                  <path d="M4 14l6-6 4 4 6-8" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M20 8v6h-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <div>
+                  <strong>{Math.round(progress)}%</strong>
+                  <span>Hoàn thành</span>
+                </div>
+              </div>
+
+              <div className="progress-card">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" className="mini-trophy-icon">
+                  <path d="M7 4h10v2a5 5 0 0 1-10 0V4zm0 0H5a2 2 0 0 0-2 2v1a5 5 0 0 0 5 5h1m10-8h2a2 2 0 0 1 2 2v1a5 5 0 0 1-5 5h-1M12 14v4m-3 0h6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <div>
+                  <strong>{lessons.length}</strong>
+                  <span>Tổng bài học</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <VideoPlayer lesson={currentLesson} />
           <LessonInfo lesson={currentLesson} />
-          <ProgressTracker current={progress} totalLessons={lessons.length} />
         </div>
 
         <LessonSidebar lessons={lessons} currentLesson={currentLesson} onSelectLesson={handleLessonChange} />
       </div>
-    </div>
   );
 }
 

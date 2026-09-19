@@ -2,6 +2,8 @@ package com.cms.service;
 
 import com.cms.dto.QuizRequest;
 import com.cms.dto.QuizResponse;
+import com.cms.dto.QuestionManagementResponse;
+import com.cms.dto.QuizManagementResponse;
 import com.cms.model.Question;
 import com.cms.model.Quiz;
 import com.cms.repository.QuizRepository;
@@ -84,6 +86,33 @@ public class QuizService {
             .collect(Collectors.toList());
         
         return new QuizResponse(
+            quiz.getId(),
+            quiz.getLessonId(),
+            quiz.getCourseId(),
+            quiz.getTitle(),
+            quiz.getDescription(),
+            quiz.getPassingScore(),
+            questionResponses,
+            quiz.isPublished(),
+            quiz.getCreatedAt(),
+            quiz.getUpdatedAt()
+        );
+    }
+
+    public QuizManagementResponse toManagementResponse(Quiz quiz) {
+        List<QuestionManagementResponse> questionResponses = questionRepository.findByQuizId(quiz.getId()).stream()
+            .sorted((q1, q2) -> Integer.compare(q1.getOrderNumber(), q2.getOrderNumber()))
+            .map(question -> new QuestionManagementResponse(
+                question.getId(),
+                question.getQuestionText(),
+                question.getOptions(),
+                question.getCorrectAnswerIndex(),
+                question.getOrderNumber(),
+                question.getExplanation()
+            ))
+            .collect(Collectors.toList());
+
+        return new QuizManagementResponse(
             quiz.getId(),
             quiz.getLessonId(),
             quiz.getCourseId(),

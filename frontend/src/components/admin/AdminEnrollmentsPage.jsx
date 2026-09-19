@@ -1,11 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import { BookOpen, CheckCircle2, RefreshCw, UserX, Users } from "lucide-react";
+import { BookOpen, CheckCircle2, RefreshCw, Users } from "lucide-react";
 import {
-  completeEnrollment,
   getAllCourses,
   getAllUsers,
   getEnrollmentsByCourse,
-  unenrollFromCourse,
 } from "../../services/api";
 import "../../styles/dashboard.css";
 
@@ -13,7 +11,6 @@ function AdminEnrollmentsPage() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [busyId, setBusyId] = useState("");
 
   const loadItems = async () => {
     try {
@@ -61,31 +58,13 @@ function AdminEnrollmentsPage() {
     return { total: items.length, active, completed };
   }, [items]);
 
-  const handleComplete = async (enrollmentId) => {
-    try {
-      setBusyId(enrollmentId);
-      await completeEnrollment(enrollmentId);
-      await loadItems();
-    } catch (err) {
-      console.error("Không hoàn thành enrollment:", err);
-      setError("Không thể cập nhật trạng thái hoàn thành.");
-    } finally {
-      setBusyId("");
-    }
-  };
-
-  const handleUnenroll = async (enrollmentId) => {
-    try {
-      setBusyId(enrollmentId);
-      await unenrollFromCourse(enrollmentId);
-      await loadItems();
-    } catch (err) {
-      console.error("Không hủy đăng ký enrollment:", err);
-      setError("Không thể hủy đăng ký.");
-    } finally {
-      setBusyId("");
-    }
-  };
+  const getStatusLabel = (status) => ({
+    ACTIVE: "Đang hoạt động",
+    PENDING: "Chờ xử lý",
+    COMPLETED: "Hoàn thành",
+    CANCELLED: "Đã hủy",
+    INACTIVE: "Không hoạt động",
+  }[status] || "Không xác định");
 
   return (
     <div className="admin-module-page">
@@ -105,82 +84,72 @@ function AdminEnrollmentsPage() {
 
       {error && <div className="dash-error">{error}</div>}
 
-      <div className="mentor-stats-grid" style={{ marginBottom: 20 }}>
-        <div className="stat-card">
-          <div className="stat-icon"><Users size={18} /></div>
+      <div className="admin-enrollment-stats">
+        <div className="admin-enrollment-stat">
+          <div className="admin-enrollment-stat-icon"><Users size={18} /></div>
           <div>
-            <div className="stat-label">Tổng đăng ký</div>
-            <div className="stat-value">{stats.total}</div>
+            <div className="admin-enrollment-stat-label">Tổng đăng ký</div>
+            <div className="admin-enrollment-stat-value">{stats.total}</div>
           </div>
         </div>
-        <div className="stat-card">
-          <div className="stat-icon"><BookOpen size={18} /></div>
+        <div className="admin-enrollment-stat">
+          <div className="admin-enrollment-stat-icon"><BookOpen size={18} /></div>
           <div>
-            <div className="stat-label">Đang hoạt động</div>
-            <div className="stat-value">{stats.active}</div>
+            <div className="admin-enrollment-stat-label">Đang hoạt động</div>
+            <div className="admin-enrollment-stat-value">{stats.active}</div>
           </div>
         </div>
-        <div className="stat-card">
-          <div className="stat-icon"><CheckCircle2 size={18} /></div>
+        <div className="admin-enrollment-stat">
+          <div className="admin-enrollment-stat-icon"><CheckCircle2 size={18} /></div>
           <div>
-            <div className="stat-label">Hoàn thành</div>
-            <div className="stat-value">{stats.completed}</div>
+            <div className="admin-enrollment-stat-label">Hoàn thành</div>
+            <div className="admin-enrollment-stat-value">{stats.completed}</div>
           </div>
         </div>
       </div>
 
-      <div className="admin-module-card">
-        <div className="admin-module-toolbar">
-          <span>Danh sách đăng ký</span>
+      <div className="admin-module-card admin-enrollment-panel">
+        <div className="admin-module-toolbar admin-enrollment-toolbar">
+          <strong>Danh sách đăng ký</strong>
           <span>{items.length} bản ghi</span>
         </div>
 
         <div className="admin-table-wrap">
-          <table className="admin-table">
+          <table className="admin-table admin-enrollment-table">
             <thead>
               <tr>
                 <th>Học viên</th>
                 <th>Khóa học</th>
                 <th>Tiến độ</th>
                 <th>Trạng thái</th>
-                <th>Thao tác</th>
               </tr>
             </thead>
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={5} style={{ textAlign: "center", padding: "24px" }}>Đang tải...</td>
+                  <td colSpan={4} style={{ textAlign: "center", padding: "24px" }}>Đang tải...</td>
                 </tr>
               ) : items.length === 0 ? (
                 <tr>
-                  <td colSpan={5} style={{ textAlign: "center", padding: "24px" }}>Không có dữ liệu đăng ký.</td>
+                  <td colSpan={4} style={{ textAlign: "center", padding: "24px" }}>Không có dữ liệu đăng ký.</td>
                 </tr>
               ) : (
                 items.map((item) => (
                   <tr key={item.id || `${item.userId}-${item.courseId}`}>
                     <td>{item.studentName}</td>
                     <td>{item.courseName}</td>
-                    <td>{Number(item.progressPercentage || 0).toFixed(0)}%</td>
-                    <td>{item.status || "UNKNOWN"}</td>
                     <td>
-                      <div className="admin-row-actions">
-                        <button
-                          type="button"
-                          className="admin-row-button"
-                          onClick={() => handleComplete(item.id)}
-                          disabled={!item.id || busyId === item.id}
-                        >
-                          <CheckCircle2 size={14} />
-                        </button>
-                        <button
-                          type="button"
-                          className="admin-row-button danger"
-                          onClick={() => handleUnenroll(item.id)}
-                          disabled={!item.id || busyId === item.id}
-                        >
-                          <UserX size={14} />
-                        </button>
+                      <div className="admin-enrollment-progress">
+                        <span>{Number(item.progressPercentage || 0).toFixed(0)}%</span>
+                        <div className="admin-enrollment-progress-track">
+                          <span style={{ width: `${Math.min(100, Math.max(0, Number(item.progressPercentage || 0)))}%` }} />
+                        </div>
                       </div>
+                    </td>
+                    <td>
+                      <span className={`admin-enrollment-status ${item.status === "COMPLETED" ? "is-complete" : item.status === "ACTIVE" ? "is-active" : "is-pending"}`}>
+                        {getStatusLabel(item.status)}
+                      </span>
                     </td>
                   </tr>
                 ))

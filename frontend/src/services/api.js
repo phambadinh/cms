@@ -397,38 +397,10 @@ export const getMyEnrollments = () => {
 };
 
 /**
- * Lấy chi tiết enrollment
- */
-export const getEnrollmentById = (enrollmentId) => {
-  return apiClient.get(`/enrollments/${enrollmentId}`);
-};
-
-/**
- * Hoàn thành khóa học / enrollment (STUDENT)
- */
-export const completeEnrollment = (enrollmentId) => {
-  return apiClient.post(`/enrollments/${enrollmentId}/complete`);
-};
-
-/**
- * Hủy đăng ký khóa học (STUDENT)
- */
-export const unenrollFromCourse = (enrollmentId) => {
-  return apiClient.post(`/enrollments/${enrollmentId}/unenroll`);
-};
-
-/**
  * Lấy danh sách học viên của khóa học (MENTOR/ADMIN)
  */
 export const getEnrollmentsByCourse = (courseId) => {
-  return apiClient.get(`/enrollments/course/${courseId}`);
-};
-
-/**
- * Cập nhật trạng thái enrollment (MENTOR/ADMIN)
- */
-export const updateEnrollmentStatus = (enrollmentId, status) => {
-  return apiClient.put(`/enrollments/${enrollmentId}`, { status });
+  return apiClient.get(`/enrollments/course/${courseId}/students`);
 };
 
 // ============ QUIZ SERVICES ============
@@ -440,11 +412,15 @@ export const getQuizByLesson = (lessonId) => {
   return apiClient.get(`/quizzes/lesson/${lessonId}`);
 };
 
+export const getQuizzesByCourse = (courseId) => {
+  return apiClient.get(`/quizzes/course/${courseId}`);
+};
+
 /**
  * Tạo quiz (MENTOR/ADMIN)
  */
 export const createQuiz = (lessonId, quizData) => {
-  return apiClient.post(`/quizzes/lesson/${lessonId}`, quizData);
+  return apiClient.post('/quizzes', { ...quizData, lessonId });
 };
 
 /**
@@ -475,6 +451,22 @@ export const deleteQuiz = (quizId) => {
   return apiClient.delete(`/quizzes/${quizId}`);
 };
 
+export const getQuestionsByQuiz = (quizId) => {
+  return apiClient.get(`/quizzes/${quizId}/questions`);
+};
+
+export const addQuestion = (quizId, questionData) => {
+  return apiClient.post(`/quizzes/${quizId}/questions`, questionData);
+};
+
+export const updateQuestion = (questionId, questionData) => {
+  return apiClient.put(`/quizzes/questions/${questionId}`, questionData);
+};
+
+export const deleteQuestion = (questionId) => {
+  return apiClient.delete(`/quizzes/questions/${questionId}`);
+};
+
 // ============ QUIZ ATTEMPT SERVICES ============
 
 /**
@@ -494,20 +486,6 @@ export const getMyQuizAttempts = () => {
   return apiClient.get('/quiz-attempts/my-attempts');
 };
 
-/**
- * Lấy chi tiết nỗ lực quiz
- */
-export const getQuizAttemptById = (attemptId) => {
-  return apiClient.get(`/quiz-attempts/${attemptId}`);
-};
-
-/**
- * Lấy tất cả nỗ lực quiz của bài (MENTOR/ADMIN)
- */
-export const getQuizAttemptsByQuiz = (quizId) => {
-  return apiClient.get(`/quiz-attempts/quiz/${quizId}`);
-};
-
 // ============ LESSON PROGRESS SERVICES ============
 
 /**
@@ -515,20 +493,6 @@ export const getQuizAttemptsByQuiz = (quizId) => {
  */
 export const getLessonProgress = (lessonId) => {
   return apiClient.get(`/lesson-progress/${lessonId}`);
-};
-
-/**
- * Lấy tiến độ của tất cả bài học trong khóa học
- */
-export const getCourseProgress = (courseId) => {
-  return apiClient.get(`/lesson-progress/course/${courseId}`);
-};
-
-/**
- * Lấy tiến độ của người dùng hiện tại
- */
-export const getMyProgress = () => {
-  return apiClient.get('/lesson-progress/my-progress');
 };
 
 // ============ DASHBOARD SERVICES ============
@@ -625,9 +589,12 @@ export const completeLesson =
 // ================= CERTIFICATE =================
 
 // Cấp chứng chỉ khi hoàn thành khóa học
-export const issueCertificate = (courseId) => {
+export const issueCertificate = (courseId, userId) => {
+  const params = { courseId };
+  if (userId) params.userId = userId;
+
   return apiClient.post("/certificates/issue", null, {
-    params: { courseId },
+    params,
   });
 };
 

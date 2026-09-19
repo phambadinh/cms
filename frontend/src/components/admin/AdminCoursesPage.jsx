@@ -44,7 +44,7 @@ const columns = [
   {
     key: "published",
     label: "Trạng thái",
-    render: (item) => (item.published ? "Đã xuất bản" : "Bản nháp"),
+    render: (item) => (item.published ? "Đã đăng" : "Nháp"),
   },
 ];
 
@@ -63,7 +63,7 @@ function AdminCoursesPage() {
   return (
     <AdminCrudPage
       title="Khóa học"
-      subtitle="Quản lý khóa học, xuất bản và xóa dữ liệu."
+      subtitle="Quản lý khóa học, đăng và hủy đăng dữ liệu."
       icon={BookOpen}
       primaryActionIcon={Plus}
       secondaryActionIcon={RefreshCw}
@@ -92,7 +92,7 @@ function AdminCoursesPage() {
       renderRowActions={(item, refresh) => (
         <button
           type="button"
-          className="admin-row-button"
+          className="admin-row-button secondary"
           onClick={async () => {
             if (item.published) {
               await unpublishCourse(item.id);
@@ -104,13 +104,13 @@ function AdminCoursesPage() {
         >
           {item.published ? (
             <>
-              <EyeOff size={14} style={{ marginRight: 4 }} />
-              Unpublish
+              <EyeOff size={14} />
+              Hủy đăng
             </>
           ) : (
             <>
-              <Eye size={14} style={{ marginRight: 4 }} />
-              Publish
+              <Eye size={14} />
+              Đăng
             </>
           )}
         </button>

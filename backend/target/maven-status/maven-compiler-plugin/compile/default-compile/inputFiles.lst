@@ -10,7 +10,9 @@ D:\CMS\backend\src\main\java\com\cms\service\impl\CourseServiceImpl.java
 D:\CMS\backend\src\main\java\com\cms\model\QuizAttempt.java
 D:\CMS\backend\src\main\java\com\cms\controller\UserController.java
 D:\CMS\backend\src\main\java\com\cms\dto\LoginRequest.java
+D:\CMS\backend\src\main\java\com\cms\service\WishlistService.java
 D:\CMS\backend\src\main\java\com\cms\model\EmailVerificationToken.java
+D:\CMS\backend\src\main\java\com\cms\repository\WishlistRepository.java
 D:\CMS\backend\src\main\java\com\cms\model\EnrollmentStatus.java
 D:\CMS\backend\src\main\java\com\cms\dto\LessonProgressResponse.java
 D:\CMS\backend\src\main\java\com\cms\service\impl\GradeServiceImpl.java
@@ -25,6 +27,7 @@ D:\CMS\backend\src\main\java\com\cms\service\impl\PaymentServiceImpl.java
 D:\CMS\backend\src\main\java\com\cms\dto\PaymentInitiateResponse.java
 D:\CMS\backend\src\main\java\com\cms\repository\QuizAttemptRepository.java
 D:\CMS\backend\src\main\java\com\cms\dto\GradeRequest.java
+D:\CMS\backend\src\main\java\com\cms\dto\QuizManagementResponse.java
 D:\CMS\backend\src\main\java\com\cms\exception\GlobalExceptionHandler.java
 D:\CMS\backend\src\main\java\com\cms\repository\PasswordResetTokenRepository.java
 D:\CMS\backend\src\main\java\com\cms\service\CertificateService.java
@@ -49,6 +52,7 @@ D:\CMS\backend\src\main\java\com\cms\dto\PaymentInitiateRequest.java
 D:\CMS\backend\src\main\java\com\cms\security\JwtHandshakeInterceptor.java
 D:\CMS\backend\src\main\java\com\cms\controller\BlogPostController.java
 D:\CMS\backend\src\main\java\com\cms\controller\EnrollmentController.java
+D:\CMS\backend\src\main\java\com\cms\dto\QuestionManagementResponse.java
 D:\CMS\backend\src\main\java\com\cms\dto\QuestionResponse.java
 D:\CMS\backend\src\main\java\com\cms\controller\ChatWebSocketController.java
 D:\CMS\backend\src\main\java\com\cms\dto\EnrollmentRequest.java
@@ -77,6 +81,7 @@ D:\CMS\backend\src\main\java\com\cms\config\CorsConfig.java
 D:\CMS\backend\src\main\java\com\cms\service\DashboardService.java
 D:\CMS\backend\src\main\java\com\cms\model\PasswordResetToken.java
 D:\CMS\backend\src\main\java\com\cms\repository\CertificateRepository.java
+D:\CMS\backend\src\main\java\com\cms\controller\WishlistController.java
 D:\CMS\backend\src\main\java\com\cms\dto\DashboardResponse.java
 D:\CMS\backend\src\main\java\com\cms\dto\EnrollmentResponse.java
 D:\CMS\backend\src\main\java\com\cms\model\ChatMessage.java
@@ -90,6 +95,7 @@ D:\CMS\backend\src\main\java\com\cms\controller\LessonProgressController.java
 D:\CMS\backend\src\main\java\com\cms\dto\QuestionRequest.java
 D:\CMS\backend\src\main\java\com\cms\model\PaymentStatus.java
 D:\CMS\backend\src\main\java\com\cms\dto\GradeResponse.java
+D:\CMS\backend\src\main\java\com\cms\model\Wishlist.java
 D:\CMS\backend\src\main\java\com\cms\service\QuizAttemptService.java
 D:\CMS\backend\src\main\java\com\cms\dto\CourseRequest.java
 D:\CMS\backend\src\main\java\com\cms\dto\LoginResponse.java

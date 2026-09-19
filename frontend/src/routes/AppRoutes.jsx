@@ -24,19 +24,21 @@ import ProtectedRoute from "./ProtectedRoute";
 import RoleRoute from "./RoleRoute";
 import EnrollmentRoute from "./EnrollmentRoute";
 import { getAuthUser } from "../services/api";
+import QuizManagementPage from "../components/quiz/QuizManagementPage";
+import { getAllCourses, getMyCreatedCourses } from "../services/api";
 
 import {
   AdminDashboard,
-  AdminModulePage,
   AdminUsersPage,
   AdminTeachersPage,
   AdminCoursesPage,
+  AdminBlogPage,
   AdminLessonsPage,
   AdminEnrollmentsPage,
   AdminGradesPage,
   AdminProgressPage,
-  AdminFeedbackPage,
   AdminCertificatesPage,
+  AdminFeedbackPage,
 } from "../components/admin";
 import {
   MentorDashboard,
@@ -117,37 +119,43 @@ function AppRoutes() {
         >
           <Route path="/profile" element={<ProfileRedirect />} />
           <Route path="/dashboard" element={<DashboardRedirect />} />
-          <Route path="/dashboard/mentor" element={<MentorDashboard />} />
-          <Route path="/mentor/dashboard" element={<MentorDashboard />} />
-          <Route path="/dashboard/student" element={<StudentDashboard />} />
 
-          <Route path="/mentor/courses" element={<MentorCourses />} />
-          <Route path="/mentor/lectures" element={<MentorLectures />} />
-          <Route path="/mentor/progress" element={<MentorProgress />} />
-          <Route path="/mentor/grades" element={<MentorGrades />} />
+          <Route element={<RoleRoute allowedRoles={["MENTOR"]} />}>
+            <Route path="/dashboard/mentor" element={<MentorDashboard />} />
+            <Route path="/mentor/dashboard" element={<MentorDashboard />} />
+            <Route path="/mentor/courses" element={<MentorCourses />} />
+            <Route path="/mentor/lectures" element={<MentorLectures />} />
+            <Route path="/mentor/quizzes" element={<QuizManagementPage loadCourses={getMyCreatedCourses} roleLabel="MENTOR" />} />
+            <Route path="/mentor/blog" element={<AdminBlogPage />} />
+            <Route path="/mentor/progress" element={<MentorProgress />} />
+            <Route path="/mentor/grades" element={<MentorGrades />} />
+          </Route>
 
-          <Route path="/grades" element={<Grades />} />
-          <Route path="/my-learning" element={<MyLearning />} />
-          <Route path="/learning-progress" element={<LearningProgress />} />
-          <Route path="/certificates" element={<Certificate />} />
-          <Route path="/wishlist" element={<Wishlist />} />
+          <Route element={<RoleRoute allowedRoles={["STUDENT"]} />}>
+            <Route path="/dashboard/student" element={<StudentDashboard />} />
+            <Route path="/grades" element={<Grades />} />
+            <Route path="/my-learning" element={<MyLearning />} />
+            <Route path="/learning-progress" element={<LearningProgress />} />
+            <Route path="/certificates" element={<Certificate />} />
+            <Route path="/wishlist" element={<Wishlist />} />
 
-          <Route
-            path="/learning/:courseId"
-            element={
-              <EnrollmentRoute>
-                <LearningCourse />
-              </EnrollmentRoute>
-            }
-          />
-          <Route
-            path="/learning/:courseId/quiz/:lessonId"
-            element={
-              <EnrollmentRoute>
-                <LearningQuizPage />
-              </EnrollmentRoute>
-            }
-          />
+            <Route
+              path="/learning/:courseId"
+              element={
+                <EnrollmentRoute>
+                  <LearningCourse />
+                </EnrollmentRoute>
+              }
+            />
+            <Route
+              path="/learning/:courseId/quiz/:lessonId"
+              element={
+                <EnrollmentRoute>
+                  <LearningQuizPage />
+                </EnrollmentRoute>
+              }
+            />
+          </Route>
         </Route>
 
         {/* Admin-only pages */}
@@ -165,6 +173,8 @@ function AppRoutes() {
           <Route path="/admin/users" element={<AdminUsersPage />} />
           <Route path="/admin/teachers" element={<AdminTeachersPage />} />
           <Route path="/admin/courses" element={<AdminCoursesPage />} />
+          <Route path="/admin/blog" element={<AdminBlogPage />} />
+          <Route path="/admin/quizzes" element={<QuizManagementPage loadCourses={getAllCourses} roleLabel="ADMIN" />} />
           <Route path="/admin/certificates" element={<AdminCertificatesPage />} />
 
           <Route path="/admin/lectures" element={<AdminLessonsPage />} />

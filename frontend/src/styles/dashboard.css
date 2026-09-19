@@ -409,7 +409,8 @@
 }
 
 .admin-module-button {
-  padding: 10px 14px;
+  min-height: 38px;
+  padding: 9px 12px;
   border-radius: var(--cds-radius-sm);
   border: 1px solid var(--cds-border);
   background: var(--cds-white);
@@ -453,6 +454,187 @@
   flex-wrap: wrap;
 }
 
+.admin-enrollment-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.admin-enrollment-stat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 86px;
+  padding: 14px 16px;
+  border: 1px solid var(--cds-border);
+  border-radius: var(--cds-radius-md);
+  background: var(--cds-white);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.admin-enrollment-stat:hover {
+  border-color: var(--cds-blue);
+  box-shadow: 0 4px 14px rgba(15, 17, 20, 0.06);
+}
+
+.admin-enrollment-stat-icon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: var(--cds-radius-sm);
+  background: var(--cds-surface);
+  color: var(--cds-blue);
+}
+
+.admin-enrollment-stat-label {
+  color: var(--cds-text-muted);
+  font-size: 13px;
+}
+
+.admin-enrollment-stat-value {
+  margin-top: 4px;
+  color: var(--cds-text);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.admin-enrollment-toolbar strong {
+  color: var(--cds-text);
+  font-size: 15px;
+}
+
+.admin-enrollment-toolbar span {
+  color: var(--cds-text-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.admin-enrollment-table {
+  min-width: 760px;
+}
+
+.admin-enrollment-table th,
+.admin-enrollment-table td {
+  padding: 13px 10px;
+  vertical-align: middle;
+}
+
+.admin-enrollment-table th:nth-child(1) {
+  width: 18%;
+}
+
+.admin-enrollment-table th:nth-child(2) {
+  width: 38%;
+}
+
+.admin-enrollment-table th:nth-child(3) {
+  width: 25%;
+}
+
+.admin-enrollment-table th:nth-child(4) {
+  width: 19%;
+}
+
+.admin-enrollment-table td:nth-child(1),
+.admin-enrollment-table td:nth-child(2) {
+  color: var(--cds-text);
+  font-weight: 600;
+}
+
+.admin-enrollment-progress {
+  display: grid;
+  grid-template-columns: 34px minmax(90px, 150px);
+  align-items: center;
+  gap: 8px;
+  color: var(--cds-text-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.admin-enrollment-progress-track {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--cds-surface);
+}
+
+.admin-enrollment-progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--cds-blue);
+}
+
+.admin-enrollment-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 9px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.admin-enrollment-status.is-active {
+  background: var(--cds-success-bg);
+  border-color: rgba(26, 107, 60, 0.18);
+  color: var(--cds-success-text);
+}
+
+.admin-enrollment-status.is-complete {
+  background: var(--cds-surface);
+  border-color: var(--cds-border);
+  color: var(--cds-blue);
+}
+
+.admin-enrollment-status.is-pending {
+  background: var(--cds-warn-bg);
+  border-color: rgba(138, 90, 18, 0.18);
+  color: var(--cds-warn-text);
+}
+
+.table-search {
+  display: flex;
+  align-items: center;
+  width: min(300px, 100%);
+  min-height: 38px;
+  gap: 8px;
+  padding: 0 10px;
+  border: 1px solid var(--cds-border);
+  border-radius: var(--cds-radius-sm);
+  background: var(--cds-white);
+  color: var(--cds-text-muted);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.table-search:focus-within {
+  border-color: var(--cds-blue);
+  box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.12);
+}
+
+.table-search input {
+  width: 100%;
+  min-width: 0;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--cds-text);
+  font: inherit;
+}
+
+.table-search input::placeholder {
+  color: var(--cds-text-muted);
+}
+
+.table-search input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
 /* CRUD MODAL */
 
 .admin-crud-modal-backdrop {
@@ -461,13 +643,14 @@
   z-index: 1000;
   display: grid;
   place-items: center;
-  padding: 24px;
+  padding: 16px;
   background: rgba(15, 17, 20, 0.45);
 }
 
 .admin-crud-modal {
-  width: min(560px, 100%);
-  max-height: min(760px, calc(100vh - 48px));
+  width: min(700px, 100%);
+  max-height: min(760px, calc(100vh - 32px));
+  padding: 20px;
   overflow-y: auto;
   box-shadow: 0 24px 70px rgba(15, 17, 20, 0.24);
 }
@@ -476,8 +659,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 18px;
+  gap: 12px;
+  margin-bottom: 14px;
 }
 
 .admin-crud-modal-header h3 {
@@ -486,14 +669,38 @@
 
 .admin-form-grid {
   display: grid;
-  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 12px;
 }
 
 .admin-field {
   display: grid;
   gap: 6px;
+  min-width: 0;
   color: var(--cds-text);
+  font-size: 13px;
   font-weight: 600;
+}
+
+.admin-field-textarea {
+  min-width: 0;
+}
+
+.admin-field-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+}
+
+.admin-field-checkbox input[type="checkbox"] {
+  width: 18px;
+  min-width: 18px;
+  height: 18px;
+  min-height: 18px;
+  margin: 0;
+  padding: 0;
+  accent-color: var(--cds-blue);
 }
 
 .admin-field input,
@@ -502,7 +709,8 @@
   width: 100%;
   border: 1px solid var(--cds-border);
   border-radius: var(--cds-radius-sm);
-  padding: 10px 12px;
+  min-height: 40px;
+  padding: 8px 10px;
   background: var(--cds-white);
   color: var(--cds-text);
   font: inherit;
@@ -518,44 +726,81 @@
 }
 
 .admin-field textarea {
+  min-height: 78px;
   resize: vertical;
 }
 
 .admin-form-actions {
   display: flex;
   gap: 10px;
-  margin-top: 14px;
+  justify-content: flex-end;
+  margin-top: 16px;
   flex-wrap: wrap;
 }
 
 .admin-row-actions {
   display: flex;
+  align-items: center;
   gap: 8px;
   flex-wrap: wrap;
 }
 
 .admin-row-button {
-  padding: 8px 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
   border-radius: var(--cds-radius-sm);
-  border: 1px solid var(--cds-border);
+  border: 1px solid transparent;
   background: var(--cds-white);
-  color: var(--cds-blue);
-  font-weight: 700;
-  cursor: pointer;
+  color: var(--cds-text);
   font: inherit;
-  transition: background 0.15s ease;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .admin-row-button:hover {
   background: var(--cds-surface);
 }
 
+.admin-row-button.secondary {
+  background: var(--cds-surface);
+  border-color: var(--cds-border);
+  color: var(--cds-blue);
+}
+
+.admin-row-button.secondary:hover {
+  background: var(--cds-white);
+  border-color: var(--cds-blue);
+}
+
+.admin-row-button:focus-visible {
+  outline: 0;
+  border-color: var(--cds-blue);
+  box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.12);
+}
+
 .admin-row-button.danger {
+  background: var(--cds-danger-bg);
+  border-color: var(--cds-danger-text);
   color: var(--cds-danger-text);
 }
 
 .admin-row-button.danger:hover {
   background: var(--cds-danger-bg);
+  border-color: var(--cds-danger-text);
+}
+
+.admin-crud-modal-header .admin-row-button {
+  width: 40px;
+  min-height: 40px;
+  padding: 0;
+  border-color: var(--cds-border);
+  background: var(--cds-surface);
+  color: var(--cds-blue);
 }
 
 /* ERROR + STATUS BADGE */
@@ -599,12 +844,30 @@
     padding: 12px;
   }
 
+  .admin-crud-modal {
+    padding: 16px;
+  }
+
+  .admin-form-grid {
+    grid-template-columns: 1fr;
+  }
+
   .admin-hero {
     flex-direction: column;
   }
 
   .admin-hero-meta {
     align-items: flex-start;
+  }
+}
+
+@media (max-width: 700px) {
+  .admin-enrollment-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-enrollment-progress {
+    grid-template-columns: 34px minmax(54px, 1fr);
   }
 }
 .admin-sidebar-footer {
@@ -687,3 +950,8 @@
     flex-direction: column;
   }
 }
+
+.admin-progress-stats {
+  margin-bottom: 2px;
+}
+

@@ -1,14 +1,14 @@
 export { default as AdminDashboard } from "./AdminDashboard";
-export { default as AdminModulePage } from "./AdminModulePage";
 export { default as AdminUsersPage } from "./AdminUsersPage";
 export { default as AdminTeachersPage } from "./AdminTeachersPage";
 export { default as AdminCoursesPage } from "./AdminCoursesPage";
+export { default as AdminBlogPage } from "./AdminBlogPage";
 export { default as AdminLessonsPage } from "./AdminLessonsPage";
 export { default as AdminEnrollmentsPage } from "./AdminEnrollmentsPage";
 export { default as AdminGradesPage } from "./AdminGradesPage";
 export { default as AdminProgressPage } from "./AdminProgressPage";
-export { default as AdminFeedbackPage } from "./AdminFeedbackPage";
 export { default as AdminDashboardView } from "./AdminDashboardView";
 export { default as AdminCrudPage } from "./AdminCrudPage";
 export { default as AdminSidebar } from "./AdminSidebar";
 export { default as AdminCertificatesPage } from "./AdminCertificatesPage";
+export { default as AdminFeedbackPage } from "./AdminFeedbackPage";

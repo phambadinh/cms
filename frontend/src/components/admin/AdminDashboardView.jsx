@@ -166,7 +166,7 @@ function AdminDashboardView({
                                 : "status-badge status-draft"
                             }
                           >
-                            {course.published ? "Published" : "Draft"}
+                            {course.published ? "Đã đăng" : "Nháp"}
                           </span>
                         </td>
                       </tr>

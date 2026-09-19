@@ -13,6 +13,8 @@ import {
   TrendingUp,
   MessageSquare,
   Award,
+  ListChecks,
+  Newspaper,
   LogOut,
 } from "lucide-react";
 
@@ -21,6 +23,8 @@ const adminItems = [
   { to: "/admin/users", vi: "Người dùng", en: "Users", icon: Users },
   { to: "/admin/teachers", vi: "Mentor", en: "Mentors", icon: GraduationCap },
   { to: "/admin/courses", vi: "Khóa học", en: "Courses", icon: BookOpen },
+  { to: "/admin/quizzes", vi: "Quiz", en: "Quizzes", icon: ListChecks },
+  { to: "/admin/blog", vi: "Blog", en: "Blog", icon: Newspaper },
   { to: "/admin/lectures", vi: "Bài học", en: "Lessons", icon: PlayCircle },
   { to: "/admin/enrollments", vi: "Đăng ký", en: "Enrollments", icon: ClipboardList },
   { to: "/admin/grades", vi: "Điểm số", en: "Grades", icon: BarChart3 },

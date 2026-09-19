@@ -12,6 +12,8 @@ import {
   Award,
   User,
   Library,
+  ListChecks,
+  Newspaper,
 } from "lucide-react";
 import "../styles/sidebar.css";
 
@@ -37,6 +39,8 @@ function Sidebar() {
           { to: "/dashboard/mentor", label: text("Tổng quan", "Dashboard"), icon: LayoutDashboard },
           { to: "/mentor/courses", label: text("Khóa học của tôi", "My courses"), icon: BookOpen },
           { to: "/mentor/lectures", label: text("Bài giảng", "Lessons"), icon: Library },
+          { to: "/mentor/quizzes", label: "Quiz", icon: ListChecks },
+          { to: "/mentor/blog", label: "Blog", icon: Newspaper },
           { to: "/mentor/grades", label: text("Điểm số", "Grades"), icon: ClipboardList },
           { to: "/mentor/progress", label: text("Tiến độ học viên", "Student progress"), icon: TrendingUp },
         ]

@@ -160,7 +160,10 @@ function AdminCrudPage({
 
             <div className="admin-form-grid">
               {fields.map((field) => (
-                <label key={field.name} className="admin-field">
+                <label
+                  key={field.name}
+                  className={`admin-field admin-field-${field.type || "text"}`}
+                >
                   <span>{field.label}</span>
 
                   {field.type === "textarea" ? (
@@ -224,8 +227,10 @@ function AdminCrudPage({
       <div className="admin-module-card">
         <div className="admin-module-toolbar">
           <div className="table-search">
-            <Search size={18} style={{ marginRight: 6 }} />
+            <Search size={16} aria-hidden="true" />
             <input
+              type="search"
+              aria-label="Tìm kiếm bản ghi"
               placeholder="Tìm kiếm..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -269,21 +274,27 @@ function AdminCrudPage({
                         <button
                           type="button"
                           className="admin-row-button"
+                          aria-label={`Chỉnh sửa ${entityLabel}`}
+                          title="Chỉnh sửa"
                           onClick={() => {
                             setEditingId(item.id);
                             setFormData(mapToForm ? mapToForm(item) : item);
                             setShowForm(true);
                           }}
                         >
-                          <Pencil size={14} />
+                          <Pencil size={14} aria-hidden="true" />
+                          <span>Sửa</span>
                         </button>
 
                         <button
                           type="button"
                           className="admin-row-button danger"
+                          aria-label={`Xóa ${entityLabel}`}
+                          title="Xóa"
                           onClick={() => deleteItem(item.id)}
                         >
-                          <Trash2 size={14} />
+                          <Trash2 size={14} aria-hidden="true" />
+                          <span>Xóa</span>
                         </button>
 
                         {renderRowActions && renderRowActions(item, loadItems)}

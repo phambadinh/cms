@@ -1,5 +1,5 @@
 // src/config/mentorNav.js
-import { BookOpen, ClipboardList, LayoutDashboard, Library, TrendingUp } from "lucide-react";
+import { BookOpen, ClipboardList, LayoutDashboard, Library, ListChecks, Newspaper, TrendingUp } from "lucide-react";
 
 export const MENTOR_NAV = [
   {
@@ -21,6 +21,20 @@ export const MENTOR_NAV = [
     icon: Library,
     label: "Bài giảng",
     description: "Theo dõi bài giảng theo từng khóa và trạng thái hiển thị.",
+    showAsQuickAction: true,
+  },
+  {
+    to: "/mentor/quizzes",
+    icon: ListChecks,
+    label: "Quiz",
+    description: "Tạo và quản lý bài kiểm tra, câu hỏi và đáp án.",
+    showAsQuickAction: true,
+  },
+  {
+    to: "/mentor/blog",
+    icon: Newspaper,
+    label: "Blog",
+    description: "Tạo và xuất bản bài viết kiến thức.",
     showAsQuickAction: true,
   },
   {

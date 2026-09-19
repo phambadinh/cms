@@ -73,7 +73,7 @@
   border: 1px solid transparent;
   border-radius: var(--cds-radius-sm, 8px);
   color: var(--cds-text, #0f1114);
-  font-weight: 600;
+  font-weight: 400;
   text-decoration: none;
   transition: background 0.15s ease, color 0.15s ease;
 }

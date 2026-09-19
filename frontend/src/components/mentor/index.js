@@ -1,7 +1,3 @@
-// src/components/mentor/index.js
-// Barrel export — giữ đúng pattern như src/components/admin/index.js
-
-export { default as MentorLayout } from "./MentorLayout";
 export { default as MentorSidebar } from "./MentorSidebar";
 export { default as MentorDashboard } from "./MentorDashboard";
 export { default as MentorCourses } from "./MentorCourses";

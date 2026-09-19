@@ -64,6 +64,14 @@ function AdminProgressPage() {
     return { total: items.length, completed, active, avgProgress };
   }, [items]);
 
+  const getStatusLabel = (status) => ({
+    ACTIVE: "Đang hoạt động",
+    PENDING: "Chờ xử lý",
+    COMPLETED: "Hoàn thành",
+    CANCELLED: "Đã hủy",
+    INACTIVE: "Không hoạt động",
+  }[status] || "Không xác định");
+
   return (
     <div className="admin-module-page">
       <div className="admin-module-header">
@@ -82,38 +90,38 @@ function AdminProgressPage() {
 
       {error && <div className="dash-error">{error}</div>}
 
-      <div className="mentor-stats-grid" style={{ marginBottom: 20 }}>
-        <div className="stat-card">
-          <div className="stat-icon"><Users size={18} /></div>
+      <div className="admin-enrollment-stats admin-progress-stats">
+        <div className="admin-enrollment-stat">
+          <div className="admin-enrollment-stat-icon"><Users size={18} /></div>
           <div>
-            <div className="stat-label">Tổng bản ghi</div>
-            <div className="stat-value">{stats.total}</div>
+            <div className="admin-enrollment-stat-label">Tổng bản ghi</div>
+            <div className="admin-enrollment-stat-value">{stats.total}</div>
           </div>
         </div>
-        <div className="stat-card">
-          <div className="stat-icon"><CheckCircle2 size={18} /></div>
+        <div className="admin-enrollment-stat">
+          <div className="admin-enrollment-stat-icon"><CheckCircle2 size={18} /></div>
           <div>
-            <div className="stat-label">Hoàn thành</div>
-            <div className="stat-value">{stats.completed}</div>
+            <div className="admin-enrollment-stat-label">Hoàn thành</div>
+            <div className="admin-enrollment-stat-value">{stats.completed}</div>
           </div>
         </div>
-        <div className="stat-card">
-          <div className="stat-icon"><TrendingUp size={18} /></div>
+        <div className="admin-enrollment-stat">
+          <div className="admin-enrollment-stat-icon"><TrendingUp size={18} /></div>
           <div>
-            <div className="stat-label">Trung bình</div>
-            <div className="stat-value">{Math.round(stats.avgProgress)}%</div>
+            <div className="admin-enrollment-stat-label">Trung bình</div>
+            <div className="admin-enrollment-stat-value">{Math.round(stats.avgProgress)}%</div>
           </div>
         </div>
       </div>
 
-      <div className="admin-module-card">
-        <div className="admin-module-toolbar">
-          <span>Theo dõi tiến độ</span>
+      <div className="admin-module-card admin-enrollment-panel">
+        <div className="admin-module-toolbar admin-enrollment-toolbar">
+          <strong>Theo dõi tiến độ</strong>
           <span>{items.length} bản ghi</span>
         </div>
 
         <div className="admin-table-wrap">
-          <table className="admin-table">
+          <table className="admin-table admin-enrollment-table">
             <thead>
               <tr>
                 <th>Học viên</th>
@@ -137,17 +145,20 @@ function AdminProgressPage() {
                     <td>{item.studentName}</td>
                     <td>{item.courseName}</td>
                     <td>
-                      <div className="mentor-progress-wrap">
-                        <div className="mentor-progress-bar">
-                          <div
-                            className="mentor-progress-fill"
-                            style={{ width: `${Math.min(Number(item.progressPercentage || 0), 100)}%` }}
+                      <div className="admin-enrollment-progress">
+                        <span>{Number(item.progressPercentage || 0).toFixed(0)}%</span>
+                        <div className="admin-enrollment-progress-track">
+                          <span
+                            style={{ width: `${Math.min(100, Math.max(0, Number(item.progressPercentage || 0)))}%` }}
                           />
                         </div>
-                        <span className="mentor-progress-label">{Math.round(Number(item.progressPercentage || 0))}%</span>
                       </div>
                     </td>
-                    <td>{item.status || "UNKNOWN"}</td>
+                    <td>
+                      <span className={`admin-enrollment-status ${item.status === "COMPLETED" ? "is-complete" : item.status === "ACTIVE" ? "is-active" : "is-pending"}`}>
+                        {getStatusLabel(item.status)}
+                      </span>
+                    </td>
                   </tr>
                 ))
               )}
